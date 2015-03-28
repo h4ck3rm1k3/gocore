@@ -1,24 +1,46 @@
 
 #export GCCGO := gccgo 
-export LD_LIBRARY_PATH := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu/libgo/.libs/:$(HOME)/gcc-1/build/gcc/:/home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/:/home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/
+export LD_LIBRARY_PATH := $(HOME)/install/lib64/
+#/gcc-1/build/powerpc64le-unknown-linux-gnu/libgo/.libs/:$(HOME)/gcc-1/build/gcc/:/home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/:/home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/
 export PATH := $(HOME)/install/bin:$(PATH)
-export GCCGO := $(HOME)/gcc-1/build/gcc/gccgo
-export GOTOOLDIR := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu
-export GOBIN := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu
+export GCCGO := $(HOME)/install/bin/gccgo
+#export GOTOOLDIR := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu
+#export GOBIN := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu
 #export GCC_EXEC_PREFIX := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu
 #export GOROOT := $(HOME)/go
 export GOPATH := $(HOME)/testgo2
 export GOROOT := $(HOME)/go
 export WORK := /tmp/gccgo/work
+#-L/home/h4ck3rm1k3/gcc-1/build/powerpc64le-unknown-linux-gnu/libgo/
 
-module :
-	strace -f -e open -o strace.txt ~/go/src/gocc build -v -a  -work  -gccgoflags '-c --verbose -save-temps -O0 -L/home/h4ck3rm1k3/gcc-1/build/powerpc64le-unknown-linux-gnu/libgo/ ' -compiler gccgo github.com/h4ck3rm1k3/gocore/image/color/palette/...
+image.sh :
+#strace -o strace.txt -f 
+	~/go/src/gocc build -n -v -a  -work  -gccgoflags '-c --verbose -save-temps -O0  ' -compiler gccgo github.com/h4ck3rm1k3/gocore/image/ > image.sh 2>&1
+
+testcompile : image.sh
+	bash -x image.sh
+
+#image :
+#	~/go/src/gocc build -v -a  -work  -gccgoflags '-c --verbose -save-temps -O0 -L/home/h4ck3rm1k3/gcc-1/build/powerpc64le-unknown-linux-gnu/libgo/ ' -compiler gccgo github.com/h4ck3rm1k3/gocore/image/
 
 compile:
 #strace -f -s 99 -o strace.txt ~/go/src/gocc build -v -x -compiler gccgo -work  -a github.com/h4ck3rm1k3/gocore/...
 
 	~/go/src/gocc build -v -a  -work  -gccgoflags '--verbose -save-temps' -compiler gccgo github.com/h4ck3rm1k3/gocore/...
 
+install:
+#strace -f -s 99 -o strace.txt ~/go/src/gocc build -v -x -compiler gccgo -work  -a github.com/h4ck3rm1k3/gocore/...
+
+	~/go/src/gocc install -v -a  -work  -gccgoflags '--verbose -save-temps' -compiler gccgo github.com/h4ck3rm1k3/gocore/...
+
 setup:
 	rm -rf /home/h4ck3rm1k3/testgo/src/github.com/h4ck3rm1k3/gocore/*
 	cp -r ~/go/src/* /home/h4ck3rm1k3/testgo/src/github.com/h4ck3rm1k3/gocore/
+
+#install:
+# # why do I need to do this?
+# 	ln -s /home/h4ck3rm1k3/gcc-1/build/gcc/liblto_plugin.*                      /home/h4ck3rm1k3/gcc-1/build/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/
+# 	ln -s /home/h4ck3rm1k3/gcc-1/build/powerpc64le-unknown-linux-gnu/libgcc/*   /home/h4ck3rm1k3/gcc-1/build/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0/
+# 	ln -s /home/h4ck3rm1k3/gcc-1/build/powerpc64le-unknown-linux-gnu/libgo/*    /home/h4ck3rm1k3/gcc-1/build/lib/gcc/
+# 	ln -s /home/h4ck3rm1k3/gcc-1/build/powerpc64le-unknown-linux-gnu/libgo/*    /home/h4ck3rm1k3/gcc-1/build/lib/
+

@@ -21,6 +21,7 @@ const (
 
 // uint8 is the set of all unsigned 8-bit integers.
 // Range: 0 through 255.
+/*
 type uint8 uint8
 
 // uint16 is the set of all unsigned 16-bit integers.
@@ -90,6 +91,7 @@ type byte byte
 // rune is an alias for int32 and is equivalent to int32 in all ways. It is
 // used, by convention, to distinguish character values from integer values.
 type rune rune
+*/
 
 // iota is a predeclared identifier representing the untyped integer ordinal
 // number of the current const specification in a (usually parenthesized)
@@ -184,7 +186,7 @@ func make(Type, size IntegerType) Type
 // The new built-in function allocates memory. The first argument is a type,
 // not a value, and the value returned is a pointer to a newly
 // allocated zero value of that type.
-func new(Type) *Type
+//func new(Type) *Type
 
 // The complex built-in function constructs a complex value from two
 // floating-point values. The real and imaginary parts must be of the same
