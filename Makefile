@@ -7,7 +7,7 @@ export GOTOOLDIR := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu
 export GOBIN := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu
 #export GCC_EXEC_PREFIX := $(HOME)/gcc-1/build/powerpc64le-unknown-linux-gnu
 #export GOROOT := $(HOME)/go
-export GOPATH := $(HOME)/testgo
+export GOPATH := $(HOME)/testgo2
 export GOROOT := $(HOME)/go
 export WORK := /tmp/gccgo/work
 
