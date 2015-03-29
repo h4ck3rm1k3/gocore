@@ -19,7 +19,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func TestBool(t *testing.T) {

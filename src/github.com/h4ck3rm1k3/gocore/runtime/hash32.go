@@ -10,7 +10,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 const (
 	// Constants for multiplication: four random odd 32-bit numbers.

@@ -504,7 +504,7 @@ func importtype(pt *Type, t *Type) {
 	// override declaration in unsafe.go for Pointer.
 	// there is no way in Go code to define unsafe.Pointer
 	// so we have to supply it.
-	if incannedimport != 0 && importpkg.Name == "github.com/h4ck3rm1k3/gocore/unsafe" && pt.Nod.Sym.Name == "Pointer" {
+	if incannedimport != 0 && importpkg.Name == "unsafe" && pt.Nod.Sym.Name == "Pointer" {
 		t = Types[TUNSAFEPTR]
 	}
 

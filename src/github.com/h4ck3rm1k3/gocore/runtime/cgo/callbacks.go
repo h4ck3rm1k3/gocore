@@ -4,7 +4,7 @@
 
 package cgo
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // These utility functions are available to be called from code
 // compiled with gcc via crosscall2.

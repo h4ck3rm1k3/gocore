@@ -130,10 +130,10 @@ func Main() {
 
 	builtinpkg.Prefix = "go.builtin" // not go%2ebuiltin
 
-	// pseudo-package, accessed by import "github.com/h4ck3rm1k3/gocore/unsafe"
-	unsafepkg = mkpkg("github.com/h4ck3rm1k3/gocore/unsafe")
+	// pseudo-package, accessed by import "unsafe"
+	unsafepkg = mkpkg("unsafe")
 
-	unsafepkg.Name = "github.com/h4ck3rm1k3/gocore/unsafe"
+	unsafepkg.Name = "unsafe"
 
 	// real package, referred to by generated runtime calls
 	Runtimepkg = mkpkg("github.com/h4ck3rm1k3/gocore/runtime")
@@ -662,7 +662,7 @@ func importfile(f *Val, line int) {
 		errorexit()
 	}
 
-	if f.U.Sval == "github.com/h4ck3rm1k3/gocore/unsafe" {
+	if f.U.Sval == "unsafe" {
 		if safemode != 0 {
 			Yyerror("cannot import package unsafe")
 			errorexit()

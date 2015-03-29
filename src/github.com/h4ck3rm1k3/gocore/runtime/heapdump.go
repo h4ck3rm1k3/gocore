@@ -11,7 +11,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 //go:linkname runtime_debug_WriteHeapDump runtime/debug.WriteHeapDump
 func runtime_debug_WriteHeapDump(fd uintptr) {

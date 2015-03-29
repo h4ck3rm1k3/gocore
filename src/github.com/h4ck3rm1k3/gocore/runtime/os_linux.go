@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 //go:noescape
 func futex(addr unsafe.Pointer, op int32, val uint32, ts, addr2 unsafe.Pointer, val3 uint32) int32

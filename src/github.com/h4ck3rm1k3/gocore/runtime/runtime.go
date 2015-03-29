@@ -4,7 +4,7 @@
 
 package runtime
 
-import _ "github.com/h4ck3rm1k3/gocore/unsafe" // for go:linkname
+import _ "unsafe" // for go:linkname
 
 //go:generate go run wincallback.go
 

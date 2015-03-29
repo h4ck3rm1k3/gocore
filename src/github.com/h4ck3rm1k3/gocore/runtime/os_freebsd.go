@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 //go:noescape
 func thr_new(param *thrparam, size int32)

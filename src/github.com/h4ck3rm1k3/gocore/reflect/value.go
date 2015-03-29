@@ -7,7 +7,7 @@ package reflect
 import (
 	"github.com/h4ck3rm1k3/gocore/math"
 	"github.com/h4ck3rm1k3/gocore/runtime"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 const ptrSize = unsafe.Sizeof((*byte)(nil))
@@ -938,7 +938,7 @@ func (v Value) InterfaceData() [2]uintptr {
 	v.mustBe(Interface)
 	// We treat this as a read operation, so we allow
 	// it even for unexported data, because the caller
-	// has to import "github.com/h4ck3rm1k3/gocore/unsafe" to turn it into something
+	// has to import "unsafe" to turn it into something
 	// that can be abused.
 	// Interface value is always bigger than a word; assume flagIndir.
 	return *(*[2]uintptr)(v.ptr)
@@ -1710,7 +1710,7 @@ func (v Value) Uint() uint64 {
 }
 
 // UnsafeAddr returns a pointer to v's data.
-// It is for advanced clients that also import the "github.com/h4ck3rm1k3/gocore/unsafe" package.
+// It is for advanced clients that also import the "unsafe" package.
 // It panics if v is not addressable.
 func (v Value) UnsafeAddr() uintptr {
 	// TODO: deprecate

@@ -6,7 +6,7 @@ package os
 
 import (
 	"github.com/h4ck3rm1k3/gocore/syscall"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // Stat returns the FileInfo structure describing file.

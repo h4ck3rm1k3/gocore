@@ -7,7 +7,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 const raceenabled = false

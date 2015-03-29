@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func lwp_mcontext_init(mc *mcontextt, stk unsafe.Pointer, mp *m, gp *g, fn uintptr) {
 	// Machine dependent mcontext initialisation for LWP.

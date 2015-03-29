@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 //go:cgo_export_dynamic runtime.end _end
 //go:cgo_export_dynamic runtime.etext _etext

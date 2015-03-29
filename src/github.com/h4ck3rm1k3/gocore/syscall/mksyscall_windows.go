@@ -733,7 +733,7 @@ const srcTemplate = `
 
 package {{packagename}}
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"{{if syscalldot}}
+import "unsafe"{{if syscalldot}}
 import "github.com/h4ck3rm1k3/gocore/syscall"{{end}}
 
 var _ unsafe.Pointer

@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/strings"
 	. "github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // Tests of correct behavior, without contention.

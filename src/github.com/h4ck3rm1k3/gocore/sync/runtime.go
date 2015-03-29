@@ -4,7 +4,7 @@
 
 package sync
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // defined in package runtime
 

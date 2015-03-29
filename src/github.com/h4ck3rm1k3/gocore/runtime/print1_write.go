@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func writeErr(b []byte) {
 	write(2, unsafe.Pointer(&b[0]), int32(len(b)))

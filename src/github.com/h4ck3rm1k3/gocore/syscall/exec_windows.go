@@ -9,7 +9,7 @@ package syscall
 import (
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf16"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 var ForkLock sync.RWMutex

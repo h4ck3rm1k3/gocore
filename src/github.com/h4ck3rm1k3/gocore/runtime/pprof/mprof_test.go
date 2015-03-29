@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/runtime"
 	. "github.com/h4ck3rm1k3/gocore/runtime/pprof"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 var memSink interface{}

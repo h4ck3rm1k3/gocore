@@ -19,7 +19,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/runtime"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/sync"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // Type is the representation of a Go type.

@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 var sigset_none sigset
 var sigset_all sigset = sigset{^uint32(0), ^uint32(0)}

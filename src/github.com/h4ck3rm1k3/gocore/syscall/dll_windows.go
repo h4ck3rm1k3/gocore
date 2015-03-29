@@ -7,7 +7,7 @@ package syscall
 import (
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // DLLError describes reasons for DLL load failures.

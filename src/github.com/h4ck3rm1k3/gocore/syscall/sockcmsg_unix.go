@@ -8,7 +8,7 @@
 
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Round the length of a raw sockaddr up to align it properly.
 func cmsgAlignOf(salen int) int {

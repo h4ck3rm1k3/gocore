@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // Test that race detector does not crash when accessing non-Go allocated memory (issue 9136).

@@ -5,7 +5,8 @@
 package atomic
 
 import (
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	//"unsafe"
+	"unsafe"
 )
 
 // A Value provides an atomic load and store of a consistently typed value.

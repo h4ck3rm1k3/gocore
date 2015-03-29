@@ -14,7 +14,7 @@ package syscall
 
 import (
 	errorspkg "github.com/h4ck3rm1k3/gocore/errors"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 const ImplementsGetwd = true

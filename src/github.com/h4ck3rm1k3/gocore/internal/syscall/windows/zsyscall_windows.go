@@ -2,7 +2,7 @@
 
 package windows
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 import "github.com/h4ck3rm1k3/gocore/syscall"
 
 var _ unsafe.Pointer

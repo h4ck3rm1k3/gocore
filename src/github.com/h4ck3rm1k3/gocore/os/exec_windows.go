@@ -9,7 +9,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/runtime"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/time"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func (p *Process) wait() (ps *ProcessState, err error) {

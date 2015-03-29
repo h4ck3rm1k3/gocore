@@ -26,7 +26,7 @@
 //
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // StringByteSlice is deprecated. Use ByteSliceFromString instead.
 // If s contains a NUL byte this function panics instead of

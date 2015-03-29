@@ -146,11 +146,11 @@ func main() {
 		w := NewWalker(context, filepath.Join(build.Default.GOROOT, "src"))
 
 		for _, name := range pkgNames {
-			// - Package "github.com/h4ck3rm1k3/gocore/unsafe" contains special signatures requiring
+			// - Package "unsafe" contains special signatures requiring
 			//   extra care when printing them - ignore since it is not
 			//   going to change w/o a language change.
 			// - We don't care about the API of commands.
-			if name != "github.com/h4ck3rm1k3/gocore/unsafe" && !strings.HasPrefix(name, "cmd/") {
+			if name != "unsafe" && !strings.HasPrefix(name, "cmd/") {
 				if name == "github.com/h4ck3rm1k3/gocore/runtime/cgo" && !context.CgoEnabled {
 					// w.Import(name) will return nil
 					continue
@@ -340,7 +340,7 @@ func NewWalker(context *build.Context, root string) *Walker {
 		context:  context,
 		root:     root,
 		features: map[string]bool{},
-		imported: map[string]*types.Package{"github.com/h4ck3rm1k3/gocore/unsafe": types.Unsafe},
+		imported: map[string]*types.Package{"unsafe": types.Unsafe},
 	}
 }
 

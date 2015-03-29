@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Note: These routines perform the read with an unspecified endianness.
 func readUnaligned32(p unsafe.Pointer) uint32 {

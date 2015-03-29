@@ -10,7 +10,7 @@ import (
 	errorspkg "github.com/h4ck3rm1k3/gocore/errors"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf16"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 //go:generate go run mksyscall_windows.go -output zsyscall_windows.go syscall_windows.go security_windows.go

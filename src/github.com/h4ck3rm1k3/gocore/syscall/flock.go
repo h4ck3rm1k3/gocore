@@ -6,7 +6,7 @@
 
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // fcntl64Syscall is usually SYS_FCNTL, but is overridden on 32-bit Linux
 // systems by flock_linux_32bit.go to be SYS_FCNTL64.

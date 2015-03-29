@@ -4,7 +4,7 @@
 
 package math
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Float32bits returns the IEEE 754 binary representation of f.
 func Float32bits(f float32) uint32 { return *(*uint32)(unsafe.Pointer(&f)) }

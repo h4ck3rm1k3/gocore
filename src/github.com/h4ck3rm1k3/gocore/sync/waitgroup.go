@@ -6,7 +6,7 @@ package sync
 
 import (
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // A WaitGroup waits for a collection of goroutines to finish.

@@ -178,7 +178,7 @@ func BenchmarkAll(b *testing.B) {
 		for _, context := range contexts {
 			w := NewWalker(context, filepath.Join(build.Default.GOROOT, "src"))
 			for _, name := range pkgNames {
-				if name != "github.com/h4ck3rm1k3/gocore/unsafe" && !strings.HasPrefix(name, "cmd/") {
+				if name != "unsafe" && !strings.HasPrefix(name, "cmd/") {
 					w.export(w.Import(name))
 				}
 			}

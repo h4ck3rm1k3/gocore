@@ -6,7 +6,7 @@
 
 package runtime
 
-import _ "github.com/h4ck3rm1k3/gocore/unsafe" // for go:linkname
+import _ "unsafe" // for go:linkname
 
 //go:linkname os_sigpipe os.sigpipe
 func os_sigpipe() {

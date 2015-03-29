@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf16"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf8"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // File represents an open file descriptor.

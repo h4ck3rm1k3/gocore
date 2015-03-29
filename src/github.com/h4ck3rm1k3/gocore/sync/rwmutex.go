@@ -6,7 +6,7 @@ package sync
 
 import (
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // An RWMutex is a reader/writer mutual exclusion lock.

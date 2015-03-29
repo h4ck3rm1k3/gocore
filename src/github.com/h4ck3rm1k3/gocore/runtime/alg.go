@@ -4,7 +4,8 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+//import "unsafe"
+import "unsafe"
 
 const (
 	c0 = uintptr((8-ptrSize)/4*2860486313 + (ptrSize-4)/4*33054211828000289)

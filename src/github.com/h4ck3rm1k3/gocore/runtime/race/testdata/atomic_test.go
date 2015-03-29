@@ -9,7 +9,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func TestNoRaceAtomicAddInt64(t *testing.T) {

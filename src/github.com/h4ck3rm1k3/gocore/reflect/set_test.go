@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io"
 	. "github.com/h4ck3rm1k3/gocore/reflect"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 type MyBuffer bytes.Buffer

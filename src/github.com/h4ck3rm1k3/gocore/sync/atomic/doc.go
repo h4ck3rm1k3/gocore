@@ -40,7 +40,8 @@
 package atomic
 
 import (
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	//"unsafe"
+	"unsafe"
 )
 
 // BUG(rsc): On x86-32, the 64-bit functions use instructions unavailable before the Pentium MMX.

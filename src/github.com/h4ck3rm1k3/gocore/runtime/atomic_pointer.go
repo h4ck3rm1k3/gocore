@@ -4,7 +4,8 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+//import "unsafe"
+import "unsafe"
 
 // These functions cannot have go:noescape annotations,
 // because while ptr does not escape, new does.

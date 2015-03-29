@@ -8,7 +8,7 @@
 package runtime
 
 import (
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // NOTE(rsc): Everything here could use cas if contention became an issue.

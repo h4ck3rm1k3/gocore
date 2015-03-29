@@ -3,7 +3,7 @@
 
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 var (
 	modlibc      = newLazySO("libc.so")

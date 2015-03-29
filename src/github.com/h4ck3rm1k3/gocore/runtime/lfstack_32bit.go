@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // On 32-bit systems, the stored uint64 has a 32-bit pointer and 32-bit count.
 

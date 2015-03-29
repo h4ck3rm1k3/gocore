@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/runtime"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 type Tintptr *int // assignable to *int

@@ -1,0 +1,740 @@
+
+export GOPATH := $(HOME)/testgo2
+
+export GOFLAGS := -I $(WORK) -I ./src -L ./src -I . -L .
+
+
+#runBuild: %v [github.com/h4ck3rm1k3/gocore/image/]
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/decode_example_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/decode_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/format.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/geom.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/geom_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/image.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/image_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/names.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/ycbcr.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/ycbcr_test.go]
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/bufio.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/bufio_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/example_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/export_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/scan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/scan_test.go]
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/buffer.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/buffer_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes_decl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/compare_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/equal_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/example_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/export_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/reader.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/reader_test.go]
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/errors/errors.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/errors/errors_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/errors/example_test.go]
+#CHECK2 [/home/h4ck3rm1k3/go/src/runtime/arch1_386.go /home/h4ck3rm1k3/go/src/runtime/arch1_amd64.go /home/h4ck3rm1k3/go/src/runtime/arch1_amd64p32.go /home/h4ck3rm1k3/go/src/runtime/arch1_arm.go /home/h4ck3rm1k3/go/src/runtime/arch1_arm64.go /home/h4ck3rm1k3/go/src/runtime/arch1_ppc64.go /home/h4ck3rm1k3/go/src/runtime/arch_386.go /home/h4ck3rm1k3/go/src/runtime/arch_amd64.go /home/h4ck3rm1k3/go/src/runtime/arch_amd64p32.go /home/h4ck3rm1k3/go/src/runtime/arch_arm.go /home/h4ck3rm1k3/go/src/runtime/arch_arm64.go /home/h4ck3rm1k3/go/src/runtime/arch_ppc64.go /home/h4ck3rm1k3/go/src/runtime/atomic_386.go /home/h4ck3rm1k3/go/src/runtime/atomic_amd64x.go /home/h4ck3rm1k3/go/src/runtime/atomic_arm.go /home/h4ck3rm1k3/go/src/runtime/atomic_arm64.go /home/h4ck3rm1k3/go/src/runtime/defs1_linux.go /home/h4ck3rm1k3/go/src/runtime/defs1_netbsd_386.go /home/h4ck3rm1k3/go/src/runtime/defs1_netbsd_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs1_netbsd_arm.go /home/h4ck3rm1k3/go/src/runtime/defs1_solaris_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs2_linux.go /home/h4ck3rm1k3/go/src/runtime/defs3_linux.go /home/h4ck3rm1k3/go/src/runtime/defs_arm_linux.go /home/h4ck3rm1k3/go/src/runtime/defs_darwin.go /home/h4ck3rm1k3/go/src/runtime/defs_darwin_386.go /home/h4ck3rm1k3/go/src/runtime/defs_darwin_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs_darwin_arm.go /home/h4ck3rm1k3/go/src/runtime/defs_dragonfly.go /home/h4ck3rm1k3/go/src/runtime/defs_dragonfly_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs_freebsd.go /home/h4ck3rm1k3/go/src/runtime/defs_freebsd_386.go /home/h4ck3rm1k3/go/src/runtime/defs_freebsd_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs_freebsd_arm.go /home/h4ck3rm1k3/go/src/runtime/defs_linux.go /home/h4ck3rm1k3/go/src/runtime/defs_linux_386.go /home/h4ck3rm1k3/go/src/runtime/defs_linux_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs_linux_arm.go /home/h4ck3rm1k3/go/src/runtime/defs_linux_arm64.go /home/h4ck3rm1k3/go/src/runtime/defs_linux_ppc64.go /home/h4ck3rm1k3/go/src/runtime/defs_nacl_386.go /home/h4ck3rm1k3/go/src/runtime/defs_nacl_amd64p32.go /home/h4ck3rm1k3/go/src/runtime/defs_nacl_arm.go /home/h4ck3rm1k3/go/src/runtime/defs_netbsd.go /home/h4ck3rm1k3/go/src/runtime/defs_netbsd_386.go /home/h4ck3rm1k3/go/src/runtime/defs_netbsd_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs_netbsd_arm.go /home/h4ck3rm1k3/go/src/runtime/defs_openbsd.go /home/h4ck3rm1k3/go/src/runtime/defs_openbsd_386.go /home/h4ck3rm1k3/go/src/runtime/defs_openbsd_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs_openbsd_arm.go /home/h4ck3rm1k3/go/src/runtime/defs_plan9_386.go /home/h4ck3rm1k3/go/src/runtime/defs_plan9_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs_solaris.go /home/h4ck3rm1k3/go/src/runtime/defs_solaris_amd64.go /home/h4ck3rm1k3/go/src/runtime/defs_windows.go /home/h4ck3rm1k3/go/src/runtime/defs_windows_386.go /home/h4ck3rm1k3/go/src/runtime/defs_windows_amd64.go /home/h4ck3rm1k3/go/src/runtime/env_plan9.go /home/h4ck3rm1k3/go/src/runtime/export_windows_test.go /home/h4ck3rm1k3/go/src/runtime/gengoos.go /home/h4ck3rm1k3/go/src/runtime/hash32.go /home/h4ck3rm1k3/go/src/runtime/lfstack_32bit.go /home/h4ck3rm1k3/go/src/runtime/lfstack_amd64.go /home/h4ck3rm1k3/go/src/runtime/lfstack_linux_arm64.go /home/h4ck3rm1k3/go/src/runtime/lock_sema.go /home/h4ck3rm1k3/go/src/runtime/mem_bsd.go /home/h4ck3rm1k3/go/src/runtime/mem_darwin.go /home/h4ck3rm1k3/go/src/runtime/mem_plan9.go /home/h4ck3rm1k3/go/src/runtime/mem_windows.go /home/h4ck3rm1k3/go/src/runtime/memmove_linux_amd64_test.go /home/h4ck3rm1k3/go/src/runtime/netpoll_kqueue.go /home/h4ck3rm1k3/go/src/runtime/netpoll_nacl.go /home/h4ck3rm1k3/go/src/runtime/netpoll_solaris.go /home/h4ck3rm1k3/go/src/runtime/netpoll_stub.go /home/h4ck3rm1k3/go/src/runtime/netpoll_windows.go /home/h4ck3rm1k3/go/src/runtime/os1_darwin.go /home/h4ck3rm1k3/go/src/runtime/os1_dragonfly.go /home/h4ck3rm1k3/go/src/runtime/os1_freebsd.go /home/h4ck3rm1k3/go/src/runtime/os1_nacl.go /home/h4ck3rm1k3/go/src/runtime/os1_netbsd.go /home/h4ck3rm1k3/go/src/runtime/os1_netbsd_386.go /home/h4ck3rm1k3/go/src/runtime/os1_netbsd_amd64.go /home/h4ck3rm1k3/go/src/runtime/os1_openbsd.go /home/h4ck3rm1k3/go/src/runtime/os1_plan9.go /home/h4ck3rm1k3/go/src/runtime/os1_windows.go /home/h4ck3rm1k3/go/src/runtime/os1_windows_386.go /home/h4ck3rm1k3/go/src/runtime/os1_windows_amd64.go /home/h4ck3rm1k3/go/src/runtime/os2_darwin.go /home/h4ck3rm1k3/go/src/runtime/os2_dragonfly.go /home/h4ck3rm1k3/go/src/runtime/os2_freebsd.go /home/h4ck3rm1k3/go/src/runtime/os2_nacl.go /home/h4ck3rm1k3/go/src/runtime/os2_netbsd.go /home/h4ck3rm1k3/go/src/runtime/os2_openbsd.go /home/h4ck3rm1k3/go/src/runtime/os2_plan9.go /home/h4ck3rm1k3/go/src/runtime/os2_solaris.go /home/h4ck3rm1k3/go/src/runtime/os2_windows.go /home/h4ck3rm1k3/go/src/runtime/os3_plan9.go /home/h4ck3rm1k3/go/src/runtime/os3_solaris.go /home/h4ck3rm1k3/go/src/runtime/os_android_arm.go /home/h4ck3rm1k3/go/src/runtime/os_darwin.go /home/h4ck3rm1k3/go/src/runtime/os_darwin_arm.go /home/h4ck3rm1k3/go/src/runtime/os_dragonfly.go /home/h4ck3rm1k3/go/src/runtime/os_freebsd.go /home/h4ck3rm1k3/go/src/runtime/os_freebsd_arm.go /home/h4ck3rm1k3/go/src/runtime/os_linux_386.go /home/h4ck3rm1k3/go/src/runtime/os_linux_arm.go /home/h4ck3rm1k3/go/src/runtime/os_linux_arm64.go /home/h4ck3rm1k3/go/src/runtime/os_nacl.go /home/h4ck3rm1k3/go/src/runtime/os_nacl_arm.go /home/h4ck3rm1k3/go/src/runtime/os_netbsd.go /home/h4ck3rm1k3/go/src/runtime/os_netbsd_arm.go /home/h4ck3rm1k3/go/src/runtime/os_openbsd.go /home/h4ck3rm1k3/go/src/runtime/os_openbsd_arm.go /home/h4ck3rm1k3/go/src/runtime/os_plan9.go /home/h4ck3rm1k3/go/src/runtime/os_solaris.go /home/h4ck3rm1k3/go/src/runtime/os_windows.go /home/h4ck3rm1k3/go/src/runtime/print1_write_android.go /home/h4ck3rm1k3/go/src/runtime/race.go /home/h4ck3rm1k3/go/src/runtime/race1.go /home/h4ck3rm1k3/go/src/runtime/signal_386.go /home/h4ck3rm1k3/go/src/runtime/signal_amd64x.go /home/h4ck3rm1k3/go/src/runtime/signal_arm.go /home/h4ck3rm1k3/go/src/runtime/signal_arm64.go /home/h4ck3rm1k3/go/src/runtime/signal_darwin.go /home/h4ck3rm1k3/go/src/runtime/signal_darwin_386.go /home/h4ck3rm1k3/go/src/runtime/signal_darwin_amd64.go /home/h4ck3rm1k3/go/src/runtime/signal_darwin_arm.go /home/h4ck3rm1k3/go/src/runtime/signal_dragonfly.go /home/h4ck3rm1k3/go/src/runtime/signal_dragonfly_amd64.go /home/h4ck3rm1k3/go/src/runtime/signal_freebsd.go /home/h4ck3rm1k3/go/src/runtime/signal_freebsd_386.go /home/h4ck3rm1k3/go/src/runtime/signal_freebsd_amd64.go /home/h4ck3rm1k3/go/src/runtime/signal_freebsd_arm.go /home/h4ck3rm1k3/go/src/runtime/signal_linux_386.go /home/h4ck3rm1k3/go/src/runtime/signal_linux_amd64.go /home/h4ck3rm1k3/go/src/runtime/signal_linux_arm.go /home/h4ck3rm1k3/go/src/runtime/signal_linux_arm64.go /home/h4ck3rm1k3/go/src/runtime/signal_nacl.go /home/h4ck3rm1k3/go/src/runtime/signal_nacl_386.go /home/h4ck3rm1k3/go/src/runtime/signal_nacl_amd64p32.go /home/h4ck3rm1k3/go/src/runtime/signal_nacl_arm.go /home/h4ck3rm1k3/go/src/runtime/signal_netbsd.go /home/h4ck3rm1k3/go/src/runtime/signal_netbsd_386.go /home/h4ck3rm1k3/go/src/runtime/signal_netbsd_amd64.go /home/h4ck3rm1k3/go/src/runtime/signal_netbsd_arm.go /home/h4ck3rm1k3/go/src/runtime/signal_openbsd.go /home/h4ck3rm1k3/go/src/runtime/signal_openbsd_386.go /home/h4ck3rm1k3/go/src/runtime/signal_openbsd_amd64.go /home/h4ck3rm1k3/go/src/runtime/signal_openbsd_arm.go /home/h4ck3rm1k3/go/src/runtime/signal_plan9.go /home/h4ck3rm1k3/go/src/runtime/signal_solaris.go /home/h4ck3rm1k3/go/src/runtime/signal_solaris_amd64.go /home/h4ck3rm1k3/go/src/runtime/sigqueue_plan9.go /home/h4ck3rm1k3/go/src/runtime/softfloat_arm.go /home/h4ck3rm1k3/go/src/runtime/stubs_android.go /home/h4ck3rm1k3/go/src/runtime/sys_arm.go /home/h4ck3rm1k3/go/src/runtime/sys_arm64.go /home/h4ck3rm1k3/go/src/runtime/sys_x86.go /home/h4ck3rm1k3/go/src/runtime/syscall2_solaris.go /home/h4ck3rm1k3/go/src/runtime/syscall_solaris.go /home/h4ck3rm1k3/go/src/runtime/syscall_windows.go /home/h4ck3rm1k3/go/src/runtime/syscall_windows_test.go /home/h4ck3rm1k3/go/src/runtime/unaligned1.go /home/h4ck3rm1k3/go/src/runtime/vdso_linux_amd64.go /home/h4ck3rm1k3/go/src/runtime/vlop_arm_test.go /home/h4ck3rm1k3/go/src/runtime/vlrt.go /home/h4ck3rm1k3/go/src/runtime/wbfat_gen.go /home/h4ck3rm1k3/go/src/runtime/wincallback.go /home/h4ck3rm1k3/go/src/runtime/zcallback_windows.go /home/h4ck3rm1k3/go/src/runtime/zgoarch_386.go /home/h4ck3rm1k3/go/src/runtime/zgoarch_amd64.go /home/h4ck3rm1k3/go/src/runtime/zgoarch_amd64p32.go /home/h4ck3rm1k3/go/src/runtime/zgoarch_arm.go /home/h4ck3rm1k3/go/src/runtime/zgoarch_arm64.go /home/h4ck3rm1k3/go/src/runtime/zgoarch_ppc64.go /home/h4ck3rm1k3/go/src/runtime/zgoos_android.go /home/h4ck3rm1k3/go/src/runtime/zgoos_darwin.go /home/h4ck3rm1k3/go/src/runtime/zgoos_dragonfly.go /home/h4ck3rm1k3/go/src/runtime/zgoos_freebsd.go /home/h4ck3rm1k3/go/src/runtime/zgoos_nacl.go /home/h4ck3rm1k3/go/src/runtime/zgoos_netbsd.go /home/h4ck3rm1k3/go/src/runtime/zgoos_openbsd.go /home/h4ck3rm1k3/go/src/runtime/zgoos_plan9.go /home/h4ck3rm1k3/go/src/runtime/zgoos_solaris.go /home/h4ck3rm1k3/go/src/runtime/zgoos_windows.go /home/h4ck3rm1k3/go/src/runtime/alg.go /home/h4ck3rm1k3/go/src/runtime/append_test.go /home/h4ck3rm1k3/go/src/runtime/arch1_ppc64le.go /home/h4ck3rm1k3/go/src/runtime/arch_ppc64le.go /home/h4ck3rm1k3/go/src/runtime/atomic_pointer.go /home/h4ck3rm1k3/go/src/runtime/atomic_ppc64x.go /home/h4ck3rm1k3/go/src/runtime/cgo.go /home/h4ck3rm1k3/go/src/runtime/cgocall.go /home/h4ck3rm1k3/go/src/runtime/cgocallback.go /home/h4ck3rm1k3/go/src/runtime/chan.go /home/h4ck3rm1k3/go/src/runtime/chan_test.go /home/h4ck3rm1k3/go/src/runtime/closure_test.go /home/h4ck3rm1k3/go/src/runtime/compiler.go /home/h4ck3rm1k3/go/src/runtime/complex.go /home/h4ck3rm1k3/go/src/runtime/complex_test.go /home/h4ck3rm1k3/go/src/runtime/cpuprof.go /home/h4ck3rm1k3/go/src/runtime/cputicks.go /home/h4ck3rm1k3/go/src/runtime/crash_cgo_test.go /home/h4ck3rm1k3/go/src/runtime/crash_test.go /home/h4ck3rm1k3/go/src/runtime/debug.go /home/h4ck3rm1k3/go/src/runtime/defs_linux_ppc64le.go /home/h4ck3rm1k3/go/src/runtime/env_posix.go /home/h4ck3rm1k3/go/src/runtime/env_test.go /home/h4ck3rm1k3/go/src/runtime/error.go /home/h4ck3rm1k3/go/src/runtime/export_futex_test.go /home/h4ck3rm1k3/go/src/runtime/export_test.go /home/h4ck3rm1k3/go/src/runtime/extern.go /home/h4ck3rm1k3/go/src/runtime/futex_test.go /home/h4ck3rm1k3/go/src/runtime/gc_test.go /home/h4ck3rm1k3/go/src/runtime/gcinfo_test.go /home/h4ck3rm1k3/go/src/runtime/hash64.go /home/h4ck3rm1k3/go/src/runtime/hash_test.go /home/h4ck3rm1k3/go/src/runtime/hashmap.go /home/h4ck3rm1k3/go/src/runtime/hashmap_fast.go /home/h4ck3rm1k3/go/src/runtime/heapdump.go /home/h4ck3rm1k3/go/src/runtime/iface.go /home/h4ck3rm1k3/go/src/runtime/iface_test.go /home/h4ck3rm1k3/go/src/runtime/lfstack.go /home/h4ck3rm1k3/go/src/runtime/lfstack_linux_ppc64x.go /home/h4ck3rm1k3/go/src/runtime/lfstack_test.go /home/h4ck3rm1k3/go/src/runtime/lock_futex.go /home/h4ck3rm1k3/go/src/runtime/malloc.go /home/h4ck3rm1k3/go/src/runtime/malloc_test.go /home/h4ck3rm1k3/go/src/runtime/map_test.go /home/h4ck3rm1k3/go/src/runtime/mapspeed_test.go /home/h4ck3rm1k3/go/src/runtime/mbarrier.go /home/h4ck3rm1k3/go/src/runtime/mbitmap.go /home/h4ck3rm1k3/go/src/runtime/mcache.go /home/h4ck3rm1k3/go/src/runtime/mcentral.go /home/h4ck3rm1k3/go/src/runtime/mem_linux.go /home/h4ck3rm1k3/go/src/runtime/memmove_test.go /home/h4ck3rm1k3/go/src/runtime/mfinal.go /home/h4ck3rm1k3/go/src/runtime/mfinal_test.go /home/h4ck3rm1k3/go/src/runtime/mfixalloc.go /home/h4ck3rm1k3/go/src/runtime/mgc.go /home/h4ck3rm1k3/go/src/runtime/mgcmark.go /home/h4ck3rm1k3/go/src/runtime/mgcsweep.go /home/h4ck3rm1k3/go/src/runtime/mgcwork.go /home/h4ck3rm1k3/go/src/runtime/mheap.go /home/h4ck3rm1k3/go/src/runtime/mprof.go /home/h4ck3rm1k3/go/src/runtime/msize.go /home/h4ck3rm1k3/go/src/runtime/mstats.go /home/h4ck3rm1k3/go/src/runtime/netpoll.go /home/h4ck3rm1k3/go/src/runtime/netpoll_epoll.go /home/h4ck3rm1k3/go/src/runtime/noasm.go /home/h4ck3rm1k3/go/src/runtime/norace_test.go /home/h4ck3rm1k3/go/src/runtime/os1_linux.go /home/h4ck3rm1k3/go/src/runtime/os2_linux.go /home/h4ck3rm1k3/go/src/runtime/os_linux.go /home/h4ck3rm1k3/go/src/runtime/panic.go /home/h4ck3rm1k3/go/src/runtime/panic1.go /home/h4ck3rm1k3/go/src/runtime/parfor.go /home/h4ck3rm1k3/go/src/runtime/parfor_test.go /home/h4ck3rm1k3/go/src/runtime/print1.go /home/h4ck3rm1k3/go/src/runtime/print1_write.go /home/h4ck3rm1k3/go/src/runtime/proc.go /home/h4ck3rm1k3/go/src/runtime/proc1.go /home/h4ck3rm1k3/go/src/runtime/proc_test.go /home/h4ck3rm1k3/go/src/runtime/race0.go /home/h4ck3rm1k3/go/src/runtime/rdebug.go /home/h4ck3rm1k3/go/src/runtime/rune.go /home/h4ck3rm1k3/go/src/runtime/runtime-gdb_test.go /home/h4ck3rm1k3/go/src/runtime/runtime.go /home/h4ck3rm1k3/go/src/runtime/runtime1.go /home/h4ck3rm1k3/go/src/runtime/runtime2.go /home/h4ck3rm1k3/go/src/runtime/runtime_linux_test.go /home/h4ck3rm1k3/go/src/runtime/runtime_test.go /home/h4ck3rm1k3/go/src/runtime/runtime_unix_test.go /home/h4ck3rm1k3/go/src/runtime/select.go /home/h4ck3rm1k3/go/src/runtime/sema.go /home/h4ck3rm1k3/go/src/runtime/signal1_unix.go /home/h4ck3rm1k3/go/src/runtime/signal_linux.go /home/h4ck3rm1k3/go/src/runtime/signal_linux_ppc64x.go /home/h4ck3rm1k3/go/src/runtime/signal_ppc64x.go /home/h4ck3rm1k3/go/src/runtime/signal_unix.go /home/h4ck3rm1k3/go/src/runtime/sigpanic_unix.go /home/h4ck3rm1k3/go/src/runtime/sigqueue.go /home/h4ck3rm1k3/go/src/runtime/slice.go /home/h4ck3rm1k3/go/src/runtime/softfloat64.go /home/h4ck3rm1k3/go/src/runtime/softfloat64_test.go /home/h4ck3rm1k3/go/src/runtime/sqrt.go /home/h4ck3rm1k3/go/src/runtime/stack1.go /home/h4ck3rm1k3/go/src/runtime/stack2.go /home/h4ck3rm1k3/go/src/runtime/stack_test.go /home/h4ck3rm1k3/go/src/runtime/string.go /home/h4ck3rm1k3/go/src/runtime/string1.go /home/h4ck3rm1k3/go/src/runtime/string_test.go /home/h4ck3rm1k3/go/src/runtime/stubs.go /home/h4ck3rm1k3/go/src/runtime/stubs2.go /home/h4ck3rm1k3/go/src/runtime/symtab.go /home/h4ck3rm1k3/go/src/runtime/symtab_test.go /home/h4ck3rm1k3/go/src/runtime/sys_ppc64x.go /home/h4ck3rm1k3/go/src/runtime/time.go /home/h4ck3rm1k3/go/src/runtime/trace.go /home/h4ck3rm1k3/go/src/runtime/traceback.go /home/h4ck3rm1k3/go/src/runtime/type.go /home/h4ck3rm1k3/go/src/runtime/typekind.go /home/h4ck3rm1k3/go/src/runtime/typekind1.go /home/h4ck3rm1k3/go/src/runtime/unaligned2.go /home/h4ck3rm1k3/go/src/runtime/vdso_none.go /home/h4ck3rm1k3/go/src/runtime/wbfat.go /home/h4ck3rm1k3/go/src/runtime/zgoarch_ppc64le.go /home/h4ck3rm1k3/go/src/runtime/zgoos_linux.go]
+#CHECK2 [/home/h4ck3rm1k3/go/src/unsafe/unsafe.go]
+#DEP2 unsafe
+#DEP2 unsafe
+#DEP2 runtime
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/io.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/io_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/multi.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/multi_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/pipe.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/pipe_test.go]
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/race.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/cond.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/cond_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/example_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/export_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/mutex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/mutex_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/once.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/once_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/pool.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/pool_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/race0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/runtime.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/runtime_sema_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/rwmutex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/rwmutex_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/waitgroup.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/waitgroup_test.go]
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_amd64p32.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_ppc64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_amd64p32.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_ppc64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_amd64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs1_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs1_netbsd_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs1_netbsd_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs1_netbsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs1_solaris_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs2_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs3_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_arm_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_darwin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_darwin_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_darwin_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_darwin_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_dragonfly.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_dragonfly_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_freebsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_freebsd_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_freebsd_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_freebsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_ppc64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_nacl_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_nacl_amd64p32.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_nacl_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_netbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_netbsd_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_netbsd_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_netbsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_openbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_openbsd_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_openbsd_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_openbsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_plan9_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_plan9_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_solaris_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_windows_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_windows_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/env_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/export_windows_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/gengoos.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hash32.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_32bit.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_linux_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lock_sema.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mem_bsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mem_darwin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mem_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mem_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/memmove_linux_amd64_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_kqueue.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_nacl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_stub.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_darwin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_dragonfly.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_freebsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_nacl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_netbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_netbsd_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_netbsd_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_openbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_windows_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_windows_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_darwin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_dragonfly.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_freebsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_nacl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_netbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_openbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os3_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os3_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_android_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_darwin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_darwin_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_dragonfly.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_freebsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_freebsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_nacl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_nacl_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_netbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_netbsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_openbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_openbsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1_write_android.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/race.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/race1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_amd64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_darwin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_darwin_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_darwin_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_darwin_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_dragonfly.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_dragonfly_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_freebsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_freebsd_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_freebsd_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_freebsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_nacl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_nacl_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_nacl_amd64p32.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_nacl_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_netbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_netbsd_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_netbsd_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_netbsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_openbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_openbsd_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_openbsd_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_openbsd_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_solaris_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigqueue_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/softfloat_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs_android.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sys_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sys_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sys_x86.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/syscall2_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/syscall_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/syscall_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/syscall_windows_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/unaligned1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/vdso_linux_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/vlop_arm_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/vlrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/wbfat_gen.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/wincallback.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zcallback_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_386.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_amd64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_amd64p32.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_arm64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_ppc64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_android.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_darwin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_dragonfly.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_freebsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_nacl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_netbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_openbsd.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_plan9.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_solaris.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_windows.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/alg.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/append_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_pointer.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgo.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgocall.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgocallback.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/chan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/chan_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/closure_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/compiler.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/complex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/complex_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cpuprof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cputicks.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/crash_cgo_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/crash_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/debug.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/env_posix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/env_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/error.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/export_futex_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/export_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/extern.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/futex_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/gc_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/gcinfo_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hash64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hash_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap_fast.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/heapdump.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/iface.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/iface_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_linux_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lock_futex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/malloc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/malloc_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/map_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mapspeed_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mbarrier.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mbitmap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mcache.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mcentral.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mem_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/memmove_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfinal.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfinal_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfixalloc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcmark.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcsweep.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcwork.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mheap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mprof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/msize.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mstats.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_epoll.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/noasm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/norace_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/panic.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/panic1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/parfor.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/parfor_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1_write.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/race0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/rdebug.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/rune.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime-gdb_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime_linux_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime_unix_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/select.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sema.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal1_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigpanic_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigqueue.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/slice.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/softfloat64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/softfloat64_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sqrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/symtab.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/symtab_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sys_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/time.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/trace.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/traceback.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/type.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/typekind.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/typekind1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/unaligned2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/vdso_none.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/wbfat.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_linux.go]
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.go]
+#DEP2 unsafe
+#DEP2 runtime
+#DEP2 unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 runtime
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/64bit_arm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/atomic_linux_arm_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/export_linux_arm_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/atomic_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/doc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/value.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/value_test.go]
+#DEP2 unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 runtime
+#DEP2 unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/sync/atomic
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/sync/atomic
+#DEP2 runtime
+#DEP2 unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/sync
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/errors
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/maketables.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/casetables.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/digit.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/digit_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/graphic.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/graphic_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/letter.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/letter_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/script_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/tables.go]
+#DEP2 unsafe
+#DEP2 runtime
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/utf8/example_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/utf8/utf8.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/utf8/utf8_test.go]
+#DEP2 unsafe
+#DEP2 runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/sync/atomic
+#DEP2 runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/io
+#DEP2 unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/unicode
+#DEP2 github.com/h4ck3rm1k3/gocore/runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/sync
+#DEP2 github.com/h4ck3rm1k3/gocore/unicode/utf8
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/errors
+#DEP2 unsafe
+#DEP2 runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/sync/atomic
+#DEP2 github.com/h4ck3rm1k3/gocore/io
+#DEP2 github.com/h4ck3rm1k3/gocore/unicode
+#DEP2 github.com/h4ck3rm1k3/gocore/bytes
+#DEP2 github.com/h4ck3rm1k3/gocore/runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/sync
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/unicode/utf8
+#DEP2 github.com/h4ck3rm1k3/gocore/errors
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/color.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/ycbcr.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/ycbcr_test.go]
+#DEP2 unsafe
+#DEP2 runtime
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/makeisprint.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atob.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atob_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atof_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atoi.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atoi_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/decimal.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/decimal_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/extfloat.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/fp_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/ftoa.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/ftoa_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/internal_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/isprint.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/itoa.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/itoa_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/quote.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/quote_example_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/quote_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/strconv_test.go]
+#CHECK2 [/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/abs.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/acosh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/all_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/asin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/asinh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atan2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atanh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/bits.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/cbrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/const.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/copysign.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/dim.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/erf.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/exp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/expm1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/export_test.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/floor.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/frexp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/gamma.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/hypot.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/j0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/j1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/jn.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/ldexp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/lgamma.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log10.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log1p.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/logb.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/mod.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/modf.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/nextafter.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/pow.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/pow10.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/remainder.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/signbit.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sincos.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sinh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sqrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/tan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/tanh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/unsafe.go]
+#DEP2 unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 runtime
+#DEP2 runtime
+#DEP2 unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/unicode/utf8
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/errors
+#DEP2 github.com/h4ck3rm1k3/gocore/math
+#DEP2 github.com/h4ck3rm1k3/gocore/io
+#DEP2 github.com/h4ck3rm1k3/gocore/bufio
+#DEP2 github.com/h4ck3rm1k3/gocore/runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/bytes
+#DEP2 github.com/h4ck3rm1k3/gocore/unicode/utf8
+#DEP2 github.com/h4ck3rm1k3/gocore/math
+#DEP2 github.com/h4ck3rm1k3/gocore/unicode
+#DEP2 github.com/h4ck3rm1k3/gocore/unsafe
+#DEP2 github.com/h4ck3rm1k3/gocore/sync/atomic
+#DEP2 runtime
+#DEP2 github.com/h4ck3rm1k3/gocore/errors
+#DEP2 github.com/h4ck3rm1k3/gocore/sync
+#DEP2 github.com/h4ck3rm1k3/gocore/image/color
+#DEP2 github.com/h4ck3rm1k3/gocore/strconv
+#DEP2 unsafe
+#DEPS  %v [0xc209fbe340]
+#BUILD [errors.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/errors
+#
+
+#github.com/h4ck3rm1k3/gocore/errors
+	#mkdir -p github.com/h4ck3rm1k3/gocore/errors/
+	#mkdir -p $(WORK)/github.com/h4ck3rm1k3/gocore/
+#INC1: [$(GOFLAGS)]
+#COMPILE [errors.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/errors
+#PKGPATH github.com/h4ck3rm1k3/gocore/errors
+#OUT github.com/h4ck3rm1k3/gocore/errors.o
+#OBJ github.com/h4ck3rm1k3/gocore/errors/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/errors.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/errors/errors.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/errors/errors.go
+#BUILD RULE for errors
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/errors.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/errors/errors.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/errors -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/errors -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/errors.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/errors/errors.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/errors -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/errors -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/errors.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/errors/errors.go
+#BUILD [unsafe.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/unsafe
+#
+
+#github.com/h4ck3rm1k3/gocore/unsafe
+	#mkdir -p github.com/h4ck3rm1k3/gocore/unsafe/
+#INC1: [$(GOFLAGS)]
+#COMPILE [unsafe.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/unsafe
+#PKGPATH github.com/h4ck3rm1k3/gocore/unsafe
+#OUT github.com/h4ck3rm1k3/gocore/unsafe.o
+#OBJ github.com/h4ck3rm1k3/gocore/unsafe/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unsafe.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.go
+#BUILD RULE for unsafe
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unsafe.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/unsafe -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unsafe.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/unsafe -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unsafe.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.go
+#BUILD [alg.go arch1_ppc64le.go arch_ppc64le.go atomic_pointer.go atomic_ppc64x.go cgo.go cgocall.go cgocallback.go chan.go compiler.go complex.go cpuprof.go cputicks.go debug.go defs_linux_ppc64le.go env_posix.go error.go extern.go hash64.go hashmap.go hashmap_fast.go heapdump.go iface.go lfstack.go lfstack_linux_ppc64x.go lock_futex.go malloc.go mbarrier.go mbitmap.go mcache.go mcentral.go mem_linux.go mfinal.go mfixalloc.go mgc.go mgcmark.go mgcsweep.go mgcwork.go mheap.go mprof.go msize.go mstats.go netpoll.go netpoll_epoll.go noasm.go os1_linux.go os2_linux.go os_linux.go panic.go panic1.go parfor.go print1.go print1_write.go proc.go proc1.go race0.go rdebug.go rune.go runtime.go runtime1.go runtime2.go select.go sema.go signal1_unix.go signal_linux.go signal_linux_ppc64x.go signal_ppc64x.go signal_unix.go sigpanic_unix.go sigqueue.go slice.go softfloat64.go sqrt.go stack1.go stack2.go string.go string1.go stubs.go stubs2.go symtab.go sys_ppc64x.go time.go trace.go traceback.go type.go typekind.go typekind1.go unaligned2.go vdso_none.go wbfat.go zgoarch_ppc64le.go zgoos_linux.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/runtime
+#
+
+#github.com/h4ck3rm1k3/gocore/runtime
+	#mkdir -p github.com/h4ck3rm1k3/gocore/runtime/
+#INC1: [$(GOFLAGS)]
+#COMPILE [alg.go arch1_ppc64le.go arch_ppc64le.go atomic_pointer.go atomic_ppc64x.go cgo.go cgocall.go cgocallback.go chan.go compiler.go complex.go cpuprof.go cputicks.go debug.go defs_linux_ppc64le.go env_posix.go error.go extern.go hash64.go hashmap.go hashmap_fast.go heapdump.go iface.go lfstack.go lfstack_linux_ppc64x.go lock_futex.go malloc.go mbarrier.go mbitmap.go mcache.go mcentral.go mem_linux.go mfinal.go mfixalloc.go mgc.go mgcmark.go mgcsweep.go mgcwork.go mheap.go mprof.go msize.go mstats.go netpoll.go netpoll_epoll.go noasm.go os1_linux.go os2_linux.go os_linux.go panic.go panic1.go parfor.go print1.go print1_write.go proc.go proc1.go race0.go rdebug.go rune.go runtime.go runtime1.go runtime2.go select.go sema.go signal1_unix.go signal_linux.go signal_linux_ppc64x.go signal_ppc64x.go signal_unix.go sigpanic_unix.go sigqueue.go slice.go softfloat64.go sqrt.go stack1.go stack2.go string.go string1.go stubs.go stubs2.go symtab.go sys_ppc64x.go time.go trace.go traceback.go type.go typekind.go typekind1.go unaligned2.go vdso_none.go wbfat.go zgoarch_ppc64le.go zgoos_linux.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/runtime
+#PKGPATH github.com/h4ck3rm1k3/gocore/runtime
+#OUT github.com/h4ck3rm1k3/gocore/runtime.o
+#OBJ github.com/h4ck3rm1k3/gocore/runtime/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/alg.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/alg.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_ppc64le.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_ppc64le.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_ppc64le.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/arch_ppc64le.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_pointer.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_pointer.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_ppc64x.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_ppc64x.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgo.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cgo.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgocall.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cgocall.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgocallback.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cgocallback.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/chan.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/chan.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/compiler.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/compiler.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/complex.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/complex.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cpuprof.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cpuprof.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cputicks.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cputicks.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/debug.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/debug.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_ppc64le.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_ppc64le.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/env_posix.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/env_posix.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/error.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/error.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/extern.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/extern.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hash64.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/hash64.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap_fast.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap_fast.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/heapdump.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/heapdump.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/iface.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/iface.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_linux_ppc64x.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_linux_ppc64x.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lock_futex.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/lock_futex.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/malloc.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/malloc.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mbarrier.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mbarrier.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mbitmap.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mbitmap.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mcache.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mcache.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mcentral.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mcentral.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mem_linux.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mem_linux.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfinal.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mfinal.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfixalloc.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mfixalloc.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgc.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mgc.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcmark.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mgcmark.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcsweep.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mgcsweep.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcwork.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mgcwork.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mheap.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mheap.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mprof.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mprof.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/msize.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/msize.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mstats.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mstats.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_epoll.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_epoll.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/noasm.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/noasm.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_linux.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/os1_linux.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_linux.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/os2_linux.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/panic.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/panic.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/panic1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/panic1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/parfor.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/parfor.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/print1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1_write.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/print1_write.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/proc.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/proc1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/race0.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/race0.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/rdebug.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/rdebug.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/rune.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/rune.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/runtime.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/runtime1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime2.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/runtime2.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/select.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/select.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sema.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sema.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal1_unix.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal1_unix.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_ppc64x.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_ppc64x.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_ppc64x.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal_ppc64x.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_unix.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal_unix.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigpanic_unix.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sigpanic_unix.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigqueue.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sigqueue.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/slice.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/slice.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/softfloat64.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/softfloat64.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sqrt.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sqrt.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/stack1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack2.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/stack2.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/string.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/string1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/stubs.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs2.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/stubs2.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/symtab.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/symtab.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sys_ppc64x.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sys_ppc64x.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/time.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/time.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/trace.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/trace.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/traceback.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/traceback.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/type.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/type.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/typekind.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/typekind.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/typekind1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/typekind1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/unaligned2.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/unaligned2.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/vdso_none.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/vdso_none.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/wbfat.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/wbfat.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_ppc64le.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_ppc64le.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_linux.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_linux.go
+#BUILD RULE for runtime
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/alg.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_ppc64le.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/arch_ppc64le.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_pointer.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_ppc64x.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cgo.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cgocall.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cgocallback.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/chan.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/compiler.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/complex.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cpuprof.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/cputicks.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/debug.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_ppc64le.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/env_posix.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/error.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/extern.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/hash64.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap_fast.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/heapdump.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/iface.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_linux_ppc64x.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/lock_futex.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/malloc.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mbarrier.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mbitmap.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mcache.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mcentral.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mem_linux.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mfinal.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mfixalloc.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mgc.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mgcmark.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mgcsweep.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mgcwork.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mheap.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mprof.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/msize.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/mstats.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_epoll.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/noasm.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/os1_linux.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/os2_linux.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/panic.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/panic1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/parfor.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/print1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/print1_write.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/proc.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/proc1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/race0.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/rdebug.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/rune.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/runtime.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/runtime1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/runtime2.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/select.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sema.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal1_unix.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_ppc64x.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal_ppc64x.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/signal_unix.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sigpanic_unix.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sigqueue.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/slice.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/softfloat64.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sqrt.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/stack1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/stack2.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/string.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/string1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/stubs.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/stubs2.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/symtab.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/sys_ppc64x.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/time.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/trace.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/traceback.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/type.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/typekind.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/typekind1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/unaligned2.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/vdso_none.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/wbfat.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_ppc64le.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_linux.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/generated.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/runtime -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/alg.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_pointer.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgo.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgocall.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgocallback.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/chan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/compiler.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/complex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cpuprof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cputicks.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/debug.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/env_posix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/error.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/extern.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hash64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap_fast.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/heapdump.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/iface.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_linux_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lock_futex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/malloc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mbarrier.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mbitmap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mcache.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mcentral.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mem_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfinal.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfixalloc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcmark.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcsweep.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcwork.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mheap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mprof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/msize.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mstats.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_epoll.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/noasm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/panic.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/panic1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/parfor.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1_write.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/race0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/rdebug.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/rune.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/select.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sema.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal1_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigpanic_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigqueue.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/slice.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/softfloat64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sqrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/symtab.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sys_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/time.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/trace.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/traceback.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/type.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/typekind.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/typekind1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/unaligned2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/vdso_none.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/wbfat.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_linux.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/runtime -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/alg.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch1_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/arch_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_pointer.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/atomic_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgo.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgocall.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cgocallback.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/chan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/compiler.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/complex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cpuprof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/cputicks.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/debug.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/defs_linux_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/env_posix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/error.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/extern.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hash64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/hashmap_fast.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/heapdump.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/iface.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lfstack_linux_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/lock_futex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/malloc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mbarrier.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mbitmap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mcache.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mcentral.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mem_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfinal.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mfixalloc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcmark.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcsweep.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mgcwork.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mheap.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mprof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/msize.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/mstats.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/netpoll_epoll.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/noasm.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os1_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os2_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/os_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/panic.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/panic1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/parfor.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/print1_write.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/proc1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/race0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/rdebug.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/rune.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/runtime2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/select.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sema.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal1_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_linux_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/signal_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigpanic_unix.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sigqueue.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/slice.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/softfloat64.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sqrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stack2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/string1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/stubs2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/symtab.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/sys_ppc64x.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/time.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/trace.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/traceback.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/type.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/typekind.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/typekind1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/unaligned2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/vdso_none.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/wbfat.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoarch_ppc64le.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime/zgoos_linux.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime/generated.go
+#BUILD [doc.go value.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/sync/atomic
+#
+
+#github.com/h4ck3rm1k3/gocore/sync/atomic
+	#mkdir -p github.com/h4ck3rm1k3/gocore/sync/atomic/
+	#mkdir -p $(WORK)/github.com/h4ck3rm1k3/gocore/sync/
+#INC1: [$(GOFLAGS)]
+#COMPILE [doc.go value.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/sync/atomic
+#PKGPATH github.com/h4ck3rm1k3/gocore/sync/atomic
+#OUT github.com/h4ck3rm1k3/gocore/sync/atomic.o
+#OBJ github.com/h4ck3rm1k3/gocore/sync/atomic/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/doc.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic/doc.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/value.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic/value.go
+#BUILD RULE for atomic
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic/doc.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic/value.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/sync/atomic -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/doc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/value.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/sync/atomic -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/doc.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/atomic/value.go
+#BUILD [cond.go mutex.go once.go pool.go race0.go runtime.go rwmutex.go waitgroup.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/sync
+#
+
+#github.com/h4ck3rm1k3/gocore/sync
+	#mkdir -p github.com/h4ck3rm1k3/gocore/sync/
+#INC1: [$(GOFLAGS)]
+#COMPILE [cond.go mutex.go once.go pool.go race0.go runtime.go rwmutex.go waitgroup.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/sync
+#PKGPATH github.com/h4ck3rm1k3/gocore/sync
+#OUT github.com/h4ck3rm1k3/gocore/sync.o
+#OBJ github.com/h4ck3rm1k3/gocore/sync/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/cond.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/cond.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/mutex.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/mutex.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/once.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/once.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/pool.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/pool.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/race0.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/race0.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/runtime.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/runtime.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/rwmutex.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/rwmutex.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/waitgroup.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/waitgroup.go
+#BUILD RULE for sync
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/cond.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/mutex.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/once.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/pool.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/race0.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/runtime.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/rwmutex.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/waitgroup.go  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic.o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/runtime.o
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/sync -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/cond.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/mutex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/once.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/pool.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/race0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/runtime.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/rwmutex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/waitgroup.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/sync -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/cond.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/mutex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/once.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/pool.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/race0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/runtime.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/rwmutex.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/sync/waitgroup.go
+#BUILD [io.go multi.go pipe.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/io
+#
+
+#github.com/h4ck3rm1k3/gocore/io
+	#mkdir -p github.com/h4ck3rm1k3/gocore/io/
+#INC1: [$(GOFLAGS)]
+#COMPILE [io.go multi.go pipe.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/io
+#PKGPATH github.com/h4ck3rm1k3/gocore/io
+#OUT github.com/h4ck3rm1k3/gocore/io.o
+#OBJ github.com/h4ck3rm1k3/gocore/io/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/io.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io/io.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/multi.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io/multi.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/pipe.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io/pipe.go
+#BUILD RULE for io
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io/io.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io/multi.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io/pipe.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync.o
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/io -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/io.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/multi.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/pipe.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/io -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/io.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/multi.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/io/pipe.go
+#BUILD [casetables.go digit.go graphic.go letter.go tables.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/unicode
+#
+
+#github.com/h4ck3rm1k3/gocore/unicode
+	#mkdir -p github.com/h4ck3rm1k3/gocore/unicode/
+#INC1: [$(GOFLAGS)]
+#COMPILE [casetables.go digit.go graphic.go letter.go tables.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/unicode
+#PKGPATH github.com/h4ck3rm1k3/gocore/unicode
+#OUT github.com/h4ck3rm1k3/gocore/unicode.o
+#OBJ github.com/h4ck3rm1k3/gocore/unicode/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/casetables.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/casetables.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/digit.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/digit.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/graphic.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/graphic.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/letter.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/letter.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/tables.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/tables.go
+#BUILD RULE for unicode
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/casetables.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/digit.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/graphic.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/letter.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/tables.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/unicode -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/casetables.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/digit.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/graphic.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/letter.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/tables.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/unicode -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/casetables.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/digit.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/graphic.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/letter.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/tables.go
+#BUILD [utf8.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/unicode/utf8
+#
+
+#github.com/h4ck3rm1k3/gocore/unicode/utf8
+	#mkdir -p github.com/h4ck3rm1k3/gocore/unicode/utf8/
+	#mkdir -p $(WORK)/github.com/h4ck3rm1k3/gocore/unicode/
+#INC1: [$(GOFLAGS)]
+#COMPILE [utf8.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/unicode/utf8
+#PKGPATH github.com/h4ck3rm1k3/gocore/unicode/utf8
+#OUT github.com/h4ck3rm1k3/gocore/unicode/utf8.o
+#OBJ github.com/h4ck3rm1k3/gocore/unicode/utf8/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/utf8.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/utf8/utf8.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/utf8/utf8.go
+#BUILD RULE for utf8
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/utf8.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/utf8/utf8.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/unicode/utf8 -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/utf8 -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/utf8.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/utf8/utf8.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/unicode/utf8 -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/utf8 -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/utf8.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unicode/utf8/utf8.go
+#BUILD [buffer.go bytes.go bytes_decl.go reader.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/bytes
+#
+
+#github.com/h4ck3rm1k3/gocore/bytes
+	#mkdir -p github.com/h4ck3rm1k3/gocore/bytes/
+#INC1: [$(GOFLAGS)]
+#COMPILE [buffer.go bytes.go bytes_decl.go reader.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/bytes
+#PKGPATH github.com/h4ck3rm1k3/gocore/bytes
+#OUT github.com/h4ck3rm1k3/gocore/bytes.o
+#OBJ github.com/h4ck3rm1k3/gocore/bytes/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/buffer.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes/buffer.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes/bytes.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes_decl.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes/bytes_decl.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/reader.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes/reader.go
+#BUILD RULE for bytes
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes/buffer.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes/bytes.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes/bytes_decl.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes/reader.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/errors.o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/io.o
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/bytes -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/buffer.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes_decl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/reader.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/bytes -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/buffer.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/bytes_decl.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bytes/reader.go
+#BUILD [bufio.go scan.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/bufio
+#
+
+#github.com/h4ck3rm1k3/gocore/bufio
+	#mkdir -p github.com/h4ck3rm1k3/gocore/bufio/
+#INC1: [$(GOFLAGS)]
+#COMPILE [bufio.go scan.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/bufio
+#PKGPATH github.com/h4ck3rm1k3/gocore/bufio
+#OUT github.com/h4ck3rm1k3/gocore/bufio.o
+#OBJ github.com/h4ck3rm1k3/gocore/bufio/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/bufio.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio/bufio.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/scan.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio/scan.go
+#BUILD RULE for bufio
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio/bufio.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio/scan.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bytes.o
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/bufio -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/bufio.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/scan.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/bufio -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/bufio.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/bufio/scan.go
+#BUILD [color.go ycbcr.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/image/color
+#
+
+#github.com/h4ck3rm1k3/gocore/image/color
+	#mkdir -p github.com/h4ck3rm1k3/gocore/image/color/
+	#mkdir -p $(WORK)/github.com/h4ck3rm1k3/gocore/image/
+#INC1: [$(GOFLAGS)]
+#COMPILE [color.go ycbcr.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/image/color
+#PKGPATH github.com/h4ck3rm1k3/gocore/image/color
+#OUT github.com/h4ck3rm1k3/gocore/image/color.o
+#OBJ github.com/h4ck3rm1k3/gocore/image/color/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/color.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/color.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/color/color.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/ycbcr.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/color/ycbcr.go
+#BUILD RULE for color
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/color.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/color/color.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/color/ycbcr.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/image/color -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/color.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/color.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/ycbcr.go]
+	/home/h4ck3rm1k3/install/bin/gccgo --verbose -L $(WORK) $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/image/color -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/color.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/color.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/color/ycbcr.go
+#BUILD [abs.go acosh.go asin.go asinh.go atan.go atan2.go atanh.go bits.go cbrt.go const.go copysign.go dim.go erf.go exp.go expm1.go floor.go frexp.go gamma.go hypot.go j0.go j1.go jn.go ldexp.go lgamma.go log.go log10.go log1p.go logb.go mod.go modf.go nextafter.go pow.go pow10.go remainder.go signbit.go sin.go sincos.go sinh.go sqrt.go tan.go tanh.go unsafe.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/math
+#
+
+#github.com/h4ck3rm1k3/gocore/math
+	#mkdir -p github.com/h4ck3rm1k3/gocore/math/
+#INC1: [$(GOFLAGS)]
+#COMPILE [abs.go acosh.go asin.go asinh.go atan.go atan2.go atanh.go bits.go cbrt.go const.go copysign.go dim.go erf.go exp.go expm1.go floor.go frexp.go gamma.go hypot.go j0.go j1.go jn.go ldexp.go lgamma.go log.go log10.go log1p.go logb.go mod.go modf.go nextafter.go pow.go pow10.go remainder.go signbit.go sin.go sincos.go sinh.go sqrt.go tan.go tanh.go unsafe.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/math
+#PKGPATH github.com/h4ck3rm1k3/gocore/math
+#OUT github.com/h4ck3rm1k3/gocore/math.o
+#OBJ github.com/h4ck3rm1k3/gocore/math/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/abs.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/abs.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/acosh.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/acosh.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/asin.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/asin.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/asinh.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/asinh.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atan.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/atan.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atan2.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/atan2.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atanh.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/atanh.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/bits.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/bits.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/cbrt.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/cbrt.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/const.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/const.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/copysign.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/copysign.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/dim.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/dim.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/erf.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/erf.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/exp.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/exp.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/expm1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/expm1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/floor.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/floor.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/frexp.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/frexp.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/gamma.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/gamma.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/hypot.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/hypot.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/j0.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/j0.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/j1.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/j1.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/jn.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/jn.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/ldexp.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/ldexp.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/lgamma.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/lgamma.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/log.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log10.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/log10.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log1p.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/log1p.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/logb.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/logb.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/mod.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/mod.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/modf.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/modf.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/nextafter.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/nextafter.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/pow.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/pow.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/pow10.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/pow10.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/remainder.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/remainder.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/signbit.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/signbit.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sin.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/sin.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sincos.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/sincos.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sinh.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/sinh.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sqrt.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/sqrt.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/tan.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/tan.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/tanh.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/tanh.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/unsafe.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/unsafe.go
+#BUILD RULE for math
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/abs.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/acosh.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/asin.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/asinh.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/atan.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/atan2.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/atanh.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/bits.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/cbrt.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/const.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/copysign.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/dim.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/erf.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/exp.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/expm1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/floor.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/frexp.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/gamma.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/hypot.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/j0.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/j1.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/jn.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/ldexp.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/lgamma.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/log.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/log10.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/log1p.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/logb.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/mod.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/modf.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/nextafter.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/pow.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/pow10.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/remainder.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/signbit.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/sin.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/sincos.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/sinh.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/sqrt.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/tan.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/tanh.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/unsafe.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/math -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/abs.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/acosh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/asin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/asinh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atan2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atanh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/bits.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/cbrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/const.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/copysign.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/dim.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/erf.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/exp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/expm1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/floor.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/frexp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/gamma.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/hypot.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/j0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/j1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/jn.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/ldexp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/lgamma.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log10.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log1p.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/logb.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/mod.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/modf.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/nextafter.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/pow.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/pow10.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/remainder.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/signbit.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sincos.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sinh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sqrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/tan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/tanh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/unsafe.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/math -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/abs.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/acosh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/asin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/asinh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atan2.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/atanh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/bits.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/cbrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/const.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/copysign.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/dim.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/erf.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/exp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/expm1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/floor.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/frexp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/gamma.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/hypot.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/j0.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/j1.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/jn.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/ldexp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/lgamma.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log10.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/log1p.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/logb.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/mod.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/modf.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/nextafter.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/pow.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/pow10.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/remainder.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/signbit.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sin.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sincos.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sinh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/sqrt.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/tan.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/tanh.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/unsafe.go
+#BUILD [atob.go atof.go atoi.go decimal.go extfloat.go ftoa.go isprint.go itoa.go quote.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/strconv
+#
+
+#github.com/h4ck3rm1k3/gocore/strconv
+	#mkdir -p github.com/h4ck3rm1k3/gocore/strconv/
+#INC1: [$(GOFLAGS)]
+#COMPILE [atob.go atof.go atoi.go decimal.go extfloat.go ftoa.go isprint.go itoa.go quote.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/strconv
+#PKGPATH github.com/h4ck3rm1k3/gocore/strconv
+#OUT github.com/h4ck3rm1k3/gocore/strconv.o
+#OBJ github.com/h4ck3rm1k3/gocore/strconv/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atob.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/atob.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atof.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/atof.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atoi.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/atoi.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/decimal.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/decimal.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/extfloat.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/extfloat.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/ftoa.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/ftoa.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/isprint.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/isprint.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/itoa.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/itoa.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/quote.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/quote.go
+#BUILD RULE for strconv
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/atob.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/atof.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/atoi.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/decimal.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/extfloat.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/ftoa.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/isprint.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/itoa.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv/quote.go
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/strconv -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atob.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atoi.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/decimal.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/extfloat.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/ftoa.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/isprint.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/itoa.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/quote.go]
+	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/strconv -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/strconv.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atob.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atof.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/atoi.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/decimal.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/extfloat.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/ftoa.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/isprint.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/itoa.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/strconv/quote.go
+#BUILD [format.go geom.go image.go names.go ycbcr.go]
+
+#
+# github.com/h4ck3rm1k3/gocore/image
+#
+
+#github.com/h4ck3rm1k3/gocore/image
+	#mkdir -p github.com/h4ck3rm1k3/gocore/image/
+#INC1: [$(GOFLAGS)]
+#COMPILE [format.go geom.go image.go names.go ycbcr.go]
+#COMPILEDIR github.com/h4ck3rm1k3/gocore/image
+#PKGPATH github.com/h4ck3rm1k3/gocore/image
+#OUT github.com/h4ck3rm1k3/gocore/image.o
+#OBJ github.com/h4ck3rm1k3/gocore/image/
+#OFILE $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image.o
+#COMPILER /home/h4ck3rm1k3/install/bin/gccgo
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/format.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/format.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/geom.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/geom.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/image.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/image.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/names.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/names.go
+#DEPa1 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/ycbcr.go
+#DEPa1 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/ycbcr.go
+#BUILD RULE for image
+$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image.o :  $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/format.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/geom.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/image.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/names.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image/ycbcr.go $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/bufio.o
+#BUILD2 [/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/image -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/format.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/geom.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/image.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/names.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/ycbcr.go]
+	/home/h4ck3rm1k3/install/bin/gccgo  -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/image -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/format.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/geom.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/image.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/names.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/image/ycbcr.go
+
+
+test : $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/image.o
+	echo test

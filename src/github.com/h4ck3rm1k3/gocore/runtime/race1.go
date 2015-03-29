@@ -7,7 +7,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Race runtime functions called via runtime·racecall.
 //go:linkname __tsan_init __tsan_init

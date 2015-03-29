@@ -6,7 +6,7 @@ package runtime
 
 // This file contains the implementation of Go channels.
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 const (
 	maxAlign  = 8

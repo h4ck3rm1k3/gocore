@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Needs to be in sync with ../../cmd/internal/ld/decodesym.go:/^commonsize and pkg/reflect/type.go:/type.
 type _type struct {

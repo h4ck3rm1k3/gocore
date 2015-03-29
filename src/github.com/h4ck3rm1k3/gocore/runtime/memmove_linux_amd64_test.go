@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/reflect"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // TestMemmoveOverflow maps 3GB of memory and calls memmove on

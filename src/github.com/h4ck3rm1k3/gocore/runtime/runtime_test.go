@@ -14,7 +14,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 var errf error

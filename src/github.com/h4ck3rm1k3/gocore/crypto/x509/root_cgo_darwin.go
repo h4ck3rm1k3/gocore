@@ -61,7 +61,7 @@ int FetchPEMRoots(CFDataRef *pemRoots) {
 }
 */
 import "C"
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func initSystemRoots() {
 	roots := NewCertPool()

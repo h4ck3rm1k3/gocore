@@ -9,7 +9,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func read(fd int32, p unsafe.Pointer, n int32) int32
 func close(fd int32) int32

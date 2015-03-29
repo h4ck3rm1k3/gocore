@@ -29,10 +29,10 @@ var pkgDeps = map[string][]string{
 	// L0 is the lowest level, core, nearly unavoidable packages.
 	"github.com/h4ck3rm1k3/gocore/errors":      {},
 	"github.com/h4ck3rm1k3/gocore/io":          {"github.com/h4ck3rm1k3/gocore/errors", "github.com/h4ck3rm1k3/gocore/sync"},
-	"github.com/h4ck3rm1k3/gocore/runtime":     {"github.com/h4ck3rm1k3/gocore/unsafe"},
-	"github.com/h4ck3rm1k3/gocore/sync":        {"github.com/h4ck3rm1k3/gocore/runtime", "github.com/h4ck3rm1k3/gocore/sync/atomic", "github.com/h4ck3rm1k3/gocore/unsafe"},
-	"github.com/h4ck3rm1k3/gocore/sync/atomic": {"github.com/h4ck3rm1k3/gocore/unsafe"},
-	"github.com/h4ck3rm1k3/gocore/unsafe":      {},
+	"github.com/h4ck3rm1k3/gocore/runtime":     {"unsafe"},
+	"github.com/h4ck3rm1k3/gocore/sync":        {"github.com/h4ck3rm1k3/gocore/runtime", "github.com/h4ck3rm1k3/gocore/sync/atomic", "unsafe"},
+	"github.com/h4ck3rm1k3/gocore/sync/atomic": {"unsafe"},
+	"unsafe":      {},
 
 	"L0": {
 		"github.com/h4ck3rm1k3/gocore/errors",
@@ -40,12 +40,12 @@ var pkgDeps = map[string][]string{
 		"github.com/h4ck3rm1k3/gocore/runtime",
 		"github.com/h4ck3rm1k3/gocore/sync",
 		"github.com/h4ck3rm1k3/gocore/sync/atomic",
-		"github.com/h4ck3rm1k3/gocore/unsafe",
+		"unsafe",
 	},
 
 	// L1 adds simple functions and strings processing,
 	// but not Unicode tables.
-	"github.com/h4ck3rm1k3/gocore/math":          {"github.com/h4ck3rm1k3/gocore/unsafe"},
+	"github.com/h4ck3rm1k3/gocore/math":          {"unsafe"},
 	"math/cmplx":    {"github.com/h4ck3rm1k3/gocore/math"},
 	"github.com/h4ck3rm1k3/gocore/math/rand":     {"L0", "github.com/h4ck3rm1k3/gocore/math"},
 	"github.com/h4ck3rm1k3/gocore/sort":          {},

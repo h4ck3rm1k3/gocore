@@ -7,7 +7,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // On ppc64, Linux limits the user address space to 46 bits (see
 // TASK_SIZE_USER64 in the Linux kernel).  This has grown over time,

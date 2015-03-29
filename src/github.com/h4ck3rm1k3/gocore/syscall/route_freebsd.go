@@ -4,7 +4,7 @@
 
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // See http://www.freebsd.org/doc/en/books/porters-handbook/freebsd-versions.html.
 var freebsdVersion uint32

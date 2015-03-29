@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // May run during STW, so write barriers are not allowed.
 //go:nowritebarrier

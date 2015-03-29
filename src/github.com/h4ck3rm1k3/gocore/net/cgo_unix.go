@@ -20,7 +20,7 @@ import "C"
 
 import (
 	"github.com/h4ck3rm1k3/gocore/syscall"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func cgoLookupHost(name string) (addrs []string, err error, completed bool) {

@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func dumpregs(c *sigctxt) {
 	print("eax    ", hex(c.eax()), "\n")

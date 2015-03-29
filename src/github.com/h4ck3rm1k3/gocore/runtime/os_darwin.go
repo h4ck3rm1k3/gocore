@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func bsdthread_create(stk unsafe.Pointer, mm *m, gg *g, fn uintptr) int32
 func bsdthread_register() int32

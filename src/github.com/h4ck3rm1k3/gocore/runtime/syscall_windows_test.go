@@ -14,7 +14,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 type DLL struct {

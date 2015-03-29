@@ -185,7 +185,7 @@ var program = `// Copyright 2013 The Go Authors. All rights reserved.
 package md5
 
 import (
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 	"github.com/h4ck3rm1k3/gocore/runtime"
 )
 

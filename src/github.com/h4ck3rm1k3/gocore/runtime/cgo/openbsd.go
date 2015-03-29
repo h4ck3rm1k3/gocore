@@ -6,7 +6,7 @@
 
 package cgo
 
-import _ "github.com/h4ck3rm1k3/gocore/unsafe" // for go:linkname
+import _ "unsafe" // for go:linkname
 
 // Supply environ, __progname and __guard_local, because
 // we don't link against the standard OpenBSD crt0.o and

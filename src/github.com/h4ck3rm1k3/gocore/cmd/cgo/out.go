@@ -63,7 +63,7 @@ func (p *Package) writeDefs() {
 	fmt.Fprintf(fm, "void _cgo_reginit(void) { }\n")
 
 	// Write second Go output: definitions of _C_xxx.
-	// In a separate file so that the import of "github.com/h4ck3rm1k3/gocore/unsafe" does not
+	// In a separate file so that the import of "unsafe" does not
 	// pollute the original file.
 	fmt.Fprintf(fgo2, "// Created by cgo - DO NOT EDIT\n\n")
 	fmt.Fprintf(fgo2, "package %s\n\n", p.PackageName)
@@ -1123,7 +1123,7 @@ func (p *Package) cgoType(e ast.Expr) *Type {
 		return &Type{Size: 4, Align: 4, C: c("int")}
 	case *ast.SelectorExpr:
 		id, ok := t.X.(*ast.Ident)
-		if ok && id.Name == "github.com/h4ck3rm1k3/gocore/unsafe" && t.Sel.Name == "Pointer" {
+		if ok && id.Name == "unsafe" && t.Sel.Name == "Pointer" {
 			return &Type{Size: p.PtrSize, Align: p.PtrSize, C: c("void*")}
 		}
 	}

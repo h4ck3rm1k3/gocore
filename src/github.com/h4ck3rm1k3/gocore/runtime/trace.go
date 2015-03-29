@@ -12,7 +12,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Event types in the trace, args are given in square brackets.
 const (

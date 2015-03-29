@@ -267,7 +267,7 @@ import "C"
 import (
 	"github.com/h4ck3rm1k3/gocore/runtime"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func main() {

@@ -536,7 +536,7 @@ func (p *Package) load(stk *importStack, bp *build.Package, err error) *Package 
 		importPaths = append(importPaths, "github.com/h4ck3rm1k3/gocore/syscall")
 	}
 	// Everything depends on runtime, except runtime and unsafe.
-	if !p.Standard || (p.ImportPath != "github.com/h4ck3rm1k3/gocore/runtime" && p.ImportPath != "github.com/h4ck3rm1k3/gocore/unsafe") {
+	if !p.Standard || (p.ImportPath != "github.com/h4ck3rm1k3/gocore/runtime" && p.ImportPath != "unsafe") {
 		importPaths = append(importPaths, "github.com/h4ck3rm1k3/gocore/runtime")
 		// When race detection enabled everything depends on runtime/race.
 		// Exclude certain packages to avoid circular dependencies.
@@ -647,7 +647,7 @@ func (p *Package) load(stk *importStack, bp *build.Package, err error) *Package 
 	}
 
 	// unsafe is a fake package.
-	if p.Standard && (p.ImportPath == "github.com/h4ck3rm1k3/gocore/unsafe" || buildContext.Compiler == "gccgo") {
+	if p.Standard && (p.ImportPath == "unsafe" || buildContext.Compiler == "gccgo") {
 		p.target = ""
 	}
 	p.Target = p.target
@@ -730,7 +730,7 @@ var isGoRelease = strings.HasPrefix(runtime.Version(), "go1")
 
 // isStale reports whether package p needs to be rebuilt.
 func isStale(p *Package, topRoot map[string]bool) bool {
-	if p.Standard && (p.ImportPath == "github.com/h4ck3rm1k3/gocore/unsafe" || buildContext.Compiler == "gccgo") {
+	if p.Standard && (p.ImportPath == "unsafe" || buildContext.Compiler == "gccgo") {
 		// fake, builtin package
 		return false
 	}

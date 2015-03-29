@@ -7,7 +7,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // SysProcIDMap holds Container ID to Host ID mappings used for User Namespaces in Linux.

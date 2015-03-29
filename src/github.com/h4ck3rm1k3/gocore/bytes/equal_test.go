@@ -10,7 +10,7 @@ import (
 	. "github.com/h4ck3rm1k3/gocore/bytes"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // This file tests the situation where memeq is checking

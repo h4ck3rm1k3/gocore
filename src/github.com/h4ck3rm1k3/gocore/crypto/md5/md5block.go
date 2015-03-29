@@ -9,7 +9,7 @@ package md5
 
 import (
 	"github.com/h4ck3rm1k3/gocore/runtime"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 const x86 = runtime.GOARCH == "amd64" || runtime.GOARCH == "386"

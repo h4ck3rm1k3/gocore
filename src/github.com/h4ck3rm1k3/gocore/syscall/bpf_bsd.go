@@ -9,7 +9,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func BpfStmt(code, k int) *BpfInsn {

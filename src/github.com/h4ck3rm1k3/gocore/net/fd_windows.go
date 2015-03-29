@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/time"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 var (

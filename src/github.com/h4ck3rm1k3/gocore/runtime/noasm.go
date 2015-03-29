@@ -8,7 +8,7 @@
 
 package runtime
 
-import _ "github.com/h4ck3rm1k3/gocore/unsafe" // for go:linkname
+import _ "unsafe" // for go:linkname
 
 func cmpstring(s1, s2 string) int {
 	l := len(s1)

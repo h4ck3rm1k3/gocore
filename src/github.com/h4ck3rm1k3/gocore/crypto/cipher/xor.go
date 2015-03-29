@@ -6,7 +6,7 @@ package cipher
 
 import (
 	"github.com/h4ck3rm1k3/gocore/runtime"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 const wordSize = int(unsafe.Sizeof(uintptr(0)))

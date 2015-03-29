@@ -4,7 +4,7 @@
 
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func Getpagesize() int { return 4096 }
 

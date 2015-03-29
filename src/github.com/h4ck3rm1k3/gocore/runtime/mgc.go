@@ -116,7 +116,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 const (
 	_DebugGC         = 0

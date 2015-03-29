@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // The calls to nop are to keep these functions from being inlined.
 // If they are inlined we have no guarantee that later rewrites of the

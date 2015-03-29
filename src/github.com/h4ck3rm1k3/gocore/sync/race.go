@@ -8,7 +8,7 @@ package sync
 
 import (
 	"github.com/h4ck3rm1k3/gocore/runtime"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 const raceenabled = true

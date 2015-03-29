@@ -7,7 +7,7 @@
 
 package cgo
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 //go:cgo_import_static x_cgo_panicmem
 //go:linkname x_cgo_panicmem x_cgo_panicmem

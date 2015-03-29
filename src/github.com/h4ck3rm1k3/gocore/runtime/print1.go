@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // The compiler knows that a print of a value of this type
 // should use printhex instead of printuint (decimal).

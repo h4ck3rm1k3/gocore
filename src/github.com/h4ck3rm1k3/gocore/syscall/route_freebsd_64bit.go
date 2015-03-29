@@ -6,7 +6,7 @@
 
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func (any *anyMessage) parseRouteMessage(b []byte) *RouteMessage {
 	p := (*RouteMessage)(unsafe.Pointer(any))

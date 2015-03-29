@@ -6,7 +6,7 @@
 
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Round the length of a netlink message up to align it properly.
 func nlmAlignOf(msglen int) int {

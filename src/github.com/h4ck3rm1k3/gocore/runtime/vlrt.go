@@ -27,7 +27,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 const (
 	sign32 = 1 << (32 - 1)

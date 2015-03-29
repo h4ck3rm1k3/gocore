@@ -13,7 +13,7 @@ import (
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/unicode"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf8"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func eq(a, b []string) bool {

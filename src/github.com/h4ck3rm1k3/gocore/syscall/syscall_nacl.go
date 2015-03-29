@@ -6,7 +6,7 @@ package syscall
 
 import (
 	"github.com/h4ck3rm1k3/gocore/sync"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 //sys	naclClose(fd int) (err error) = sys_close

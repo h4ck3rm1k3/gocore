@@ -9,7 +9,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 type md5Test struct {

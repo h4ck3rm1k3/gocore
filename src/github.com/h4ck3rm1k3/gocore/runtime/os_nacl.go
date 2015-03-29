@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func nacl_exception_stack(p uintptr, size int32) int32
 func nacl_exception_handler(fn uintptr, arg unsafe.Pointer) int32

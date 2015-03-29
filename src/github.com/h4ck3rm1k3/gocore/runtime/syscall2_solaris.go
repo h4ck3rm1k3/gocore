@@ -4,7 +4,7 @@
 
 package runtime
 
-import _ "github.com/h4ck3rm1k3/gocore/unsafe" // for go:linkname
+import _ "unsafe" // for go:linkname
 
 //go:cgo_import_dynamic libc_chdir chdir "libc.so"
 //go:cgo_import_dynamic libc_chroot chroot "libc.so"

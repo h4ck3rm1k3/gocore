@@ -341,7 +341,7 @@ func runInstall(cmd *Command, args []string) {
 	pkgs := packagesForBuild(args)
 
 	for _, p := range pkgs {
-		if p.Target == "" && (!p.Standard || p.ImportPath != "github.com/h4ck3rm1k3/gocore/unsafe") {
+		if p.Target == "" && (!p.Standard || p.ImportPath != "unsafe") {
 			if p.cmdline {
 				errorf("go install: no install location for .go files listed on command line (GOBIN not set)")
 			} else if p.ConflictDir != "" {
@@ -615,7 +615,7 @@ func (b *builder) action(mode buildMode, depMode buildMode, p *Package) *action 
 
 	if p.Standard {
 		switch p.ImportPath {
-		case "builtin", "github.com/h4ck3rm1k3/gocore/unsafe":
+		case "builtin", "unsafe":
 			// Fake packages - nothing to build.
 			return a
 		}

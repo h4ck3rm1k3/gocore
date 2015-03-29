@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Keep a cached value to make gotraceback fast,
 // since we call it on every call to gentraceback.

@@ -5,7 +5,7 @@
 package runtime
 
 import (
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func mapaccess1_fast32(t *maptype, h *hmap, key uint32) unsafe.Pointer {

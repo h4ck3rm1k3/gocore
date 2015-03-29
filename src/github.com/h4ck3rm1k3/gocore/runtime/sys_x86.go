@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // adjust Gobuf as it if executed a call to fn with context ctxt
 // and then did an immediate gosave.

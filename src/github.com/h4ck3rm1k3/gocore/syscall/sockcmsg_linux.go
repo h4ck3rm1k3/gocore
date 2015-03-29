@@ -6,7 +6,7 @@
 
 package syscall
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // UnixCredentials encodes credentials into a socket control message
 // for sending to another process. This can be used for

@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Statistics.
 // Shared with Go: if you edit this structure, also edit type MemStats in mem.go.

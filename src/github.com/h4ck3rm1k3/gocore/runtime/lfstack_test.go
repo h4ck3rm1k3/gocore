@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/math/rand"
 	. "github.com/h4ck3rm1k3/gocore/runtime"
 	"testing"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 type MyNode struct {

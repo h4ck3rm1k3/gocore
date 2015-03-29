@@ -8,7 +8,7 @@ package syscall
 
 import (
 	"github.com/h4ck3rm1k3/gocore/unicode/utf16"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func Getenv(key string) (value string, found bool) {

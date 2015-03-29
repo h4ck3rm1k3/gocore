@@ -8,7 +8,7 @@ import (
 	"internal/syscall/windows"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/syscall"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 func getAdapters() (*windows.IpAdapterAddresses, error) {

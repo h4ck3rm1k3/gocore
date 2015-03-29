@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 var (
 	writeHeader = []byte{6 /* ANDROID_LOG_ERROR */, 'G', 'o', 0}

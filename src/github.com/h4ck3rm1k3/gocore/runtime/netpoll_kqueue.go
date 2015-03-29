@@ -8,7 +8,7 @@ package runtime
 
 // Integrated network poller (kqueue-based implementation).
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func kqueue() int32
 

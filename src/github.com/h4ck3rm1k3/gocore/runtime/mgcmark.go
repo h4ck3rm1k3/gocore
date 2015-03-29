@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // Scan all of the stacks, greying (or graying if in America) the referents
 // but not blackening them since the mark write barrier isn't installed.

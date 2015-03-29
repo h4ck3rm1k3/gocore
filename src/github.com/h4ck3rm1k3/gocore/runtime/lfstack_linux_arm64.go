@@ -4,7 +4,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 // In addition to the 16 bits taken from the top, we can take 3 from the
 // bottom, because node must be pointer-aligned, giving a total of 19 bits

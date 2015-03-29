@@ -6,7 +6,7 @@
 
 package runtime
 
-import "github.com/h4ck3rm1k3/gocore/unsafe"
+import "unsafe"
 
 func epollcreate(size int32) int32
 func epollcreate1(flags int32) int32

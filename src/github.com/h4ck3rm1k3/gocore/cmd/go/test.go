@@ -385,7 +385,7 @@ func runTest(cmd *Command, args []string) {
 			}
 		}
 		// Ignore pseudo-packages.
-		delete(deps, "github.com/h4ck3rm1k3/gocore/unsafe")
+		delete(deps, "unsafe")
 
 		all := []string{}
 		for path := range deps {

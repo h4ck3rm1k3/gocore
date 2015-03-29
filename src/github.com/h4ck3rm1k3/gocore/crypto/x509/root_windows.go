@@ -7,7 +7,7 @@ package x509
 import (
 	"github.com/h4ck3rm1k3/gocore/errors"
 	"github.com/h4ck3rm1k3/gocore/syscall"
-	"github.com/h4ck3rm1k3/gocore/unsafe"
+	"unsafe"
 )
 
 // Creates a new *syscall.CertContext representing the leaf certificate in an in-memory
