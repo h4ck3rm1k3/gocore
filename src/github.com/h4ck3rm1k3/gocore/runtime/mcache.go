@@ -43,13 +43,14 @@ type gclink struct {
 
 // A gclinkptr is a pointer to a gclink, but it is opaque
 // to the garbage collector.
-type gclinkptr uintptr
+
+type gclinkptr uintptr // see https://github.com/golang/go/issues/10284
 
 // ptr returns the *gclink form of p.
 // The result should be used for accessing fields, not stored
 // in other data structures.
 func (p gclinkptr) ptr() *gclink {
-	return (*gclink)(unsafe.Pointer(p))
+	return (*gclink)(unsafe.Pointer(uintptr(p)))
 }
 
 type stackfreelist struct {
@@ -106,7 +107,7 @@ func mCache_Refill(c *mcache, sizeclass int32) *mspan {
 	_g_.m.locks++
 	// Return the current cached span to the central lists.
 	s := c.alloc[sizeclass]
-	if s.freelist.ptr() != nil {
+	if gclinkptr(s.freelist).ptr() != nil {
 		throw("refill on a nonempty span")
 	}
 	if s != &emptymspan {
@@ -118,7 +119,7 @@ func mCache_Refill(c *mcache, sizeclass int32) *mspan {
 	if s == nil {
 		throw("out of memory")
 	}
-	if s.freelist.ptr() == nil {
+	if gclinkptr(s.freelist).ptr() == nil {
 		println(s.ref, (s.npages<<_PageShift)/s.elemsize)
 		throw("empty span")
 	}

@@ -114,7 +114,7 @@ type slice struct {
 type guintptr uintptr
 
 func (gp guintptr) ptr() *g {
-	return (*g)(unsafe.Pointer(gp))
+	return (*g)(unsafe.Pointer(uintptr(gp)))
 }
 
 // ps, ms, gs, and mcache are structures that must be manipulated at a level

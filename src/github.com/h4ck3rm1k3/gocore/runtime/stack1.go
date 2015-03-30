@@ -72,41 +72,41 @@ func stackpoolalloc(order uint8) gclinkptr {
 		if s.ref != 0 {
 			throw("bad ref")
 		}
-		if s.freelist.ptr() != nil {
+		if gclinkptr(s.freelist).ptr() != nil {
 			throw("bad freelist")
 		}
 		for i := uintptr(0); i < _StackCacheSize; i += _FixedStack << order {
 			x := gclinkptr(uintptr(s.start)<<_PageShift + i)
-			x.ptr().next = s.freelist
-			s.freelist = x
+			x.ptr().next = gclinkptr(s.freelist)
+			s.freelist = uintptr(x)
 		}
 		mSpanList_Insert(list, s)
 	}
 	x := s.freelist
-	if x.ptr() == nil {
+	if gclinkptr(x).ptr() == nil {
 		throw("span has no free stacks")
 	}
-	s.freelist = x.ptr().next
+	s.freelist = uintptr(gclinkptr(x).ptr().next)
 	s.ref++
-	if s.freelist.ptr() == nil {
+	if gclinkptr(s.freelist).ptr() == nil {
 		// all stacks in s are allocated.
 		mSpanList_Remove(s)
 	}
-	return x
+	return gclinkptr(x)
 }
 
 // Adds stack x to the free pool.  Must be called with stackpoolmu held.
 func stackpoolfree(x gclinkptr, order uint8) {
-	s := mHeap_Lookup(&mheap_, (unsafe.Pointer)(x))
+	s := mHeap_Lookup(&mheap_, (unsafe.Pointer)(uintptr(x)))
 	if s.state != _MSpanStack {
 		throw("freeing stack not in a stack span")
 	}
-	if s.freelist.ptr() == nil {
+	if gclinkptr(s.freelist).ptr() == nil {
 		// s will now have a free stack
 		mSpanList_Insert(&stackpool[order], s)
 	}
-	x.ptr().next = s.freelist
-	s.freelist = x
+	gclinkptr(x).ptr().next = gclinkptr(uintptr(s.freelist))
+	s.freelist = uintptr(x)
 	s.ref--
 	if s.ref == 0 {
 		// span is completely free - return to heap
@@ -130,7 +130,7 @@ func stackcacherefill(c *mcache, order uint8) {
 	lock(&stackpoolmu)
 	for size < _StackCacheSize/2 {
 		x := stackpoolalloc(order)
-		x.ptr().next = list
+		gclinkptr(x).ptr().next = list
 		list = x
 		size += _FixedStack << order
 	}
@@ -147,7 +147,7 @@ func stackcacherelease(c *mcache, order uint8) {
 	size := c.stackcache[order].size
 	lock(&stackpoolmu)
 	for size > _StackCacheSize/2 {
-		y := x.ptr().next
+		y := gclinkptr(x).ptr().next
 		stackpoolfree(x, order)
 		x = y
 		size -= _FixedStack << order
@@ -165,7 +165,7 @@ func stackcache_clear(c *mcache) {
 	for order := uint8(0); order < _NumStackOrders; order++ {
 		x := c.stackcache[order].list
 		for x.ptr() != nil {
-			y := x.ptr().next
+			y := (x.ptr()).next
 			stackpoolfree(x, order)
 			x = y
 		}
@@ -225,16 +225,16 @@ func stackalloc(n uint32) stack {
 				stackcacherefill(c, order)
 				x = c.stackcache[order].list
 			}
-			c.stackcache[order].list = x.ptr().next
+			c.stackcache[order].list = gclinkptr(x).ptr().next
 			c.stackcache[order].size -= uintptr(n)
 		}
-		v = (unsafe.Pointer)(x)
+		v = (unsafe.Pointer)(uintptr(x))
 	} else {
 		s := mHeap_AllocStack(&mheap_, round(uintptr(n), _PageSize)>>_PageShift)
 		if s == nil {
 			throw("out of memory")
 		}
-		v = (unsafe.Pointer)(s.start << _PageShift)
+		v = (unsafe.Pointer)(uintptr(s.start << _PageShift))
 	}
 
 	if raceenabled {
@@ -272,7 +272,7 @@ func stackfree(stk stack) {
 			order++
 			n2 >>= 1
 		}
-		x := gclinkptr(v)
+		x := gclinkptr(uintptr(v))
 		c := gp.m.mcache
 		if c == nil || gp.m.preemptoff != "" || gp.m.helpgc != 0 {
 			lock(&stackpoolmu)
@@ -282,7 +282,7 @@ func stackfree(stk stack) {
 			if c.stackcache[order].size >= _StackCacheSize {
 				stackcacherelease(c, order)
 			}
-			x.ptr().next = c.stackcache[order].list
+			gclinkptr(x).ptr().next = c.stackcache[order].list
 			c.stackcache[order].list = x
 			c.stackcache[order].size += n
 		}

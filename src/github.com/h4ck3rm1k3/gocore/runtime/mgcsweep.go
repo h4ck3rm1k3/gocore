@@ -176,7 +176,7 @@ func mSpan_Sweep(s *mspan, preserve bool) bool {
 	sweepgenset := false
 
 	// Mark any free objects in this span so we don't collect them.
-	for link := s.freelist; link.ptr() != nil; link = link.ptr().next {
+	for link := gclinkptr(s.freelist); gclinkptr(link).ptr() != nil; link = gclinkptr(link).ptr().next {
 		heapBitsForAddr(uintptr(link)).setMarkedNonAtomic()
 	}
 

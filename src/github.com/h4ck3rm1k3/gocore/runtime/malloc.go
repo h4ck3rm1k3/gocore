@@ -564,7 +564,7 @@ func mallocgc(size uintptr, typ *_type, flags uint32) unsafe.Pointer {
 			// Allocate a new maxTinySize block.
 			s = c.alloc[tinySizeClass]
 			v := s.freelist
-			if v.ptr() == nil {
+			if gclinkptr(v).ptr() == nil {
 				systemstack(func() {
 					mCache_Refill(c, tinySizeClass)
 				})
@@ -572,10 +572,10 @@ func mallocgc(size uintptr, typ *_type, flags uint32) unsafe.Pointer {
 				s = c.alloc[tinySizeClass]
 				v = s.freelist
 			}
-			s.freelist = v.ptr().next
+			s.freelist = uintptr(gclinkptr(v).ptr().next)
 			s.ref++
 			// prefetchnta offers best performance, see change list message.
-			prefetchnta(uintptr(v.ptr().next))
+			prefetchnta(uintptr(gclinkptr(v).ptr().next))
 			x = unsafe.Pointer(v)
 			(*[2]uint64)(x)[0] = 0
 			(*[2]uint64)(x)[1] = 0
@@ -596,7 +596,7 @@ func mallocgc(size uintptr, typ *_type, flags uint32) unsafe.Pointer {
 			size = uintptr(class_to_size[sizeclass])
 			s = c.alloc[sizeclass]
 			v := s.freelist
-			if v.ptr() == nil {
+			if gclinkptr(v).ptr() == nil {
 				systemstack(func() {
 					mCache_Refill(c, int32(sizeclass))
 				})
@@ -604,13 +604,13 @@ func mallocgc(size uintptr, typ *_type, flags uint32) unsafe.Pointer {
 				s = c.alloc[sizeclass]
 				v = s.freelist
 			}
-			s.freelist = v.ptr().next
+			s.freelist = uintptr(gclinkptr(v).ptr().next)
 			s.ref++
 			// prefetchnta offers best performance, see change list message.
-			prefetchnta(uintptr(v.ptr().next))
+			prefetchnta(uintptr(gclinkptr(v).ptr().next))
 			x = unsafe.Pointer(v)
 			if flags&flagNoZero == 0 {
-				v.ptr().next = 0
+				gclinkptr(v).ptr().next = 0
 				if size > 2*ptrSize && ((*[2]uintptr)(x))[1] != 0 {
 					memclr(unsafe.Pointer(v), size)
 				}

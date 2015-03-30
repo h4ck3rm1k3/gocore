@@ -4,3 +4,11 @@
 *.o
 *.s
 *.a
+/a.out
+/src/github.com/h4ck3rm1k3/gocore/runtime/.#cgocallback.go
+/src/github.com/h4ck3rm1k3/gocore/runtime/.#extern.go
+/src/github.com/h4ck3rm1k3/gocore/runtime/strace.txt
+/strace.txt
+/unsafe_pointer.go
+/unsafe_pointer2.go
+/unsafe_pointer3.go

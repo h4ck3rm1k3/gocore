@@ -94,7 +94,7 @@ type mspan struct {
 	prev     *mspan    // in a span linked list
 	start    pageID    // starting page number
 	npages   uintptr   // number of pages in span
-	freelist gclinkptr // list of free objects
+	freelist uintptr //gclinkptr // list of free objects
 	// sweep generation:
 	// if sweepgen == h->sweepgen - 2, the span needs sweeping
 	// if sweepgen == h->sweepgen - 1, the span is currently being swept
@@ -429,7 +429,7 @@ func mHeap_Alloc(h *mheap, npage uintptr, sizeclass int32, large bool, needzero 
 
 	if s != nil {
 		if needzero && s.needzero != 0 {
-			memclr(unsafe.Pointer(s.start<<_PageShift), s.npages<<_PageShift)
+			memclr(unsafe.Pointer(uintptr(s.start<<_PageShift)), s.npages<<_PageShift)
 		}
 		s.needzero = 0
 	}
@@ -492,7 +492,7 @@ HaveSpan:
 		throw("still in list")
 	}
 	if s.npreleased > 0 {
-		sysUsed((unsafe.Pointer)(s.start<<_PageShift), s.npages<<_PageShift)
+		sysUsed((unsafe.Pointer)(uintptr(s.start<<_PageShift)), s.npages<<_PageShift)
 		memstats.heap_released -= uint64(s.npreleased << _PageShift)
 		s.npreleased = 0
 	}
@@ -747,7 +747,7 @@ func scavengelist(list *mspan, now, limit uint64) uintptr {
 			memstats.heap_released += uint64(released)
 			sumreleased += released
 			s.npreleased = s.npages
-			sysUnused((unsafe.Pointer)(s.start<<_PageShift), s.npages<<_PageShift)
+			sysUnused((unsafe.Pointer)(uintptr(s.start<<_PageShift)), s.npages<<_PageShift)
 		}
 	}
 	return sumreleased

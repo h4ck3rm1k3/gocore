@@ -28,11 +28,11 @@ const (
 type wbufptr uintptr
 
 func wbufptrOf(w *workbuf) wbufptr {
-	return wbufptr(unsafe.Pointer(w))
+	return wbufptr(uintptr(unsafe.Pointer(w)))
 }
 
 func (wp wbufptr) ptr() *workbuf {
-	return (*workbuf)(unsafe.Pointer(wp))
+	return (*workbuf)(unsafe.Pointer(uintptr(wp)))
 }
 
 // A gcWork provides the interface to produce and consume work for the

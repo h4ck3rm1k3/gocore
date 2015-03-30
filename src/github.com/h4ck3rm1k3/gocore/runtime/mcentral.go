@@ -61,7 +61,7 @@ retry:
 			mSpanList_InsertBack(&c.empty, s)
 			unlock(&c.lock)
 			mSpan_Sweep(s, true)
-			if s.freelist.ptr() != nil {
+			if gclinkptr(s.freelist).ptr() != nil {
 				goto havespan
 			}
 			lock(&c.lock)
@@ -96,7 +96,7 @@ havespan:
 	if n == 0 {
 		throw("empty span")
 	}
-	if s.freelist.ptr() == nil {
+	if gclinkptr(s.freelist).ptr() == nil {
 		throw("freelist empty")
 	}
 	s.incache = true
@@ -134,9 +134,9 @@ func mCentral_FreeSpan(c *mcentral, s *mspan, n int32, start gclinkptr, end gcli
 	}
 
 	// Add the objects back to s's free list.
-	wasempty := s.freelist.ptr() == nil
-	end.ptr().next = s.freelist
-	s.freelist = start
+	wasempty := gclinkptr(s.freelist).ptr() == nil
+	gclinkptr(end).ptr().next = gclinkptr(s.freelist)
+	s.freelist = uintptr(start)
 	s.ref -= uint16(n)
 
 	if preserve {
@@ -199,11 +199,11 @@ func mCentral_Grow(c *mcentral) *mspan {
 		tail.ptr().next = gclinkptr(p)
 		tail = gclinkptr(p)
 	}
-	if s.freelist.ptr() != nil {
+	if gclinkptr(s.freelist).ptr() != nil {
 		throw("freelist not empty")
 	}
 	tail.ptr().next = 0
-	s.freelist = head
+	s.freelist = uintptr(head)
 	heapBitsForSpan(s.base()).initSpan(s.layout())
 	return s
 }
