@@ -1,0 +1,417 @@
+[h4ck3rm1k3@gcc2-power8 runtime]$ gdb /home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/go1 # 
+GNU gdb (GDB) Fedora 7.8.2-38.fc21
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "ppc64le-redhat-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from /home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/go1...done.
+(gdb) r ./print1.go    ./stubs.go   -g -O0 -version -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/runtime -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime -I /tmp/gocompile/ -I /home/h4ck3rm1k3/testgo2/pkg/gccgo_linux_ppc64le -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0 -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0/../../..
+Starting program: /home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/go1 ./print1.go    ./stubs.go   -g -O0 -version -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/runtime -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime -I /tmp/gocompile/ -I /home/h4ck3rm1k3/testgo2/pkg/gccgo_linux_ppc64le -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0 -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0/../../..
+Missing separate debuginfos, use: debuginfo-install glibc-2.20-7.fc21.ppc64le
+GNU Go (GCC) version 5.0.0 20150328 (experimental) (powerpc64le-unknown-linux-gnu)
+	compiled by GNU C version 5.0.0 20150328 (experimental), GMP version 6.0.0, MPFR version 3.1.2, MPC version 1.0.2
+GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
+GNU Go (GCC) version 5.0.0 20150328 (experimental) (powerpc64le-unknown-linux-gnu)
+	compiled by GNU C version 5.0.0 20150328 (experimental), GMP version 6.0.0, MPFR version 3.1.2, MPC version 1.0.2
+GGC heuristics: --param ggc-min-expand=30 --param ggc-min-heapsize=4096
+options passed:  ./print1.go ./stubs.go -g -O0
+ -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/runtime
+ -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/runtime
+ -I /tmp/gocompile/ -I /home/h4ck3rm1k3/testgo2/pkg/gccgo_linux_ppc64le
+ -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0
+ -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0/../../../../lib64
+ -L/lib/../lib64 -L/usr/lib/../lib64
+ -L/home/h4ck3rm1k3/install/lib/gcc/powerpc64le-unknown-linux-gnu/5.0.0/../../..
+options enabled:  -faggressive-loop-optimizations
+ -fasynchronous-unwind-tables -fauto-inc-dec -fchkp-check-incomplete-type
+ -fchkp-check-read -fchkp-check-write -fchkp-instrument-calls
+ -fchkp-narrow-bounds -fchkp-optimize -fchkp-store-bounds
+ -fchkp-use-static-bounds -fchkp-use-static-const-bounds
+ -fchkp-use-wrappers -fcommon -fdelete-null-pointer-checks -fdwarf2-cfi-asm
+ -fearly-inlining -feliminate-unused-debug-types -fexceptions
+ -ffunction-cse -fgcse-lm -fgnu-runtime -fgnu-unique -fident
+ -finline-atomics -fira-hoist-pressure -fira-share-save-slots
+ -fira-share-spill-slots -fivopts -fkeep-static-consts -fleading-underscore
+ -flifetime-dse -flto-odr-type-merging -fmerge-debug-strings
+ -fnon-call-exceptions -fpeephole -fprefetch-loop-arrays
+ -freg-struct-return -fsched-critical-path-heuristic
+ -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
+ -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
+ -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-fusion
+ -fsemantic-interposition -fshow-column -fsigned-zeros
+ -fsplit-ivs-in-unroller -fstdarg-opt -fstrict-volatile-bitfields
+ -fsync-libcalls -ftrapping-math -ftree-coalesce-vars -ftree-cselim
+ -ftree-forwprop -ftree-loop-if-convert -ftree-loop-im -ftree-loop-ivcanon
+ -ftree-loop-optimize -ftree-parallelize-loops= -ftree-phiprop
+ -ftree-reassoc -ftree-scev-cprop -funit-at-a-time -funwind-tables
+ -fvar-tracking -fvar-tracking-assignments -fwrapv
+ -fzero-initialized-in-bss -m64 -maix-struct-return -malign-branch-targets
+ -maltivec -malways-hint -mblock-move-inline-limit= -mbss-plt -mcmpb
+ -mcrypto -mdirect-move -mfprnd -mfriz -mgen-cell-microcode -mglibc
+ -mhard-dfp -mhard-float -mhtm -mlittle -mlittle-endian -mmfcrf
+ -mno-fp-in-toc -mpointers-to-nested-functions -mpopcntb -mpopcntd
+ -mpower8-fusion -mpower8-vector -mpowerpc-gfxopt -mpowerpc-gpopt
+ -mpowerpc64 -mquad-memory-atomic -mrecip-precision -msched-groups
+ -msched-prolog -mtls-markers -mupdate -mupper-regs -mupper-regs-df
+ -mupper-regs-sf -mvectorize-builtins -mvsx -mvsx-scalar-double
+ -mvsx-scalar-float
+./print1.go:7:43: error: import file ‘github.com/h4ck3rm1k3/gocore/unsafe’ not found
+ import "github.com/h4ck3rm1k3/gocore/unsafe"
+                                           ^
+./print1.go:74:22: error: expected package
+ func printpc(p unsafe.Pointer) {
+                      ^
+./print1.go:205:27: error: expected package
+ func printpointer(p unsafe.Pointer) {
+                           ^
+./stubs.go:7:43: error: import file ‘github.com/h4ck3rm1k3/gocore/unsafe’ not found
+ import "github.com/h4ck3rm1k3/gocore/unsafe"
+                                           ^
+./stubs.go:17:18: error: expected package
+ func add(p unsafe.Pointer, x uintptr) unsafe.Pointer {
+                  ^
+./stubs.go:17:45: error: expected package
+ func add(p unsafe.Pointer, x uintptr) unsafe.Pointer {
+                                             ^
+./stubs.go:63:23: error: expected package
+ func memclr(ptr unsafe.Pointer, n uintptr)
+                       ^
+./stubs.go:66:31: error: expected package
+ func reflect_memclr(ptr unsafe.Pointer, n uintptr) {
+                               ^
+./stubs.go:73:29: error: expected package
+ func memmove(to, from unsafe.Pointer, n uintptr)
+                             ^
+./stubs.go:76:37: error: expected package
+ func reflect_memmove(to, from unsafe.Pointer, n uintptr) {
+                                     ^
+./stubs.go:88:23: error: expected package
+ func memeq(a, b unsafe.Pointer, size uintptr) bool
+                       ^
+./stubs.go:96:23: error: expected package
+ func noescape(p unsafe.Pointer) unsafe.Pointer {
+                       ^
+./stubs.go:96:39: error: expected package
+ func noescape(p unsafe.Pointer) unsafe.Pointer {
+                                       ^
+./stubs.go:101:34: error: expected package
+ func cgocallback(fn, frame unsafe.Pointer, framesize uintptr)
+                                  ^
+./stubs.go:104:25: error: expected package
+ func mincore(addr unsafe.Pointer, n uintptr, dst *byte) int32
+                         ^
+./stubs.go:122:48: error: expected package
+ func reflectcall(argtype *_type, fn, arg unsafe.Pointer, argsize uint32, retoffs
+                                                ^
+./stubs.go:125:50: error: expected package
+ func cgocallback_gofunc(fv *funcval, frame unsafe.Pointer, framesize uintptr)
+                                                  ^
+./stubs.go:132:23: error: expected package
+ func casp1(ptr *unsafe.Pointer, old, new unsafe.Pointer) bool
+                       ^
+./stubs.go:132:48: error: expected package
+ func casp1(ptr *unsafe.Pointer, old, new unsafe.Pointer) bool
+                                                ^
+./stubs.go:149:29: error: expected package
+ func setcallerpc(argp unsafe.Pointer, pc uintptr)
+                             ^
+./stubs.go:180:29: error: expected package
+ func getcallerpc(argp unsafe.Pointer) uintptr
+                             ^
+./stubs.go:183:29: error: expected package
+ func getcallersp(argp unsafe.Pointer) uintptr
+                             ^
+./stubs.go:186:31: error: expected package
+ func asmcgocall(fn, arg unsafe.Pointer)
+                               ^
+./stubs.go:189:37: error: expected package
+ func asmcgocall_errno(fn, arg unsafe.Pointer) int32
+                                     ^
+./stubs.go:209:27: error: expected package
+ func call16(fn, arg unsafe.Pointer, n, retoffset uint32)
+                           ^
+./stubs.go:210:27: error: expected package
+ func call32(fn, arg unsafe.Pointer, n, retoffset uint32)
+                           ^
+./stubs.go:211:27: error: expected package
+ func call64(fn, arg unsafe.Pointer, n, retoffset uint32)
+                           ^
+./stubs.go:212:28: error: expected package
+ func call128(fn, arg unsafe.Pointer, n, retoffset uint32)
+                            ^
+./stubs.go:213:28: error: expected package
+ func call256(fn, arg unsafe.Pointer, n, retoffset uint32)
+                            ^
+./stubs.go:214:28: error: expected package
+ func call512(fn, arg unsafe.Pointer, n, retoffset uint32)
+                            ^
+./stubs.go:215:29: error: expected package
+ func call1024(fn, arg unsafe.Pointer, n, retoffset uint32)
+                             ^
+./stubs.go:216:29: error: expected package
+ func call2048(fn, arg unsafe.Pointer, n, retoffset uint32)
+                             ^
+./stubs.go:217:29: error: expected package
+ func call4096(fn, arg unsafe.Pointer, n, retoffset uint32)
+                             ^
+./stubs.go:218:29: error: expected package
+ func call8192(fn, arg unsafe.Pointer, n, retoffset uint32)
+                             ^
+./stubs.go:219:30: error: expected package
+ func call16384(fn, arg unsafe.Pointer, n, retoffset uint32)
+                              ^
+./stubs.go:220:30: error: expected package
+ func call32768(fn, arg unsafe.Pointer, n, retoffset uint32)
+                              ^
+./stubs.go:221:30: error: expected package
+ func call65536(fn, arg unsafe.Pointer, n, retoffset uint32)
+                              ^
+./stubs.go:222:31: error: expected package
+ func call131072(fn, arg unsafe.Pointer, n, retoffset uint32)
+                               ^
+./stubs.go:223:31: error: expected package
+ func call262144(fn, arg unsafe.Pointer, n, retoffset uint32)
+                               ^
+./stubs.go:224:31: error: expected package
+ func call524288(fn, arg unsafe.Pointer, n, retoffset uint32)
+                               ^
+./stubs.go:225:32: error: expected package
+ func call1048576(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                ^
+./stubs.go:226:32: error: expected package
+ func call2097152(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                ^
+./stubs.go:227:32: error: expected package
+ func call4194304(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                ^
+./stubs.go:228:32: error: expected package
+ func call8388608(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                ^
+./stubs.go:229:33: error: expected package
+ func call16777216(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                 ^
+./stubs.go:230:33: error: expected package
+ func call33554432(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                 ^
+./stubs.go:231:33: error: expected package
+ func call67108864(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                 ^
+./stubs.go:232:34: error: expected package
+ func call134217728(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                  ^
+./stubs.go:233:34: error: expected package
+ func call268435456(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                  ^
+./stubs.go:234:34: error: expected package
+ func call536870912(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                  ^
+./stubs.go:235:35: error: expected package
+ func call1073741824(fn, arg unsafe.Pointer, n, retoffset uint32)
+                                   ^
+./print1.go:14:10: error: reference to undefined name ‘slice’
+  rp := (*slice)(unsafe.Pointer(&ret))
+          ^
+./print1.go:14:9: error: expected pointer
+  rp := (*slice)(unsafe.Pointer(&ret))
+         ^
+./print1.go:14:17: error: reference to undefined name ‘unsafe’
+  rp := (*slice)(unsafe.Pointer(&ret))
+                 ^
+./print1.go:15:10: error: reference to undefined name ‘_string’
+  sp := (*_string)(noescape(unsafe.Pointer(&s)))
+          ^
+./print1.go:15:9: error: expected pointer
+  sp := (*_string)(noescape(unsafe.Pointer(&s)))
+         ^
+./print1.go:15:19: error: reference to undefined name ‘noescape’
+  sp := (*_string)(noescape(unsafe.Pointer(&s)))
+                   ^
+./print1.go:15:28: error: reference to undefined name ‘unsafe’
+  sp := (*_string)(noescape(unsafe.Pointer(&s)))
+                            ^
+./stubs.go:21:14: error: use of undefined type ‘g’
+ func getg() *g
+              ^
+./print1.go:33:14: error: reference to field ‘m’ in object which has no fields or methods
+  mp := getg().m
+              ^
+./print1.go:37:3: error: reference to undefined name ‘lock’
+   lock(&debuglock)
+   ^
+./print1.go:43:14: error: reference to field ‘m’ in object which has no fields or methods
+  mp := getg().m
+              ^
+./print1.go:46:3: error: reference to undefined name ‘unlock’
+   unlock(&debuglock)
+   ^
+./print1.go:57:20: error: reference to field ‘writebuf’ in object which has no fields or methods
+  if gp == nil || gp.writebuf == nil {
+                    ^
+./print1.go:58:3: error: reference to undefined name ‘writeErr’
+   writeErr(b)
+   ^
+./print1.go:62:14: error: reference to field ‘writebuf’ in object which has no fields or methods
+  n := copy(gp.writebuf[len(gp.writebuf):cap(gp.writebuf)], b)
+              ^
+./print1.go:62:30: error: reference to field ‘writebuf’ in object which has no fields or methods
+  n := copy(gp.writebuf[len(gp.writebuf):cap(gp.writebuf)], b)
+                              ^
+./print1.go:62:47: error: reference to field ‘writebuf’ in object which has no fields or methods
+  n := copy(gp.writebuf[len(gp.writebuf):cap(gp.writebuf)], b)
+                                               ^
+./print1.go:63:4: error: reference to field ‘writebuf’ in object which has no fields or methods
+  gp.writebuf = gp.writebuf[:len(gp.writebuf)+n]
+    ^
+./print1.go:63:18: error: reference to field ‘writebuf’ in object which has no fields or methods
+  gp.writebuf = gp.writebuf[:len(gp.writebuf)+n]
+                  ^
+./print1.go:63:35: error: reference to field ‘writebuf’ in object which has no fields or methods
+  gp.writebuf = gp.writebuf[:len(gp.writebuf)+n]
+                                   ^
+./print1.go:87:20: error: reference to undefined name ‘unsafe’
+  gwrite((*[1]byte)(unsafe.Pointer(&c))[:])
+                    ^
+./print1.go:210:23: error: reference to undefined name ‘maxstring’
+  if uintptr(len(s)) > maxstring {
+                       ^
+./print1.go:218:10: error: reference to undefined name ‘slice’
+  sp := (*slice)(unsafe.Pointer(&s))
+          ^
+./print1.go:218:9: error: expected pointer
+  sp := (*slice)(unsafe.Pointer(&s))
+         ^
+./print1.go:218:17: error: reference to undefined name ‘unsafe’
+  sp := (*slice)(unsafe.Pointer(&s))
+                 ^
+./print1.go:220:15: error: reference to undefined name ‘unsafe’
+  printpointer(unsafe.Pointer(sp.array))
+               ^
+./print1.go:224:10: error: reference to undefined name ‘eface’
+  ep := (*eface)(unsafe.Pointer(&e))
+          ^
+./print1.go:224:9: error: expected pointer
+  ep := (*eface)(unsafe.Pointer(&e))
+         ^
+./print1.go:224:17: error: reference to undefined name ‘unsafe’
+  ep := (*eface)(unsafe.Pointer(&e))
+                 ^
+./print1.go:229:10: error: reference to undefined name ‘iface’
+  ip := (*iface)(unsafe.Pointer(&i))
+          ^
+./print1.go:229:9: error: expected pointer
+  ip := (*iface)(unsafe.Pointer(&i))
+         ^
+./print1.go:229:17: error: reference to undefined name ‘unsafe’
+  ip := (*iface)(unsafe.Pointer(&i))
+                 ^
+./stubs.go:12:24: error: reference to undefined name ‘uintreg’
+ const regSize = 4 << (^uintreg(0) >> 63)             // unsafe.Sizeof(uintreg(0)
+                        ^
+./stubs.go:12:19: error: shift count overflow
+ const regSize = 4 << (^uintreg(0) >> 63)             // unsafe.Sizeof(uintreg(0)
+                   ^
+./stubs.go:13:22: error: reference to undefined name ‘goarch_arm64’
+ const spAlign = 1*(1-goarch_arm64) + 16*goarch_arm64 // SP alignment: 1 normally
+                      ^
+./stubs.go:13:41: error: reference to undefined name ‘goarch_arm64’
+ const spAlign = 1*(1-goarch_arm64) + 16*goarch_arm64 // SP alignment: 1 normally
+                                         ^
+./stubs.go:18:2: error: return with value in function with no return type
+  return unsafe.Pointer(uintptr(p) + x)
+  ^
+./stubs.go:57:2: error: reference to undefined name ‘throw’
+  throw("systemstack called from unexpected goroutine")
+  ^
+./stubs.go:81:16: error: reference to undefined name ‘loadFactor’
+ var hashLoad = loadFactor
+                ^
+./stubs.go:98:2: error: return with value in function with no return type
+  return unsafe.Pointer(x ^ 0)
+  ^
+./print1.go:22:15: error: use of undefined type ‘mutex’
+ var debuglock mutex
+               ^
+./print1.go:228:19: error: use of undefined type ‘fInterface’
+ func printiface(i fInterface) {
+                   ^
+./stubs.go:102:16: error: use of undefined type ‘gobuf’
+ func gogo(buf *gobuf)
+                ^
+./stubs.go:122:27: error: use of undefined type ‘_type’
+ func reflectcall(argtype *_type, fn, arg unsafe.Pointer, argsize uint32, retoffs
+                           ^
+./stubs.go:107:19: error: use of undefined type ‘funcval’
+ func jmpdefer(fv *funcval, argp uintptr)
+                   ^
+./stubs.go:21:14: error: use of undefined type ‘g’
+ func getg() *g
+              ^
+./stubs.go:102:16: error: use of undefined type ‘gobuf’
+ func gogo(buf *gobuf)
+                ^
+./stubs.go:107:19: error: use of undefined type ‘funcval’
+ func jmpdefer(fv *funcval, argp uintptr)
+                   ^
+./stubs.go:21:14: error: use of undefined type ‘g’
+ func getg() *g
+              ^
+
+Program received signal SIGSEGV, Segmentation fault.
+Array_type::get_value_pointer (this=0x0, array=0x116826c0)
+    at ../../gcc/go/gofrontend/types.cc:6163
+6163	  if (this->length() != NULL)
+Missing separate debuginfos, use: debuginfo-install gmp-6.0.0-7.fc21.ppc64le libmpc-1.0.2-3.fc21.ppc64le mpfr-3.1.2-8.fc21.ppc64le
+(gdb) bt
+#0  Array_type::get_value_pointer (this=0x0, array=0x116826c0)
+    at ../../gcc/go/gofrontend/types.cc:6163
+#1  0x00000000101d4de0 in Builtin_call_expression::do_get_backend (
+    this=0x11675020, context=0x3fffffffe920)
+    at ../../gcc/go/gofrontend/expressions.cc:8353
+#2  0x00000000101c2c48 in Expression::get_backend (this=<optimized out>, 
+    context=<optimized out>) at ../../gcc/go/gofrontend/expressions.cc:411
+#3  0x00000000101d846c in Type_conversion_expression::do_get_backend (
+    this=0x11687b00, context=0x3fffffffe920)
+    at ../../gcc/go/gofrontend/expressions.cc:3340
+#4  0x00000000101c2c48 in Expression::get_backend (this=<optimized out>, 
+    context=<optimized out>) at ../../gcc/go/gofrontend/expressions.cc:411
+#5  0x000000001020aebc in Variable::get_init (this=0x1163cf00, 
+    gogo=0x1162f320, function=<optimized out>)
+    at ../../gcc/go/gofrontend/gogo.cc:6195
+#6  0x000000001025ec90 in Variable_declaration_statement::do_get_backend (
+    this=0x1163bc20, context=0x3fffffffea50)
+    at ../../gcc/go/gofrontend/statements.cc:267
+#7  0x0000000010253798 in Statement::get_backend (this=<optimized out>, 
+    context=<optimized out>) at ../../gcc/go/gofrontend/statements.cc:141
+#8  0x0000000010216e50 in Block::get_backend (this=0x1163a920, 
+    context=0x3fffffffeb20) at ../../gcc/go/gofrontend/gogo.cc:5648
+#9  0x0000000010217bd8 in Function::build (this=0x1163adb0, gogo=0x1162f320, 
+    named_function=0x1163b040) at ../../gcc/go/gofrontend/gogo.cc:5254
+#10 0x0000000010218504 in Named_object::get_backend (this=0x1163b040, 
+    gogo=0x1162f320, const_decls=..., type_decls=..., func_decls=...)
+    at ../../gcc/go/gofrontend/gogo.cc:6973
+#11 0x0000000010220590 in Gogo::write_globals (this=0x1162f320)
+    at ../../gcc/go/gofrontend/gogo.cc:1289
+#12 0x00000000102045c0 in go_write_globals ()
+    at ../../gcc/go/gofrontend/go.cc:147
+#13 0x00000000101fe728 in go_langhook_write_globals ()
+    at ../../gcc/go/go-lang.c:463
+#14 0x00000000107f05b0 in compile_file () at ../../gcc/toplev.c:608
+#15 0x00000000101ace1c in do_compile () at ../../gcc/toplev.c:2076
+#16 toplev::main (this=<optimized out>, argc=17, argv=0x3ffffffff628)
+    at ../../gcc/toplev.c:2174
+#17 0x00000000101ad9b8 in main (argc=<optimized out>, argv=0x3ffffffff628)
+    at ../../gcc/main.c:39
+(gdb) up
+#1  0x00000000101d4de0 in Builtin_call_expression::do_get_backend (
+    this=0x11675020, context=0x3fffffffe920)
+    at ../../gcc/go/gofrontend/expressions.cc:8353
+8353		Expression* arg1_val = at->get_value_pointer(gogo, arg1);
