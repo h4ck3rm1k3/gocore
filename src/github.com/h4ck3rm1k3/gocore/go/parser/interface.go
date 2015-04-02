@@ -81,6 +81,9 @@ const (
 // representing the fragments of erroneous source code). Multiple errors
 // are returned via a scanner.ErrorList which is sorted by file position.
 //
+func ParseFile2(fset *token.FileSet) {
+}
+	
 func ParseFile(fset *token.FileSet, filename string, src interface{}, mode Mode) (f *ast.File, err error) {
 	// get source
 	text, err := readSource(filename, src)

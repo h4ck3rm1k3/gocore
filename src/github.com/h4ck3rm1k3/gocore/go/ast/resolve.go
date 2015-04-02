@@ -11,6 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/go/scanner"
 	"github.com/h4ck3rm1k3/gocore/go/token"
 	"github.com/h4ck3rm1k3/gocore/strconv"
+
 )
 
 type pkgBuilder struct {
@@ -19,6 +20,7 @@ type pkgBuilder struct {
 }
 
 func (p *pkgBuilder) error(pos token.Pos, msg string) {
+
 	p.errors.Add(p.fset.Position(pos), msg)
 }
 

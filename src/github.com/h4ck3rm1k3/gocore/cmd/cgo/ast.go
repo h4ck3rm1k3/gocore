@@ -17,6 +17,8 @@ import (
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
 
+
+
 func parse(name string, flags parser.Mode) *ast.File {
 	ast1, err := parser.ParseFile(fset, name, nil, flags)
 	if err != nil {

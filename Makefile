@@ -1,4 +1,10 @@
 
+test123:
+	gccgo test123.go
+
+test1234:
+	gccgo test1234.go
+
 #export GCCGO := gccgo 
 export LD_LIBRARY_PATH := $(HOME)/install/lib64/
 #/gcc-1/build/powerpc64le-unknown-linux-gnu/libgo/.libs/:$(HOME)/gcc-1/build/gcc/:/home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/:/home/h4ck3rm1k3/install/libexec/gcc/powerpc64le-unknown-linux-gnu/5.0.0/
