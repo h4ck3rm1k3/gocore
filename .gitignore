@@ -2,7 +2,6 @@
 *~
 *.bak
 *.o
-*.s
 *.a
 /a.out
 /src/github.com/h4ck3rm1k3/gocore/runtime/.#cgocallback.go
