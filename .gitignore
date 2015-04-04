@@ -27,3 +27,10 @@
 /testcase.go
 /error2.sh
 /src/github.com/h4ck3rm1k3/gocore/cmd/cgo/.#main.go
+/src/github.com/h4ck3rm1k3/gocore/os/.#file_unix.go
+/src/github.com/h4ck3rm1k3/gocore/sync/atomic/.#doc.go
+/.#Makefile.all
+/.#todo.py
+/todo.mak
+/todo.txt
+/unsafe
