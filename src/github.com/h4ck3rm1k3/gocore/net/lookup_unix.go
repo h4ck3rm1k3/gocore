@@ -53,34 +53,34 @@ func lookupProtocol(name string) (proto int, err error) {
 }
 
 func lookupHost(host string) (addrs []string, err error) {
-	addrs, err, ok := cgoLookupHost(host)
-	if !ok {
-		addrs, err = goLookupHost(host)
-	}
+//	addrs, err, ok := cgoLookupHost(host)
+//	if !ok {
+	addrs, err = goLookupHost(host)
+//	}
 	return
 }
 
 func lookupIP(host string) (addrs []IPAddr, err error) {
-	addrs, err, ok := cgoLookupIP(host)
-	if !ok {
-		addrs, err = goLookupIP(host)
-	}
+//	addrs, err, ok := cgoLookupIP(host)
+//	if !ok {
+	addrs, err = goLookupIP(host)
+//	}
 	return
 }
 
 func lookupPort(network, service string) (port int, err error) {
-	port, err, ok := cgoLookupPort(network, service)
-	if !ok {
-		port, err = goLookupPort(network, service)
-	}
+//	port, err, ok := cgoLookupPort(network, service)
+//	if !ok {
+	port, err = goLookupPort(network, service)
+//	}
 	return
 }
 
 func lookupCNAME(name string) (cname string, err error) {
-	cname, err, ok := cgoLookupCNAME(name)
-	if !ok {
-		cname, err = goLookupCNAME(name)
-	}
+//	cname, err, ok := cgoLookupCNAME(name)
+//	if !ok {
+	cname, err = goLookupCNAME(name)
+//	}
 	return
 }
 
