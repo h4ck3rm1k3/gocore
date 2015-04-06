@@ -2007,8 +2007,13 @@ func Select(cases []SelectCase) (chosen int, recv Value, recvOK bool) {
  */
 
 // implemented in package run_time
-func unsafe_New(*rtype) unsafe.Pointer
-func unsafe_NewArray(*rtype, int) unsafe.Pointer
+func unsafe_New(t *rtype) unsafe.Pointer {
+	return run_time.Reflect_unsafe_New(unsafe.Pointer(t))
+}
+
+func unsafe_NewArray(t *rtype, n int) unsafe.Pointer {
+	return run_time.Reflect_unsafe_NewArray(unsafe.Pointer(t), uintptr(n))
+}
 
 // MakeSlice creates a new zero-initialized slice value
 // for the specified slice type, length, and capacity.

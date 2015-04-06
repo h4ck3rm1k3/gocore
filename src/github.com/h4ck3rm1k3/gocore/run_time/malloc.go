@@ -208,7 +208,7 @@ const _MaxArena32 = 2 << 30
 // reserved, not merely checked.
 //
 // SysFault marks a (already sysAlloc'd) region to fault
-// if accessed.  Used only for debugging the run_time.
+// if accessed.  Used only for debugging the runtime.
 
 func mallocinit() {
 	initSizes()
@@ -220,7 +220,7 @@ func mallocinit() {
 	var p, bitmapSize, spansSize, pSize, limit uintptr
 	var reserved bool
 
-	// limit = run_time.memlimit();
+	// limit = runtime.memlimit();
 	// See https://golang.org/issue/5049
 	// TODO(rsc): Fix after 1.1.
 	limit = 0
@@ -330,7 +330,7 @@ func mallocinit() {
 			}
 		}
 		if p == 0 {
-			throw("run_time: cannot reserve arena virtual address space")
+			throw("runtime: cannot reserve arena virtual address space")
 		}
 	}
 
@@ -442,7 +442,7 @@ func mHeap_SysAlloc(h *mheap, n uintptr) unsafe.Pointer {
 	}
 
 	if p < h.arena_start || uintptr(p)+p_size-uintptr(h.arena_start) >= _MaxArena32 {
-		print("run_time: memory allocated by OS (", p, ") not in usable range [", hex(h.arena_start), ",", hex(h.arena_start+_MaxArena32), ")\n")
+		print("runtime: memory allocated by OS (", p, ") not in usable range [", hex(h.arena_start), ",", hex(h.arena_start+_MaxArena32), ")\n")
 		sysFree((unsafe.Pointer)(p), p_size, &memstats.heap_sys)
 		return nil
 	}
@@ -720,8 +720,8 @@ func newobject(typ *_type) unsafe.Pointer {
 }
 
 //go:linkname reflect_unsafe_New reflect.unsafe_New
-func reflect_unsafe_New(typ *_type) unsafe.Pointer {
-	return newobject(typ)
+func Reflect_unsafe_New(typ unsafe.Pointer) unsafe.Pointer {
+	return newobject((*_type)(typ))
 }
 
 // implementation of make builtin for slices
@@ -731,14 +731,14 @@ func newarray(typ *_type, n uintptr) unsafe.Pointer {
 		flags |= flagNoScan
 	}
 	if int(n) < 0 || (typ.size > 0 && n > _MaxMem/uintptr(typ.size)) {
-		panic("run_time: allocation size out of range")
+		panic("runtime: allocation size out of range")
 	}
 	return mallocgc(uintptr(typ.size)*n, typ, flags)
 }
 
 //go:linkname reflect_unsafe_NewArray reflect.unsafe_NewArray
-func reflect_unsafe_NewArray(typ *_type, n uintptr) unsafe.Pointer {
-	return newarray(typ, n)
+func Reflect_unsafe_NewArray(typ unsafe.Pointer, n uintptr) unsafe.Pointer {
+	return newarray((*_type)(typ), n)
 }
 
 // rawmem returns a chunk of pointerless memory.  It is
@@ -823,7 +823,7 @@ func persistentalloc(size, align uintptr, stat *uint64) unsafe.Pointer {
 			if persistent == &globalAlloc.persistentAlloc {
 				unlock(&globalAlloc.mutex)
 			}
-			throw("run_time: cannot allocate memory")
+			throw("runtime: cannot allocate memory")
 		}
 		persistent.off = 0
 	}

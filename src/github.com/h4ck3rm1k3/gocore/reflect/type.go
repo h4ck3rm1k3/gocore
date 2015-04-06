@@ -1301,7 +1301,10 @@ func haveIdenticalUnderlyingType(T, V *rtype) bool {
 // there can be more than one with a given string.
 // Only types we might want to look up are included:
 // channels, maps, slices, and arrays.
-func typelinks() []*rtype
+func typelinks() []*rtype {
+	f := run_time.Reflect_typelinks()
+	return *(*[]*rtype)(unsafe.Pointer(&f))
+}
 
 // typesByString returns the subslice of typelinks() whose elements have
 // the given string representation.
