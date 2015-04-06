@@ -1198,8 +1198,8 @@ var allocRxStr = strings.Join([]string{
 	`malloc_zone_memalign`,
 	`malloc_zone_free`,
 
-	// Go runtime
-	`runtime\..*`,
+	// Go run_time
+	`run_time\..*`,
 
 	// Other misc. memory allocation routines
 	`BaseArena::.*`,
@@ -1221,9 +1221,9 @@ var allocRxStr = strings.Join([]string{
 }, `|`)
 
 var allocSkipRxStr = strings.Join([]string{
-	// Preserve Go runtime frames that appear in the middle/bottom of
+	// Preserve Go run_time frames that appear in the middle/bottom of
 	// the stack.
-	`runtime\.panic`,
+	`run_time\.panic`,
 }, `|`)
 
 var cpuProfilerRxStr = strings.Join([]string{

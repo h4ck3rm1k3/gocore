@@ -6,7 +6,7 @@ package net
 
 import (
 	"github.com/h4ck3rm1k3/gocore/math/rand"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -127,7 +127,7 @@ func TestMutexStress(t *testing.T) {
 		P = 4
 		N = 1e4
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(P))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(P))
 	done := make(chan bool)
 	var mu fdMutex
 	var readState [2]uint64

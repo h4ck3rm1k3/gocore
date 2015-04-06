@@ -8,12 +8,12 @@ package net
 
 import (
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 )
 
 func setDefaultSockopts(s, family, sotype int, ipv6only bool) error {
-	if runtime.GOOS == "dragonfly" && sotype != syscall.SOCK_RAW {
+	if run_time.GOOS == "dragonfly" && sotype != syscall.SOCK_RAW {
 		// On DragonFly BSD, we adjust the ephemeral port
 		// range because unlike other BSD systems its default
 		// port range doesn't conform to IANA recommendation

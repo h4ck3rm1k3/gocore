@@ -13,11 +13,11 @@ import (
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 )
 
-// Interface to timers implemented in package runtime.
-// Must be in sync with ../runtime/runtime.h:/^struct.Timer$
+// Interface to timers implemented in package run_time.
+// Must be in sync with ../run_time/run_time.h:/^struct.Timer$
 // Really for use by package time, but we cannot import time here.
 
-type runtimeTimer struct {
+type run_timeTimer struct {
 	i      int
 	when   int64
 	period int64
@@ -26,13 +26,13 @@ type runtimeTimer struct {
 	seq    uintptr
 }
 
-func startTimer(*runtimeTimer)
-func stopTimer(*runtimeTimer) bool
+func startTimer(*run_timeTimer)
+func stopTimer(*run_timeTimer) bool
 
 type timer struct {
 	expired bool
 	q       *queue
-	r       runtimeTimer
+	r       run_timeTimer
 }
 
 func (t *timer) start(q *queue, deadline int64) {

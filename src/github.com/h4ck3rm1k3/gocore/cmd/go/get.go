@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
@@ -381,7 +381,7 @@ func downloadPackage(p *Package) error {
 	if err != nil {
 		return err
 	}
-	vers := runtime.Version()
+	vers := run_time.Version()
 	if i := strings.Index(vers, " "); i >= 0 {
 		vers = vers[:i]
 	}

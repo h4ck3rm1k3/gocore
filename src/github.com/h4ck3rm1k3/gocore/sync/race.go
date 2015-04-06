@@ -7,36 +7,36 @@
 package sync
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"unsafe"
 )
 
 const raceenabled = true
 
 func raceAcquire(addr unsafe.Pointer) {
-	runtime.RaceAcquire(addr)
+	run_time.RaceAcquire(addr)
 }
 
 func raceRelease(addr unsafe.Pointer) {
-	runtime.RaceRelease(addr)
+	run_time.RaceRelease(addr)
 }
 
 func raceReleaseMerge(addr unsafe.Pointer) {
-	runtime.RaceReleaseMerge(addr)
+	run_time.RaceReleaseMerge(addr)
 }
 
 func raceDisable() {
-	runtime.RaceDisable()
+	run_time.RaceDisable()
 }
 
 func raceEnable() {
-	runtime.RaceEnable()
+	run_time.RaceEnable()
 }
 
 func raceRead(addr unsafe.Pointer) {
-	runtime.RaceRead(addr)
+	run_time.RaceRead(addr)
 }
 
 func raceWrite(addr unsafe.Pointer) {
-	runtime.RaceWrite(addr)
+	run_time.RaceWrite(addr)
 }

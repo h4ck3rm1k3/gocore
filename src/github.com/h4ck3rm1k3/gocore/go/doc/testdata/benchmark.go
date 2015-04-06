@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/flag"
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
 
@@ -77,7 +77,7 @@ func (b *B) nsPerOp() int64 {
 func (b *B) runN(n int) {
 	// Try to get a comparable environment for each run
 	// by clearing garbage from previous runs.
-	runtime.GC()
+	run_time.GC()
 	b.N = n
 	b.ResetTimer()
 	b.StartTimer()
@@ -144,7 +144,7 @@ func (b *B) launch() {
 	n := 1
 
 	// Signal that we're done whether we return normally
-	// or by FailNow's runtime.Goexit.
+	// or by FailNow's run_time.Goexit.
 	defer func() {
 		b.signal <- b
 	}()
@@ -229,7 +229,7 @@ func RunBenchmarks(matchString func(pat, str string) (bool, error), benchmarks [
 			continue
 		}
 		for _, procs := range cpuList {
-			runtime.GOMAXPROCS(procs)
+			run_time.GOMAXPROCS(procs)
 			b := &B{
 				common: common{
 					signal: make(chan interface{}),
@@ -256,7 +256,7 @@ func RunBenchmarks(matchString func(pat, str string) (bool, error), benchmarks [
 				b.trimOutput()
 				fmt.Printf("--- BENCH: %s\n%s", benchName, b.output)
 			}
-			if p := runtime.GOMAXPROCS(-1); p != procs {
+			if p := run_time.GOMAXPROCS(-1); p != procs {
 				fmt.Fprintf(os.Stderr, "testing: %s left GOMAXPROCS set to %d\n", benchName, p)
 			}
 		}

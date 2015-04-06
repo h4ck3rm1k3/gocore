@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -61,7 +61,7 @@ func BenchmarkTCP6PersistentTimeout(b *testing.B) {
 func benchmarkTCP(b *testing.B, persistent, timeout bool, laddr string) {
 	const msgLen = 512
 	conns := b.N
-	numConcurrent := runtime.GOMAXPROCS(-1) * 2
+	numConcurrent := run_time.GOMAXPROCS(-1) * 2
 	msgs := 1
 	if persistent {
 		conns = numConcurrent
@@ -174,7 +174,7 @@ func benchmarkTCPConcurrentReadWrite(b *testing.B, laddr string) {
 
 	b.StopTimer()
 
-	P := runtime.GOMAXPROCS(0)
+	P := run_time.GOMAXPROCS(0)
 	N := b.N / P
 	W := 1000
 
@@ -398,7 +398,7 @@ func TestIPv6LinkLocalUnicastTCP(t *testing.T) {
 		{"tcp", "[" + laddr + "%" + ifi.Name + "]:0", false},
 		{"tcp6", "[" + laddr + "%" + ifi.Name + "]:0", false},
 	}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin", "freebsd", "openbsd", "netbsd":
 		tests = append(tests, []test{
 			{"tcp", "[localhost%" + ifi.Name + "]:0", true},
@@ -451,7 +451,7 @@ func TestIPv6LinkLocalUnicastTCP(t *testing.T) {
 }
 
 func TestTCPConcurrentAccept(t *testing.T) {
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	ln, err := Listen("tcp", "127.0.0.1:0")
 	if err != nil {
 		t.Fatalf("Listen failed: %v", err)
@@ -493,7 +493,7 @@ func TestTCPConcurrentAccept(t *testing.T) {
 }
 
 func TestTCPReadWriteAllocs(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "windows", "darwin", "dragonfly":
 		// NaCl needs to allocate pseudo file descriptor
 		// stuff. See syscall/fd_nacl.go.
@@ -501,7 +501,7 @@ func TestTCPReadWriteAllocs(t *testing.T) {
 		// completion port-based netpoll. See fd_windows.go.
 		// Darwin is unreliable for unknown reasons (issue 8859).
 		// Dragonfly also unreliable (lumped into issue 8859).
-		t.Skipf("not supported on %s", runtime.GOOS)
+		t.Skipf("not supported on %s", run_time.GOOS)
 	}
 
 	ln, err := Listen("tcp", "127.0.0.1:0")

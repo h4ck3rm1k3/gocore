@@ -9,7 +9,7 @@ package net
 
 import (
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -32,16 +32,16 @@ func TestConnAndListener(t *testing.T) {
 	for _, tt := range connTests {
 		switch tt.net {
 		case "unix":
-			switch runtime.GOOS {
+			switch run_time.GOOS {
 			case "nacl", "plan9", "windows":
 				continue
 			}
 			// iOS does not support unix domain sockets
-			if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+			if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 				continue
 			}
 		case "unixpacket":
-			switch runtime.GOOS {
+			switch run_time.GOOS {
 			case "android", "darwin", "nacl", "openbsd", "plan9", "windows":
 				continue
 			case "freebsd": // FreeBSD 8 doesn't support unixpacket

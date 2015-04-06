@@ -9,7 +9,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/encoding/json"
 	"github.com/h4ck3rm1k3/gocore/net"
 	"net/http/httptest"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"testing"
@@ -264,7 +264,7 @@ func BenchmarkRealworldExpvarUsage(b *testing.B) {
 
 	b.StopTimer()
 
-	P := runtime.GOMAXPROCS(0)
+	P := run_time.GOMAXPROCS(0)
 	N := b.N / P
 	W := 1000
 

@@ -639,7 +639,7 @@ func (l eventList) Swap(i, j int) {
 }
 
 // Event types in the trace.
-// Verbatim copy from src/runtime/trace.go.
+// Verbatim copy from src/run_time/trace.go.
 const (
 	EvNone           = 0  // unused
 	EvBatch          = 1  // start of per-P batch of events [pid, timestamp]

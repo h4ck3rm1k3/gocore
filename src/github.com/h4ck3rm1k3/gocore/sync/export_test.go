@@ -5,5 +5,5 @@
 package sync
 
 // Export for testing.
-var Runtime_Semacquire = runtime_Semacquire
-var Runtime_Semrelease = runtime_Semrelease
+var Runtime_Semacquire = run_time_Semacquire
+var Runtime_Semrelease = run_time_Semrelease

@@ -13,12 +13,12 @@ package time
 
 import (
 	"github.com/h4ck3rm1k3/gocore/errors"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 )
 
 func initTestingZone() {
-	z, err := loadZoneFile(runtime.GOROOT()+"/lib/time/zoneinfo.zip", "America/Los_Angeles")
+	z, err := loadZoneFile(run_time.GOROOT()+"/lib/time/zoneinfo.zip", "America/Los_Angeles")
 	if err != nil {
 		panic("cannot load America/Los_Angeles for testing: " + err.Error())
 	}
@@ -32,7 +32,7 @@ var zoneDirs = []string{
 	"/usr/share/zoneinfo/",
 	"/usr/share/lib/zoneinfo/",
 	"/usr/lib/locale/TZ/",
-	runtime.GOROOT() + "/lib/time/zoneinfo.zip",
+	run_time.GOROOT() + "/lib/time/zoneinfo.zip",
 }
 
 var origZoneDirs = zoneDirs

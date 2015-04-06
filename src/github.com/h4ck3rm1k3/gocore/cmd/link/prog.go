@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/go/build"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 )
 
 // A Prog holds state for constructing an executable (program) image.
@@ -21,7 +21,7 @@ import (
 //	p.init()
 //	p.scan(file)
 //	p.dead()
-//	p.runtime()
+//	p.run_time()
 //	p.layout()
 //	p.load()
 //	p.debug()
@@ -45,7 +45,7 @@ type Prog struct {
 	formatter   formatter
 	startSym    goobj.SymID
 	pkgdir      string
-	omitRuntime bool // do not load runtime package
+	omitRuntime bool // do not load run_time package
 
 	// Input
 	Packages   map[string]*Package  // loaded packages, by import path
@@ -146,7 +146,7 @@ func (p *Prog) link(w io.Writer, mainFile string) {
 		return
 	}
 	p.dead()
-	p.runtime()
+	p.run_time()
 	p.autoData()
 	p.layout()
 	p.autoConst()
@@ -198,7 +198,7 @@ func (p *Prog) init() {
 	}
 	p.arch = arch
 
-	p.pkgdir = fmt.Sprintf("%s/pkg/%s_%s", runtime.GOROOT(), p.GOOS, p.GOARCH)
+	p.pkgdir = fmt.Sprintf("%s/pkg/%s_%s", run_time.GOROOT(), p.GOOS, p.GOARCH)
 }
 
 // goosFormat records the default format for each known GOOS value.

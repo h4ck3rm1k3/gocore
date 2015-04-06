@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package pprof serves via its HTTP server runtime profiling data
+// Package pprof serves via its HTTP server run_time profiling data
 // in the format expected by the pprof visualization tool.
 // For more information about pprof, see
 // http://code.google.com/p/google-perftools/.
@@ -56,8 +56,8 @@ import (
 	"github.com/h4ck3rm1k3/gocore/log"
 	"github.com/h4ck3rm1k3/gocore/net/http"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
-	"github.com/h4ck3rm1k3/gocore/runtime/pprof"
+	"github.com/h4ck3rm1k3/gocore/run_time"
+	"github.com/h4ck3rm1k3/gocore/run_time/pprof"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -156,7 +156,7 @@ func Symbol(w http.ResponseWriter, r *http.Request) {
 		}
 		pc, _ := strconv.ParseUint(string(word), 0, 64)
 		if pc != 0 {
-			f := runtime.FuncForPC(uintptr(pc))
+			f := run_time.FuncForPC(uintptr(pc))
 			if f != nil {
 				fmt.Fprintf(&buf, "%#x %s\n", pc, f.Name())
 			}
@@ -193,7 +193,7 @@ func (name handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	gc, _ := strconv.Atoi(r.FormValue("gc"))
 	if name == "heap" && gc > 0 {
-		runtime.GC()
+		run_time.GC()
 	}
 	p.WriteTo(w, debug)
 	return

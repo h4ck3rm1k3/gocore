@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -25,9 +25,9 @@ type copyRes struct {
 }
 
 func TestAcceptTimeout(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t).(*TCPListener)
@@ -72,9 +72,9 @@ func TestAcceptTimeout(t *testing.T) {
 }
 
 func TestReadTimeout(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t)
@@ -120,7 +120,7 @@ func TestReadTimeout(t *testing.T) {
 			t.Fatalf("Read: expected err %v, got %v", errClosing, err)
 		}
 	default:
-		if err == io.EOF && runtime.GOOS == "nacl" { // close enough; golang.org/issue/8044
+		if err == io.EOF && run_time.GOOS == "nacl" { // close enough; golang.org/issue/8044
 			break
 		}
 		if err != errClosing {
@@ -130,9 +130,9 @@ func TestReadTimeout(t *testing.T) {
 }
 
 func TestWriteTimeout(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t)
@@ -236,9 +236,9 @@ func testTimeout(t *testing.T, net, addr string, readFrom bool) {
 }
 
 func TestTimeoutUDP(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	// set up a listener that won't talk back
@@ -253,9 +253,9 @@ func TestTimeoutUDP(t *testing.T) {
 }
 
 func TestTimeoutTCP(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	// set up a listener that won't talk back
@@ -269,9 +269,9 @@ func TestTimeoutTCP(t *testing.T) {
 }
 
 func TestDeadlineReset(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	ln, err := Listen("tcp", "127.0.0.1:0")
 	if err != nil {
@@ -297,9 +297,9 @@ func TestDeadlineReset(t *testing.T) {
 }
 
 func TestTimeoutAccept(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	ln, err := Listen("tcp", "127.0.0.1:0")
 	if err != nil {
@@ -323,9 +323,9 @@ func TestTimeoutAccept(t *testing.T) {
 }
 
 func TestReadWriteDeadline(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	const (
@@ -421,12 +421,12 @@ func TestVariousDeadlines4Proc(t *testing.T) {
 }
 
 func testVariousDeadlines(t *testing.T, maxProcs int) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(maxProcs))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(maxProcs))
 	ln := newLocalListener(t)
 	defer ln.Close()
 	acceptc := make(chan error, 1)
@@ -524,9 +524,9 @@ func testVariousDeadlines(t *testing.T, maxProcs int) {
 // TestReadDeadlineDataAvailable tests that read deadlines work, even
 // if there's data ready to be read.
 func TestReadDeadlineDataAvailable(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t)
@@ -564,9 +564,9 @@ func TestReadDeadlineDataAvailable(t *testing.T) {
 // TestWriteDeadlineBufferAvailable tests that write deadlines work, even
 // if there's buffer space available to write.
 func TestWriteDeadlineBufferAvailable(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t)
@@ -602,9 +602,9 @@ func TestWriteDeadlineBufferAvailable(t *testing.T) {
 // TestAcceptDeadlineConnectionAvailable tests that accept deadlines work, even
 // if there's incoming connections available.
 func TestAcceptDeadlineConnectionAvailable(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t).(*TCPListener)
@@ -634,9 +634,9 @@ func TestAcceptDeadlineConnectionAvailable(t *testing.T) {
 // TestConnectDeadlineInThePast tests that connect deadlines work, even
 // if the connection can be established w/o blocking.
 func TestConnectDeadlineInThePast(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t).(*TCPListener)
@@ -661,9 +661,9 @@ func TestConnectDeadlineInThePast(t *testing.T) {
 // TestProlongTimeout tests concurrent deadline modification.
 // Known to cause data races in the past.
 func TestProlongTimeout(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t)
@@ -710,16 +710,16 @@ func TestProlongTimeout(t *testing.T) {
 }
 
 func TestDeadlineRace(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	N := 1000
 	if testing.Short() {
 		N = 50
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	ln := newLocalListener(t)
 	defer ln.Close()
 	c, err := Dial("tcp", ln.Addr().String())

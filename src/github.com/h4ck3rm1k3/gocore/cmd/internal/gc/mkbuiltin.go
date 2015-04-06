@@ -4,8 +4,8 @@
 
 // +build ignore
 
-// Generate builtin.go from $* (runtime.go and unsafe.go).
-// Run this after changing runtime.go and unsafe.go
+// Generate builtin.go from $* (run_time.go and unsafe.go).
+// Run this after changing run_time.go and unsafe.go
 // or after changing the export metadata format in the compiler.
 // Either way, you need to have a working compiler binary first.
 package main
@@ -18,12 +18,12 @@ import (
 	"github.com/h4ck3rm1k3/gocore/log"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
 
 func main() {
-	gochar, err := build.ArchChar(runtime.GOARCH)
+	gochar, err := build.ArchChar(run_time.GOARCH)
 	if err != nil {
 		log.Fatal(err)
 	}

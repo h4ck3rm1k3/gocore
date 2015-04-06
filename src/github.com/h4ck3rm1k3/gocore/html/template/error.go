@@ -28,7 +28,7 @@ type Error struct {
 type ErrorCode int
 
 // We define codes for each error that manifests while escaping templates, but
-// escaped templates may also fail at runtime.
+// escaped templates may also fail at run_time.
 //
 // Output: "ZgotmplZ"
 // Example:
@@ -36,7 +36,7 @@ type ErrorCode int
 //   where {{.X}} evaluates to `javascript:...`
 // Discussion:
 //   "ZgotmplZ" is a special value that indicates that unsafe content reached a
-//   CSS or URL context at runtime. The output of the example will be
+//   CSS or URL context at run_time. The output of the example will be
 //     <img src="#ZgotmplZ">
 //   If the data comes from a trusted source, use content types to exempt it
 //   from filtering: URL(`javascript:...`).

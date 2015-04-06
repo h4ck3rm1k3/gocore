@@ -179,7 +179,7 @@ func Ldmain() {
 		if Debug['F'] != 0 {
 			mark(Linkrlookup(Ctxt, "_sfloat", 0))
 		}
-		mark(Linklookup(Ctxt, "runtime.read_tls_fallback", 0))
+		mark(Linklookup(Ctxt, "run_time.read_tls_fallback", 0))
 	}
 
 	checkgo()

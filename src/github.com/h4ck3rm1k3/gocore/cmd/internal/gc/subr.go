@@ -1537,7 +1537,7 @@ func deep(t *Type) *Type {
 func syslook(name string, copy int) *Node {
 	s := Pkglookup(name, Runtimepkg)
 	if s == nil || s.Def == nil {
-		Fatal("syslook: can't find runtime.%s", name)
+		Fatal("syslook: can't find run_time.%s", name)
 	}
 
 	if copy == 0 {
@@ -1560,7 +1560,7 @@ func syslook(name string, copy int) *Node {
  * of the type that completely describes it.
  * using smprint here avoids duplicating that code.
  * using md5 here is overkill, but i got tired of
- * accidental collisions making the runtime think
+ * accidental collisions making the run_time think
  * two types are equal when they really aren't.
  */
 func typehash(t *Type) uint32 {
@@ -2625,7 +2625,7 @@ func genhash(sym *Sym, t *Type) {
 		n.Nbody = list(n.Nbody, Nod(OAS, nh, Nod(OOR, Nod(OLSH, nh, Nodintconst(3)), Nod(ORSH, nh, Nodintconst(int64(Widthptr)*8-3)))))
 
 		// h *= mul
-		// Same multipliers as in runtime.memhash.
+		// Same multipliers as in run_time.memhash.
 		var mul int64
 		if Widthptr == 4 {
 			mul = 3267000013
@@ -3576,7 +3576,7 @@ func isdirectiface(t *Type) bool {
 
 // type2IET returns "T" if t is a concrete type,
 // "I" if t is an interface type, and "E" if t is an empty interface type.
-// It is used to build calls to the conv* and assert* runtime routines.
+// It is used to build calls to the conv* and assert* run_time routines.
 func type2IET(t *Type) string {
 	if isnilinter(t) {
 		return "E"

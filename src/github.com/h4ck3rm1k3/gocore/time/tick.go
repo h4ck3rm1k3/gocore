@@ -10,7 +10,7 @@ import "github.com/h4ck3rm1k3/gocore/errors"
 // at intervals.
 type Ticker struct {
 	C <-chan Time // The channel on which the ticks are delivered.
-	r runtimeTimer
+	r run_timeTimer
 }
 
 // NewTicker returns a new Ticker containing a channel that will send the
@@ -28,7 +28,7 @@ func NewTicker(d Duration) *Ticker {
 	c := make(chan Time, 1)
 	t := &Ticker{
 		C: c,
-		r: runtimeTimer{
+		r: run_timeTimer{
 			when:   when(d),
 			period: int64(d),
 			f:      sendTime,

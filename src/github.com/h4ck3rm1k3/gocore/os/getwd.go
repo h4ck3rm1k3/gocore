@@ -5,7 +5,7 @@
 package os
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 )
@@ -24,7 +24,7 @@ var useSyscallwd = func(error) bool { return true }
 // reached via multiple paths (due to symbolic links),
 // Getwd may return any one of them.
 func Getwd() (dir string, err error) {
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		return syscall.Getwd()
 	}
 

@@ -10,7 +10,11 @@ package math
 //	Dim(+Inf, +Inf) = NaN
 //	Dim(-Inf, -Inf) = NaN
 //	Dim(x, NaN) = Dim(NaN, x) = NaN
-func Dim(x, y float64) float64
+func Dim(x, y float64) float64{
+	panic("not implemented")
+	return 0.0
+}
+
 
 func dim(x, y float64) float64 {
 	return max(x-y, 0)
@@ -23,7 +27,11 @@ func dim(x, y float64) float64 {
 //	Max(x, NaN) = Max(NaN, x) = NaN
 //	Max(+0, ±0) = Max(±0, +0) = +0
 //	Max(-0, -0) = -0
-func Max(x, y float64) float64
+func Max(x, y float64) float64 {
+	panic("not implemented")
+	return 0.0
+}
+
 
 func max(x, y float64) float64 {
 	// special cases
@@ -50,7 +58,10 @@ func max(x, y float64) float64 {
 //	Min(x, -Inf) = Min(-Inf, x) = -Inf
 //	Min(x, NaN) = Min(NaN, x) = NaN
 //	Min(-0, ±0) = Min(±0, -0) = -0
-func Min(x, y float64) float64
+func Min(x, y float64) float64 {
+	return min(x,y)
+}
+
 
 func min(x, y float64) float64 {
 	// special cases

@@ -14,17 +14,17 @@ var DaysIn = daysIn
 
 func empty(arg interface{}, seq uintptr) {}
 
-// Test that a runtimeTimer with a duration so large it overflows
+// Test that a run_timeTimer with a duration so large it overflows
 // does not cause other timers to hang.
 //
 // This test has to be in internal_test.go since it fiddles with
 // unexported data structures.
 func CheckRuntimeTimerOverflow() {
-	// We manually create a runtimeTimer to bypass the overflow
+	// We manually create a run_timeTimer to bypass the overflow
 	// detection logic in NewTimer: we're testing the underlying
-	// runtime.addtimer function.
-	r := &runtimeTimer{
-		when: runtimeNano() + (1<<63 - 1),
+	// run_time.addtimer function.
+	r := &run_timeTimer{
+		when: run_timeNano() + (1<<63 - 1),
 		f:    empty,
 		arg:  nil,
 	}
@@ -53,7 +53,7 @@ func CheckRuntimeTimerOverflow() {
 	// fires, which is 10 minutes. It would be nice to catch the problem sooner,
 	// but there is no reliable way to guarantee that timerproc schedules without
 	// doing something involving timerproc itself. Previous failed attempts have
-	// tried calling runtime.Gosched and runtime.GC, but neither is reliable.
+	// tried calling run_time.Gosched and run_time.GC, but neither is reliable.
 	// So we fall back to hope: We hope we don't hang here.
 	<-t.C
 }

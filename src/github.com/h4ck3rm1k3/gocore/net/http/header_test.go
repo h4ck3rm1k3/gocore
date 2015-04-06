@@ -6,7 +6,7 @@ package http
 
 import (
 	"github.com/h4ck3rm1k3/gocore/bytes"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -199,7 +199,7 @@ func TestHeaderWriteSubsetAllocs(t *testing.T) {
 	if raceEnabled {
 		t.Skip("skipping test under race detector")
 	}
-	if runtime.GOMAXPROCS(0) > 1 {
+	if run_time.GOMAXPROCS(0) > 1 {
 		t.Skip("skipping; GOMAXPROCS>1")
 	}
 	n := testing.AllocsPerRun(100, func() {

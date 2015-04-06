@@ -13,7 +13,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/math/rand"
 	"github.com/h4ck3rm1k3/gocore/os"
 	. "github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -1608,7 +1608,7 @@ func (p Point) Dist(scale int) int {
 
 // This will be index 2.
 func (p Point) GCMethod(k int) int {
-	runtime.GC()
+	run_time.GC()
 	return k + p.x
 }
 
@@ -2425,7 +2425,7 @@ func TestPtrToGC(t *testing.T) {
 		v.Elem().Set(ValueOf(p).Convert(pt))
 		x = append(x, v.Interface())
 	}
-	runtime.GC()
+	run_time.GC()
 
 	for i, xi := range x {
 		k := ValueOf(xi).Elem().Elem().Elem().Interface().(uintptr)
@@ -2501,7 +2501,7 @@ func noAlloc(t *testing.T, n int, f func(int)) {
 	if testing.Short() {
 		t.Skip("skipping malloc count in short mode")
 	}
-	if runtime.GOMAXPROCS(0) > 1 {
+	if run_time.GOMAXPROCS(0) > 1 {
 		t.Skip("skipping; GOMAXPROCS>1")
 	}
 	i := -1
@@ -3413,10 +3413,10 @@ func TestSliceOf(t *testing.T) {
 	type T int
 	st := SliceOf(TypeOf(T(1)))
 	v := MakeSlice(st, 10, 10)
-	runtime.GC()
+	run_time.GC()
 	for i := 0; i < v.Len(); i++ {
 		v.Index(i).Set(ValueOf(T(i)))
-		runtime.GC()
+		run_time.GC()
 	}
 	s := fmt.Sprint(v.Interface())
 	want := "[0 1 2 3 4 5 6 7 8 9]"
@@ -3463,7 +3463,7 @@ func TestSliceOfGC(t *testing.T) {
 		}
 		x = append(x, v.Interface())
 	}
-	runtime.GC()
+	run_time.GC()
 
 	for i, xi := range x {
 		v := ValueOf(xi)
@@ -3481,11 +3481,11 @@ func TestChanOf(t *testing.T) {
 	type T string
 	ct := ChanOf(BothDir, TypeOf(T("")))
 	v := MakeChan(ct, 2)
-	runtime.GC()
+	run_time.GC()
 	v.Send(ValueOf(T("hello")))
-	runtime.GC()
+	run_time.GC()
 	v.Send(ValueOf(T("world")))
-	runtime.GC()
+	run_time.GC()
 
 	sv1, _ := v.Recv()
 	sv2, _ := v.Recv()
@@ -3554,7 +3554,7 @@ func TestChanOfGC(t *testing.T) {
 		pv.Elem().Set(v)
 		x = append(x, pv.Interface())
 	}
-	runtime.GC()
+	run_time.GC()
 
 	for i, xi := range x {
 		v := ValueOf(xi).Elem()
@@ -3574,9 +3574,9 @@ func TestMapOf(t *testing.T) {
 	type V float64
 
 	v := MakeMap(MapOf(TypeOf(K("")), TypeOf(V(0))))
-	runtime.GC()
+	run_time.GC()
 	v.SetMapIndex(ValueOf(K("a")), ValueOf(V(1)))
-	runtime.GC()
+	run_time.GC()
 
 	s := fmt.Sprint(v.Interface())
 	want := "map[a:1]"
@@ -3612,7 +3612,7 @@ func TestMapOfGCKeys(t *testing.T) {
 		pv.Elem().Set(v)
 		x = append(x, pv.Interface())
 	}
-	runtime.GC()
+	run_time.GC()
 
 	for i, xi := range x {
 		v := ValueOf(xi).Elem()
@@ -3650,7 +3650,7 @@ func TestMapOfGCValues(t *testing.T) {
 		pv.Elem().Set(v)
 		x = append(x, pv.Interface())
 	}
-	runtime.GC()
+	run_time.GC()
 
 	for i, xi := range x {
 		v := ValueOf(xi).Elem()
@@ -3900,7 +3900,7 @@ func (x *exhaustive) Maybe() bool {
 }
 
 func GCFunc(args []Value) []Value {
-	runtime.GC()
+	run_time.GC()
 	return []Value{}
 }
 
@@ -4035,7 +4035,7 @@ func TestCallMethodJump(t *testing.T) {
 
 func TestMakeFuncStackCopy(t *testing.T) {
 	target := func(in []Value) []Value {
-		runtime.GC()
+		run_time.GC()
 		useStack(16)
 		return []Value{ValueOf(9)}
 	}
@@ -4099,7 +4099,7 @@ func TestCallGC(t *testing.T) {
 	f := func(a, b, c, d, e string) {
 	}
 	g := func(in []Value) []Value {
-		runtime.GC()
+		run_time.GC()
 		return nil
 	}
 	typ := ValueOf(f).Type()
@@ -4119,7 +4119,7 @@ var funcLayoutTests []funcLayoutTest
 func init() {
 	var argAlign = PtrSize
 	var naclExtra []byte
-	if runtime.GOARCH == "amd64p32" {
+	if run_time.GOARCH == "amd64p32" {
 		argAlign = 2 * PtrSize
 		naclExtra = append(naclExtra, BitsScalar)
 	}

@@ -6,7 +6,7 @@
 Trace is a tool for viewing trace files.
 
 Trace files can be generated with:
-	- runtime/pprof.StartTrace
+	- run_time/pprof.StartTrace
 	- net/http/pprof package
 	- go test -trace
 
@@ -27,7 +27,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/net/http"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 )
 
@@ -138,7 +138,7 @@ var templMain = []byte(`
 func startBrowser(url string) bool {
 	// try to start the browser
 	var args []string
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin":
 		args = []string{"open"}
 	case "windows":

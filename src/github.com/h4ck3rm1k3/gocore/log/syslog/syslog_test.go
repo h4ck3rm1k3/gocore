@@ -14,7 +14,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/log"
 	"github.com/h4ck3rm1k3/gocore/net"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -121,7 +121,7 @@ func TestWithSimulated(t *testing.T) {
 	msg := "Test 123"
 	transport := []string{"unix", "unixgram", "udp", "tcp"}
 
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		transport = []string{"udp", "tcp"}
 	}
 
@@ -147,8 +147,8 @@ func TestWithSimulated(t *testing.T) {
 }
 
 func TestFlap(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
-		t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
+		t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 
 	net := "unix"
@@ -315,7 +315,7 @@ func TestConcurrentReconnect(t *testing.T) {
 	const N = 10
 	const M = 100
 	net := "unix"
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		net = "tcp"
 	}
 	done := make(chan string, N*M)

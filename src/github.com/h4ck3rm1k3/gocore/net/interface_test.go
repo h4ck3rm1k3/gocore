@@ -6,7 +6,7 @@ package net
 
 import (
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -92,7 +92,7 @@ func TestInterfaces(t *testing.T) {
 		stats.multi4 += n4
 		stats.multi6 += n6
 	}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9", "solaris":
 	default:
 		// Test the existence of connected unicast routes for
@@ -107,7 +107,7 @@ func TestInterfaces(t *testing.T) {
 			t.Errorf("num IPv6 unicast routes = 0; want >0; summary: %+v", stats)
 		}
 	}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "dragonfly", "nacl", "netbsd", "openbsd", "plan9", "solaris":
 	default:
 		// Test the existence of connected multicast route

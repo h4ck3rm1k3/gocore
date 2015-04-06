@@ -6,7 +6,7 @@ package os
 
 import (
 	"github.com/h4ck3rm1k3/gocore/errors"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -85,7 +85,7 @@ func (p *Process) release() error {
 	// NOOP for Plan 9.
 	p.Pid = -1
 	// no need for a finalizer anymore
-	runtime.SetFinalizer(p, nil)
+	run_time.SetFinalizer(p, nil)
 	return nil
 }
 

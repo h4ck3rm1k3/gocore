@@ -7,7 +7,7 @@
 package os
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 )
@@ -44,7 +44,7 @@ func NewFile(fd uintptr, name string) *File {
 		return nil
 	}
 	f := &File{&file{fd: fdi, name: name}}
-	runtime.SetFinalizer(f.file, (*file).close)
+	run_time.SetFinalizer(f.file, (*file).close)
 	return f
 }
 
@@ -121,7 +121,7 @@ func (file *file) close() error {
 	file.fd = -1 // so it can't be closed again
 
 	// no need for a finalizer anymore
-	runtime.SetFinalizer(file, nil)
+	run_time.SetFinalizer(file, nil)
 	return err
 }
 
@@ -190,7 +190,7 @@ func (f *File) readdir(n int) (fi []FileInfo, err error) {
 // Use 1GB instead of, say, 2GB-1, to keep subsequent
 // reads aligned.
 const (
-	needsMaxRW = runtime.GOOS == "darwin" || runtime.GOOS == "freebsd"
+	needsMaxRW = run_time.GOOS == "darwin" || run_time.GOOS == "freebsd"
 	maxRW      = 1 << 30
 )
 
@@ -321,7 +321,7 @@ func basename(name string) string {
 func TempDir() string {
 	dir := Getenv("TMPDIR")
 	if dir == "" {
-		if runtime.GOOS == "android" {
+		if run_time.GOOS == "android" {
 			dir = "/data/local/tmp"
 		} else {
 			dir = "/tmp"

@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/crypto/x509/pkix"
 	"github.com/h4ck3rm1k3/gocore/encoding/pem"
 	"github.com/h4ck3rm1k3/gocore/errors"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -294,7 +294,7 @@ func testVerify(t *testing.T, useSystemRoots bool) {
 		if useSystemRoots && test.systemSkip {
 			continue
 		}
-		if runtime.GOOS == "windows" && test.testSystemRootsError {
+		if run_time.GOOS == "windows" && test.testSystemRootsError {
 			continue
 		}
 
@@ -389,8 +389,8 @@ func TestGoVerify(t *testing.T) {
 }
 
 func TestSystemVerify(t *testing.T) {
-	if runtime.GOOS != "windows" {
-		t.Skipf("skipping verify test using system APIs on %q", runtime.GOOS)
+	if run_time.GOOS != "windows" {
+		t.Skipf("skipping verify test using system APIs on %q", run_time.GOOS)
 	}
 
 	testVerify(t, true)

@@ -58,9 +58,9 @@ func isIdentRune(ch rune, i int) bool {
 	switch ch {
 	case '_': // Underscore; traditional.
 		return true
-	case '\u00B7': // Represents the period in runtime.exit. U+00B7 '·' middle dot
+	case '\u00B7': // Represents the period in run_time.exit. U+00B7 '·' middle dot
 		return true
-	case '\u2215': // Represents the slash in runtime/debug.setGCPercent. U+2215 '∕' division slash
+	case '\u2215': // Represents the slash in run_time/debug.setGCPercent. U+2215 '∕' division slash
 		return true
 	}
 	// Digits are OK only after the first character.

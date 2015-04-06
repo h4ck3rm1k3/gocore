@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Generation of runtime function information (pclntab).
+// Generation of run_time function information (pclntab).
 
 package main
 
@@ -15,7 +15,7 @@ import (
 
 var zerofunc goobj.Func
 
-// pclntab collects the runtime function data for each function that will
+// pclntab collects the run_time function data for each function that will
 // be listed in the binary and builds a single table describing all functions.
 // This table is used at run time for stack traces and to look up PC-specific
 // information during garbage collection. The symbol created is named
@@ -63,7 +63,7 @@ func (p *Prog) pclntab() {
 	// Build the table, build the index, and build the file name numbering.
 	// The loop here must visit functions in the same order that they will
 	// be stored in the binary, or else binary search over the index will fail.
-	// The runtime checks that the index is sorted properly at program start time.
+	// The run_time checks that the index is sorted properly at program start time.
 	var lastSym *Sym
 	for _, sym := range p.SymOrder {
 		if sym.Kind != goobj.STEXT {
@@ -183,7 +183,7 @@ func (p *Prog) pclntab() {
 
 	pclntab := &Sym{
 		Sym: &goobj.Sym{
-			SymID: goobj.SymID{Name: "runtime.pclntab"},
+			SymID: goobj.SymID{Name: "run_time.pclntab"},
 			Kind:  goobj.SPCLNTAB,
 			Size:  buf.Size(),
 			Reloc: buf.Reloc(),

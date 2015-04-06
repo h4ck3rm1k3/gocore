@@ -89,7 +89,9 @@ package math
 //	Sqrt(±0) = ±0
 //	Sqrt(x < 0) = NaN
 //	Sqrt(NaN) = NaN
-func Sqrt(x float64) float64
+func Sqrt(x float64) float64 {
+	return sqrt(x)
+}
 
 func sqrt(x float64) float64 {
 	// special cases

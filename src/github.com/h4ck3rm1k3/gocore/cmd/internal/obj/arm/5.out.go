@@ -92,7 +92,7 @@ const (
 	/* compiler allocates register variables R3 up */
 	/* compiler allocates external registers R10 down */
 	REGEXT = REG_R10
-	/* these two registers are declared in runtime.h */
+	/* these two registers are declared in run_time.h */
 	REGG = REGEXT - 0
 	REGM = REGEXT - 1
 

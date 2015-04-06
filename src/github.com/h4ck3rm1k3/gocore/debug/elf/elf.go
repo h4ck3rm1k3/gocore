@@ -1054,7 +1054,7 @@ const (
 	R_ALPHA_IMMED_SCN_HI32 R_ALPHA = 21
 	R_ALPHA_IMMED_BR_HI32  R_ALPHA = 22
 	R_ALPHA_IMMED_LO32     R_ALPHA = 23
-	R_ALPHA_COPY           R_ALPHA = 24 /* Copy symbol at runtime */
+	R_ALPHA_COPY           R_ALPHA = 24 /* Copy symbol at run_time */
 	R_ALPHA_GLOB_DAT       R_ALPHA = 25 /* Create GOT entry */
 	R_ALPHA_JMP_SLOT       R_ALPHA = 26 /* Create PLT entry */
 	R_ALPHA_RELATIVE       R_ALPHA = 27 /* Adjust by program base */

@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
@@ -385,7 +385,7 @@ func main() {
 
 	slash = string(filepath.Separator)
 
-	gohostos = runtime.GOOS
+	gohostos = run_time.GOOS
 	switch gohostos {
 	case "darwin":
 		// Even on 64-bit platform, darwin uname -m prints i386.
@@ -438,7 +438,7 @@ func main() {
 	}
 
 	if gohostarch == "arm" {
-		maxbg = min(maxbg, runtime.NumCPU())
+		maxbg = min(maxbg, run_time.NumCPU())
 	}
 	bginit()
 
@@ -535,7 +535,7 @@ func xgetgoarm() string {
 		// 5: no vfp support was found
 		// 6: vfp (v1) support was detected, but no higher
 		// 7: vfpv3 support was detected.
-		// This matches the assertions in runtime.checkarm.
+		// This matches the assertions in run_time.checkarm.
 		for _, f := range features {
 			switch f {
 			case "vfp":

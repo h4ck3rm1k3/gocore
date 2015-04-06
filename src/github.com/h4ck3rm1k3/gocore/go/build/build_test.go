@@ -9,7 +9,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
@@ -36,17 +36,17 @@ func TestMatch(t *testing.T) {
 		}
 	}
 
-	match(runtime.GOOS+","+runtime.GOARCH, map[string]bool{runtime.GOOS: true, runtime.GOARCH: true})
-	match(runtime.GOOS+","+runtime.GOARCH+",!foo", map[string]bool{runtime.GOOS: true, runtime.GOARCH: true, "foo": true})
-	nomatch(runtime.GOOS+","+runtime.GOARCH+",foo", map[string]bool{runtime.GOOS: true, runtime.GOARCH: true, "foo": true})
+	match(run_time.GOOS+","+run_time.GOARCH, map[string]bool{run_time.GOOS: true, run_time.GOARCH: true})
+	match(run_time.GOOS+","+run_time.GOARCH+",!foo", map[string]bool{run_time.GOOS: true, run_time.GOARCH: true, "foo": true})
+	nomatch(run_time.GOOS+","+run_time.GOARCH+",foo", map[string]bool{run_time.GOOS: true, run_time.GOARCH: true, "foo": true})
 
 	what = "modified"
 	ctxt.BuildTags = []string{"foo"}
-	match(runtime.GOOS+","+runtime.GOARCH, map[string]bool{runtime.GOOS: true, runtime.GOARCH: true})
-	match(runtime.GOOS+","+runtime.GOARCH+",foo", map[string]bool{runtime.GOOS: true, runtime.GOARCH: true, "foo": true})
-	nomatch(runtime.GOOS+","+runtime.GOARCH+",!foo", map[string]bool{runtime.GOOS: true, runtime.GOARCH: true, "foo": true})
-	match(runtime.GOOS+","+runtime.GOARCH+",!bar", map[string]bool{runtime.GOOS: true, runtime.GOARCH: true, "bar": true})
-	nomatch(runtime.GOOS+","+runtime.GOARCH+",bar", map[string]bool{runtime.GOOS: true, runtime.GOARCH: true, "bar": true})
+	match(run_time.GOOS+","+run_time.GOARCH, map[string]bool{run_time.GOOS: true, run_time.GOARCH: true})
+	match(run_time.GOOS+","+run_time.GOARCH+",foo", map[string]bool{run_time.GOOS: true, run_time.GOARCH: true, "foo": true})
+	nomatch(run_time.GOOS+","+run_time.GOARCH+",!foo", map[string]bool{run_time.GOOS: true, run_time.GOARCH: true, "foo": true})
+	match(run_time.GOOS+","+run_time.GOARCH+",!bar", map[string]bool{run_time.GOOS: true, run_time.GOARCH: true, "bar": true})
+	nomatch(run_time.GOOS+","+run_time.GOARCH+",bar", map[string]bool{run_time.GOOS: true, run_time.GOARCH: true, "bar": true})
 	nomatch("!", map[string]bool{})
 }
 
@@ -109,8 +109,8 @@ func TestMultiplePackageImport(t *testing.T) {
 }
 
 func TestLocalDirectory(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
-		t.Skipf("skipping on %s/%s, no valid GOROOT", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
+		t.Skipf("skipping on %s/%s, no valid GOROOT", run_time.GOOS, run_time.GOARCH)
 	}
 
 	cwd, err := os.Getwd()
@@ -227,8 +227,8 @@ func TestMatchFile(t *testing.T) {
 }
 
 func TestImportCmd(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
-		t.Skipf("skipping on %s/%s, no valid GOROOT", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
+		t.Skipf("skipping on %s/%s, no valid GOROOT", run_time.GOOS, run_time.GOARCH)
 	}
 
 	p, err := Import("github.com/h4ck3rm1k3/gocore/cmd/internal/objfile", "", 0)

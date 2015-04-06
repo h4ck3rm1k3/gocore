@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
 	"github.com/h4ck3rm1k3/gocore/os"
 	. "github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
@@ -87,7 +87,7 @@ func TestMatch(t *testing.T) {
 	for _, tt := range matchTests {
 		pattern := tt.pattern
 		s := tt.s
-		if runtime.GOOS == "windows" {
+		if run_time.GOOS == "windows" {
 			if strings.Index(pattern, "\\") >= 0 {
 				// no escape allowed on windows.
 				continue
@@ -125,7 +125,7 @@ func TestGlob(t *testing.T) {
 	for _, tt := range globTests {
 		pattern := tt.pattern
 		result := tt.result
-		if runtime.GOOS == "windows" {
+		if run_time.GOOS == "windows" {
 			pattern = Clean(pattern)
 			result = Clean(result)
 		}
@@ -166,12 +166,12 @@ var globSymlinkTests = []struct {
 }
 
 func TestGlobSymlink(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "windows":
 		if !supportsSymlinks {
-			t.Skipf("skipping on %s", runtime.GOOS)
+			t.Skipf("skipping on %s", run_time.GOOS)
 		}
 
 	}

@@ -9,7 +9,7 @@ package net
 import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -45,8 +45,8 @@ func TestPointToPointInterface(t *testing.T) {
 		t.Skip("skipping test in short mode")
 	}
 	switch {
-	case runtime.GOOS == "darwin":
-		t.Skipf("skipping read test on %q", runtime.GOOS)
+	case run_time.GOOS == "darwin":
+		t.Skipf("skipping read test on %q", run_time.GOOS)
 	}
 	if os.Getuid() != 0 {
 		t.Skip("skipping test; must be root")

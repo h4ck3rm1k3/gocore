@@ -43,7 +43,7 @@ import (
 func addlib(ctxt *Link, src string, obj string, pathname string) {
 	name := path.Clean(pathname)
 
-	// runtime.a -> runtime, runtime.6 -> runtime
+	// run_time.a -> run_time, run_time.6 -> run_time
 	pkg := name
 	if len(pkg) >= 2 && pkg[len(pkg)-2] == '.' {
 		pkg = pkg[:len(pkg)-2]

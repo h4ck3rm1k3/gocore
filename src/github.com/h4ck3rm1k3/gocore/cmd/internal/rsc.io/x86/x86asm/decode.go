@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/encoding/binary"
 	"github.com/h4ck3rm1k3/gocore/errors"
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 )
 
 // Set trace to true to cause the decoder to print the PC sequence
@@ -172,7 +172,7 @@ const (
 func instPrefix(b byte, mode int) (Inst, error) {
 	// When tracing it is useful to see what called instPrefix to report an error.
 	if trace {
-		_, file, line, _ := runtime.Caller(1)
+		_, file, line, _ := run_time.Caller(1)
 		fmt.Printf("%s:%d\n", file, line)
 	}
 	p := Prefix(b)

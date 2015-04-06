@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
@@ -51,7 +51,7 @@ func runAddr2Line(t *testing.T, exepath, addr string) (funcname, path, lineno st
 	funcname = f[0]
 	pathAndLineNo := f[1]
 	f = strings.Split(pathAndLineNo, ":")
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		switch len(f) {
 		case 2:
 			return funcname, f[0], f[1]
@@ -92,12 +92,12 @@ func testAddr2Line(t *testing.T, exepath, addr string) {
 
 // This is line 93. The test depends on that.
 func TestAddr2Line(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "android":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 

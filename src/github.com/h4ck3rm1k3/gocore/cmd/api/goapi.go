@@ -23,7 +23,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 
@@ -112,9 +112,9 @@ var internalPkg = regexp.MustCompile(`(^|/)internal($|/)`)
 func main() {
 	flag.Parse()
 
-	if !strings.Contains(runtime.Version(), "weekly") && !strings.Contains(runtime.Version(), "devel") {
+	if !strings.Contains(run_time.Version(), "weekly") && !strings.Contains(run_time.Version(), "devel") {
 		if *nextFile != "" {
-			fmt.Printf("Go version is %q, ignoring -next %s\n", runtime.Version(), *nextFile)
+			fmt.Printf("Go version is %q, ignoring -next %s\n", run_time.Version(), *nextFile)
 			*nextFile = ""
 		}
 	}
@@ -151,7 +151,7 @@ func main() {
 			//   going to change w/o a language change.
 			// - We don't care about the API of commands.
 			if name != "unsafe" && !strings.HasPrefix(name, "cmd/") {
-				if name == "github.com/h4ck3rm1k3/gocore/runtime/cgo" && !context.CgoEnabled {
+				if name == "github.com/h4ck3rm1k3/gocore/run_time/cgo" && !context.CgoEnabled {
 					// w.Import(name) will return nil
 					continue
 				}
@@ -283,7 +283,7 @@ func compareAPI(w io.Writer, features, required, optional, exception []string) (
 				delete(optionalSet, newFeature)
 			} else {
 				fmt.Fprintf(w, "+%s\n", newFeature)
-				if !*allowNew || !strings.Contains(runtime.Version(), "devel") {
+				if !*allowNew || !strings.Contains(run_time.Version(), "devel") {
 					ok = false // we're in lock-down mode for next release
 				}
 			}

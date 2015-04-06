@@ -5,7 +5,7 @@
 package testing
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 )
 
 // AllocsPerRun returns the average number of allocations during calls to f.
@@ -18,14 +18,14 @@ import (
 // AllocsPerRun sets GOMAXPROCS to 1 during its measurement and will restore
 // it before returning.
 func AllocsPerRun(runs int, f func()) (avg float64) {
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(1))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(1))
 
 	// Warm up the function
 	f()
 
 	// Measure the starting statistics
-	var memstats runtime.MemStats
-	runtime.ReadMemStats(&memstats)
+	var memstats run_time.MemStats
+	run_time.ReadMemStats(&memstats)
 	mallocs := 0 - memstats.Mallocs
 
 	// Run the function the specified number of times
@@ -34,7 +34,7 @@ func AllocsPerRun(runs int, f func()) (avg float64) {
 	}
 
 	// Read the final statistics
-	runtime.ReadMemStats(&memstats)
+	run_time.ReadMemStats(&memstats)
 	mallocs += memstats.Mallocs
 
 	// Average the mallocs over the runs (not counting the warm-up).

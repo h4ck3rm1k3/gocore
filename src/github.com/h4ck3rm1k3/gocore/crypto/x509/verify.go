@@ -7,7 +7,7 @@ package x509
 import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/net"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/time"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf8"
@@ -211,7 +211,7 @@ func (c *Certificate) isValid(certType int, currentChain []*Certificate, opts *V
 // WARNING: this doesn't do any revocation checking.
 func (c *Certificate) Verify(opts VerifyOptions) (chains [][]*Certificate, err error) {
 	// Use Windows's own verification and chain building.
-	if opts.Roots == nil && runtime.GOOS == "windows" {
+	if opts.Roots == nil && run_time.GOOS == "windows" {
 		return c.systemVerify(&opts)
 	}
 

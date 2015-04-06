@@ -20,7 +20,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
@@ -28,9 +28,9 @@ import (
 )
 
 func helperCommand(t *testing.T, s ...string) *exec.Cmd {
-	if runtime.GOOS == "nacl" || (runtime.GOOS == "darwin" && runtime.GOARCH == "arm") {
+	if run_time.GOOS == "nacl" || (run_time.GOOS == "darwin" && run_time.GOARCH == "arm") {
 		// iOS cannot fork
-		t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 	cs := []string{"-test.run=TestHelperProcess", "--"}
 	cs = append(cs, s...)
@@ -50,7 +50,7 @@ func TestEcho(t *testing.T) {
 }
 
 func TestCommandRelativeName(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		t.Skip("skipping on darwin/arm")
 	}
 
@@ -128,7 +128,7 @@ func TestExitStatus(t *testing.T) {
 	cmd := helperCommand(t, "exit", "42")
 	err := cmd.Run()
 	want := "exit status 42"
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
 		want = fmt.Sprintf("exit status: '%s %d: 42'", filepath.Base(cmd.Path), cmd.ProcessState.Pid())
 	}
@@ -251,7 +251,7 @@ func TestPipeLookPathLeak(t *testing.T) {
 }
 
 func numOpenFDS(t *testing.T) (n int, lsof []byte) {
-	if runtime.GOOS == "android" {
+	if run_time.GOOS == "android" {
 		// Android's stock lsof does not obey the -p option,
 		// so extra filtering is needed. (golang.org/issue/10206)
 		return numOpenFDsAndroid(t)
@@ -322,7 +322,7 @@ func closeUnexpectedFds(t *testing.T, m string) {
 
 func TestExtraFilesFDShuffle(t *testing.T) {
 	t.Skip("flaky test; see http://golang.org/issue/5780")
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin":
 		// TODO(cnicolaou): http://golang.org/issue/2603
 		// leads to leaked file descriptors in this test when it's
@@ -425,12 +425,12 @@ func TestExtraFilesFDShuffle(t *testing.T) {
 }
 
 func TestExtraFiles(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "windows":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping test on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping test on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 
@@ -505,7 +505,7 @@ func TestExtraFiles(t *testing.T) {
 }
 
 func TestExtraFilesRace(t *testing.T) {
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		t.Skip("no operating system support; skipping")
 	}
 	listen := func() net.Listener {
@@ -570,7 +570,7 @@ func TestHelperProcess(*testing.T) {
 
 	// Determine which command to use to display open files.
 	ofcmd := "lsof"
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "dragonfly", "freebsd", "netbsd", "openbsd":
 		ofcmd = "fstat"
 	case "plan9":
@@ -652,7 +652,7 @@ func TestHelperProcess(*testing.T) {
 			fmt.Printf("ReadAll from fd 3: %v", err)
 			os.Exit(1)
 		}
-		switch runtime.GOOS {
+		switch run_time.GOOS {
 		case "dragonfly":
 			// TODO(jsing): Determine why DragonFly is leaking
 			// file descriptors...
@@ -685,7 +685,7 @@ func TestHelperProcess(*testing.T) {
 				if got := f.Fd(); got != wantfd {
 					fmt.Printf("leaked parent file. fd = %d; want %d\n", got, wantfd)
 					var args []string
-					switch runtime.GOOS {
+					switch run_time.GOOS {
 					case "plan9":
 						args = []string{fmt.Sprintf("/proc/%d/fd", os.Getpid())}
 					default:

@@ -362,7 +362,7 @@ func asmoutnacl(ctxt *obj.Link, origPC int32, p *obj.Prog, o *Optab, out []uint3
 		// align the last instruction (the actual BL) to the last instruction in a bundle
 		if p.As == ABL {
 			if deferreturn == nil {
-				deferreturn = obj.Linklookup(ctxt, "runtime.deferreturn", 0)
+				deferreturn = obj.Linklookup(ctxt, "run_time.deferreturn", 0)
 			}
 			if p.To.Sym == deferreturn {
 				p.Pc = ((int64(origPC) + 15) &^ 15) + 16 - int64(size)
@@ -761,7 +761,7 @@ func span5(ctxt *obj.Link, cursym *obj.LSym) {
 	 * perhaps we'd be able to parallelize the span loop above.
 	 */
 	if ctxt.Tlsg == nil {
-		ctxt.Tlsg = obj.Linklookup(ctxt, "runtime.tlsg", 0)
+		ctxt.Tlsg = obj.Linklookup(ctxt, "run_time.tlsg", 0)
 	}
 
 	p = cursym.Text
@@ -1665,12 +1665,12 @@ func asmout(ctxt *obj.Link, p *obj.Prog, o *Optab, out []uint32) {
 			rel.Sym = p.To.Sym
 			rel.Add = p.To.Offset
 
-			// runtime.tlsg is special.
+			// run_time.tlsg is special.
 			// Its "address" is the offset from the TLS thread pointer
 			// to the thread-local g and m pointers.
 			// Emit a TLS relocation instead of a standard one if its
-			// type is not explicitly set by runtime. This assumes that
-			// all references to runtime.tlsg should be accompanied with
+			// type is not explicitly set by run_time. This assumes that
+			// all references to run_time.tlsg should be accompanied with
 			// its type declaration if necessary.
 			if rel.Sym == ctxt.Tlsg && ctxt.Tlsg.Type == 0 {
 				rel.Type = obj.R_TLS

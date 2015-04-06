@@ -77,7 +77,9 @@ package math
 //	Log(0) = -Inf
 //	Log(x < 0) = NaN
 //	Log(NaN) = NaN
-func Log(x float64) float64
+func Log(x float64) float64 {
+	return log(x)
+}
 
 func log(x float64) float64 {
 	const (

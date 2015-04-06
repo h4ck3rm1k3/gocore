@@ -179,13 +179,13 @@ func stacksplit(ctxt *obj.Link, p *obj.Prog, framesize int32, noctxt int) *obj.P
 	p.To.Type = obj.TYPE_REG
 	p.To.Reg = REGTMP
 
-	// BL	runtime.morestack(SB)
+	// BL	run_time.morestack(SB)
 	p = obj.Appendp(ctxt, p)
 
 	p.As = ABL
 	p.To.Type = obj.TYPE_BRANCH
 	if ctxt.Cursym.Cfunc != 0 {
-		p.To.Sym = obj.Linklookup(ctxt, "runtime.morestackc", 0)
+		p.To.Sym = obj.Linklookup(ctxt, "run_time.morestackc", 0)
 	} else {
 		p.To.Sym = ctxt.Symmorestack[noctxt]
 	}
@@ -466,8 +466,8 @@ loop:
 
 func preprocess(ctxt *obj.Link, cursym *obj.LSym) {
 	if ctxt.Symmorestack[0] == nil {
-		ctxt.Symmorestack[0] = obj.Linklookup(ctxt, "runtime.morestack", 0)
-		ctxt.Symmorestack[1] = obj.Linklookup(ctxt, "runtime.morestack_noctxt", 0)
+		ctxt.Symmorestack[0] = obj.Linklookup(ctxt, "run_time.morestack", 0)
+		ctxt.Symmorestack[1] = obj.Linklookup(ctxt, "run_time.morestack_noctxt", 0)
 	}
 
 	ctxt.Cursym = cursym

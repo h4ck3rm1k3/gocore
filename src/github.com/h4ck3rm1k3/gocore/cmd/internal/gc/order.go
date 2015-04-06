@@ -15,8 +15,8 @@ import (
 //
 // Rewrite x op= y into x = x op y.
 //
-// Introduce temporaries as needed by runtime routines.
-// For example, the map runtime routines take the map key
+// Introduce temporaries as needed by run_time routines.
+// For example, the map run_time routines take the map key
 // by reference, so make sure all map keys are addressable
 // by copying them to temporaries as needed.
 // The same is true for channel operations.
@@ -184,7 +184,7 @@ func istemp(n *Node) bool {
 	return strings.HasPrefix(n.Sym.Name, "autotmp_")
 }
 
-// Isaddrokay reports whether it is okay to pass n's address to runtime routines.
+// Isaddrokay reports whether it is okay to pass n's address to run_time routines.
 // Taking the address of a variable makes the liveness and optimization analyses
 // lose track of where the variable's lifetime ends. To avoid hurting the analyses
 // of ordinary stack variables, those are not 'isaddrokay'. Temporaries are okay,
@@ -194,7 +194,7 @@ func isaddrokay(n *Node) bool {
 	return islvalue(n) && (n.Op != ONAME || n.Class == PEXTERN || istemp(n))
 }
 
-// Orderaddrtemp ensures that *np is okay to pass by address to runtime routines.
+// Orderaddrtemp ensures that *np is okay to pass by address to run_time routines.
 // If the original argument *np is not okay, orderaddrtemp creates a tmp, emits
 // tmp = *np, and then sets *np to the tmp variable.
 func orderaddrtemp(np **Node, order *Order) {
@@ -968,7 +968,7 @@ func orderexpr(np **Node, order *Order) {
 
 		// Addition of strings turns into a function call.
 	// Allocate a temporary to hold the strings.
-	// Fewer than 5 strings use direct runtime helpers.
+	// Fewer than 5 strings use direct run_time helpers.
 	case OADDSTR:
 		orderexprlist(n.List, order)
 
@@ -1044,7 +1044,7 @@ func orderexpr(np **Node, order *Order) {
 		}
 
 		// concrete type (not interface) argument must be addressable
-	// temporary to pass to runtime.
+	// temporary to pass to run_time.
 	case OCONVIFACE:
 		orderexpr(&n.Left, order)
 
@@ -1128,7 +1128,7 @@ func orderexpr(np **Node, order *Order) {
 		t := n.Left.Type
 		if t.Etype == TSTRUCT || Isfixedarray(t) {
 			// for complex comparisons, we need both args to be
-			// addressable so we can pass them to the runtime.
+			// addressable so we can pass them to the run_time.
 			orderaddrtemp(&n.Left, order)
 
 			orderaddrtemp(&n.Right, order)

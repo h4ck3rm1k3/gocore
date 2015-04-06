@@ -13,7 +13,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -282,7 +282,7 @@ func (c *Cmd) Start() error {
 		c.closeDescriptors(c.closeAfterWait)
 		return c.lookPathErr
 	}
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		lp, err := lookExtensions(c.Path, c.Dir)
 		if err != nil {
 			c.closeDescriptors(c.closeAfterStart)

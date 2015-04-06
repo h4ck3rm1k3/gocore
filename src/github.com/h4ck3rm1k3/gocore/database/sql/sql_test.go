@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/math/rand"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"testing"
@@ -1730,7 +1730,7 @@ func doConcurrentTest(t testing.TB, ct concurrentTest) {
 	if testing.Short() {
 		maxProcs, numReqs = 4, 50
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(maxProcs))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(maxProcs))
 
 	db := newTestDB(t, "people")
 	defer closeDB(t, db)
@@ -1943,7 +1943,7 @@ func BenchmarkManyConcurrentQueries(b *testing.B) {
 
 	db := newTestDB(b, "magicquery")
 	defer closeDB(b, db)
-	db.SetMaxIdleConns(runtime.GOMAXPROCS(0) * parallelism)
+	db.SetMaxIdleConns(run_time.GOMAXPROCS(0) * parallelism)
 
 	stmt, err := db.Prepare("SELECT|magicquery|op|op=?,millis=?")
 	if err != nil {

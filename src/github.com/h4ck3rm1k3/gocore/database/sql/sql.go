@@ -17,7 +17,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/errors"
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/io"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
@@ -1739,7 +1739,7 @@ func (dr driverResult) RowsAffected() (int64, error) {
 
 func stack() string {
 	var buf [2 << 10]byte
-	return string(buf[:runtime.Stack(buf[:], false)])
+	return string(buf[:run_time.Stack(buf[:], false)])
 }
 
 // withLock runs while holding lk.

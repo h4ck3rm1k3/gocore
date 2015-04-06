@@ -7,7 +7,7 @@
 package net
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 )
 
@@ -16,7 +16,7 @@ func maxListenerBacklog() int {
 		n   uint32
 		err error
 	)
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin", "freebsd":
 		n, err = syscall.SysctlUint32("kern.ipc.somaxconn")
 	case "netbsd":

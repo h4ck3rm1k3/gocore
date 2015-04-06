@@ -6,7 +6,7 @@ package net
 
 import (
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -36,9 +36,9 @@ func TestResolveUDPAddr(t *testing.T) {
 }
 
 func TestReadFromUDP(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9":
-		t.Skipf("skipping test on %q, see issue 8916", runtime.GOOS)
+		t.Skipf("skipping test on %q, see issue 8916", run_time.GOOS)
 	}
 
 	ra, err := ResolveUDPAddr("udp", "127.0.0.1:7")
@@ -76,9 +76,9 @@ func TestReadFromUDP(t *testing.T) {
 }
 
 func TestWriteToUDP(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	c, err := ListenPacket("udp", "127.0.0.1:0")
@@ -132,9 +132,9 @@ func testWriteToConn(t *testing.T, raddr string) {
 		t.Fatalf("WriteMsgUDP should fail as ErrWriteToConnected: %v", err)
 	}
 	_, _, err = c.(*UDPConn).WriteMsgUDP([]byte("Connection-oriented mode socket"), nil, nil)
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "windows": // see golang.org/issue/9252
-		t.Skipf("not implemented yet on %s", runtime.GOOS)
+		t.Skipf("not implemented yet on %s", run_time.GOOS)
 	default:
 		if err != nil {
 			t.Fatal(err)
@@ -177,9 +177,9 @@ func testWriteToPacketConn(t *testing.T, raddr string) {
 		t.Fatalf("WriteMsgUDP should fail as errMissingAddress: %v", err)
 	}
 	_, _, err = c.(*UDPConn).WriteMsgUDP([]byte("Connection-less mode socket"), nil, ra)
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "windows": // see golang.org/issue/9252
-		t.Skipf("not implemented yet on %s", runtime.GOOS)
+		t.Skipf("not implemented yet on %s", run_time.GOOS)
 	default:
 		if err != nil {
 			t.Fatal(err)
@@ -277,10 +277,10 @@ func TestIPv6LinkLocalUnicastUDP(t *testing.T) {
 		{"udp6", "[" + laddr + "%" + ifi.Name + "]:0", false},
 	}
 	// The first udp test fails on DragonFly - see issue 7473.
-	if runtime.GOOS == "dragonfly" {
+	if run_time.GOOS == "dragonfly" {
 		tests = tests[1:]
 	}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin", "dragonfly", "freebsd", "openbsd", "netbsd":
 		tests = append(tests, []test{
 			{"udp", "[localhost%" + ifi.Name + "]:0", true},

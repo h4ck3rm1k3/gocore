@@ -79,11 +79,11 @@ func (mu *fdMutex) IncrefAndClose() bool {
 			// they will observe closed flag after wakeup.
 			for old&mutexRMask != 0 {
 				old -= mutexRWait
-				runtime_Semrelease(&mu.rsema)
+				run_time_Semrelease(&mu.rsema)
 			}
 			for old&mutexWMask != 0 {
 				old -= mutexWWait
-				runtime_Semrelease(&mu.wsema)
+				run_time_Semrelease(&mu.wsema)
 			}
 			return true
 		}
@@ -140,7 +140,7 @@ func (mu *fdMutex) RWLock(read bool) bool {
 			if old&mutexBit == 0 {
 				return true
 			}
-			runtime_Semacquire(mutexSema)
+			run_time_Semacquire(mutexSema)
 			// The signaller has subtracted mutexWait.
 		}
 	}
@@ -172,13 +172,13 @@ func (mu *fdMutex) RWUnlock(read bool) bool {
 		}
 		if atomic.CompareAndSwapUint64(&mu.state, old, new) {
 			if old&mutexMask != 0 {
-				runtime_Semrelease(mutexSema)
+				run_time_Semrelease(mutexSema)
 			}
 			return new&(mutexClosed|mutexRefMask) == mutexClosed
 		}
 	}
 }
 
-// Implemented in runtime package.
-func runtime_Semacquire(sema *uint32)
-func runtime_Semrelease(sema *uint32)
+// Implemented in run_time package.
+func run_time_Semacquire(sema *uint32)
+func run_time_Semrelease(sema *uint32)

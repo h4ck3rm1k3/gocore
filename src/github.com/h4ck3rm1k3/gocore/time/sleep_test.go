@@ -7,7 +7,7 @@ package time_test
 import (
 	"github.com/h4ck3rm1k3/gocore/errors"
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -16,7 +16,7 @@ import (
 	. "github.com/h4ck3rm1k3/gocore/time"
 )
 
-// Go runtime uses different Windows timers for time.Now and sleeping.
+// Go run_time uses different Windows timers for time.Now and sleeping.
 // These can tick at different frequencies and can arrive out of sync.
 // The effect can be seen, for example, as time.Sleep(100ms) is actually
 // shorter then 100ms when measured as difference between time.Now before and
@@ -33,7 +33,7 @@ func TestSleep(t *testing.T) {
 	start := Now()
 	Sleep(delay)
 	delayadj := delay
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		delayadj -= windowsInaccuracy
 	}
 	duration := Now().Sub(start)
@@ -67,7 +67,7 @@ func TestAfterStress(t *testing.T) {
 	stop := uint32(0)
 	go func() {
 		for atomic.LoadUint32(&stop) == 0 {
-			runtime.GC()
+			run_time.GC()
 			// Yield so that the OS can wake up the timer thread,
 			// so that it can generate channel sends for the main goroutine,
 			// which will eventually set stop = 1 for us.
@@ -164,7 +164,7 @@ func TestAfter(t *testing.T) {
 	start := Now()
 	end := <-After(delay)
 	delayadj := delay
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		delayadj -= windowsInaccuracy
 	}
 	if duration := Now().Sub(start); duration < delayadj {
@@ -297,11 +297,11 @@ func TestSleepZeroDeadlock(t *testing.T) {
 	// Sleep(0) sets G's status to Gwaiting, but then immediately returns leaving the status.
 	// Then the goroutine calls e.g. new and falls down into the scheduler due to pending GC.
 	// After the GC nobody wakes up the goroutine from Gwaiting status.
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	c := make(chan bool)
 	go func() {
 		for i := 0; i < 100; i++ {
-			runtime.GC()
+			run_time.GC()
 		}
 		c <- true
 	}()
@@ -383,8 +383,8 @@ func TestOverflowSleep(t *testing.T) {
 // Test that a panic while deleting a timer does not leave
 // the timers mutex held, deadlocking a ticker.Stop in a defer.
 func TestIssue5745(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
-		t.Skipf("skipping on %s/%s, see issue 10043", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
+		t.Skipf("skipping on %s/%s, see issue 10043", run_time.GOOS, run_time.GOARCH)
 	}
 
 	ticker := NewTicker(Hour)

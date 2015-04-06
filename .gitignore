@@ -34,3 +34,14 @@
 /todo.mak
 /todo.txt
 /unsafe
+/.#link.sh
+/.#symbols.txt
+/.#test1.sh
+/funct.txt
+/link.sh
+/src/github.com/h4ck3rm1k3/Makefile
+/src/github.com/h4ck3rm1k3/gocore/bytes/.#bytes.go
+/src/github.com/h4ck3rm1k3/gocore/math/.#ldexp.go
+/src/github.com/h4ck3rm1k3/gocore/run_time/.#asm_amd64.s
+/symbols.txt
+/test1.sh

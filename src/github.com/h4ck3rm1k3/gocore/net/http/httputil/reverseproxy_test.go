@@ -12,7 +12,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/net/http"
 	"net/http/httptest"
 	"github.com/h4ck3rm1k3/gocore/net/url"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -215,7 +215,7 @@ func TestReverseProxyFlushInterval(t *testing.T) {
 }
 
 func TestReverseProxyCancellation(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/9554")
 	}
 	const backendResponse = "I am the backend"

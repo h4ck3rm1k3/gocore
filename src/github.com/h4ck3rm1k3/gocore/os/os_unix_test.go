@@ -8,7 +8,7 @@ package os_test
 
 import (
 	. "github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
 )
@@ -34,7 +34,7 @@ func checkUidGid(t *testing.T, path string, uid, gid int) {
 func TestChown(t *testing.T) {
 	// Chown is not supported under windows os Plan 9.
 	// Plan9 provides a native ChownPlan9 version instead.
-	if runtime.GOOS == "windows" || runtime.GOOS == "plan9" {
+	if run_time.GOOS == "windows" || run_time.GOOS == "plan9" {
 		return
 	}
 	// Use TempDir() to make sure we're on a local file system,

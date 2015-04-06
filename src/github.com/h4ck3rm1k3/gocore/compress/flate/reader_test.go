@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/bytes"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
@@ -61,7 +61,7 @@ func benchmarkDecode(b *testing.B, testfile, level, n int) {
 	w.Close()
 	buf1 := compressed.Bytes()
 	buf0, compressed, w = nil, nil, nil
-	runtime.GC()
+	run_time.GC()
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
 		io.Copy(ioutil.Discard, NewReader(bytes.NewReader(buf1)))

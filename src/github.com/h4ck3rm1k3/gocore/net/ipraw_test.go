@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -64,9 +64,9 @@ func init() {
 }
 
 func TestResolveIPAddr(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	for _, tt := range resolveIPAddrTests {
@@ -89,9 +89,9 @@ var ipConnLocalNameTests = []struct {
 }
 
 func TestIPConnLocalName(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9", "windows":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	default:
 		if os.Getuid() != 0 {
 			t.Skip("skipping test; must be root")
@@ -111,9 +111,9 @@ func TestIPConnLocalName(t *testing.T) {
 }
 
 func TestIPConnRemoteName(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9", "windows":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	default:
 		if os.Getuid() != 0 {
 			t.Skip("skipping test; must be root")

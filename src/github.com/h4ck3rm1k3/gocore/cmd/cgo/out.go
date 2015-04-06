@@ -54,7 +54,7 @@ func (p *Package) writeDefs() {
 		fmt.Fprintf(fm, "void crosscall2(void(*fn)(void*, int), void *a, int c) { }\n")
 		fmt.Fprintf(fm, "char* _cgo_topofstack(void) { return (char*)0; }\n")
 	} else {
-		// If we're not importing runtime/cgo, we *are* runtime/cgo,
+		// If we're not importing run_time/cgo, we *are* run_time/cgo,
 		// which provides crosscall2.  We just need a prototype.
 		fmt.Fprintf(fm, "void crosscall2(void(*fn)(void*, int), void *a, int c);\n")
 	}
@@ -69,7 +69,7 @@ func (p *Package) writeDefs() {
 	fmt.Fprintf(fgo2, "package %s\n\n", p.PackageName)
 	fmt.Fprintf(fgo2, "import \"unsafe\"\n\n")
 	if !*gccgo && *importRuntimeCgo {
-		fmt.Fprintf(fgo2, "import _ \"runtime/cgo\"\n\n")
+		fmt.Fprintf(fgo2, "import _ \"run_time/cgo\"\n\n")
 	}
 	if *importSyscall {
 		fmt.Fprintf(fgo2, "import \"syscall\"\n\n")
@@ -434,7 +434,7 @@ func (p *Package) writeDefsFunc(fgo2 io.Writer, n *Name) {
 	if n.AddError {
 		prefix = "errno := "
 	}
-	fmt.Fprintf(fgo2, "\t%s_cgo_runtime_cgocall_errno(%s, %s)\n", prefix, cname, arg)
+	fmt.Fprintf(fgo2, "\t%s_cgo_run_time_cgocall_errno(%s, %s)\n", prefix, cname, arg)
 	if n.AddError {
 		fmt.Fprintf(fgo2, "\tif errno != 0 { r2 = syscall.Errno(errno) }\n")
 	}
@@ -776,7 +776,7 @@ func (p *Package) writeExports(fgo2, fm io.Writer) {
 		fmt.Fprintf(fgo2, "func _cgoexp%s_%s(a unsafe.Pointer, n int32) {", cPrefix, exp.ExpName)
 		fmt.Fprintf(fgo2, "\tfn := %s\n", goname)
 		// The indirect here is converting from a Go function pointer to a C function pointer.
-		fmt.Fprintf(fgo2, "\t_cgo_runtime_cgocallback(**(**unsafe.Pointer)(unsafe.Pointer(&fn)), a, uintptr(n));\n")
+		fmt.Fprintf(fgo2, "\t_cgo_run_time_cgocallback(**(**unsafe.Pointer)(unsafe.Pointer(&fn)), a, uintptr(n));\n")
 		fmt.Fprintf(fgo2, "}\n")
 
 		fmt.Fprintf(fm, "int _cgoexp%s_%s;\n", cPrefix, exp.ExpName)
@@ -1170,46 +1170,46 @@ void *_CMalloc(size_t);
 `
 
 const goProlog = `
-//go:linkname _cgo_runtime_cgocall_errno runtime.cgocall_errno
-func _cgo_runtime_cgocall_errno(unsafe.Pointer, uintptr) int32
+//go:linkname _cgo_run_time_cgocall_errno run_time.cgocall_errno
+func _cgo_run_time_cgocall_errno(unsafe.Pointer, uintptr) int32
 
-//go:linkname _cgo_runtime_cmalloc runtime.cmalloc
-func _cgo_runtime_cmalloc(uintptr) unsafe.Pointer
+//go:linkname _cgo_run_time_cmalloc run_time.cmalloc
+func _cgo_run_time_cmalloc(uintptr) unsafe.Pointer
 
-//go:linkname _cgo_runtime_cgocallback runtime.cgocallback
-func _cgo_runtime_cgocallback(unsafe.Pointer, unsafe.Pointer, uintptr)
+//go:linkname _cgo_run_time_cgocallback run_time.cgocallback
+func _cgo_run_time_cgocallback(unsafe.Pointer, unsafe.Pointer, uintptr)
 `
 
 const goStringDef = `
-//go:linkname _cgo_runtime_gostring runtime.gostring
-func _cgo_runtime_gostring(*_Ctype_char) string
+//go:linkname _cgo_run_time_gostring run_time.gostring
+func _cgo_run_time_gostring(*_Ctype_char) string
 
 func _Cfunc_GoString(p *_Ctype_char) string {
-	return _cgo_runtime_gostring(p)
+	return _cgo_run_time_gostring(p)
 }
 `
 
 const goStringNDef = `
-//go:linkname _cgo_runtime_gostringn runtime.gostringn
-func _cgo_runtime_gostringn(*_Ctype_char, int) string
+//go:linkname _cgo_run_time_gostringn run_time.gostringn
+func _cgo_run_time_gostringn(*_Ctype_char, int) string
 
 func _Cfunc_GoStringN(p *_Ctype_char, l _Ctype_int) string {
-	return _cgo_runtime_gostringn(p, int(l))
+	return _cgo_run_time_gostringn(p, int(l))
 }
 `
 
 const goBytesDef = `
-//go:linkname _cgo_runtime_gobytes runtime.gobytes
-func _cgo_runtime_gobytes(unsafe.Pointer, int) []byte
+//go:linkname _cgo_run_time_gobytes run_time.gobytes
+func _cgo_run_time_gobytes(unsafe.Pointer, int) []byte
 
 func _Cfunc_GoBytes(p unsafe.Pointer, l _Ctype_int) []byte {
-	return _cgo_runtime_gobytes(p, int(l))
+	return _cgo_run_time_gobytes(p, int(l))
 }
 `
 
 const cStringDef = `
 func _Cfunc_CString(s string) *_Ctype_char {
-	p := _cgo_runtime_cmalloc(uintptr(len(s)+1))
+	p := _cgo_run_time_cmalloc(uintptr(len(s)+1))
 	pp := (*[1<<30]byte)(p)
 	copy(pp[:], s)
 	pp[len(s)] = 0
@@ -1219,7 +1219,7 @@ func _Cfunc_CString(s string) *_Ctype_char {
 
 const cMallocDef = `
 func _Cfunc__CMalloc(n _Ctype_size_t) unsafe.Pointer {
-	return _cgo_runtime_cmalloc(uintptr(n))
+	return _cgo_run_time_cmalloc(uintptr(n))
 }
 `
 
@@ -1278,13 +1278,13 @@ Slice _cgoPREFIX_Cfunc_GoBytes(char *p, int32_t n) {
 	return __go_string_to_byte_array(s);
 }
 
-extern void runtime_throw(const char *);
+extern void run_time_throw(const char *);
 void *_cgoPREFIX_Cfunc__CMalloc(size_t n) {
         void *p = malloc(n);
         if(p == NULL && n == 0)
                 p = malloc(1);
         if(p == NULL)
-                runtime_throw("runtime: C malloc failed");
+                run_time_throw("run_time: C malloc failed");
         return p;
 }
 `

@@ -9,7 +9,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -515,7 +515,7 @@ var winsegments = []segment{
 // Verify that comments of the form "//line filename:line" are interpreted correctly.
 func TestLineComments(t *testing.T) {
 	segs := segments
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		segs = append(segs, winsegments...)
 	} else {
 		segs = append(segs, unixsegments...)

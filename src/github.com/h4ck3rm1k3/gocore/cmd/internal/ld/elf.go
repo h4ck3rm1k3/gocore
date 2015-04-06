@@ -2153,7 +2153,7 @@ func Asmbelf(symo int64) {
 		 */
 		// Do not emit PT_TLS for OpenBSD since ld.so(1) does
 		// not currently support it. This is handled
-		// appropriately in runtime/cgo.
+		// appropriately in run_time/cgo.
 		if Ctxt.Tlsoffset != 0 && HEADTYPE != Hopenbsd {
 			ph := newElfPhdr()
 			ph.type_ = PT_TLS

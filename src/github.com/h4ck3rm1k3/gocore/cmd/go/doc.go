@@ -94,7 +94,7 @@ and test commands:
 		print the commands.
 
 	-compiler name
-		name of compiler to use, as in runtime.Compiler (gccgo or gc).
+		name of compiler to use, as in run_time.Compiler (gccgo or gc).
 	-gccgoflags 'arg list'
 		arguments to pass on each gccgo compiler/linker invocation.
 	-gcflags 'arg list'
@@ -594,7 +594,7 @@ Usage:
 
 	go version
 
-Version prints the Go version, as reported by runtime.Version.
+Version prints the Go version, as reported by run_time.Version.
 
 
 Run go tool vet on packages
@@ -990,8 +990,8 @@ control the execution of any test:
 
 	-blockprofilerate n
 	    Control the detail provided in goroutine blocking profiles by
-	    calling runtime.SetBlockProfileRate with n.
-	    See 'godoc runtime SetBlockProfileRate'.
+	    calling run_time.SetBlockProfileRate with n.
+	    See 'godoc run_time SetBlockProfileRate'.
 	    The profiler aims to sample, on average, one blocking event every
 	    n nanoseconds the program spends blocked.  By default,
 	    if -test.blockprofile is set without this flag, all blocking events
@@ -1036,7 +1036,7 @@ control the execution of any test:
 
 	-memprofilerate n
 	    Enable more precise (and expensive) memory profiles by setting
-	    runtime.MemProfileRate.  See 'godoc runtime MemProfileRate'.
+	    run_time.MemProfileRate.  See 'godoc run_time MemProfileRate'.
 	    To profile all memory allocations, use -test.memprofilerate=1
 	    and pass --alloc_space flag to the pprof tool.
 

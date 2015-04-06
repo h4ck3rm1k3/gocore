@@ -6,7 +6,7 @@ package reflect
 
 import (
 	"github.com/h4ck3rm1k3/gocore/math"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"unsafe"
 )
 
@@ -160,8 +160,8 @@ func (e *ValueError) Error() string {
 // methodName returns the name of the calling method,
 // assumed to be two stack frames above.
 func methodName() string {
-	pc, _, _, _ := runtime.Caller(2)
-	f := runtime.FuncForPC(pc)
+	pc, _, _, _ := run_time.Caller(2)
+	f := run_time.FuncForPC(pc)
 	if f == nil {
 		return "unknown method"
 	}
@@ -176,7 +176,7 @@ type emptyInterface struct {
 
 // nonEmptyInterface is the header for a interface value with methods.
 type nonEmptyInterface struct {
-	// see ../runtime/iface.go:/Itab
+	// see ../run_time/iface.go:/Itab
 	itab *struct {
 		ityp   *rtype // static interface type
 		typ    *rtype // dynamic concrete type
@@ -433,7 +433,7 @@ func (v Value) call(op string, in []Value) []Value {
 
 	// For testing; see TestCallMethodJump.
 	if callGC {
-		runtime.GC()
+		run_time.GC()
 	}
 
 	var ret []Value
@@ -510,7 +510,7 @@ func callReflect(ctxt *makeFuncImpl, frame unsafe.Pointer) {
 	// Copy results back into argument frame.
 	if len(ftyp.out) > 0 {
 		off += -off & (ptrSize - 1)
-		if runtime.GOARCH == "amd64p32" {
+		if run_time.GOARCH == "amd64p32" {
 			off = align(off, 8)
 		}
 		for i, arg := range ftyp.out {
@@ -633,7 +633,7 @@ func callMethod(ctxt *methodValue, frame unsafe.Pointer) {
 	// a receiver.
 	// Ignore any changes to args and just copy return values.
 	callerRetOffset := retOffset - ptrSize
-	if runtime.GOARCH == "amd64p32" {
+	if run_time.GOARCH == "amd64p32" {
 		callerRetOffset = align(argSize-ptrSize, 8)
 	}
 	typedmemmovepartial(frametype,
@@ -649,7 +649,7 @@ func callMethod(ctxt *methodValue, frame unsafe.Pointer) {
 // funcName returns the name of f, for use in error messages.
 func funcName(f func([]Value) []Value) string {
 	pc := *(*uintptr)(unsafe.Pointer(&f))
-	rf := runtime.FuncForPC(pc)
+	rf := run_time.FuncForPC(pc)
 	if rf != nil {
 		return rf.Name()
 	}
@@ -1723,7 +1723,7 @@ func (v Value) UnsafeAddr() uintptr {
 	return uintptr(v.ptr)
 }
 
-// StringHeader is the runtime representation of a string.
+// StringHeader is the run_time representation of a string.
 // It cannot be used safely or portably and its representation may
 // change in a later release.
 // Moreover, the Data field is not sufficient to guarantee the data
@@ -1740,7 +1740,7 @@ type stringHeader struct {
 	Len  int
 }
 
-// SliceHeader is the runtime representation of a slice.
+// SliceHeader is the run_time representation of a slice.
 // It cannot be used safely or portably and its representation may
 // change in a later release.
 // Moreover, the Data field is not sufficient to guarantee the data
@@ -1859,9 +1859,9 @@ func Copy(dst, src Value) int {
 	return typedslicecopy(de.common(), ds, ss)
 }
 
-// A runtimeSelect is a single case passed to rselect.
-// This must match ../runtime/select.go:/runtimeSelect
-type runtimeSelect struct {
+// A run_timeSelect is a single case passed to rselect.
+// This must match ../run_time/select.go:/run_timeSelect
+type run_timeSelect struct {
 	dir uintptr        // 0, SendDir, or RecvDir
 	typ *rtype         // channel type
 	ch  unsafe.Pointer // channel
@@ -1873,12 +1873,12 @@ type runtimeSelect struct {
 // The conventional OK bool indicates whether the receive corresponds
 // to a sent value.
 //go:noescape
-func rselect([]runtimeSelect) (chosen int, recvOK bool)
+func rselect([]run_timeSelect) (chosen int, recvOK bool)
 
 // A SelectDir describes the communication direction of a select case.
 type SelectDir int
 
-// NOTE: These values must match ../runtime/select.go:/selectDir.
+// NOTE: These values must match ../run_time/select.go:/selectDir.
 
 const (
 	_             SelectDir = iota
@@ -1921,7 +1921,7 @@ func Select(cases []SelectCase) (chosen int, recv Value, recvOK bool) {
 	// NOTE: Do not trust that caller is not modifying cases data underfoot.
 	// The range is safe because the caller cannot modify our copy of the len
 	// and each iteration makes its own copy of the value c.
-	runcases := make([]runtimeSelect, len(cases))
+	runcases := make([]run_timeSelect, len(cases))
 	haveDefault := false
 	for i, c := range cases {
 		rc := &runcases[i]
@@ -2006,7 +2006,7 @@ func Select(cases []SelectCase) (chosen int, recv Value, recvOK bool) {
  * constructors
  */
 
-// implemented in package runtime
+// implemented in package run_time
 func unsafe_New(*rtype) unsafe.Pointer
 func unsafe_NewArray(*rtype, int) unsafe.Pointer
 
@@ -2426,7 +2426,7 @@ func cvtI2I(v Value, typ Type) Value {
 	return cvtT2I(v.Elem(), typ)
 }
 
-// implemented in ../runtime
+// implemented in ../run_time
 func chancap(ch unsafe.Pointer) int
 func chanclose(ch unsafe.Pointer)
 func chanlen(ch unsafe.Pointer) int

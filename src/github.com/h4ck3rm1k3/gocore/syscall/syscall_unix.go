@@ -7,7 +7,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"unsafe"
 )
@@ -19,9 +19,9 @@ var (
 )
 
 const (
-	darwin64Bit    = runtime.GOOS == "darwin" && sizeofPtr == 8
-	dragonfly64Bit = runtime.GOOS == "dragonfly" && sizeofPtr == 8
-	netbsd32Bit    = runtime.GOOS == "netbsd" && sizeofPtr == 4
+	darwin64Bit    = run_time.GOOS == "darwin" && sizeofPtr == 8
+	dragonfly64Bit = run_time.GOOS == "dragonfly" && sizeofPtr == 8
+	netbsd32Bit    = run_time.GOOS == "netbsd" && sizeofPtr == 4
 )
 
 func Syscall(trap, a1, a2, a3 uintptr) (r1, r2 uintptr, err Errno)
@@ -125,7 +125,7 @@ var (
 )
 
 // errnoErr returns common boxed Errno values, to prevent
-// allocations at runtime.
+// allocations at run_time.
 func errnoErr(e Errno) error {
 	switch e {
 	case 0:

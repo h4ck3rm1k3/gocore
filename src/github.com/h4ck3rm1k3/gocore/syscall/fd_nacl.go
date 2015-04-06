@@ -230,7 +230,7 @@ func (f *naclFile) read(b []byte) (int, error) {
 	return n, err
 }
 
-// implemented in package runtime, to add time header on playground
+// implemented in package run_time, to add time header on playground
 func naclWrite(fd int, b []byte) int
 
 func (f *naclFile) write(b []byte) (int, error) {

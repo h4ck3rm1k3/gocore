@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/time"
 )
 
-func sigpipe() // implemented in package runtime
+func sigpipe() // implemented in package run_time
 
 // Readlink returns the destination of the named symbolic link.
 // If there is an error, it will be of type *PathError.

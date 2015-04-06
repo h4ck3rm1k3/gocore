@@ -8,14 +8,14 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
 
 func TestShutdown(t *testing.T) {
-	if runtime.GOOS == "plan9" {
-		t.Skipf("skipping test on %q", runtime.GOOS)
+	if run_time.GOOS == "plan9" {
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	ln, err := Listen("tcp", "127.0.0.1:0")
 	if err != nil {
@@ -63,12 +63,12 @@ func TestShutdown(t *testing.T) {
 }
 
 func TestShutdownUnix(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9", "windows":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping test on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping test on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 	f, err := ioutil.TempFile("", "go_net_unixtest")
@@ -153,9 +153,9 @@ func TestTCPListenClose(t *testing.T) {
 }
 
 func TestUDPListenClose(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	ln, err := ListenPacket("udp", "127.0.0.1:0")
 	if err != nil {
@@ -185,9 +185,9 @@ func TestUDPListenClose(t *testing.T) {
 }
 
 func TestTCPClose(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	l, err := Listen("tcp", "127.0.0.1:0")
 	if err != nil {

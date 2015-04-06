@@ -7,7 +7,7 @@
 package os
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 )
 
@@ -15,14 +15,14 @@ import (
 var Args []string
 
 func init() {
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		// Initialized in exec_windows.go.
 		return
 	}
-	Args = runtime_args()
+	Args = run_time_args()
 }
 
-func runtime_args() []string // in package runtime
+func run_time_args() []string // in package run_time
 
 // Getuid returns the numeric user id of the caller.
 func Getuid() int { return syscall.Getuid() }

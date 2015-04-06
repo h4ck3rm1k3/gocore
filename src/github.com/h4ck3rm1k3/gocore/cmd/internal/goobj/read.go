@@ -196,8 +196,8 @@ type Func struct {
 	PCSP     Data       // PC → SP offset map
 	PCFile   Data       // PC → file number map (index into File)
 	PCLine   Data       // PC → line number map
-	PCData   []Data     // PC → runtime support data map
-	FuncData []FuncData // non-PC-specific runtime support data
+	PCData   []Data     // PC → run_time support data map
+	FuncData []FuncData // non-PC-specific run_time support data
 	File     []string   // paths indexed by PCFile
 }
 

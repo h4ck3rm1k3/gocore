@@ -11,7 +11,7 @@ package parse
 import (
 	"github.com/h4ck3rm1k3/gocore/bytes"
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
@@ -192,7 +192,7 @@ func (t *Tree) unexpected(token item, context string) {
 func (t *Tree) recover(errp *error) {
 	e := recover()
 	if e != nil {
-		if _, ok := e.(runtime.Error); ok {
+		if _, ok := e.(run_time.Error); ok {
 			panic(e)
 		}
 		if t != nil {

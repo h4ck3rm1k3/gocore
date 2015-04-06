@@ -59,7 +59,7 @@ func (f *File) Disasm() (*Disasm, error) {
 	keep := syms[:0]
 	for _, sym := range syms {
 		switch sym.Name {
-		case "runtime.text", "text", "_text", "runtime.etext", "etext", "_etext":
+		case "run_time.text", "text", "_text", "run_time.etext", "etext", "_etext":
 			// drop
 		default:
 			keep = append(keep, sym)

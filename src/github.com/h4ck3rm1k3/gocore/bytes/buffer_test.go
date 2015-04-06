@@ -8,7 +8,7 @@ import (
 	. "github.com/h4ck3rm1k3/gocore/bytes"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/math/rand"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf8"
 )
@@ -423,11 +423,11 @@ func TestGrow(t *testing.T) {
 			buf.Grow(growLen)
 			yBytes := Repeat(y, growLen)
 			// Check no allocation occurs in write, as long as we're single-threaded.
-			var m1, m2 runtime.MemStats
-			runtime.ReadMemStats(&m1)
+			var m1, m2 run_time.MemStats
+			run_time.ReadMemStats(&m1)
 			buf.Write(yBytes)
-			runtime.ReadMemStats(&m2)
-			if runtime.GOMAXPROCS(-1) == 1 && m1.Mallocs != m2.Mallocs {
+			run_time.ReadMemStats(&m2)
+			if run_time.GOMAXPROCS(-1) == 1 && m1.Mallocs != m2.Mallocs {
 				t.Errorf("allocation occurred during write")
 			}
 			// Check that buffer has correct data.

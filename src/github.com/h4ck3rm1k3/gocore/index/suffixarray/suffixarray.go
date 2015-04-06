@@ -171,7 +171,7 @@ func (x *Index) at(i int) []byte {
 }
 
 // lookupAll returns a slice into the matching region of the index.
-// The runtime is O(log(N)*len(s)).
+// The run_time is O(log(N)*len(s)).
 func (x *Index) lookupAll(s []byte) []int {
 	// find matching suffix index range [i:j]
 	// find the first index where s would be the prefix

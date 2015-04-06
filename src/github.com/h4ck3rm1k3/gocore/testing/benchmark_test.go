@@ -6,7 +6,7 @@ package testing_test
 
 import (
 	"github.com/h4ck3rm1k3/gocore/bytes"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/text/template"
@@ -74,7 +74,7 @@ func TestRunParallel(t *testing.T) {
 				atomic.AddUint64(&iters, 1)
 			}
 		})
-		if want := uint32(3 * runtime.GOMAXPROCS(0)); procs != want {
+		if want := uint32(3 * run_time.GOMAXPROCS(0)); procs != want {
 			t.Errorf("got %v procs, want %v", procs, want)
 		}
 		if iters != uint64(b.N) {

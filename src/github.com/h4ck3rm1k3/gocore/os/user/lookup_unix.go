@@ -9,7 +9,7 @@ package user
 
 import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/syscall"
@@ -50,7 +50,7 @@ func lookupUnix(uid int, username string, lookupByName bool) (*User, error) {
 	var result *C.struct_passwd
 
 	var bufSize C.long
-	if runtime.GOOS == "dragonfly" || runtime.GOOS == "freebsd" {
+	if run_time.GOOS == "dragonfly" || run_time.GOOS == "freebsd" {
 		// DragonFly and FreeBSD do not have _SC_GETPW_R_SIZE_MAX
 		// and just return -1.  So just use the same
 		// size that Linux returns.

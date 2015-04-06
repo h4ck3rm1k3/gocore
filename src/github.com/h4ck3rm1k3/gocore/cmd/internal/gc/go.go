@@ -29,7 +29,7 @@ const (
 )
 
 const (
-	// These values are known by runtime.
+	// These values are known by run_time.
 	// The MEMx and NOEQx values must run in parallel.  See algtype.
 	AMEM = iota
 	AMEM0
@@ -418,7 +418,7 @@ type Magic struct {
 }
 
 /*
- * note this is the runtime representation
+ * note this is the run_time representation
  * of the compilers arrays.
  *
  * typedef	struct
@@ -428,16 +428,16 @@ type Magic struct {
  *	uchar	cap[4];		// allocated number of elements
  * } Array;
  */
-var Array_array int // runtime offsetof(Array,array) - same for String
+var Array_array int // run_time offsetof(Array,array) - same for String
 
-var Array_nel int // runtime offsetof(Array,nel) - same for String
+var Array_nel int // run_time offsetof(Array,nel) - same for String
 
-var Array_cap int // runtime offsetof(Array,cap)
+var Array_cap int // run_time offsetof(Array,cap)
 
-var sizeof_Array int // runtime sizeof(Array)
+var sizeof_Array int // run_time sizeof(Array)
 
 /*
- * note this is the runtime representation
+ * note this is the run_time representation
  * of the compilers strings.
  *
  * typedef	struct
@@ -446,7 +446,7 @@ var sizeof_Array int // runtime sizeof(Array)
  *	uchar	nel[4];		// number of elements
  * } String;
  */
-var sizeof_String int // runtime sizeof(String)
+var sizeof_String int // run_time sizeof(String)
 
 var dotlist [10]Dlist // size is max depth of embeddeds
 
@@ -506,17 +506,17 @@ var gostringpkg *Pkg // fake pkg for Go strings
 
 var itabpkg *Pkg // fake pkg for itab cache
 
-var Runtimepkg *Pkg // package runtime
+var Runtimepkg *Pkg // package run_time
 
-var racepkg *Pkg // package runtime/race
+var racepkg *Pkg // package run_time/race
 
 var stringpkg *Pkg // fake package for C strings
 
-var typepkg *Pkg // fake package for runtime type info (headers)
+var typepkg *Pkg // fake package for run_time type info (headers)
 
-var typelinkpkg *Pkg // fake package for runtime type info (data)
+var typelinkpkg *Pkg // fake package for run_time type info (data)
 
-var weaktypepkg *Pkg // weak references to runtime type info
+var weaktypepkg *Pkg // weak references to run_time type info
 
 var unsafepkg *Pkg // package unsafe
 
@@ -644,7 +644,7 @@ var Funcdepth int32
 
 var typecheckok int
 
-var compiling_runtime int
+var compiling_run_time int
 
 var compiling_wrappers int
 

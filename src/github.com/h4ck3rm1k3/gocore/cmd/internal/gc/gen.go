@@ -262,8 +262,8 @@ func cgen_dcl(n *Node) {
 	if n.Class&PHEAP == 0 {
 		return
 	}
-	if compiling_runtime != 0 {
-		Yyerror("%v escapes to heap, not allowed in runtime.", Nconv(n, 0))
+	if compiling_run_time != 0 {
+		Yyerror("%v escapes to heap, not allowed in run_time.", Nconv(n, 0))
 	}
 	if n.Alloc == nil {
 		n.Alloc = callnew(n.Type)
@@ -433,7 +433,7 @@ func cgen_dottype(n *Node, res, resok *Node) {
 	var iface Node
 	Igen(n.Left, &iface, res)
 	var r1, r2 Node
-	byteptr := Ptrto(Types[TUINT8]) // type used in runtime prototypes for runtime type (*byte)
+	byteptr := Ptrto(Types[TUINT8]) // type used in run_time prototypes for run_time type (*byte)
 	Regalloc(&r1, byteptr, nil)
 	iface.Type = byteptr
 	Cgen(&iface, &r1)
@@ -526,7 +526,7 @@ func Cgen_As2dottype(n, res, resok *Node) {
 	var iface Node
 	Igen(n.Left, &iface, nil)
 	var r1, r2 Node
-	byteptr := Ptrto(Types[TUINT8]) // type used in runtime prototypes for runtime type (*byte)
+	byteptr := Ptrto(Types[TUINT8]) // type used in run_time prototypes for run_time type (*byte)
 	Regalloc(&r1, byteptr, res)
 	iface.Type = byteptr
 	Cgen(&iface, &r1)

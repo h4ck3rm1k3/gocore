@@ -7,7 +7,7 @@ package net
 import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -88,9 +88,9 @@ var fileListenerTests = []struct {
 }
 
 func TestFileListener(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "windows":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	for _, tt := range fileListenerTests {
@@ -180,9 +180,9 @@ var filePacketConnTests = []struct {
 }
 
 func TestFilePacketConn(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9", "windows":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	for _, tt := range filePacketConnTests {

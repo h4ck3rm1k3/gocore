@@ -92,7 +92,9 @@ package math
 //	Log1p(-1) = -Inf
 //	Log1p(x < -1) = NaN
 //	Log1p(NaN) = NaN
-func Log1p(x float64) float64
+func Log1p(x float64) float64 {
+	return log1p(x)
+}
 
 func log1p(x float64) float64 {
 	const (

@@ -18,7 +18,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	pathpkg "github.com/h4ck3rm1k3/gocore/path"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
@@ -281,11 +281,11 @@ var cgoEnabled = map[string]bool{
 func defaultContext() Context {
 	var c Context
 
-	c.GOARCH = envOr("GOARCH", runtime.GOARCH)
-	c.GOOS = envOr("GOOS", runtime.GOOS)
-	c.GOROOT = runtime.GOROOT()
+	c.GOARCH = envOr("GOARCH", run_time.GOARCH)
+	c.GOOS = envOr("GOOS", run_time.GOOS)
+	c.GOROOT = run_time.GOROOT()
 	c.GOPATH = envOr("GOPATH", "")
-	c.Compiler = runtime.Compiler
+	c.Compiler = run_time.Compiler
 
 	// Each major Go release in the Go 1.x series should add a tag here.
 	// Old tags should not be removed. That is, the go1.x tag is present
@@ -305,7 +305,7 @@ func defaultContext() Context {
 		c.CgoEnabled = false
 	default:
 		// cgo must be explicitly enabled for cross compilation builds
-		if runtime.GOARCH == c.GOARCH && runtime.GOOS == c.GOOS {
+		if run_time.GOARCH == c.GOARCH && run_time.GOOS == c.GOOS {
 			c.CgoEnabled = cgoEnabled[c.GOOS+"/"+c.GOARCH]
 			break
 		}
@@ -1377,7 +1377,7 @@ func init() {
 }
 
 // ToolDir is the directory containing build tools.
-//var ToolDir = filepath.Join(runtime.GOROOT(), "pkg/tool/"+runtime.GOOS+"_"+runtime.GOARCH)
+//var ToolDir = filepath.Join(run_time.GOROOT(), "pkg/tool/"+run_time.GOOS+"_"+run_time.GOARCH)
 
 // IsLocalImport reports whether the import path is
 // a local import path, like ".", "..", "./foo", or "../foo".

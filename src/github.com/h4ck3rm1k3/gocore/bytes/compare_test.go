@@ -25,7 +25,7 @@ var compareTests = []struct {
 	{[]byte("ab"), []byte("x"), -1},
 	{[]byte("x"), []byte("a"), 1},
 	{[]byte("b"), []byte("x"), -1},
-	// test runtime·memeq's chunked implementation
+	// test run_time·memeq's chunked implementation
 	{[]byte("abcdefgh"), []byte("abcdefgh"), 0},
 	{[]byte("abcdefghi"), []byte("abcdefghi"), 0},
 	{[]byte("abcdefghi"), []byte("abcdefghj"), -1},

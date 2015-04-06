@@ -5,7 +5,7 @@
 package os
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 )
@@ -19,7 +19,7 @@ type Process struct {
 
 func newProcess(pid int, handle uintptr) *Process {
 	p := &Process{Pid: pid, handle: handle}
-	runtime.SetFinalizer(p, (*Process).Release)
+	run_time.SetFinalizer(p, (*Process).Release)
 	return p
 }
 

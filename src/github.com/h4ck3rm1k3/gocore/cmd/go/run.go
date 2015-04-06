@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
 
@@ -19,7 +19,7 @@ func findExecCmd() []string {
 		return execCmd
 	}
 	execCmd = []string{} // avoid work the second time
-	if goos == runtime.GOOS && goarch == runtime.GOARCH {
+	if goos == run_time.GOOS && goarch == run_time.GOARCH {
 		return execCmd
 	}
 	path, err := exec.LookPath(fmt.Sprintf("go_%s_%s_exec", goos, goarch))

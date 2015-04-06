@@ -33,7 +33,7 @@ package gc
 import (
 	"github.com/h4ck3rm1k3/gocore/cmd/internal/obj"
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
 
@@ -722,7 +722,7 @@ Switch:
 			regstk[ix] = make([]byte, 4096)
 		}
 		stk := regstk[ix]
-		n := runtime.Stack(stk[:cap(stk)], false)
+		n := run_time.Stack(stk[:cap(stk)], false)
 		regstk[ix] = stk[:n]
 	}
 	reg[ix]++
@@ -795,7 +795,7 @@ func Regrealloc(n *Node) {
 			regstk[i] = make([]byte, 4096)
 		}
 		stk := regstk[i]
-		n := runtime.Stack(stk[:cap(stk)], false)
+		n := run_time.Stack(stk[:cap(stk)], false)
 		regstk[i] = stk[:n]
 	}
 	reg[i]++

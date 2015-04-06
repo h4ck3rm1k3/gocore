@@ -37,7 +37,7 @@ type Driver interface {
 }
 
 // ErrSkip may be returned by some optional interfaces' methods to
-// indicate at runtime that the fast path is unavailable and the sql
+// indicate at run_time that the fast path is unavailable and the sql
 // package should continue as if the optional interface was not
 // implemented. ErrSkip is only supported where explicitly
 // documented.

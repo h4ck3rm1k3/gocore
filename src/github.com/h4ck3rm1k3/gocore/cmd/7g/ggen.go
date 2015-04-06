@@ -451,7 +451,7 @@ func clearfat(nl *gc.Node) {
 		p = gins(obj.ADUFFZERO, nil, f)
 		gc.Afunclit(&p.To, f)
 
-		// 4 and 128 = magic constants: see ../../runtime/asm_arm64x.s
+		// 4 and 128 = magic constants: see ../../run_time/asm_arm64x.s
 		p.To.Offset = int64(4 * (128 - q))
 
 		// duffzero leaves R16 on the last zeroed dword

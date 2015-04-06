@@ -93,8 +93,8 @@
 //
 // During a particular build, the following words are satisfied:
 //
-//	- the target operating system, as spelled by runtime.GOOS
-//	- the target architecture, as spelled by runtime.GOARCH
+//	- the target operating system, as spelled by run_time.GOOS
+//	- the target architecture, as spelled by run_time.GOARCH
 //	- the compiler being used, either "gc" or "gccgo"
 //	- "cgo", if ctxt.CgoEnabled is true
 //	- "go1.1", from Go version 1.1 onward

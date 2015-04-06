@@ -21,7 +21,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
@@ -169,7 +169,7 @@ var objDir = flag.String("objdir", "", "object directory")
 var gccgo = flag.Bool("gccgo", false, "generate files for use with gccgo")
 var gccgoprefix = flag.String("gccgoprefix", "", "-fgo-prefix option used with gccgo")
 var gccgopkgpath = flag.String("gccgopkgpath", "", "-fgo-pkgpath option used with gccgo")
-var importRuntimeCgo = flag.Bool("import_runtime_cgo", true, "import runtime/cgo in generated code")
+var importRuntimeCgo = flag.Bool("import_run_time_cgo", true, "import run_time/cgo in generated code")
 var importSyscall = flag.Bool("import_syscall", true, "import syscall in generated code")
 var goarch, goos string
 
@@ -298,11 +298,11 @@ func main() {
 // newPackage returns a new Package that will invoke
 // gcc with the additional arguments specified in args.
 func newPackage(args []string) *Package {
-	goarch = runtime.GOARCH
+	goarch = run_time.GOARCH
 	if s := os.Getenv("GOARCH"); s != "" {
 		goarch = s
 	}
-	goos = runtime.GOOS
+	goos = run_time.GOOS
 	if s := os.Getenv("GOOS"); s != "" {
 		goos = s
 	}

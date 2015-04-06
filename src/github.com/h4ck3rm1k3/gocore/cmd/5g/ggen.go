@@ -385,7 +385,7 @@ func clearfat(nl *gc.Node) {
 		p := gins(obj.ADUFFZERO, nil, f)
 		gc.Afunclit(&p.To, f)
 
-		// 4 and 128 = magic constants: see ../../runtime/asm_arm.s
+		// 4 and 128 = magic constants: see ../../run_time/asm_arm.s
 		p.To.Offset = 4 * (128 - int64(q))
 	} else {
 		var p *obj.Prog

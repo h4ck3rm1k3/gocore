@@ -10,7 +10,7 @@ package gosym
 // The table format is a variant of the format used in Plan 9's a.out
 // format, documented at http://plan9.bell-labs.com/magic/man2html/6/a.out.
 // The best reference for the differences between the Plan 9 format
-// and the Go format is the runtime source, specifically ../../runtime/symtab.c.
+// and the Go format is the run_time source, specifically ../../run_time/symtab.c.
 
 import (
 	"github.com/h4ck3rm1k3/gocore/bytes"
@@ -402,7 +402,7 @@ func NewTable(symtab []byte, pcln *LineTable) (*Table, error) {
 			if n := len(t.Funcs); n > 0 {
 				t.Funcs[n-1].End = sym.Value
 			}
-			if sym.Name == "runtime.etext" || sym.Name == "etext" {
+			if sym.Name == "run_time.etext" || sym.Name == "etext" {
 				continue
 			}
 

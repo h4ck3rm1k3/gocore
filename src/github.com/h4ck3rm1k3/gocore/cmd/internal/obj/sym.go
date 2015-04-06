@@ -36,7 +36,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/log"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 )
 
 func yy_isalpha(c int) bool {
@@ -129,8 +129,8 @@ func Linknew(arch *LinkArch) *Link {
 	ctxt.Version = HistVersion
 	ctxt.Goroot = Getgoroot()
 	ctxt.Goroot_final = os.Getenv("GOROOT_FINAL")
-	if runtime.GOOS == "windows" {
-		// TODO(rsc): Remove ctxt.Windows and let callers use runtime.GOOS.
+	if run_time.GOOS == "windows" {
+		// TODO(rsc): Remove ctxt.Windows and let callers use run_time.GOOS.
 		ctxt.Windows = 1
 	}
 
@@ -164,7 +164,7 @@ func Linknew(arch *LinkArch) *Link {
 		/*
 		 * ELF uses TLS offset negative from FS.
 		 * Translate 0(FS) and 8(FS) into -16(FS) and -8(FS).
-		 * Known to low-level assembly in package runtime and runtime/cgo.
+		 * Known to low-level assembly in package run_time and run_time/cgo.
 		 */
 	case Hlinux,
 		Hfreebsd,
@@ -191,7 +191,7 @@ func Linknew(arch *LinkArch) *Link {
 
 		/*
 		 * OS X system constants - offset from 0(GS) to our TLS.
-		 * Explained in ../../runtime/cgo/gcc_darwin_*.c.
+		 * Explained in ../../run_time/cgo/gcc_darwin_*.c.
 		 */
 	case Hdarwin:
 		switch ctxt.Arch.Thechar {

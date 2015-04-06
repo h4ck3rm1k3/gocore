@@ -17,7 +17,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/path"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/text/template"
@@ -129,7 +129,7 @@ func main() {
 	// Diagnose common mistake: GOPATH==GOROOT.
 	// This setting is equivalent to not setting GOPATH at all,
 	// which is not what most people want when they do it.
-	if gopath := os.Getenv("GOPATH"); gopath == runtime.GOROOT() {
+	if gopath := os.Getenv("GOPATH"); gopath == run_time.GOROOT() {
 		fmt.Fprintf(os.Stderr, "warning: GOPATH set to GOROOT (%s) has no effect\n", gopath)
 	} else {
 		for _, p := range filepath.SplitList(gopath) {
@@ -511,7 +511,7 @@ func matchPackages(pattern string) []string {
 		"builtin": true, // ignore pseudo-package that exists only for documentation
 	}
 	if !buildContext.CgoEnabled {
-		have["github.com/h4ck3rm1k3/gocore/runtime/cgo"] = true // ignore during walk
+		have["github.com/h4ck3rm1k3/gocore/run_time/cgo"] = true // ignore during walk
 	}
 	var pkgs []string
 

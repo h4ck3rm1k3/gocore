@@ -15,7 +15,7 @@ import (
 	osexec "github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -43,7 +43,7 @@ type sysDir struct {
 }
 
 var sysdir = func() *sysDir {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android":
 		return &sysDir{
 			"/system/etc",
@@ -53,7 +53,7 @@ var sysdir = func() *sysDir {
 			},
 		}
 	case "darwin":
-		if runtime.GOARCH == "arm" {
+		if run_time.GOARCH == "arm" {
 			wd, err := syscall.Getwd()
 			if err != nil {
 				wd = err.Error()
@@ -116,7 +116,7 @@ func size(name string, t *testing.T) int64 {
 }
 
 func equal(name1, name2 string) (r bool) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "windows":
 		r = strings.ToLower(name1) == strings.ToLower(name2)
 	default:
@@ -127,11 +127,11 @@ func equal(name1, name2 string) (r bool) {
 
 // localTmp returns a local temporary directory not on NFS.
 func localTmp() string {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "windows":
 		return TempDir()
 	case "darwin":
-		if runtime.GOARCH == "arm" {
+		if run_time.GOARCH == "arm" {
 			return TempDir()
 		}
 	}
@@ -319,11 +319,11 @@ func smallReaddirnames(file *File, length int, t *testing.T) []string {
 func TestReaddirnamesOneAtATime(t *testing.T) {
 	// big directory that doesn't change often.
 	dir := "/usr/bin"
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android":
 		dir = "/system/bin"
 	case "darwin":
-		if runtime.GOARCH == "arm" {
+		if run_time.GOARCH == "arm" {
 			wd, err := Getwd()
 			if err != nil {
 				t.Fatal(err)
@@ -442,13 +442,13 @@ func touch(t *testing.T, name string) {
 }
 
 func TestReaddirStatFailures(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "windows", "plan9":
 		// Windows and Plan 9 already do this correctly,
 		// but are structured with different syscalls such
 		// that they don't use Lstat, so the hook below for
 		// testing it wouldn't work.
-		t.Skipf("skipping test on %v", runtime.GOOS)
+		t.Skipf("skipping test on %v", run_time.GOOS)
 	}
 	dir, err := ioutil.TempDir("", "")
 	if err != nil {
@@ -535,11 +535,11 @@ func TestReaddirOfFile(t *testing.T) {
 
 func TestHardLink(t *testing.T) {
 	// Hardlinks are not supported under windows or Plan 9.
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
 		return
 	case "darwin":
-		if runtime.GOARCH == "arm" {
+		if run_time.GOARCH == "arm" {
 			defer chtmpdir(t)()
 		}
 	}
@@ -602,15 +602,15 @@ func chtmpdir(t *testing.T) func() {
 }
 
 func TestSymlink(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl", "plan9":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "windows":
 		if !supportsSymlinks {
-			t.Skipf("skipping on %s", runtime.GOOS)
+			t.Skipf("skipping on %s", run_time.GOOS)
 		}
 	case "darwin":
-		if runtime.GOARCH == "arm" {
+		if run_time.GOARCH == "arm" {
 			defer chtmpdir(t)()
 		}
 	}
@@ -672,15 +672,15 @@ func TestSymlink(t *testing.T) {
 }
 
 func TestLongSymlink(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9", "nacl":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "windows":
 		if !supportsSymlinks {
-			t.Skipf("skipping on %s", runtime.GOOS)
+			t.Skipf("skipping on %s", run_time.GOOS)
 		}
 	case "darwin":
-		if runtime.GOARCH == "arm" {
+		if run_time.GOARCH == "arm" {
 			defer chtmpdir(t)()
 		}
 	}
@@ -704,7 +704,7 @@ func TestLongSymlink(t *testing.T) {
 }
 
 func TestRename(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		defer chtmpdir(t)()
 	}
 	from, to := "renamefrom", "renameto"
@@ -754,18 +754,18 @@ func exec(t *testing.T, dir, cmd string, args []string, expect string) {
 }
 
 func TestStartProcess(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 
 	var dir, cmd string
 	var args []string
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		cmd = Getenv("COMSPEC")
 		dir = Getenv("SystemRoot")
 		args = []string{"/c", "cd"}
@@ -794,7 +794,7 @@ func checkMode(t *testing.T, path string, mode FileMode) {
 
 func TestChmod(t *testing.T) {
 	// Chmod is not supported under windows.
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		return
 	}
 	f := newFile("TestChmod", t)
@@ -914,7 +914,7 @@ func testChtimes(t *testing.T, name string) {
 	*/
 	pat := Atime(postStat)
 	pmt := postStat.ModTime()
-	if !pat.Before(at) && runtime.GOOS != "plan9" && runtime.GOOS != "nacl" {
+	if !pat.Before(at) && run_time.GOOS != "plan9" && run_time.GOOS != "nacl" {
 		t.Errorf("AccessTime didn't go backwards; was=%d, after=%d", at, pat)
 	}
 
@@ -925,7 +925,7 @@ func testChtimes(t *testing.T, name string) {
 
 func TestChdirAndGetwd(t *testing.T) {
 	// TODO(brainman): file.Chdir() is not implemented on windows.
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		return
 	}
 	fd, err := Open(".")
@@ -936,13 +936,13 @@ func TestChdirAndGetwd(t *testing.T) {
 	// (unlike, say, /var, /etc), except /tmp, which we handle below.
 	dirs := []string{"/", "/usr/bin", "/tmp"}
 	// /usr/bin does not usually exist on Plan 9 or Android.
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android":
 		dirs = []string{"/", "/system/bin"}
 	case "plan9":
 		dirs = []string{"/", "/usr"}
 	case "darwin":
-		if runtime.GOARCH == "arm" {
+		if run_time.GOARCH == "arm" {
 			d1, err := ioutil.TempDir("", "d1")
 			if err != nil {
 				t.Fatalf("TempDir: %v", err)
@@ -1071,7 +1071,7 @@ func TestOpenError(t *testing.T) {
 			t.Errorf("Open(%q, %d) returns error of %T type; want *PathError", tt.path, tt.mode, err)
 		}
 		if perr.Err != tt.error {
-			if runtime.GOOS == "plan9" {
+			if run_time.GOOS == "plan9" {
 				syscallErrStr := perr.Err.Error()
 				expectedErrStr := strings.Replace(tt.error.Error(), "file ", "", 1)
 				if !strings.HasSuffix(syscallErrStr, expectedErrStr) {
@@ -1085,7 +1085,7 @@ func TestOpenError(t *testing.T) {
 				}
 				continue
 			}
-			if runtime.GOOS == "dragonfly" {
+			if run_time.GOOS == "dragonfly" {
 				// DragonFly incorrectly returns EACCES rather
 				// EISDIR when a directory is opened for write.
 				if tt.error == syscall.EISDIR && perr.Err == syscall.EACCES {
@@ -1158,12 +1158,12 @@ func testWindowsHostname(t *testing.T) {
 func TestHostname(t *testing.T) {
 	// There is no other way to fetch hostname on windows, but via winapi.
 	// On Plan 9 it can be taken from #c/sysname as Hostname() does.
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl", "plan9":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	case "windows":
 		testWindowsHostname(t)
@@ -1244,7 +1244,7 @@ func writeFile(t *testing.T, fname string, flag int, text string) string {
 }
 
 func TestAppend(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		defer chtmpdir(t)()
 	}
 	const f = "append.txt"
@@ -1310,7 +1310,7 @@ func TestNilProcessStateString(t *testing.T) {
 }
 
 func TestSameFile(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		defer chtmpdir(t)()
 	}
 	fa, err := Create("a")
@@ -1432,12 +1432,12 @@ func TestReadAtEOF(t *testing.T) {
 }
 
 func testKillProcess(t *testing.T, processKiller func(p *Process)) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 
@@ -1476,15 +1476,15 @@ func TestKillStartProcess(t *testing.T) {
 }
 
 func TestGetppid(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl":
 		t.Skip("skipping on nacl")
 	case "plan9":
 		// TODO: golang.org/issue/8206
 		t.Skipf("skipping test on plan9; see issue 8206")
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping test on %s/%s, no fork", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping test on %s/%s, no fork", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 
@@ -1571,7 +1571,7 @@ func mkdirTree(t *testing.T, root string, level, max int) {
 // Test that simultaneous RemoveAll do not report an error.
 // As long as it gets removed, we should be happy.
 func TestRemoveAllRace(t *testing.T) {
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		// Windows has very strict rules about things like
 		// removing directories while someone else has
 		// them open. The racing doesn't work out nicely
@@ -1579,8 +1579,8 @@ func TestRemoveAllRace(t *testing.T) {
 		t.Skip("skipping on windows")
 	}
 
-	n := runtime.GOMAXPROCS(16)
-	defer runtime.GOMAXPROCS(n)
+	n := run_time.GOMAXPROCS(16)
+	defer run_time.GOMAXPROCS(n)
 	root, err := ioutil.TempDir("", "issue")
 	if err != nil {
 		t.Fatal(err)

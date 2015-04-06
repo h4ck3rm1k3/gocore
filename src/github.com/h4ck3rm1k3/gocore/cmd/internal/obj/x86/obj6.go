@@ -337,11 +337,11 @@ func nacladdr(ctxt *obj.Link, p *obj.Prog, a *obj.Addr) {
 
 func preprocess(ctxt *obj.Link, cursym *obj.LSym) {
 	if ctxt.Tlsg == nil {
-		ctxt.Tlsg = obj.Linklookup(ctxt, "runtime.tlsg", 0)
+		ctxt.Tlsg = obj.Linklookup(ctxt, "run_time.tlsg", 0)
 	}
 	if ctxt.Symmorestack[0] == nil {
-		ctxt.Symmorestack[0] = obj.Linklookup(ctxt, "runtime.morestack", 0)
-		ctxt.Symmorestack[1] = obj.Linklookup(ctxt, "runtime.morestack_noctxt", 0)
+		ctxt.Symmorestack[0] = obj.Linklookup(ctxt, "run_time.morestack", 0)
+		ctxt.Symmorestack[1] = obj.Linklookup(ctxt, "run_time.morestack_noctxt", 0)
 	}
 
 	if ctxt.Headtype == obj.Hplan9 && ctxt.Plan9privates == nil {
@@ -892,7 +892,7 @@ func stacksplit(ctxt *obj.Link, p *obj.Prog, framesize int32, textarg int32, noc
 	p.As = obj.ACALL
 	p.To.Type = obj.TYPE_BRANCH
 	if ctxt.Cursym.Cfunc != 0 {
-		p.To.Sym = obj.Linklookup(ctxt, "runtime.morestackc", 0)
+		p.To.Sym = obj.Linklookup(ctxt, "run_time.morestackc", 0)
 	} else {
 		p.To.Sym = ctxt.Symmorestack[bool2int(noctxt)]
 	}

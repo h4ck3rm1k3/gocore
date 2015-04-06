@@ -8,8 +8,8 @@
 package sync_test
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
-	"runtime/debug"
+	"github.com/h4ck3rm1k3/gocore/run_time"
+	"run_time/debug"
 	. "github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"testing"
@@ -37,7 +37,7 @@ func TestPool(t *testing.T) {
 
 	p.Put("c")
 	debug.SetGCPercent(100) // to allow following GC to actually run
-	runtime.GC()
+	run_time.GC()
 	if g := p.Get(); g != nil {
 		t.Fatalf("got %#v; want nil after GC", g)
 	}
@@ -87,7 +87,7 @@ loop:
 		var fin, fin1 uint32
 		for i := 0; i < N; i++ {
 			v := new(string)
-			runtime.SetFinalizer(v, func(vv *string) {
+			run_time.SetFinalizer(v, func(vv *string) {
 				atomic.AddUint32(&fin, 1)
 			})
 			p.Put(v)
@@ -98,7 +98,7 @@ loop:
 			}
 		}
 		for i := 0; i < 5; i++ {
-			runtime.GC()
+			run_time.GC()
 			time.Sleep(time.Duration(i*100+10) * time.Millisecond)
 			// 1 pointer can remain on stack or elsewhere
 			if fin1 = atomic.LoadUint32(&fin); fin1 >= N-1 {

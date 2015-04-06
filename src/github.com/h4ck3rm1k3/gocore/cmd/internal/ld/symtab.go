@@ -179,7 +179,7 @@ func Asmelfsym() {
 	genasmsym(putelfsym)
 
 	if Linkmode == LinkExternal && HEADTYPE != Hopenbsd {
-		s := Linklookup(Ctxt, "runtime.tlsg", 0)
+		s := Linklookup(Ctxt, "run_time.tlsg", 0)
 		if s.Sect == nil {
 			Ctxt.Cursym = nil
 			Diag("missing section for %s", s.Name)
@@ -187,7 +187,7 @@ func Asmelfsym() {
 		}
 
 		if goos == "android" {
-			// Android emulates runtime.tlsg as a regular variable.
+			// Android emulates run_time.tlsg as a regular variable.
 			putelfsyment(putelfstr(s.Name), 0, s.Size, STB_LOCAL<<4|STT_OBJECT, ((s.Sect.(*Section)).Elfsect.(*ElfShdr)).shnum, 0)
 		} else {
 			putelfsyment(putelfstr(s.Name), 0, s.Size, STB_LOCAL<<4|STT_TLS, ((s.Sect.(*Section)).Elfsect.(*ElfShdr)).shnum, 0)
@@ -317,38 +317,38 @@ func symtab() {
 
 	// Define these so that they'll get put into the symbol table.
 	// data.c:/^address will provide the actual values.
-	xdefine("runtime.text", STEXT, 0)
+	xdefine("run_time.text", STEXT, 0)
 
-	xdefine("runtime.etext", STEXT, 0)
-	xdefine("runtime.typelink", SRODATA, 0)
-	xdefine("runtime.etypelink", SRODATA, 0)
-	xdefine("runtime.rodata", SRODATA, 0)
-	xdefine("runtime.erodata", SRODATA, 0)
-	xdefine("runtime.noptrdata", SNOPTRDATA, 0)
-	xdefine("runtime.enoptrdata", SNOPTRDATA, 0)
-	xdefine("runtime.data", SDATA, 0)
-	xdefine("runtime.edata", SDATA, 0)
-	xdefine("runtime.bss", SBSS, 0)
-	xdefine("runtime.ebss", SBSS, 0)
-	xdefine("runtime.noptrbss", SNOPTRBSS, 0)
-	xdefine("runtime.enoptrbss", SNOPTRBSS, 0)
-	xdefine("runtime.end", SBSS, 0)
-	xdefine("runtime.epclntab", SRODATA, 0)
-	xdefine("runtime.esymtab", SRODATA, 0)
+	xdefine("run_time.etext", STEXT, 0)
+	xdefine("run_time.typelink", SRODATA, 0)
+	xdefine("run_time.etypelink", SRODATA, 0)
+	xdefine("run_time.rodata", SRODATA, 0)
+	xdefine("run_time.erodata", SRODATA, 0)
+	xdefine("run_time.noptrdata", SNOPTRDATA, 0)
+	xdefine("run_time.enoptrdata", SNOPTRDATA, 0)
+	xdefine("run_time.data", SDATA, 0)
+	xdefine("run_time.edata", SDATA, 0)
+	xdefine("run_time.bss", SBSS, 0)
+	xdefine("run_time.ebss", SBSS, 0)
+	xdefine("run_time.noptrbss", SNOPTRBSS, 0)
+	xdefine("run_time.enoptrbss", SNOPTRBSS, 0)
+	xdefine("run_time.end", SBSS, 0)
+	xdefine("run_time.epclntab", SRODATA, 0)
+	xdefine("run_time.esymtab", SRODATA, 0)
 
 	// garbage collection symbols
-	s := Linklookup(Ctxt, "runtime.gcdata", 0)
+	s := Linklookup(Ctxt, "run_time.gcdata", 0)
 
 	s.Type = SRODATA
 	s.Size = 0
 	s.Reachable = true
-	xdefine("runtime.egcdata", SRODATA, 0)
+	xdefine("run_time.egcdata", SRODATA, 0)
 
-	s = Linklookup(Ctxt, "runtime.gcbss", 0)
+	s = Linklookup(Ctxt, "run_time.gcbss", 0)
 	s.Type = SRODATA
 	s.Size = 0
 	s.Reachable = true
-	xdefine("runtime.egcbss", SRODATA, 0)
+	xdefine("run_time.egcbss", SRODATA, 0)
 
 	// pseudo-symbols to mark locations of type, string, and go string data.
 	s = Linklookup(Ctxt, "type.*", 0)
@@ -370,9 +370,9 @@ func symtab() {
 	s.Reachable = true
 	symgofunc := s
 
-	symtypelink := Linklookup(Ctxt, "runtime.typelink", 0)
+	symtypelink := Linklookup(Ctxt, "run_time.typelink", 0)
 
-	symt = Linklookup(Ctxt, "runtime.symtab", 0)
+	symt = Linklookup(Ctxt, "run_time.symtab", 0)
 	symt.Type = SSYMTAB
 	symt.Size = 0
 	symt.Reachable = true

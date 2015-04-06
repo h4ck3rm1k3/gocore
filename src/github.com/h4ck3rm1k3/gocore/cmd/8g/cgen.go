@@ -126,7 +126,7 @@ func stackcopy(n, res *gc.Node, osrc, odst, w int64) {
 			p.To.Type = obj.TYPE_ADDR
 			p.To.Sym = gc.Linksym(gc.Pkglookup("duffcopy", gc.Runtimepkg))
 
-			// 10 and 128 = magic constants: see ../../runtime/asm_386.s
+			// 10 and 128 = magic constants: see ../../run_time/asm_386.s
 			p.To.Offset = 10 * (128 - int64(q))
 		} else if !gc.Nacl && c == 0 {
 			var cx gc.Node

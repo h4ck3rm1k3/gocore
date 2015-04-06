@@ -6,7 +6,7 @@ package os
 
 import (
 	"github.com/h4ck3rm1k3/gocore/io"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf16"
@@ -52,7 +52,7 @@ func newFile(h syscall.Handle, name string) *File {
 	if syscall.GetConsoleMode(f.fd, &m) == nil {
 		f.isConsole = true
 	}
-	runtime.SetFinalizer(f.file, (*file).close)
+	run_time.SetFinalizer(f.file, (*file).close)
 	return f
 }
 
@@ -185,7 +185,7 @@ func (file *file) close() error {
 	file.fd = syscall.InvalidHandle // so it can't be closed again
 
 	// no need for a finalizer anymore
-	runtime.SetFinalizer(file, nil)
+	run_time.SetFinalizer(file, nil)
 	return err
 }
 

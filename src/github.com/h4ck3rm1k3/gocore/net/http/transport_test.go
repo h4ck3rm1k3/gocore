@@ -23,7 +23,7 @@ import (
 	"net/http/httptest"
 	"github.com/h4ck3rm1k3/gocore/net/url"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -858,7 +858,7 @@ func TestTransportGzipShort(t *testing.T) {
 
 // tests that persistent goroutine connections shut down when no longer desired.
 func TestTransportPersistConnLeak(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7237")
 	}
 	defer afterTest(t)
@@ -875,7 +875,7 @@ func TestTransportPersistConnLeak(t *testing.T) {
 	tr := &Transport{}
 	c := &Client{Transport: tr}
 
-	n0 := runtime.NumGoroutine()
+	n0 := run_time.NumGoroutine()
 
 	const numReq = 25
 	didReqCh := make(chan bool)
@@ -896,7 +896,7 @@ func TestTransportPersistConnLeak(t *testing.T) {
 		<-gotReqCh
 	}
 
-	nhigh := runtime.NumGoroutine()
+	nhigh := run_time.NumGoroutine()
 
 	// Tell all handlers to unblock and reply.
 	for i := 0; i < numReq; i++ {
@@ -910,9 +910,9 @@ func TestTransportPersistConnLeak(t *testing.T) {
 
 	tr.CloseIdleConnections()
 	time.Sleep(100 * time.Millisecond)
-	runtime.GC()
-	runtime.GC() // even more.
-	nfinal := runtime.NumGoroutine()
+	run_time.GC()
+	run_time.GC() // even more.
+	nfinal := run_time.NumGoroutine()
 
 	growth := nfinal - n0
 
@@ -927,7 +927,7 @@ func TestTransportPersistConnLeak(t *testing.T) {
 // golang.org/issue/4531: Transport leaks goroutines when
 // request.ContentLength is explicitly short
 func TestTransportPersistConnLeakShortBody(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7237")
 	}
 	defer afterTest(t)
@@ -938,7 +938,7 @@ func TestTransportPersistConnLeakShortBody(t *testing.T) {
 	tr := &Transport{}
 	c := &Client{Transport: tr}
 
-	n0 := runtime.NumGoroutine()
+	n0 := run_time.NumGoroutine()
 	body := []byte("Hello")
 	for i := 0; i < 20; i++ {
 		req, err := NewRequest("POST", ts.URL, bytes.NewReader(body))
@@ -951,11 +951,11 @@ func TestTransportPersistConnLeakShortBody(t *testing.T) {
 			t.Fatal("Expect an error from writing too long of a body.")
 		}
 	}
-	nhigh := runtime.NumGoroutine()
+	nhigh := run_time.NumGoroutine()
 	tr.CloseIdleConnections()
 	time.Sleep(400 * time.Millisecond)
-	runtime.GC()
-	nfinal := runtime.NumGoroutine()
+	run_time.GC()
+	nfinal := run_time.NumGoroutine()
 
 	growth := nfinal - n0
 
@@ -1080,7 +1080,7 @@ func TestTransportConcurrency(t *testing.T) {
 	if testing.Short() {
 		maxProcs, numReqs = 4, 50
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(maxProcs))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(maxProcs))
 	ts := httptest.NewServer(HandlerFunc(func(w ResponseWriter, r *Request) {
 		fmt.Fprintf(w, "%v", r.FormValue("echo"))
 	}))
@@ -1135,7 +1135,7 @@ func TestTransportConcurrency(t *testing.T) {
 }
 
 func TestIssue4191_InfiniteGetTimeout(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7237")
 	}
 	defer afterTest(t)
@@ -1199,7 +1199,7 @@ func TestIssue4191_InfiniteGetTimeout(t *testing.T) {
 }
 
 func TestIssue4191_InfiniteGetToPutTimeout(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7237")
 	}
 	defer afterTest(t)
@@ -1933,7 +1933,7 @@ func TestTransportTLSHandshakeTimeout(t *testing.T) {
 // Trying to repro golang.org/issue/3514
 func TestTLSServerClosesConnection(t *testing.T) {
 	defer afterTest(t)
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		t.Skip("skipping flaky test on Windows; golang.org/issue/7634")
 	}
 	closedc := make(chan bool, 1)
@@ -2098,7 +2098,7 @@ func (f closerFunc) Close() error { return f() }
 
 // Issue 6981
 func TestTransportClosesBodyOnError(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7782")
 	}
 	defer afterTest(t)

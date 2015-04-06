@@ -13,7 +13,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/reflect"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"testing"
@@ -47,7 +47,7 @@ func TestDialTimeout(t *testing.T) {
 
 	// TODO(bradfitz): It's hard to test this in a portable
 	// way. This is unfortunate, but works for now.
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "linux":
 		// The kernel will start accepting TCP connections before userspace
 		// gets a chance to not accept them, so fire off a bunch to fill up
@@ -85,7 +85,7 @@ func TestDialTimeout(t *testing.T) {
 		// by default. FreeBSD likely works, but is untested.
 		// TODO(rsc):
 		// The timeout never happens on Windows.  Why?  Issue 3016.
-		t.Skipf("skipping test on %q; untested.", runtime.GOOS)
+		t.Skipf("skipping test on %q; untested.", run_time.GOOS)
 	}
 
 	connected := 0
@@ -115,7 +115,7 @@ func TestDialTimeout(t *testing.T) {
 }
 
 func TestSelfConnect(t *testing.T) {
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		// TODO(brainman): do not know why it hangs.
 		t.Skip("skipping known-broken test on windows")
 	}
@@ -141,7 +141,7 @@ func TestSelfConnect(t *testing.T) {
 	if testing.Short() {
 		n = 1000
 	}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin", "dragonfly", "freebsd", "netbsd", "openbsd", "plan9", "solaris", "windows":
 		// Non-Linux systems take a long time to figure
 		// out that there is nothing listening on localhost.
@@ -265,9 +265,9 @@ func TestInvalidDialAndListenArgs(t *testing.T) {
 }
 
 func TestDialTimeoutFDLeak(t *testing.T) {
-	if runtime.GOOS != "linux" {
+	if run_time.GOOS != "linux" {
 		// TODO(bradfitz): test on other platforms
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	ln := newLocalListener(t)
@@ -279,7 +279,7 @@ func TestDialTimeoutFDLeak(t *testing.T) {
 	}
 	dials := listenerBacklog + 100
 	// used to be listenerBacklog + 5, but was found to be unreliable, issue 4384.
-	maxGoodConnect := listenerBacklog + runtime.NumCPU()*10
+	maxGoodConnect := listenerBacklog + run_time.NumCPU()*10
 	resc := make(chan connErr)
 	for i := 0; i < dials; i++ {
 		go func() {
@@ -416,7 +416,7 @@ func TestDialMultiFDLeak(t *testing.T) {
 }
 
 func numFD() int {
-	if runtime.GOOS == "linux" {
+	if run_time.GOOS == "linux" {
 		f, err := os.Open("/proc/self/fd")
 		if err != nil {
 			panic(err)
@@ -429,7 +429,7 @@ func numFD() int {
 		return len(names)
 	}
 	// All tests using this should be skipped anyway, but:
-	panic("numFDs not implemented on " + runtime.GOOS)
+	panic("numFDs not implemented on " + run_time.GOOS)
 }
 
 func TestDialer(t *testing.T) {
@@ -467,9 +467,9 @@ func TestDialer(t *testing.T) {
 }
 
 func TestDialDualStackLocalhost(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	if ips, err := LookupIP("localhost"); err != nil {

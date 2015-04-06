@@ -8,13 +8,13 @@ import (
 	"github.com/h4ck3rm1k3/gocore/flag"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
 
 func skipServerTest(net, unixsotype, addr string, ipv6, ipv4map, linuxOnly bool) bool {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "linux":
 	case "nacl", "plan9", "windows":
 		// "unix" sockets are not supported on Windows and Plan 9.
@@ -23,7 +23,7 @@ func skipServerTest(net, unixsotype, addr string, ipv6, ipv4map, linuxOnly bool)
 		}
 	case "darwin":
 		if net == unixsotype {
-			if runtime.GOARCH == "arm" || linuxOnly {
+			if run_time.GOARCH == "arm" || linuxOnly {
 				return true
 			}
 		}
@@ -147,15 +147,15 @@ var seqpacketConnServerTests = []struct {
 }
 
 func TestSeqpacketConnServer(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin", "nacl", "openbsd", "plan9", "windows":
 		fallthrough
 	case "freebsd": // FreeBSD 8 doesn't support unixpacket
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	for _, tt := range seqpacketConnServerTests {
-		if runtime.GOOS != "linux" && tt.linuxOnly {
+		if run_time.GOOS != "linux" && tt.linuxOnly {
 			continue
 		}
 		listening := make(chan string)

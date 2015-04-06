@@ -243,7 +243,7 @@ func stringsym(s string) *Sym {
 		off = dsname(sym, off, s[n:n+m])
 	}
 
-	off = duint8(sym, off, 0)                    // terminating NUL for runtime
+	off = duint8(sym, off, 0)                    // terminating NUL for run_time
 	off = (off + Widthptr - 1) &^ (Widthptr - 1) // round to pointer alignment
 	ggloblsym(sym, int32(off), obj.DUPOK|obj.RODATA)
 

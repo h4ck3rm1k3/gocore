@@ -6,7 +6,7 @@ package net
 
 import (
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"unsafe"
 )
@@ -36,8 +36,8 @@ func lookupProtocol(name string) (proto int, err error) {
 	go func() {
 		acquireThread()
 		defer releaseThread()
-		runtime.LockOSThread()
-		defer runtime.UnlockOSThread()
+		run_time.LockOSThread()
+		defer run_time.UnlockOSThread()
 		proto, err := getprotobyname(name)
 		ch <- result{proto: proto, err: err}
 	}()
@@ -93,8 +93,8 @@ func oldLookupIP(name string) (addrs []IPAddr, err error) {
 	go func() {
 		acquireThread()
 		defer releaseThread()
-		runtime.LockOSThread()
-		defer runtime.UnlockOSThread()
+		run_time.LockOSThread()
+		defer run_time.UnlockOSThread()
 		addrs, err := gethostbyname(name)
 		ch <- result{addrs: addrs, err: err}
 	}()
@@ -161,8 +161,8 @@ func oldLookupPort(network, service string) (port int, err error) {
 	go func() {
 		acquireThread()
 		defer releaseThread()
-		runtime.LockOSThread()
-		defer runtime.UnlockOSThread()
+		run_time.LockOSThread()
+		defer run_time.UnlockOSThread()
 		port, err := getservbyname(network, service)
 		ch <- result{port: port, err: err}
 	}()

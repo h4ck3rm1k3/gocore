@@ -470,7 +470,7 @@ var deptab = []struct {
 	{"cmd/go", []string{
 		"zdefaultcc.go",
 	}},
-	{"github.com/h4ck3rm1k3/gocore/runtime", []string{
+	{"github.com/h4ck3rm1k3/gocore/run_time", []string{
 		"zversion.go",
 	}},
 }
@@ -612,14 +612,14 @@ func install(dir string) {
 		return
 	}
 
-	// For package runtime, copy some files into the work space.
-	if dir == "github.com/h4ck3rm1k3/gocore/runtime" {
+	// For package run_time, copy some files into the work space.
+	if dir == "github.com/h4ck3rm1k3/gocore/run_time" {
 		xmkdirall(pathf("%s/pkg/include", goroot))
 		// For use by assembly and C files.
 		copyfile(pathf("%s/pkg/include/textflag.h", goroot),
-			pathf("%s/src/runtime/textflag.h", goroot), 0)
+			pathf("%s/src/run_time/textflag.h", goroot), 0)
 		copyfile(pathf("%s/pkg/include/funcdata.h", goroot),
-			pathf("%s/src/runtime/funcdata.h", goroot), 0)
+			pathf("%s/src/run_time/funcdata.h", goroot), 0)
 	}
 
 	// Generate any missing files; regenerate existing ones.
@@ -635,7 +635,7 @@ func install(dir string) {
 				}
 				gt.gen(path, p)
 				// Do not add generated file to clean list.
-				// In runtime, we want to be able to
+				// In run_time, we want to be able to
 				// build the package with the go tool,
 				// and it assumes these generated files already
 				// exist (it does not know how to build them).
@@ -662,7 +662,7 @@ func install(dir string) {
 	var archive string
 	// The next loop will compile individual non-Go files.
 	// Hand the Go files to the compiler en masse.
-	// For package runtime, this writes go_asm.h, which
+	// For package run_time, this writes go_asm.h, which
 	// the assembly files will need.
 	pkg := dir
 	if strings.HasPrefix(dir, "cmd/") {
@@ -676,7 +676,7 @@ func install(dir string) {
 		archive = b
 	}
 	compile := []string{pathf("%s/%sg", tooldir, gochar), "-pack", "-o", b, "-p", pkg}
-	if dir == "github.com/h4ck3rm1k3/gocore/runtime" {
+	if dir == "github.com/h4ck3rm1k3/gocore/run_time" {
 		compile = append(compile, "-+", "-asmhdr", pathf("%s/go_asm.h", workdir))
 	}
 	compile = append(compile, gofiles...)
@@ -855,7 +855,7 @@ func dopack(dst, src string, extra []string) {
 // maintained by hand, but the order doesn't change often.
 var buildorder = []string{
 	// Go libraries and programs for bootstrap.
-	"github.com/h4ck3rm1k3/gocore/runtime",
+	"github.com/h4ck3rm1k3/gocore/run_time",
 	"github.com/h4ck3rm1k3/gocore/errors",
 	"github.com/h4ck3rm1k3/gocore/sync/atomic",
 	"github.com/h4ck3rm1k3/gocore/sync",
@@ -950,7 +950,7 @@ var cleantab = []string{
 	"github.com/h4ck3rm1k3/gocore/reflect",
 	"github.com/h4ck3rm1k3/gocore/regexp",
 	"github.com/h4ck3rm1k3/gocore/regexp/syntax",
-	"github.com/h4ck3rm1k3/gocore/runtime",
+	"github.com/h4ck3rm1k3/gocore/run_time",
 	"github.com/h4ck3rm1k3/gocore/sort",
 	"github.com/h4ck3rm1k3/gocore/strconv",
 	"github.com/h4ck3rm1k3/gocore/strings",
@@ -965,7 +965,7 @@ var cleantab = []string{
 	"github.com/h4ck3rm1k3/gocore/unicode/utf8",
 }
 
-var runtimegen = []string{
+var run_timegen = []string{
 	"zaexperiment.h",
 	"zversion.go",
 }
@@ -987,9 +987,9 @@ func clean() {
 		}
 	}
 
-	// remove runtimegen files.
-	path := pathf("%s/src/runtime", goroot)
-	for _, elem := range runtimegen {
+	// remove run_timegen files.
+	path := pathf("%s/src/run_time", goroot)
+	for _, elem := range run_timegen {
 		xremove(pathf("%s/%s", path, elem))
 	}
 
@@ -1148,9 +1148,9 @@ func cmdbootstrap() {
 	os.Setenv("GOARCH", goarch)
 	os.Setenv("GOOS", goos)
 
-	// Build runtime for actual goos/goarch too.
+	// Build run_time for actual goos/goarch too.
 	if goos != gohostos || goarch != gohostarch {
-		install("github.com/h4ck3rm1k3/gocore/runtime")
+		install("github.com/h4ck3rm1k3/gocore/run_time")
 	}
 }
 

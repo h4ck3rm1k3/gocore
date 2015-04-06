@@ -5,13 +5,13 @@
 package build
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
 var (
-	thisOS    = runtime.GOOS
-	thisArch  = runtime.GOARCH
+	thisOS    = run_time.GOOS
+	thisArch  = run_time.GOARCH
 	otherOS   = anotherOS()
 	otherArch = anotherArch()
 )

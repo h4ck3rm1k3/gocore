@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -15,9 +15,9 @@ func TestRepoRootForImportPath(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test to avoid external network")
 	}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "android":
-		t.Skipf("no networking available on %s", runtime.GOOS)
+		t.Skipf("no networking available on %s", run_time.GOOS)
 	}
 	tests := []struct {
 		path string

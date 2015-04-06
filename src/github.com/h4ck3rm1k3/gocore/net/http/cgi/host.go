@@ -25,7 +25,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
@@ -175,7 +175,7 @@ func (h *Handler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		}
 	}
 
-	for _, e := range osDefaultInheritEnv[runtime.GOOS] {
+	for _, e := range osDefaultInheritEnv[run_time.GOOS] {
 		if v := os.Getenv(e); v != "" {
 			env = append(env, e+"="+v)
 		}

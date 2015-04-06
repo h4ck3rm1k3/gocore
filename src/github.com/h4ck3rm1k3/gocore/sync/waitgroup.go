@@ -72,7 +72,7 @@ func (wg *WaitGroup) Add(delta int) {
 	wg.m.Lock()
 	if atomic.LoadInt32(&wg.counter) == 0 {
 		for i := int32(0); i < wg.waiters; i++ {
-			runtime_Semrelease(wg.sema)
+			run_time_Semrelease(wg.sema)
 		}
 		wg.waiters = 0
 		wg.sema = nil
@@ -129,7 +129,7 @@ func (wg *WaitGroup) Wait() {
 	}
 	s := wg.sema
 	wg.m.Unlock()
-	runtime_Semacquire(s)
+	run_time_Semacquire(s)
 	if raceenabled {
 		raceEnable()
 		raceAcquire(unsafe.Pointer(wg))

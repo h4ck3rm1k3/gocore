@@ -19,7 +19,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/net/url"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -191,13 +191,13 @@ func (c *conn) noteClientGone() {
 	c.clientGone = true
 }
 
-// A switchWriter can have its Writer changed at runtime.
+// A switchWriter can have its Writer changed at run_time.
 // It's not safe for concurrent Writes and switches.
 type switchWriter struct {
 	io.Writer
 }
 
-// A liveSwitchReader can have its Reader changed at runtime. It's
+// A liveSwitchReader can have its Reader changed at run_time. It's
 // safe for concurrent reads and switches, if its mutex is held.
 type liveSwitchReader struct {
 	sync.Mutex
@@ -1178,7 +1178,7 @@ func (c *conn) serve() {
 		if err := recover(); err != nil {
 			const size = 64 << 10
 			buf := make([]byte, size)
-			buf = buf[:runtime.Stack(buf, false)]
+			buf = buf[:run_time.Stack(buf, false)]
 			c.server.logf("http: panic serving %v: %v\n%s", c.remoteAddr, err, buf)
 		}
 		if !c.hijacked() {

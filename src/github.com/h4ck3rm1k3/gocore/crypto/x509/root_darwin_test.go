@@ -5,13 +5,13 @@
 package x509
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
 func TestSystemRoots(t *testing.T) {
-	if runtime.GOARCH == "arm" {
-		t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOARCH == "arm" {
+		t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 
 	sysRoots := systemRootsPool()         // actual system roots

@@ -22,7 +22,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/reflect"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
@@ -323,7 +323,7 @@ func TestFileServerImplicitLeadingSlash(t *testing.T) {
 }
 
 func TestDirJoin(t *testing.T) {
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		t.Skip("skipping test on windows")
 	}
 	wfi, err := os.Stat("/etc/hosts")
@@ -806,7 +806,7 @@ func TestServeContent(t *testing.T) {
 // verifies that sendfile is being used on Linux
 func TestLinuxSendfile(t *testing.T) {
 	defer afterTest(t)
-	if runtime.GOOS != "linux" {
+	if run_time.GOOS != "linux" {
 		t.Skip("skipping; linux-only test")
 	}
 	if _, err := exec.LookPath("strace"); err != nil {

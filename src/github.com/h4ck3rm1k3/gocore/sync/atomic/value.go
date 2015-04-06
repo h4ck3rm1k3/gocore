@@ -57,15 +57,15 @@ func (v *Value) Store(x interface{}) {
 			// Disable preemption so that other goroutines can use
 			// active spin wait to wait for completion; and so that
 			// GC does not see the fake type accidentally.
-			runtime_procPin()
+			run_time_procPin()
 			if !CompareAndSwapPointer(&vp.typ, nil, unsafe.Pointer(^uintptr(0))) {
-				runtime_procUnpin()
+				run_time_procUnpin()
 				continue
 			}
 			// Complete first store.
 			StorePointer(&vp.data, xp.data)
 			StorePointer(&vp.typ, xp.typ)
-			runtime_procUnpin()
+			run_time_procUnpin()
 			return
 		}
 		if uintptr(typ) == ^uintptr(0) {
@@ -83,9 +83,9 @@ func (v *Value) Store(x interface{}) {
 	}
 }
 
-// Disable/enable preemption, implemented in runtime.
-func runtime_procPin()
-func runtime_procUnpin()
+// Disable/enable preemption, implemented in run_time.
+func run_time_procPin()
+func run_time_procUnpin()
 
 
 
@@ -94,8 +94,8 @@ func LoadPointer(addr *unsafe.Pointer) (val unsafe.Pointer) {
 	return *addr
 
 }
-func runtime_procPin() {}
-func runtime_procUnpin() {}
+func run_time_procPin() {}
+func run_time_procUnpin() {}
 func StorePointer(addr *unsafe.Pointer, val unsafe.Pointer) {
 
 }

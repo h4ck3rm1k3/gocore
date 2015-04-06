@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/os/signal"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
 	"unsafe"
@@ -48,8 +48,8 @@ func (c *command) Stop() {
 }
 
 func create(t *testing.T) *command {
-	if runtime.GOOS == "darwin" && (runtime.GOARCH == "arm" || runtime.GOARCH == "arm64") {
-		t.Skipf("skipping on %s/%s, cannot fork", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && (run_time.GOARCH == "arm" || run_time.GOARCH == "arm64") {
+		t.Skipf("skipping on %s/%s, cannot fork", run_time.GOOS, run_time.GOARCH)
 	}
 	proc := exec.Command("cat")
 	stdin, err := proc.StdinPipe()

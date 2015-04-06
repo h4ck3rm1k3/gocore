@@ -9,7 +9,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/text/template/parse"
@@ -96,7 +96,7 @@ func errRecover(errp *error) {
 	e := recover()
 	if e != nil {
 		switch err := e.(type) {
-		case runtime.Error:
+		case run_time.Error:
 			panic(e)
 		case error:
 			*errp = err

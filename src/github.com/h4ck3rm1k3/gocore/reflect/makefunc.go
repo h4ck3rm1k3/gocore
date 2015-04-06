@@ -14,7 +14,7 @@ import (
 // returned by MakeFunc.
 type makeFuncImpl struct {
 	code  uintptr
-	stack *bitVector // stack bitmap for args - offset known to runtime
+	stack *bitVector // stack bitmap for args - offset known to run_time
 	typ   *funcType
 	fn    func([]Value) []Value
 }
@@ -55,7 +55,7 @@ func MakeFunc(typ Type, fn func(args []Value) (results []Value)) Value {
 	dummy := makeFuncStub
 	code := **(**uintptr)(unsafe.Pointer(&dummy))
 
-	// makeFuncImpl contains a stack map for use by the runtime
+	// makeFuncImpl contains a stack map for use by the run_time
 	_, _, _, stack, _ := funcLayout(t, nil)
 
 	impl := &makeFuncImpl{code: code, stack: stack, typ: ftyp, fn: fn}
@@ -72,7 +72,7 @@ func makeFuncStub()
 
 type methodValue struct {
 	fn     uintptr
-	stack  *bitVector // stack bitmap for args - offset known to runtime
+	stack  *bitVector // stack bitmap for args - offset known to run_time
 	method int
 	rcvr   Value
 }
@@ -103,7 +103,7 @@ func makeMethodValue(op string, v Value) Value {
 	dummy := methodValueCall
 	code := **(**uintptr)(unsafe.Pointer(&dummy))
 
-	// methodValue contains a stack map for use by the runtime
+	// methodValue contains a stack map for use by the run_time
 	_, _, _, stack, _ := funcLayout(funcType, nil)
 
 	fv := &methodValue{

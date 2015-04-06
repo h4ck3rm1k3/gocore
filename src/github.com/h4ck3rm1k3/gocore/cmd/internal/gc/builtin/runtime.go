@@ -86,7 +86,7 @@ func efaceeq(i1 any, i2 any) (ret bool)
 func ifacethash(i1 any) (ret uint32)
 func efacethash(i1 any) (ret uint32)
 
-// *byte is really *runtime.Type
+// *byte is really *run_time.Type
 func makemap(mapType *byte, hint int64, mapbuf *any, bucketbuf *any) (hmap map[any]any)
 func mapaccess1(mapType *byte, hmap map[any]any, key *any) (val *any)
 func mapaccess1_fast32(mapType *byte, hmap map[any]any, key any) (val *any)
@@ -101,14 +101,14 @@ func mapiterinit(mapType *byte, hmap map[any]any, hiter *any)
 func mapdelete(mapType *byte, hmap map[any]any, key *any)
 func mapiternext(hiter *any)
 
-// *byte is really *runtime.Type
+// *byte is really *run_time.Type
 func makechan(chanType *byte, hint int64) (hchan chan any)
 func chanrecv1(chanType *byte, hchan <-chan any, elem *any)
 func chanrecv2(chanType *byte, hchan <-chan any, elem *any) bool
 func chansend1(chanType *byte, hchan chan<- any, elem *any)
 func closechan(hchan any)
 
-// *byte is really *runtime.Type
+// *byte is really *run_time.Type
 func writebarrierptr(dst *any, src any)
 func writebarrierstring(dst *any, src any)
 func writebarrierslice(dst *any, src any)

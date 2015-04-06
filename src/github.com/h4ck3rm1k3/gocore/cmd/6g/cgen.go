@@ -89,7 +89,7 @@ func stackcopy(n, ns *gc.Node, osrc, odst, w int64) {
 			p.To.Type = obj.TYPE_ADDR
 			p.To.Sym = gc.Linksym(gc.Pkglookup("duffcopy", gc.Runtimepkg))
 
-			// 14 and 128 = magic constants: see ../../runtime/asm_amd64.s
+			// 14 and 128 = magic constants: see ../../run_time/asm_amd64.s
 			p.To.Offset = 14 * (128 - q)
 		} else if !gc.Nacl && c == 0 {
 			// We don't need the MOVSQ side-effect of updating SI and DI,

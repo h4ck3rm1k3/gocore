@@ -60,7 +60,7 @@ func (c *Cond) Wait() {
 		raceEnable()
 	}
 	c.L.Unlock()
-	runtime_Syncsemacquire(&c.sema)
+	run_time_Syncsemacquire(&c.sema)
 	c.L.Lock()
 }
 
@@ -101,7 +101,7 @@ func (c *Cond) signalImpl(all bool) {
 			if raceenabled {
 				raceEnable()
 			}
-			runtime_Syncsemrelease(&c.sema, old-new)
+			run_time_Syncsemrelease(&c.sema, old-new)
 			return
 		}
 	}

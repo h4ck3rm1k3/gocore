@@ -14,7 +14,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/errors"
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/unicode"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf16"
@@ -132,7 +132,7 @@ func (e *InvalidUnmarshalError) Error() string {
 func (d *decodeState) unmarshal(v interface{}) (err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			if _, ok := r.(runtime.Error); ok {
+			if _, ok := r.(run_time.Error); ok {
 				panic(r)
 			}
 			err = r.(error)

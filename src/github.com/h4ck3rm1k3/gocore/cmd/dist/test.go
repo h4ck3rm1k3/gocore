@@ -111,9 +111,9 @@ func (t *tester) run() {
 		return
 	}
 
-	// we must unset GOROOT_FINAL before tests, because runtime/debug requires
+	// we must unset GOROOT_FINAL before tests, because run_time/debug requires
 	// correct access to source code, so if we have GOROOT_FINAL in effect,
-	// at least runtime/debug test will fail.
+	// at least run_time/debug test will fail.
 	os.Unsetenv("GOROOT_FINAL")
 
 	var lastHeading string
@@ -195,13 +195,13 @@ func (t *tester) registerTests() {
 	// Runtime CPU tests.
 	for _, cpu := range []string{"1", "2", "4"} {
 		cpu := cpu
-		testName := "runtime:cpu" + cpu
+		testName := "run_time:cpu" + cpu
 		t.tests = append(t.tests, distTest{
 			name:    testName,
-			heading: "GOMAXPROCS=2 runtime -cpu=1,2,4",
+			heading: "GOMAXPROCS=2 run_time -cpu=1,2,4",
 			fn: func() error {
-				cmd := t.dirCmd(".", "go", "test", "-short", t.timeout(300), "github.com/h4ck3rm1k3/gocore/runtime", "-cpu="+cpu)
-				// We set GOMAXPROCS=2 in addition to -cpu=1,2,4 in order to test runtime bootstrap code,
+				cmd := t.dirCmd(".", "go", "test", "-short", t.timeout(300), "github.com/h4ck3rm1k3/gocore/run_time", "-cpu="+cpu)
+				// We set GOMAXPROCS=2 in addition to -cpu=1,2,4 in order to test run_time bootstrap code,
 				// creation of first goroutines and first garbage collections in the parallel setting.
 				cmd.Env = mergeEnvLists([]string{"GOMAXPROCS=2"}, os.Environ())
 				return cmd.Run()
@@ -533,10 +533,10 @@ func (t *tester) raceDetectorSupported() bool {
 }
 
 func (t *tester) raceTest() error {
-	if err := t.dirCmd(".", "go", "test", "-race", "-i", "runtime/race", "github.com/h4ck3rm1k3/gocore/flag", "github.com/h4ck3rm1k3/gocore/os/exec").Run(); err != nil {
+	if err := t.dirCmd(".", "go", "test", "-race", "-i", "run_time/race", "github.com/h4ck3rm1k3/gocore/flag", "github.com/h4ck3rm1k3/gocore/os/exec").Run(); err != nil {
 		return err
 	}
-	if err := t.dirCmd(".", "go", "test", "-race", "-run=Output", "runtime/race").Run(); err != nil {
+	if err := t.dirCmd(".", "go", "test", "-race", "-run=Output", "run_time/race").Run(); err != nil {
 		return err
 	}
 	if err := t.dirCmd(".", "go", "test", "-race", "-short", "github.com/h4ck3rm1k3/gocore/flag", "github.com/h4ck3rm1k3/gocore/os/exec").Run(); err != nil {

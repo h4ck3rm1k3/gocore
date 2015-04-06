@@ -20,9 +20,9 @@ type SysProcAttr struct {
 	Pgid       int         // Child's process group ID if Setpgid.
 }
 
-// Implemented in runtime package.
-func runtime_BeforeFork()
-func runtime_AfterFork()
+// Implemented in run_time package.
+func run_time_BeforeFork()
+func run_time_AfterFork()
 
 func chdir(path uintptr) (err Errno)
 func chroot1(path uintptr) (err Errno)
@@ -48,7 +48,7 @@ func write1(fd uintptr, buf uintptr, nbyte uintptr) (n uintptr, err Errno)
 // no rescheduling, no malloc calls, and no new stack segments.
 //
 // We call hand-crafted syscalls, implemented in
-// ../runtime/syscall_solaris.go, rather than generated libc wrappers
+// ../run_time/syscall_solaris.go, rather than generated libc wrappers
 // because we need to avoid lazy-loading the functions (might malloc,
 // split the stack, or acquire mutexes). We can't call RawSyscall
 // because it's not safe even for BSD-subsystem calls.
@@ -77,16 +77,16 @@ func forkAndExecInChild(argv0 *byte, argv, envv []*byte, chroot, dir *byte, attr
 
 	// About to call fork.
 	// No more allocation or calls of non-assembly functions.
-	runtime_BeforeFork()
+	run_time_BeforeFork()
 	r1, err1 = forkx(0x1) // FORK_NOSIGCHLD
 	if err1 != 0 {
-		runtime_AfterFork()
+		run_time_AfterFork()
 		return 0, err1
 	}
 
 	if r1 != 0 {
 		// parent; return PID
-		runtime_AfterFork()
+		run_time_AfterFork()
 		return int(r1), 0
 	}
 

@@ -39,7 +39,7 @@ import (
 
 // TODO(rsc): Can make this bigger if we move
 // the text segment up higher in 6l for all GOOS.
-// At the same time, can raise StackBig in ../../runtime/stack.h.
+// At the same time, can raise StackBig in ../../run_time/stack.h.
 var unmappedzero int64 = 4096
 
 var resvd = []int{

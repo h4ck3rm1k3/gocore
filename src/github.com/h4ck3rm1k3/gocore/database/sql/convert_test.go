@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/database/sql/driver"
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -332,7 +332,7 @@ func TestRawBytesAllocs(t *testing.T) {
 	// and gc. With 32-bit words there are more convT2E allocs, and
 	// with gccgo, only pointers currently go in interface data.
 	// So only care on amd64 gc for now.
-	measureAllocs := runtime.GOARCH == "amd64" && runtime.Compiler == "gc"
+	measureAllocs := run_time.GOARCH == "amd64" && run_time.Compiler == "gc"
 
 	if n > 0.5 && measureAllocs {
 		t.Fatalf("allocs = %v; want 0", n)

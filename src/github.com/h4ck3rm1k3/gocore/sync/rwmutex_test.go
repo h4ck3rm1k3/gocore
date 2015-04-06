@@ -8,7 +8,7 @@ package sync_test
 
 import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	. "github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"testing"
@@ -23,7 +23,7 @@ func parallelReader(m *RWMutex, clocked, cunlock, cdone chan bool) {
 }
 
 func doTestParallelReaders(numReaders, gomaxprocs int) {
-	runtime.GOMAXPROCS(gomaxprocs)
+	run_time.GOMAXPROCS(gomaxprocs)
 	var m RWMutex
 	clocked := make(chan bool)
 	cunlock := make(chan bool)
@@ -45,7 +45,7 @@ func doTestParallelReaders(numReaders, gomaxprocs int) {
 }
 
 func TestParallelReaders(t *testing.T) {
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(-1))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(-1))
 	doTestParallelReaders(1, 4)
 	doTestParallelReaders(3, 4)
 	doTestParallelReaders(4, 2)
@@ -82,7 +82,7 @@ func writer(rwm *RWMutex, num_iterations int, activity *int32, cdone chan bool) 
 }
 
 func HammerRWMutex(gomaxprocs, numReaders, num_iterations int) {
-	runtime.GOMAXPROCS(gomaxprocs)
+	run_time.GOMAXPROCS(gomaxprocs)
 	// Number of active readers + 10000 * number of active writers.
 	var activity int32
 	var rwm RWMutex
@@ -103,7 +103,7 @@ func HammerRWMutex(gomaxprocs, numReaders, num_iterations int) {
 }
 
 func TestRWMutex(t *testing.T) {
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(-1))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(-1))
 	n := 1000
 	if testing.Short() {
 		n = 5

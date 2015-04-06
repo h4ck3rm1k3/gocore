@@ -348,7 +348,7 @@ func relocsym(s *LSym) {
 			Diag("unreachable sym in relocation: %s %s", s.Name, r.Sym.Name)
 		}
 
-		// Android emulates runtime.tlsg as a regular variable.
+		// Android emulates run_time.tlsg as a regular variable.
 		if r.Type == R_TLS && goos == "android" {
 			r.Type = R_ADDR
 		}
@@ -456,7 +456,7 @@ func relocsym(s *LSym) {
 
 			// On amd64, 4-byte offsets will be sign-extended, so it is impossible to
 			// access more than 2GB of static data; fail at link time is better than
-			// fail at runtime. See http://golang.org/issue/7980.
+			// fail at run_time. See http://golang.org/issue/7980.
 			// Instead of special casing only amd64, we treat this as an error on all
 			// 64-bit architectures so as to be future-proof.
 			if int32(o) < 0 && Thearch.Ptrsize > 4 && siz == 4 {
@@ -1292,8 +1292,8 @@ func dodata() {
 	sect.Align = maxalign(s, SINITARR-1)
 	datsize = Rnd(datsize, int64(sect.Align))
 	sect.Vaddr = uint64(datsize)
-	Linklookup(Ctxt, "runtime.noptrdata", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.enoptrdata", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.noptrdata", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.enoptrdata", 0).Sect = sect
 	for ; s != nil && s.Type < SINITARR; s = s.Next {
 		datsize = aligndatsize(datsize, s)
 		s.Sect = sect
@@ -1326,9 +1326,9 @@ func dodata() {
 	sect.Align = maxalign(s, SBSS-1)
 	datsize = Rnd(datsize, int64(sect.Align))
 	sect.Vaddr = uint64(datsize)
-	Linklookup(Ctxt, "runtime.data", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.edata", 0).Sect = sect
-	gcdata := Linklookup(Ctxt, "runtime.gcdata", 0)
+	Linklookup(Ctxt, "run_time.data", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.edata", 0).Sect = sect
+	gcdata := Linklookup(Ctxt, "run_time.gcdata", 0)
 	var gen ProgGen
 	proggeninit(&gen, gcdata)
 	for ; s != nil && s.Type < SBSS; s = s.Next {
@@ -1354,9 +1354,9 @@ func dodata() {
 	sect.Align = maxalign(s, SNOPTRBSS-1)
 	datsize = Rnd(datsize, int64(sect.Align))
 	sect.Vaddr = uint64(datsize)
-	Linklookup(Ctxt, "runtime.bss", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.ebss", 0).Sect = sect
-	gcbss := Linklookup(Ctxt, "runtime.gcbss", 0)
+	Linklookup(Ctxt, "run_time.bss", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.ebss", 0).Sect = sect
+	gcbss := Linklookup(Ctxt, "run_time.gcbss", 0)
 	proggeninit(&gen, gcbss)
 	for ; s != nil && s.Type < SNOPTRBSS; s = s.Next {
 		s.Sect = sect
@@ -1375,8 +1375,8 @@ func dodata() {
 	sect.Align = maxalign(s, SNOPTRBSS)
 	datsize = Rnd(datsize, int64(sect.Align))
 	sect.Vaddr = uint64(datsize)
-	Linklookup(Ctxt, "runtime.noptrbss", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.enoptrbss", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.noptrbss", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.enoptrbss", 0).Sect = sect
 	for ; s != nil && s.Type == SNOPTRBSS; s = s.Next {
 		datsize = aligndatsize(datsize, s)
 		s.Sect = sect
@@ -1385,7 +1385,7 @@ func dodata() {
 	}
 
 	sect.Length = uint64(datsize) - sect.Vaddr
-	Linklookup(Ctxt, "runtime.end", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.end", 0).Sect = sect
 
 	// 6g uses 4-byte relocation offsets, so the entire segment must fit in 32 bits.
 	if datsize != int64(uint32(datsize)) {
@@ -1407,9 +1407,9 @@ func dodata() {
 		sect.Length = uint64(datsize)
 	} else {
 		// Might be internal linking but still using cgo.
-		// In that case, the only possible STLSBSS symbol is runtime.tlsg.
+		// In that case, the only possible STLSBSS symbol is run_time.tlsg.
 		// Give it offset 0, because it's the only thing here.
-		if s != nil && s.Type == STLSBSS && s.Name == "runtime.tlsg" {
+		if s != nil && s.Type == STLSBSS && s.Name == "run_time.tlsg" {
 			s.Value = 0
 			s = s.Next
 		}
@@ -1460,8 +1460,8 @@ func dodata() {
 	sect.Align = maxalign(s, STYPELINK-1)
 	datsize = Rnd(datsize, int64(sect.Align))
 	sect.Vaddr = 0
-	Linklookup(Ctxt, "runtime.rodata", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.erodata", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.rodata", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.erodata", 0).Sect = sect
 	for ; s != nil && s.Type < STYPELINK; s = s.Next {
 		datsize = aligndatsize(datsize, s)
 		s.Sect = sect
@@ -1478,8 +1478,8 @@ func dodata() {
 	sect.Align = maxalign(s, STYPELINK)
 	datsize = Rnd(datsize, int64(sect.Align))
 	sect.Vaddr = uint64(datsize)
-	Linklookup(Ctxt, "runtime.typelink", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.etypelink", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.typelink", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.etypelink", 0).Sect = sect
 	for ; s != nil && s.Type == STYPELINK; s = s.Next {
 		datsize = aligndatsize(datsize, s)
 		s.Sect = sect
@@ -1496,8 +1496,8 @@ func dodata() {
 	sect.Align = maxalign(s, SPCLNTAB-1)
 	datsize = Rnd(datsize, int64(sect.Align))
 	sect.Vaddr = uint64(datsize)
-	Linklookup(Ctxt, "runtime.symtab", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.esymtab", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.symtab", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.esymtab", 0).Sect = sect
 	for ; s != nil && s.Type < SPCLNTAB; s = s.Next {
 		datsize = aligndatsize(datsize, s)
 		s.Sect = sect
@@ -1514,8 +1514,8 @@ func dodata() {
 	sect.Align = maxalign(s, SELFROSECT-1)
 	datsize = Rnd(datsize, int64(sect.Align))
 	sect.Vaddr = uint64(datsize)
-	Linklookup(Ctxt, "runtime.pclntab", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.epclntab", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.pclntab", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.epclntab", 0).Sect = sect
 	for ; s != nil && s.Type < SELFROSECT; s = s.Next {
 		datsize = aligndatsize(datsize, s)
 		s.Sect = sect
@@ -1573,8 +1573,8 @@ func textaddress() {
 	sect := Segtext.Sect
 
 	sect.Align = int32(Funcalign)
-	Linklookup(Ctxt, "runtime.text", 0).Sect = sect
-	Linklookup(Ctxt, "runtime.etext", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.text", 0).Sect = sect
+	Linklookup(Ctxt, "run_time.etext", 0).Sect = sect
 	va := uint64(INITTEXT)
 	sect.Vaddr = va
 	for sym := Ctxt.Textp; sym != nil; sym = sym.Next {
@@ -1703,32 +1703,32 @@ func address() {
 		}
 	}
 
-	xdefine("runtime.text", STEXT, int64(text.Vaddr))
-	xdefine("runtime.etext", STEXT, int64(text.Vaddr+text.Length))
-	xdefine("runtime.rodata", SRODATA, int64(rodata.Vaddr))
-	xdefine("runtime.erodata", SRODATA, int64(rodata.Vaddr+rodata.Length))
-	xdefine("runtime.typelink", SRODATA, int64(typelink.Vaddr))
-	xdefine("runtime.etypelink", SRODATA, int64(typelink.Vaddr+typelink.Length))
+	xdefine("run_time.text", STEXT, int64(text.Vaddr))
+	xdefine("run_time.etext", STEXT, int64(text.Vaddr+text.Length))
+	xdefine("run_time.rodata", SRODATA, int64(rodata.Vaddr))
+	xdefine("run_time.erodata", SRODATA, int64(rodata.Vaddr+rodata.Length))
+	xdefine("run_time.typelink", SRODATA, int64(typelink.Vaddr))
+	xdefine("run_time.etypelink", SRODATA, int64(typelink.Vaddr+typelink.Length))
 
-	sym := Linklookup(Ctxt, "runtime.gcdata", 0)
-	xdefine("runtime.egcdata", SRODATA, Symaddr(sym)+sym.Size)
-	Linklookup(Ctxt, "runtime.egcdata", 0).Sect = sym.Sect
+	sym := Linklookup(Ctxt, "run_time.gcdata", 0)
+	xdefine("run_time.egcdata", SRODATA, Symaddr(sym)+sym.Size)
+	Linklookup(Ctxt, "run_time.egcdata", 0).Sect = sym.Sect
 
-	sym = Linklookup(Ctxt, "runtime.gcbss", 0)
-	xdefine("runtime.egcbss", SRODATA, Symaddr(sym)+sym.Size)
-	Linklookup(Ctxt, "runtime.egcbss", 0).Sect = sym.Sect
+	sym = Linklookup(Ctxt, "run_time.gcbss", 0)
+	xdefine("run_time.egcbss", SRODATA, Symaddr(sym)+sym.Size)
+	Linklookup(Ctxt, "run_time.egcbss", 0).Sect = sym.Sect
 
-	xdefine("runtime.symtab", SRODATA, int64(symtab.Vaddr))
-	xdefine("runtime.esymtab", SRODATA, int64(symtab.Vaddr+symtab.Length))
-	xdefine("runtime.pclntab", SRODATA, int64(pclntab.Vaddr))
-	xdefine("runtime.epclntab", SRODATA, int64(pclntab.Vaddr+pclntab.Length))
-	xdefine("runtime.noptrdata", SNOPTRDATA, int64(noptr.Vaddr))
-	xdefine("runtime.enoptrdata", SNOPTRDATA, int64(noptr.Vaddr+noptr.Length))
-	xdefine("runtime.bss", SBSS, int64(bss.Vaddr))
-	xdefine("runtime.ebss", SBSS, int64(bss.Vaddr+bss.Length))
-	xdefine("runtime.data", SDATA, int64(data.Vaddr))
-	xdefine("runtime.edata", SDATA, int64(data.Vaddr+data.Length))
-	xdefine("runtime.noptrbss", SNOPTRBSS, int64(noptrbss.Vaddr))
-	xdefine("runtime.enoptrbss", SNOPTRBSS, int64(noptrbss.Vaddr+noptrbss.Length))
-	xdefine("runtime.end", SBSS, int64(Segdata.Vaddr+Segdata.Length))
+	xdefine("run_time.symtab", SRODATA, int64(symtab.Vaddr))
+	xdefine("run_time.esymtab", SRODATA, int64(symtab.Vaddr+symtab.Length))
+	xdefine("run_time.pclntab", SRODATA, int64(pclntab.Vaddr))
+	xdefine("run_time.epclntab", SRODATA, int64(pclntab.Vaddr+pclntab.Length))
+	xdefine("run_time.noptrdata", SNOPTRDATA, int64(noptr.Vaddr))
+	xdefine("run_time.enoptrdata", SNOPTRDATA, int64(noptr.Vaddr+noptr.Length))
+	xdefine("run_time.bss", SBSS, int64(bss.Vaddr))
+	xdefine("run_time.ebss", SBSS, int64(bss.Vaddr+bss.Length))
+	xdefine("run_time.data", SDATA, int64(data.Vaddr))
+	xdefine("run_time.edata", SDATA, int64(data.Vaddr+data.Length))
+	xdefine("run_time.noptrbss", SNOPTRBSS, int64(noptrbss.Vaddr))
+	xdefine("run_time.enoptrbss", SNOPTRBSS, int64(noptrbss.Vaddr+noptrbss.Length))
+	xdefine("run_time.end", SBSS, int64(Segdata.Vaddr+Segdata.Length))
 }

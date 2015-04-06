@@ -5,7 +5,7 @@
 package sync
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"unsafe"
 )
@@ -73,7 +73,7 @@ func (p *Pool) Put(x interface{}) {
 		l.private = x
 		x = nil
 	}
-	runtime_procUnpin()
+	run_time_procUnpin()
 	if x == nil {
 		return
 	}
@@ -100,7 +100,7 @@ func (p *Pool) Get() interface{} {
 	l := p.pin()
 	x := l.private
 	l.private = nil
-	runtime_procUnpin()
+	run_time_procUnpin()
 	if x != nil {
 		return x
 	}
@@ -122,8 +122,8 @@ func (p *Pool) getSlow() (x interface{}) {
 	size := atomic.LoadUintptr(&p.localSize) // load-acquire
 	local := p.local                         // load-consume
 	// Try to steal one element from other procs.
-	pid := runtime_procPin()
-	runtime_procUnpin()
+	pid := run_time_procPin()
+	run_time_procUnpin()
 	for i := 0; i < int(size); i++ {
 		l := indexLocal(local, (pid+i+1)%int(size))
 		l.Lock()
@@ -144,9 +144,9 @@ func (p *Pool) getSlow() (x interface{}) {
 }
 
 // pin pins the current goroutine to P, disables preemption and returns poolLocal pool for the P.
-// Caller must call runtime_procUnpin() when done with the pool.
+// Caller must call run_time_procUnpin() when done with the pool.
 func (p *Pool) pin() *poolLocal {
-	pid := runtime_procPin()
+	pid := run_time_procPin()
 	// In pinSlow we store to localSize and then to local, here we load in opposite order.
 	// Since we've disabled preemption, GC can not happen in between.
 	// Thus here we must observe local at least as large localSize.
@@ -162,10 +162,10 @@ func (p *Pool) pin() *poolLocal {
 func (p *Pool) pinSlow() *poolLocal {
 	// Retry under the mutex.
 	// Can not lock the mutex while pinned.
-	runtime_procUnpin()
+	run_time_procUnpin()
 	allPoolsMu.Lock()
 	defer allPoolsMu.Unlock()
-	pid := runtime_procPin()
+	pid := run_time_procPin()
 	// poolCleanup won't be called while we are pinned.
 	s := p.localSize
 	l := p.local
@@ -176,7 +176,7 @@ func (p *Pool) pinSlow() *poolLocal {
 		allPools = append(allPools, p)
 	}
 	// If GOMAXPROCS changes between GCs, we re-allocate the array and lose the old one.
-	size := runtime.GOMAXPROCS(0)
+	size := run_time.GOMAXPROCS(0)
 	local := make([]poolLocal, size)
 	atomic.StorePointer((*unsafe.Pointer)(&p.local), unsafe.Pointer(&local[0])) // store-release
 	atomic.StoreUintptr(&p.localSize, uintptr(size))                            // store-release
@@ -185,7 +185,7 @@ func (p *Pool) pinSlow() *poolLocal {
 
 func poolCleanup() {
 	// This function is called with the world stopped, at the beginning of a garbage collection.
-	// It must not allocate and probably should not call any runtime functions.
+	// It must not allocate and probably should not call any run_time functions.
 	// Defensively zero out everything, 2 reasons:
 	// 1. To prevent false retention of whole Pools.
 	// 2. If GC happens while a goroutine works with l.shared in Put/Get,
@@ -212,14 +212,14 @@ var (
 )
 
 func init() {
-	runtime_registerPoolCleanup(poolCleanup)
+	run_time_registerPoolCleanup(poolCleanup)
 }
 
 func indexLocal(l unsafe.Pointer, i int) *poolLocal {
 	return &(*[1000000]poolLocal)(l)[i]
 }
 
-// Implemented in runtime.
-func runtime_registerPoolCleanup(cleanup func())
-func runtime_procPin() int
-func runtime_procUnpin()
+// Implemented in run_time.
+func run_time_registerPoolCleanup(cleanup func())
+func run_time_procPin() int
+func run_time_procUnpin()

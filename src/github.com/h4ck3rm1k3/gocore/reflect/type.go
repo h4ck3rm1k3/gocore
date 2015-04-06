@@ -16,7 +16,7 @@
 package reflect
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"unsafe"
@@ -202,8 +202,8 @@ type Type interface {
 
 /*
  * These data structures are known to the compiler (../../cmd/internal/gc/reflect.go).
- * A few are known to ../runtime/type.go to convey to debuggers.
- * They are also known to ../runtime/type.go.
+ * A few are known to ../run_time/type.go to convey to debuggers.
+ * They are also known to ../run_time/type.go.
  */
 
 // A Kind represents the specific kind of type that a Type represents.
@@ -259,7 +259,7 @@ type rtype struct {
 	zero          unsafe.Pointer    // pointer to zero value
 }
 
-// a copy of runtime.typeAlg
+// a copy of run_time.typeAlg
 type typeAlg struct {
 	// function for hashing objects of this type
 	// (ptr to object, size, seed) -> hash
@@ -1143,7 +1143,7 @@ func implements(T, V *rtype) bool {
 	// methods along the way, or else V does not implement T.
 	// This lets us run the scan in overall linear time instead of
 	// the quadratic time  a naive search would require.
-	// See also ../runtime/iface.go.
+	// See also ../run_time/iface.go.
 	if V.Kind() == Interface {
 		v := (*interfaceType)(unsafe.Pointer(V))
 		i := 0
@@ -1294,7 +1294,7 @@ func haveIdenticalUnderlyingType(T, V *rtype) bool {
 	return false
 }
 
-// typelinks is implemented in package runtime.
+// typelinks is implemented in package run_time.
 // It returns a slice of all the 'typelink' information in the binary,
 // which is to say a slice of known types, sorted by string.
 // Note that strings are not unique identifiers for types:
@@ -1390,7 +1390,7 @@ func cachePut(k cacheKey, t *rtype) Type {
 // ChanOf returns the channel type with the given direction and element type.
 // For example, if t represents int, ChanOf(RecvDir, t) represents <-chan int.
 //
-// The gc runtime imposes a limit of 64 kB on channel element types.
+// The gc run_time imposes a limit of 64 kB on channel element types.
 // If t's size is equal to or exceeds this limit, ChanOf panics.
 func ChanOf(dir ChanDir, t Type) Type {
 	typ := t.(*rtype)
@@ -1401,7 +1401,7 @@ func ChanOf(dir ChanDir, t Type) Type {
 		return ch
 	}
 
-	// This restriction is imposed by the gc compiler and the runtime.
+	// This restriction is imposed by the gc compiler and the run_time.
 	if typ.size >= 1<<16 {
 		lookupCache.Unlock()
 		panic("reflect.ChanOf: element size too large")
@@ -1444,7 +1444,7 @@ func ChanOf(dir ChanDir, t Type) Type {
 	return cachePut(ckey, &ch.rtype)
 }
 
-func ismapkey(*rtype) bool // implemented in runtime
+func ismapkey(*rtype) bool // implemented in run_time
 
 // MapOf returns the map type with the given key and element types.
 // For example, if k represents int and e represents string,
@@ -1637,13 +1637,13 @@ func (gc *gcProg) align(a uintptr) {
 	gc.size = align(gc.size, a)
 }
 
-// These constants must stay in sync with ../runtime/mbitmap.go.
+// These constants must stay in sync with ../run_time/mbitmap.go.
 const (
 	bitsScalar  = 1
 	bitsPointer = 2
 )
 
-// Make sure these routines stay in sync with ../../runtime/hashmap.go!
+// Make sure these routines stay in sync with ../../run_time/hashmap.go!
 // These types exist only for GC, so we only fill out GC relevant info.
 // Currently, that's just size and the GC program.  We also fill in string
 // for possible debugging use.
@@ -1654,7 +1654,7 @@ const (
 )
 
 func bucketOf(ktyp, etyp *rtype) *rtype {
-	// See comment on hmap.overflow in ../runtime/hashmap.go.
+	// See comment on hmap.overflow in ../run_time/hashmap.go.
 	var kind uint8
 	if ktyp.kind&kindNoPointers != 0 && etyp.kind&kindNoPointers != 0 &&
 		ktyp.size <= maxKeySize && etyp.size <= maxValSize {
@@ -1684,7 +1684,7 @@ func bucketOf(ktyp, etyp *rtype) *rtype {
 	}
 	// overflow
 	gc.append(bitsPointer)
-	if runtime.GOARCH == "amd64p32" {
+	if run_time.GOARCH == "amd64p32" {
 		gc.append(bitsScalar)
 	}
 
@@ -1879,7 +1879,7 @@ func funcLayout(t *rtype, rcvr *rtype) (frametype *rtype, argSize, retOffset uin
 		addTypeBits(stack, &offset, arg)
 	}
 	argSize = gc.size
-	if runtime.GOARCH == "amd64p32" {
+	if run_time.GOARCH == "amd64p32" {
 		gc.align(8)
 	}
 	gc.align(ptrSize)
@@ -1929,7 +1929,7 @@ func ifaceIndir(t *rtype) bool {
 	return t.kind&kindDirectIface == 0
 }
 
-// Layout matches runtime.BitVector (well enough).
+// Layout matches run_time.BitVector (well enough).
 type bitVector struct {
 	n    uint32 // number of bits
 	data []byte

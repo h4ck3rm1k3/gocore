@@ -141,7 +141,7 @@ func TestPclntab(t *testing.T) {
 // It returns a symbol reader for pclntab, the offset of the function information
 // within that symbol, and the args and frame values read out of the information.
 func findFunc(t *testing.T, p *Prog, name string) (r *SymReader, off, args, frame int, ok bool) {
-	tabsym := p.Syms[goobj.SymID{Name: "runtime.pclntab"}]
+	tabsym := p.Syms[goobj.SymID{Name: "run_time.pclntab"}]
 	if tabsym == nil {
 		t.Errorf("pclntab is missing in binary")
 		return

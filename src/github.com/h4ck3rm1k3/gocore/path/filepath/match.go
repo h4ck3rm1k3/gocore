@@ -7,7 +7,7 @@ package filepath
 import (
 	"github.com/h4ck3rm1k3/gocore/errors"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf8"
@@ -99,7 +99,7 @@ Scan:
 	for i = 0; i < len(pattern); i++ {
 		switch pattern[i] {
 		case '\\':
-			if runtime.GOOS != "windows" {
+			if run_time.GOOS != "windows" {
 				// error check handled in matchChunk: bad pattern.
 				if i+1 < len(pattern) {
 					i++
@@ -179,7 +179,7 @@ func matchChunk(chunk, s string) (rest string, ok bool, err error) {
 			chunk = chunk[1:]
 
 		case '\\':
-			if runtime.GOOS != "windows" {
+			if run_time.GOOS != "windows" {
 				chunk = chunk[1:]
 				if len(chunk) == 0 {
 					err = ErrBadPattern
@@ -205,7 +205,7 @@ func getEsc(chunk string) (r rune, nchunk string, err error) {
 		err = ErrBadPattern
 		return
 	}
-	if chunk[0] == '\\' && runtime.GOOS != "windows" {
+	if chunk[0] == '\\' && run_time.GOOS != "windows" {
 		chunk = chunk[1:]
 		if len(chunk) == 0 {
 			err = ErrBadPattern

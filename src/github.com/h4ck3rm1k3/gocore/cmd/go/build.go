@@ -20,7 +20,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/path"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -76,7 +76,7 @@ and test commands:
 		print the commands.
 
 	-compiler name
-		name of compiler to use, as in runtime.Compiler (gccgo or gc).
+		name of compiler to use, as in run_time.Compiler (gccgo or gc).
 	-gccgoflags 'arg list'
 		arguments to pass on each gccgo compiler/linker invocation.
 	-gcflags 'arg list'
@@ -131,7 +131,7 @@ func init() {
 // Flags set by multiple commands.
 var buildA bool               // -a flag
 var buildN bool               // -n flag
-var buildP = runtime.NumCPU() // -p flag
+var buildP = run_time.NumCPU() // -p flag
 var buildV bool               // -v flag
 var buildX bool               // -x flag
 var buildI bool               // -i flag
@@ -466,7 +466,7 @@ const (
 )
 
 var (
-	goroot    = filepath.Clean(runtime.GOROOT())
+	goroot    = filepath.Clean(run_time.GOROOT())
 	gobin     = os.Getenv("GOBIN")
 	gorootBin = filepath.Join(goroot, "bin")
 	gorootPkg = filepath.Join(goroot, "pkg")
@@ -601,8 +601,8 @@ func (b *builder) action(mode buildMode, depMode buildMode, p *Package) *action 
 	// using cgo, to make sure we do not overwrite the binary while
 	// a package is using it.  If this is a cross-build, then the cgo we
 	// are writing is not the cgo we need to use.
-	if goos == runtime.GOOS && goarch == runtime.GOARCH && !buildRace {
-		if len(p.CgoFiles) > 0 || p.Standard && p.ImportPath == "github.com/h4ck3rm1k3/gocore/runtime/cgo" {
+	if goos == run_time.GOOS && goarch == run_time.GOARCH && !buildRace {
+		if len(p.CgoFiles) > 0 || p.Standard && p.ImportPath == "github.com/h4ck3rm1k3/gocore/run_time/cgo" {
 			var stk importStack
 			p1 := loadPackage("cmd/cgo", &stk)
 			if p1.Error != nil {
@@ -841,7 +841,7 @@ func (b *builder) build(a *action) (err error) {
 		fmt.Fprintf(os.Stderr, "#%s\n", a.p.ImportPath)
 	}
 
-	if a.p.Standard && a.p.ImportPath == "github.com/h4ck3rm1k3/gocore/runtime" && buildContext.Compiler == "gc" && archChar() != "" &&
+	if a.p.Standard && a.p.ImportPath == "github.com/h4ck3rm1k3/gocore/run_time" && buildContext.Compiler == "gc" && archChar() != "" &&
 		(!hasString(a.p.GoFiles, "zgoos_"+buildContext.GOOS+".go") ||
 			!hasString(a.p.GoFiles, "zgoarch_"+buildContext.GOARCH+".go")) {
 		return fmt.Errorf("%s/%s must be bootstrapped using make%v", buildContext.GOOS, buildContext.GOARCH, defaultSuffix())
@@ -891,11 +891,11 @@ func (b *builder) build(a *action) (err error) {
 	// Run cgo.
 	if a.p.usesCgo() || a.p.usesSwig() {
 		// In a package using cgo, cgo compiles the C, C++ and assembly files with gcc.
-		// There is one exception: runtime/cgo's job is to bridge the
+		// There is one exception: run_time/cgo's job is to bridge the
 		// cgo and non-cgo worlds, so it necessarily has files in both.
 		// In that case gcc only gets the gcc_* files.
 		var gccfiles []string
-		if a.p.Standard && a.p.ImportPath == "github.com/h4ck3rm1k3/gocore/runtime/cgo" {
+		if a.p.Standard && a.p.ImportPath == "github.com/h4ck3rm1k3/gocore/run_time/cgo" {
 			filter := func(files, nongcc, gcc []string) ([]string, []string) {
 				for _, f := range files {
 					if strings.HasPrefix(f, "gcc_") {
@@ -1658,8 +1658,8 @@ func (gcToolchain) gc(b *builder, p *Package, archive, obj string, asmhdr bool, 
 	}
 
 	gcargs := []string{"-p", p.ImportPath}
-	if p.Standard && p.ImportPath == "github.com/h4ck3rm1k3/gocore/runtime" {
-		// runtime compiles with a special 6g flag to emit
+	if p.Standard && p.ImportPath == "github.com/h4ck3rm1k3/gocore/run_time" {
+		// run_time compiles with a special 6g flag to emit
 		// additional reflect type data.
 		gcargs = append(gcargs, "-+")
 	}
@@ -1667,11 +1667,11 @@ func (gcToolchain) gc(b *builder, p *Package, archive, obj string, asmhdr bool, 
 	// If we're giving the compiler the entire package (no C etc files), tell it that,
 	// so that it can give good error messages about forward declarations.
 	// Exceptions: a few standard packages have forward declarations for
-	// pieces supplied behind-the-scenes by package runtime.
+	// pieces supplied behind-the-scenes by package run_time.
 	extFiles := len(p.CgoFiles) + len(p.CFiles) + len(p.CXXFiles) + len(p.MFiles) + len(p.SFiles) + len(p.SysoFiles) + len(p.SwigFiles) + len(p.SwigCXXFiles)
 	if p.Standard {
 		switch p.ImportPath {
-		case "github.com/h4ck3rm1k3/gocore/bytes", "github.com/h4ck3rm1k3/gocore/net", "github.com/h4ck3rm1k3/gocore/os", "github.com/h4ck3rm1k3/gocore/runtime/pprof", "github.com/h4ck3rm1k3/gocore/sync", "github.com/h4ck3rm1k3/gocore/time":
+		case "github.com/h4ck3rm1k3/gocore/bytes", "github.com/h4ck3rm1k3/gocore/net", "github.com/h4ck3rm1k3/gocore/os", "github.com/h4ck3rm1k3/gocore/run_time/pprof", "github.com/h4ck3rm1k3/gocore/sync", "github.com/h4ck3rm1k3/gocore/time":
 			extFiles++
 		}
 	}
@@ -2259,10 +2259,10 @@ func (b *builder) cgo(p *Package, cgoExe, obj string, pcCFLAGS, pcLDFLAGS, cgofi
 		objExt = archChar()
 	}
 
-	if p.Standard && p.ImportPath == "github.com/h4ck3rm1k3/gocore/runtime/cgo" {
-		cgoflags = append(cgoflags, "-import_runtime_cgo=false")
+	if p.Standard && p.ImportPath == "github.com/h4ck3rm1k3/gocore/run_time/cgo" {
+		cgoflags = append(cgoflags, "-import_run_time_cgo=false")
 	}
-	if p.Standard && (p.ImportPath == "runtime/race" || p.ImportPath == "github.com/h4ck3rm1k3/gocore/runtime/cgo") {
+	if p.Standard && (p.ImportPath == "run_time/race" || p.ImportPath == "github.com/h4ck3rm1k3/gocore/run_time/cgo") {
 		cgoflags = append(cgoflags, "-import_syscall=false")
 	}
 
@@ -2320,9 +2320,9 @@ func (b *builder) cgo(p *Package, cgoExe, obj string, pcCFLAGS, pcLDFLAGS, cgofi
 			continue
 		// Remove any -fsanitize=foo flags.
 		// Otherwise the compiler driver thinks that we are doing final link
-		// and links sanitizer runtime into the object file. But we are not doing
+		// and links sanitizer run_time into the object file. But we are not doing
 		// the final link, we will link the resulting object file again. And
-		// so the program ends up with two copies of sanitizer runtime.
+		// so the program ends up with two copies of sanitizer run_time.
 		// See issue 8788 for details.
 		case strings.HasPrefix(f, "-fsanitize="):
 			continue
@@ -2411,7 +2411,7 @@ func (b *builder) cgo(p *Package, cgoExe, obj string, pcCFLAGS, pcLDFLAGS, cgofi
 	// cgo -dynimport
 	importGo := obj + "_cgo_import.go"
 	cgoflags = []string{}
-	if p.Standard && p.ImportPath == "github.com/h4ck3rm1k3/gocore/runtime/cgo" {
+	if p.Standard && p.ImportPath == "github.com/h4ck3rm1k3/gocore/run_time/cgo" {
 		cgoflags = append(cgoflags, "-dynlinker") // record path to dynamic linker
 	}
 	if err := b.run(p.Dir, p.ImportPath, nil, buildToolExec, cgoExe, "-objdir", obj, "-dynpackage", p.Name, "-dynimport", dynobj, "-dynout", importGo, cgoflags); err != nil {
@@ -2695,7 +2695,7 @@ func raceInit() {
 // defaultSuffix returns file extension used for command files in
 // current os environment.
 func defaultSuffix() string {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "windows":
 		return ".bat"
 	case "plan9":

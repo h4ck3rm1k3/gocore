@@ -7,7 +7,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"unsafe"
 )
 
@@ -27,7 +27,7 @@ func rsaAlignOf(salen int) int {
 		// NetBSD 6 and beyond kernels require 64-bit aligned
 		// access to routing facilities.
 		salign = 8
-	} else if runtime.GOOS == "freebsd" {
+	} else if run_time.GOOS == "freebsd" {
 		// In the case of kern.supported_archs="amd64 i386",
 		// we need to know the underlying kernel's
 		// architecture because the alignment for routing

@@ -10,7 +10,9 @@ package math
 //	Floor(±0) = ±0
 //	Floor(±Inf) = ±Inf
 //	Floor(NaN) = NaN
-func Floor(x float64) float64
+func Floor(x float64) float64 {
+	return floor(x)
+}
 
 func floor(x float64) float64 {
 	if x == 0 || IsNaN(x) || IsInf(x, 0) {
@@ -33,7 +35,9 @@ func floor(x float64) float64 {
 //	Ceil(±0) = ±0
 //	Ceil(±Inf) = ±Inf
 //	Ceil(NaN) = NaN
-func Ceil(x float64) float64
+func Ceil(x float64) float64 {
+	return ceil(x)
+}
 
 func ceil(x float64) float64 {
 	return -Floor(-x)
@@ -45,7 +49,10 @@ func ceil(x float64) float64 {
 //	Trunc(±0) = ±0
 //	Trunc(±Inf) = ±Inf
 //	Trunc(NaN) = NaN
-func Trunc(x float64) float64
+func Trunc(x float64) float64{
+	return trunc(x)
+}
+
 
 func trunc(x float64) float64 {
 	if x == 0 || IsNaN(x) || IsInf(x, 0) {

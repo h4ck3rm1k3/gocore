@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
 	"github.com/h4ck3rm1k3/gocore/net/http"
 	"github.com/h4ck3rm1k3/gocore/net/url"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
@@ -138,7 +138,7 @@ var dumpTests = []dumpTest{
 }
 
 func TestDumpRequest(t *testing.T) {
-	numg0 := runtime.NumGoroutine()
+	numg0 := run_time.NumGoroutine()
 	for i, tt := range dumpTests {
 		setBody := func() {
 			if tt.Body == nil {
@@ -184,9 +184,9 @@ func TestDumpRequest(t *testing.T) {
 			}
 		}
 	}
-	if dg := runtime.NumGoroutine() - numg0; dg > 4 {
+	if dg := run_time.NumGoroutine() - numg0; dg > 4 {
 		buf := make([]byte, 4096)
-		buf = buf[:runtime.Stack(buf, true)]
+		buf = buf[:run_time.Stack(buf, true)]
 		t.Errorf("Unexpectedly large number of new goroutines: %d new: %s", dg, buf)
 	}
 }

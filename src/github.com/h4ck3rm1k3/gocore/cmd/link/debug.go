@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Generation of debug data structures (in the executable but not mapped at run time).
-// See also runtime.go.
+// See also run_time.go.
 
 package main
 

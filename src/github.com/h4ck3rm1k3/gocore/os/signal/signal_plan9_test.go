@@ -6,7 +6,7 @@ package signal
 
 import (
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -63,7 +63,7 @@ func TestStress(t *testing.T) {
 	if testing.Short() {
 		dur = 100 * time.Millisecond
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	done := make(chan bool)
 	finished := make(chan bool)
 	go func() {
@@ -88,7 +88,7 @@ func TestStress(t *testing.T) {
 				break Loop
 			default:
 				postNote(syscall.Getpid(), "alarm")
-				runtime.Gosched()
+				run_time.Gosched()
 			}
 		}
 		finished <- true

@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/log"
 	"github.com/h4ck3rm1k3/gocore/net"
 	"net/http/httptest"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
@@ -506,7 +506,7 @@ func TestCountMallocs(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping malloc count in short mode")
 	}
-	if runtime.GOMAXPROCS(0) > 1 {
+	if run_time.GOMAXPROCS(0) > 1 {
 		t.Skip("skipping; GOMAXPROCS>1")
 	}
 	fmt.Printf("mallocs per rpc round trip: %v\n", countMallocs(dialDirect, t))
@@ -516,7 +516,7 @@ func TestCountMallocsOverHTTP(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping malloc count in short mode")
 	}
-	if runtime.GOMAXPROCS(0) > 1 {
+	if run_time.GOMAXPROCS(0) > 1 {
 		t.Skip("skipping; GOMAXPROCS>1")
 	}
 	fmt.Printf("mallocs per HTTP rpc round trip: %v\n", countMallocs(dialHTTP, t))
@@ -630,7 +630,7 @@ func benchmarkEndToEndAsync(dial func() (*Client, error), b *testing.B) {
 
 	// Asynchronous calls
 	args := &Args{7, 8}
-	procs := 4 * runtime.GOMAXPROCS(-1)
+	procs := 4 * run_time.GOMAXPROCS(-1)
 	send := int32(b.N)
 	recv := int32(b.N)
 	var wg sync.WaitGroup

@@ -1195,9 +1195,9 @@ func defgotype(gotype *LSym) *DWDie {
 		nfields := int(decodetype_ifacemethodcount(gotype))
 		var s *LSym
 		if nfields == 0 {
-			s = lookup_or_diag("type.runtime.eface")
+			s = lookup_or_diag("type.run_time.eface")
 		} else {
-			s = lookup_or_diag("type.runtime.iface")
+			s = lookup_or_diag("type.run_time.iface")
 		}
 		newrefattr(die, DW_AT_type, defgotype(s))
 
@@ -1312,7 +1312,7 @@ func substitutetype(structdie *DWDie, field string, dwtype *DWDie) {
 }
 
 func synthesizestringtypes(die *DWDie) {
-	prototype := walktypedef(defgotype(lookup_or_diag("type.runtime._string")))
+	prototype := walktypedef(defgotype(lookup_or_diag("type.run_time._string")))
 	if prototype == nil {
 		return
 	}
@@ -1326,7 +1326,7 @@ func synthesizestringtypes(die *DWDie) {
 }
 
 func synthesizeslicetypes(die *DWDie) {
-	prototype := walktypedef(defgotype(lookup_or_diag("type.runtime.slice")))
+	prototype := walktypedef(defgotype(lookup_or_diag("type.run_time.slice")))
 	if prototype == nil {
 		return
 	}
@@ -1354,7 +1354,7 @@ func mkinternaltypename(base string, arg1 string, arg2 string) string {
 	return n
 }
 
-// synthesizemaptypes is way too closely married to runtime/hashmap.c
+// synthesizemaptypes is way too closely married to run_time/hashmap.c
 const (
 	MaxKeySize = 128
 	MaxValSize = 128
@@ -1362,8 +1362,8 @@ const (
 )
 
 func synthesizemaptypes(die *DWDie) {
-	hash := walktypedef(defgotype(lookup_or_diag("type.runtime.hmap")))
-	bucket := walktypedef(defgotype(lookup_or_diag("type.runtime.bmap")))
+	hash := walktypedef(defgotype(lookup_or_diag("type.run_time.hmap")))
+	bucket := walktypedef(defgotype(lookup_or_diag("type.run_time.bmap")))
 
 	if hash == nil {
 		return
@@ -1480,9 +1480,9 @@ func synthesizemaptypes(die *DWDie) {
 }
 
 func synthesizechantypes(die *DWDie) {
-	sudog := walktypedef(defgotype(lookup_or_diag("type.runtime.sudog")))
-	waitq := walktypedef(defgotype(lookup_or_diag("type.runtime.waitq")))
-	hchan := walktypedef(defgotype(lookup_or_diag("type.runtime.hchan")))
+	sudog := walktypedef(defgotype(lookup_or_diag("type.run_time.sudog")))
+	waitq := walktypedef(defgotype(lookup_or_diag("type.run_time.waitq")))
+	hchan := walktypedef(defgotype(lookup_or_diag("type.run_time.hchan")))
 	if sudog == nil || waitq == nil || hchan == nil {
 		return
 	}
@@ -1587,8 +1587,8 @@ func movetomodule(parent *DWDie) {
 	die.link = parent.child
 }
 
-// If the pcln table contains runtime/runtime.go, use that to set gdbscript path.
-func finddebugruntimepath(s *LSym) {
+// If the pcln table contains run_time/run_time.go, use that to set gdbscript path.
+func finddebugrun_timepath(s *LSym) {
 	if gdbscript != "" {
 		return
 	}
@@ -1598,8 +1598,8 @@ func finddebugruntimepath(s *LSym) {
 	for i := 0; i < s.Pcln.Nfile; i++ {
 		f = s.Pcln.File[i]
 		_ = p
-		if i := strings.Index(f.Name, "runtime/runtime.go"); i >= 0 {
-			gdbscript = f.Name[:i] + "runtime/runtime-gdb.py"
+		if i := strings.Index(f.Name, "run_time/run_time.go"); i >= 0 {
+			gdbscript = f.Name[:i] + "run_time/run_time-gdb.py"
 			break
 		}
 	}
@@ -1786,7 +1786,7 @@ func writelines() {
 			continue
 		}
 
-		finddebugruntimepath(s)
+		finddebugrun_timepath(s)
 
 		pciterinit(Ctxt, &pcfile, &s.Pcln.Pcfile)
 		pciterinit(Ctxt, &pcline, &s.Pcln.Pcline)
@@ -2239,10 +2239,10 @@ func Dwarfemitdebugsections() {
 	newattr(die, DW_AT_go_kind, DW_CLS_CONSTANT, obj.KindUintptr, 0)
 
 	// Needed by the prettyprinter code for interface inspection.
-	defgotype(lookup_or_diag("type.runtime._type"))
+	defgotype(lookup_or_diag("type.run_time._type"))
 
-	defgotype(lookup_or_diag("type.runtime.interfacetype"))
-	defgotype(lookup_or_diag("type.runtime.itab"))
+	defgotype(lookup_or_diag("type.run_time.interfacetype"))
+	defgotype(lookup_or_diag("type.run_time.itab"))
 
 	genasmsym(defdwsymb)
 

@@ -14,7 +14,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -85,7 +85,7 @@ func TestFcntlFlock(t *testing.T) {
 // "-test.run=^TestPassFD$" and an environment variable used to signal
 // that the test should become the child process instead.
 func TestPassFD(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "dragonfly":
 		// TODO(jsing): Figure out why sendmsg is returning EINVAL.
 		t.Skip("skipping test on dragonfly")
@@ -93,8 +93,8 @@ func TestPassFD(t *testing.T) {
 		// TODO(aram): Figure out why ReadMsgUnix is returning empty message.
 		t.Skip("skipping test on solaris, see issue 7402")
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping test on %d/%s, no fork", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping test on %d/%s, no fork", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 	if os.Getenv("GO_WANT_HELPER_PROCESS") == "1" {
@@ -293,7 +293,7 @@ func TestRlimit(t *testing.T) {
 		// Seems like Darwin requires some privilege to
 		// increase the soft limit of rlimit sandbox, though
 		// Setrlimit never reports an error.
-		switch runtime.GOOS {
+		switch run_time.GOOS {
 		case "darwin":
 		default:
 			t.Fatalf("Rlimit: change failed: wanted %#v got %#v", set, get)

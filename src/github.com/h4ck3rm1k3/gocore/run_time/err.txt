@@ -1,0 +1,402 @@
+alg.go:7:43: error: import file ‘github.com/h4ck3rm1k3/gocore/unsafe’ not found
+ import "github.com/h4ck3rm1k3/gocore/unsafe"
+                                           ^
+alg.go:44:18: error: expected package
+  hash func(unsafe.Pointer, uintptr) uintptr
+                  ^
+alg.go:44:12: error: invalid named/anonymous mix
+  hash func(unsafe.Pointer, uintptr) uintptr
+            ^
+alg.go:47:19: error: expected package
+  equal func(unsafe.Pointer, unsafe.Pointer) bool
+                   ^
+alg.go:47:35: error: expected package
+  equal func(unsafe.Pointer, unsafe.Pointer) bool
+                                   ^
+alg.go:47:13: error: invalid named/anonymous mix
+  equal func(unsafe.Pointer, unsafe.Pointer) bool
+             ^
+alg.go:50:23: error: expected package
+ func memhash0(p unsafe.Pointer, h uintptr) uintptr {
+                       ^
+alg.go:53:23: error: expected package
+ func memhash8(p unsafe.Pointer, h uintptr) uintptr {
+                       ^
+alg.go:56:24: error: expected package
+ func memhash16(p unsafe.Pointer, h uintptr) uintptr {
+                        ^
+alg.go:59:24: error: expected package
+ func memhash32(p unsafe.Pointer, h uintptr) uintptr {
+                        ^
+alg.go:62:24: error: expected package
+ func memhash64(p unsafe.Pointer, h uintptr) uintptr {
+                        ^
+alg.go:65:25: error: expected package
+ func memhash128(p unsafe.Pointer, h uintptr) uintptr {
+                         ^
+alg.go:72:29: error: expected package
+ func memhash_varlen(p unsafe.Pointer, h uintptr) uintptr
+                             ^
+alg.go:102:22: error: expected package
+ func aeshash(p unsafe.Pointer, h, s uintptr) uintptr
+                      ^
+alg.go:103:24: error: expected package
+ func aeshash32(p unsafe.Pointer, h uintptr) uintptr
+                        ^
+alg.go:104:24: error: expected package
+ func aeshash64(p unsafe.Pointer, h uintptr) uintptr
+                        ^
+alg.go:105:25: error: expected package
+ func aeshashstr(p unsafe.Pointer, h uintptr) uintptr
+                         ^
+alg.go:107:22: error: expected package
+ func strhash(a unsafe.Pointer, h uintptr) uintptr {
+                      ^
+alg.go:117:22: error: expected package
+ func f32hash(p unsafe.Pointer, h uintptr) uintptr {
+                      ^
+alg.go:129:22: error: expected package
+ func f64hash(p unsafe.Pointer, h uintptr) uintptr {
+                      ^
+alg.go:141:22: error: expected package
+ func c64hash(p unsafe.Pointer, h uintptr) uintptr {
+                      ^
+alg.go:146:23: error: expected package
+ func c128hash(p unsafe.Pointer, h uintptr) uintptr {
+                       ^
+alg.go:151:24: error: expected package
+ func interhash(p unsafe.Pointer, h uintptr) uintptr {
+                        ^
+alg.go:169:27: error: expected package
+ func nilinterhash(p unsafe.Pointer, h uintptr) uintptr {
+                           ^
+alg.go:186:26: error: expected package
+ func memequal(p, q unsafe.Pointer, size uintptr) bool {
+                          ^
+alg.go:193:27: error: expected package
+ func memequal0(p, q unsafe.Pointer) bool {
+                           ^
+alg.go:196:27: error: expected package
+ func memequal8(p, q unsafe.Pointer) bool {
+                           ^
+alg.go:199:28: error: expected package
+ func memequal16(p, q unsafe.Pointer) bool {
+                            ^
+alg.go:202:28: error: expected package
+ func memequal32(p, q unsafe.Pointer) bool {
+                            ^
+alg.go:205:28: error: expected package
+ func memequal64(p, q unsafe.Pointer) bool {
+                            ^
+alg.go:208:29: error: expected package
+ func memequal128(p, q unsafe.Pointer) bool {
+                             ^
+alg.go:211:26: error: expected package
+ func f32equal(p, q unsafe.Pointer) bool {
+                          ^
+alg.go:214:26: error: expected package
+ func f64equal(p, q unsafe.Pointer) bool {
+                          ^
+alg.go:217:26: error: expected package
+ func c64equal(p, q unsafe.Pointer) bool {
+                          ^
+alg.go:220:27: error: expected package
+ func c128equal(p, q unsafe.Pointer) bool {
+                           ^
+alg.go:223:26: error: expected package
+ func strequal(p, q unsafe.Pointer) bool {
+                          ^
+alg.go:226:28: error: expected package
+ func interequal(p, q unsafe.Pointer) bool {
+                            ^
+alg.go:233:31: error: expected package
+ func nilinterequal(p, q unsafe.Pointer) bool {
+                               ^
+alg.go:10:18: error: reference to undefined name ‘ptrSize’
+  c0 = uintptr((8-ptrSize)/4*2860486313 + (ptrSize-4)/4*33054211828000289)
+                  ^
+alg.go:10:43: error: reference to undefined name ‘ptrSize’
+  c0 = uintptr((8-ptrSize)/4*2860486313 + (ptrSize-4)/4*33054211828000289)
+                                           ^
+alg.go:10:7: error: integer constant overflow
+  c0 = uintptr((8-ptrSize)/4*2860486313 + (ptrSize-4)/4*33054211828000289)
+       ^
+alg.go:11:18: error: reference to undefined name ‘ptrSize’
+  c1 = uintptr((8-ptrSize)/4*3267000013 + (ptrSize-4)/4*23344194077549503)
+                  ^
+alg.go:11:43: error: reference to undefined name ‘ptrSize’
+  c1 = uintptr((8-ptrSize)/4*3267000013 + (ptrSize-4)/4*23344194077549503)
+                                           ^
+alg.go:11:7: error: integer constant overflow
+  c1 = uintptr((8-ptrSize)/4*3267000013 + (ptrSize-4)/4*23344194077549503)
+       ^
+alg.go:54:9: error: reference to undefined name ‘memhash’
+  return memhash(p, h, 1)
+         ^
+alg.go:57:9: error: reference to undefined name ‘memhash’
+  return memhash(p, h, 2)
+         ^
+alg.go:60:9: error: reference to undefined name ‘memhash’
+  return memhash(p, h, 4)
+         ^
+alg.go:63:9: error: reference to undefined name ‘memhash’
+  return memhash(p, h, 8)
+         ^
+alg.go:66:9: error: reference to undefined name ‘memhash’
+  return memhash(p, h, 16)
+         ^
+alg.go:108:9: error: reference to undefined name ‘stringStruct’
+  x := (*stringStruct)(a)
+         ^
+alg.go:108:8: error: expected pointer
+  x := (*stringStruct)(a)
+        ^
+alg.go:109:9: error: reference to undefined name ‘memhash’
+  return memhash(x.str, h, uintptr(x.len))
+         ^
+alg.go:123:33: error: reference to undefined name ‘fastrand1’
+   return c1 * (c0 ^ h ^ uintptr(fastrand1())) // any kind of NaN
+                                 ^
+alg.go:125:10: error: reference to undefined name ‘memhash’
+   return memhash(p, h, 4)
+          ^
+alg.go:135:33: error: reference to undefined name ‘fastrand1’
+   return c1 * (c0 ^ h ^ uintptr(fastrand1())) // any kind of NaN
+                                 ^
+alg.go:137:10: error: reference to undefined name ‘memhash’
+   return memhash(p, h, 8)
+          ^
+alg.go:143:17: error: reference to undefined name ‘unsafe’
+  return f32hash(unsafe.Pointer(&x[1]), f32hash(unsafe.Pointer(&x[0]), h))
+                 ^
+alg.go:143:48: error: reference to undefined name ‘unsafe’
+  return f32hash(unsafe.Pointer(&x[1]), f32hash(unsafe.Pointer(&x[0]), h))
+                                                ^
+alg.go:148:17: error: reference to undefined name ‘unsafe’
+  return f64hash(unsafe.Pointer(&x[1]), f64hash(unsafe.Pointer(&x[0]), h))
+                 ^
+alg.go:148:48: error: reference to undefined name ‘unsafe’
+  return f64hash(unsafe.Pointer(&x[1]), f64hash(unsafe.Pointer(&x[0]), h))
+                                                ^
+alg.go:152:9: error: reference to undefined name ‘iface’
+  a := (*iface)(p)
+         ^
+alg.go:152:8: error: expected pointer
+  a := (*iface)(p)
+        ^
+alg.go:160:9: error: reference to undefined name ‘errorString’
+   panic(errorString("hash of unhashable type " + *t._string))
+         ^
+alg.go:160:50: error: expected pointer
+   panic(errorString("hash of unhashable type " + *t._string))
+                                                  ^
+alg.go:162:5: error: reference to undefined name ‘isDirectIface’
+  if isDirectIface(t) {
+     ^
+alg.go:163:18: error: reference to undefined name ‘unsafe’
+   return c1 * fn(unsafe.Pointer(&a.data), h^c0)
+                  ^
+alg.go:170:9: error: reference to undefined name ‘eface’
+  a := (*eface)(p)
+         ^
+alg.go:170:8: error: expected pointer
+  a := (*eface)(p)
+        ^
+alg.go:177:9: error: reference to undefined name ‘errorString’
+   panic(errorString("hash of unhashable type " + *t._string))
+         ^
+alg.go:177:50: error: expected pointer
+   panic(errorString("hash of unhashable type " + *t._string))
+                                                  ^
+alg.go:179:5: error: reference to undefined name ‘isDirectIface’
+  if isDirectIface(t) {
+     ^
+alg.go:180:18: error: reference to undefined name ‘unsafe’
+   return c1 * fn(unsafe.Pointer(&a.data), h^c0)
+                  ^
+alg.go:190:9: error: reference to undefined name ‘memeq’
+  return memeq(p, q, size)
+         ^
+alg.go:237:9: error: reference to undefined name ‘eface’
+  x := (*eface)(unsafe.Pointer(&p))
+         ^
+alg.go:237:8: error: expected pointer
+  x := (*eface)(unsafe.Pointer(&p))
+        ^
+alg.go:237:16: error: reference to undefined name ‘unsafe’
+  x := (*eface)(unsafe.Pointer(&p))
+                ^
+alg.go:238:9: error: reference to undefined name ‘eface’
+  y := (*eface)(unsafe.Pointer(&q))
+         ^
+alg.go:238:8: error: expected pointer
+  y := (*eface)(unsafe.Pointer(&q))
+        ^
+alg.go:238:16: error: reference to undefined name ‘unsafe’
+  y := (*eface)(unsafe.Pointer(&q))
+                ^
+alg.go:248:9: error: reference to undefined name ‘errorString’
+   panic(errorString("comparing uncomparable type " + *t._string))
+         ^
+alg.go:248:54: error: expected pointer
+   panic(errorString("comparing uncomparable type " + *t._string))
+                                                      ^
+alg.go:250:5: error: reference to undefined name ‘isDirectIface’
+  if isDirectIface(t) {
+     ^
+alg.go:251:13: error: reference to undefined name ‘noescape’
+   return eq(noescape(unsafe.Pointer(&x.data)), noescape(unsafe.Pointer(&y.data)))
+             ^
+alg.go:251:22: error: reference to undefined name ‘unsafe’
+   return eq(noescape(unsafe.Pointer(&x.data)), noescape(unsafe.Pointer(&y.data)))
+                      ^
+alg.go:251:48: error: reference to undefined name ‘noescape’
+   return eq(noescape(unsafe.Pointer(&x.data)), noescape(unsafe.Pointer(&y.data)))
+                                                ^
+alg.go:251:57: error: reference to undefined name ‘unsafe’
+   return eq(noescape(unsafe.Pointer(&x.data)), noescape(unsafe.Pointer(&y.data)))
+                                                         ^
+alg.go:258:9: error: reference to undefined name ‘iface’
+  x := (*iface)(unsafe.Pointer(&p))
+         ^
+alg.go:258:8: error: expected pointer
+  x := (*iface)(unsafe.Pointer(&p))
+        ^
+alg.go:258:16: error: reference to undefined name ‘unsafe’
+  x := (*iface)(unsafe.Pointer(&p))
+                ^
+alg.go:259:9: error: reference to undefined name ‘iface’
+  y := (*iface)(unsafe.Pointer(&q))
+         ^
+alg.go:259:8: error: expected pointer
+  y := (*iface)(unsafe.Pointer(&q))
+        ^
+alg.go:259:16: error: reference to undefined name ‘unsafe’
+  y := (*iface)(unsafe.Pointer(&q))
+                ^
+alg.go:270:9: error: reference to undefined name ‘errorString’
+   panic(errorString("comparing uncomparable type " + *t._string))
+         ^
+alg.go:270:54: error: expected pointer
+   panic(errorString("comparing uncomparable type " + *t._string))
+                                                      ^
+alg.go:272:5: error: reference to undefined name ‘isDirectIface’
+  if isDirectIface(t) {
+     ^
+alg.go:273:13: error: reference to undefined name ‘noescape’
+   return eq(noescape(unsafe.Pointer(&x.data)), noescape(unsafe.Pointer(&y.data)))
+             ^
+alg.go:273:22: error: reference to undefined name ‘unsafe’
+   return eq(noescape(unsafe.Pointer(&x.data)), noescape(unsafe.Pointer(&y.data)))
+                      ^
+alg.go:273:48: error: reference to undefined name ‘noescape’
+   return eq(noescape(unsafe.Pointer(&x.data)), noescape(unsafe.Pointer(&y.data)))
+                                                ^
+alg.go:273:57: error: reference to undefined name ‘unsafe’
+   return eq(noescape(unsafe.Pointer(&x.data)), noescape(unsafe.Pointer(&y.data)))
+                                                         ^
+alg.go:280:35: error: reference to undefined name ‘noescape’
+  return algarray[alg_STRING].hash(noescape(unsafe.Pointer(&s)), seed)
+                                   ^
+alg.go:280:44: error: reference to undefined name ‘unsafe’
+  return algarray[alg_STRING].hash(noescape(unsafe.Pointer(&s)), seed)
+                                            ^
+alg.go:284:9: error: reference to undefined name ‘sliceStruct’
+  s := (*sliceStruct)(unsafe.Pointer(&b))
+         ^
+alg.go:284:8: error: expected pointer
+  s := (*sliceStruct)(unsafe.Pointer(&b))
+        ^
+alg.go:284:22: error: reference to undefined name ‘unsafe’
+  s := (*sliceStruct)(unsafe.Pointer(&b))
+                      ^
+alg.go:285:9: error: reference to undefined name ‘memhash’
+  return memhash(s.array, seed, uintptr(s.len))
+         ^
+alg.go:289:34: error: reference to undefined name ‘noescape’
+  return algarray[alg_MEM32].hash(noescape(unsafe.Pointer(&i)), seed)
+                                  ^
+alg.go:289:43: error: reference to undefined name ‘unsafe’
+  return algarray[alg_MEM32].hash(noescape(unsafe.Pointer(&i)), seed)
+                                           ^
+alg.go:293:34: error: reference to undefined name ‘noescape’
+  return algarray[alg_MEM64].hash(noescape(unsafe.Pointer(&i)), seed)
+                                  ^
+alg.go:293:43: error: reference to undefined name ‘unsafe’
+  return algarray[alg_MEM64].hash(noescape(unsafe.Pointer(&i)), seed)
+                                           ^
+alg.go:297:37: error: reference to undefined name ‘noescape’
+  return algarray[alg_NILINTER].hash(noescape(unsafe.Pointer(&i)), seed)
+                                     ^
+alg.go:297:46: error: reference to undefined name ‘unsafe’
+  return algarray[alg_NILINTER].hash(noescape(unsafe.Pointer(&i)), seed)
+                                              ^
+alg.go:303:34: error: reference to undefined name ‘noescape’
+  return algarray[alg_INTER].hash(noescape(unsafe.Pointer(&i)), seed)
+                                  ^
+alg.go:303:43: error: reference to undefined name ‘unsafe’
+  return algarray[alg_INTER].hash(noescape(unsafe.Pointer(&i)), seed)
+                                           ^
+alg.go:308:9: error: reference to undefined name ‘sliceStruct’
+  s := (*sliceStruct)(unsafe.Pointer(&b))
+         ^
+alg.go:308:8: error: expected pointer
+  s := (*sliceStruct)(unsafe.Pointer(&b))
+        ^
+alg.go:308:22: error: reference to undefined name ‘unsafe’
+  s := (*sliceStruct)(unsafe.Pointer(&b))
+                      ^
+alg.go:309:2: error: reference to undefined name ‘memclr’
+  memclr(s.array, uintptr(s.len))
+  ^
+alg.go:312:25: error: reference to undefined name ‘ptrSize’
+ const hashRandomBytes = ptrSize / 4 * 64
+                         ^
+extern.go:191:23: error: reference to undefined name ‘theGoarch’
+ const GOARCH string = theGoarch
+                       ^
+go1: internal compiler error: in set_type, at go/gofrontend/expressions.cc:15628
+0x101d2b0f Numeric_constant::set_type(Type*, bool, Location)
+	../../gcc/go/gofrontend/expressions.cc:15628
+0x101d45a7 Const_expression::do_numeric_constant_value(Numeric_constant*) const
+	../../gcc/go/gofrontend/expressions.cc:2691
+0x101d5493 Expression::numeric_constant_value(Numeric_constant*) const
+	../../gcc/go/gofrontend/expressions.h:490
+0x101d5493 Binary_expression::do_lower(Gogo*, Named_object*, Statement_inserter*, int)
+	../../gcc/go/gofrontend/expressions.cc:4927
+0x101fbb1f Expression::lower(Gogo*, Named_object*, Statement_inserter*, int)
+	../../gcc/go/gofrontend/expressions.h:699
+0x101fbb1f Lower_parse_tree::expression(Expression**)
+	../../gcc/go/gofrontend/gogo.cc:2616
+0x101b631f Expression::traverse(Expression**, Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:43
+0x101b651b Binary_expression::do_traverse(Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:4354
+0x101b7087 Expression::traverse_subexpressions(Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:57
+0x101fbabb Lower_parse_tree::expression(Expression**)
+	../../gcc/go/gofrontend/gogo.cc:2609
+0x101b631f Expression::traverse(Expression**, Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:43
+0x101b651b Binary_expression::do_traverse(Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:4354
+0x101b7087 Expression::traverse_subexpressions(Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:57
+0x101fbabb Lower_parse_tree::expression(Expression**)
+	../../gcc/go/gofrontend/gogo.cc:2609
+0x101b631f Expression::traverse(Expression**, Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:43
+0x101b651b Binary_expression::do_traverse(Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:4354
+0x101b7087 Expression::traverse_subexpressions(Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:57
+0x101fbabb Lower_parse_tree::expression(Expression**)
+	../../gcc/go/gofrontend/gogo.cc:2609
+0x101b631f Expression::traverse(Expression**, Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:43
+0x101b651b Binary_expression::do_traverse(Traverse*)
+	../../gcc/go/gofrontend/expressions.cc:4354
+Please submit a full bug report,
+with preprocessed source if appropriate.
+Please include the complete backtrace with any bug report.
+See <http://gcc.gnu.org/bugs.html> for instructions.

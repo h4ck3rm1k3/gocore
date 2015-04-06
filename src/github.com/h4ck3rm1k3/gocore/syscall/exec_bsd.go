@@ -7,7 +7,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"unsafe"
 )
 
@@ -24,9 +24,9 @@ type SysProcAttr struct {
 	Pgid       int         // Child's process group ID if Setpgid.
 }
 
-// Implemented in runtime package.
-func runtime_BeforeFork()
-func runtime_AfterFork()
+// Implemented in run_time package.
+func run_time_BeforeFork()
+func run_time_AfterFork()
 
 // Fork, dup fd onto 0..len(fd), and exec(argv0, argvv, envv) in child.
 // If a dup or exec fails, write the errno error to pipe.
@@ -60,14 +60,14 @@ func forkAndExecInChild(argv0 *byte, argv, envv []*byte, chroot, dir *byte, attr
 	}
 	nextfd++
 
-	darwin := runtime.GOOS == "darwin"
+	darwin := run_time.GOOS == "darwin"
 
 	// About to call fork.
 	// No more allocation or calls of non-assembly functions.
-	runtime_BeforeFork()
+	run_time_BeforeFork()
 	r1, r2, err1 = RawSyscall(SYS_FORK, 0, 0, 0)
 	if err1 != 0 {
-		runtime_AfterFork()
+		run_time_AfterFork()
 		return 0, err1
 	}
 
@@ -81,7 +81,7 @@ func forkAndExecInChild(argv0 *byte, argv, envv []*byte, chroot, dir *byte, attr
 
 	if r1 != 0 {
 		// parent; return PID
-		runtime_AfterFork()
+		run_time_AfterFork()
 		return int(r1), 0
 	}
 

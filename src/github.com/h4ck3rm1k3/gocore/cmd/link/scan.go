@@ -22,7 +22,7 @@ func (p *Prog) scan(mainfile string) {
 	p.initScan()
 	p.scanFile("main", mainfile)
 	if len(p.Missing) > 0 && !p.omitRuntime {
-		p.scanImport("github.com/h4ck3rm1k3/gocore/runtime")
+		p.scanImport("github.com/h4ck3rm1k3/gocore/run_time")
 	}
 
 	var missing []string

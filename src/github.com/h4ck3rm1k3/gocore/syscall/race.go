@@ -7,24 +7,24 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"unsafe"
 )
 
 const raceenabled = true
 
 func raceAcquire(addr unsafe.Pointer) {
-	runtime.RaceAcquire(addr)
+	run_time.RaceAcquire(addr)
 }
 
 func raceReleaseMerge(addr unsafe.Pointer) {
-	runtime.RaceReleaseMerge(addr)
+	run_time.RaceReleaseMerge(addr)
 }
 
 func raceReadRange(addr unsafe.Pointer, len int) {
-	runtime.RaceReadRange(addr, len)
+	run_time.RaceReadRange(addr, len)
 }
 
 func raceWriteRange(addr unsafe.Pointer, len int) {
-	runtime.RaceWriteRange(addr, len)
+	run_time.RaceWriteRange(addr, len)
 }

@@ -67,9 +67,9 @@ func progedit(ctxt *obj.Link, p *obj.Prog) {
 			}
 
 			if ctxt.Goarm < 7 {
-				// Replace it with BL runtime.read_tls_fallback(SB) for ARM CPUs that lack the tls extension.
+				// Replace it with BL run_time.read_tls_fallback(SB) for ARM CPUs that lack the tls extension.
 				if progedit_tlsfallback == nil {
-					progedit_tlsfallback = obj.Linklookup(ctxt, "runtime.read_tls_fallback", 0)
+					progedit_tlsfallback = obj.Linklookup(ctxt, "run_time.read_tls_fallback", 0)
 				}
 
 				// MOVW	LR, R11
@@ -80,7 +80,7 @@ func progedit(ctxt *obj.Link, p *obj.Prog) {
 				p.To.Type = obj.TYPE_REG
 				p.To.Reg = REGTMP
 
-				// BL	runtime.read_tls_fallback(SB)
+				// BL	run_time.read_tls_fallback(SB)
 				p = obj.Appendp(ctxt, p)
 
 				p.As = ABL
@@ -145,11 +145,11 @@ func progedit(ctxt *obj.Link, p *obj.Prog) {
 	if ctxt.Flag_shared != 0 {
 		// Shared libraries use R_ARM_TLS_IE32 instead of
 		// R_ARM_TLS_LE32, replacing the link time constant TLS offset in
-		// runtime.tlsg with an address to a GOT entry containing the
-		// offset. Rewrite $runtime.tlsg(SB) to runtime.tlsg(SB) to
+		// run_time.tlsg with an address to a GOT entry containing the
+		// offset. Rewrite $run_time.tlsg(SB) to run_time.tlsg(SB) to
 		// compensate.
 		if ctxt.Tlsg == nil {
-			ctxt.Tlsg = obj.Linklookup(ctxt, "runtime.tlsg", 0)
+			ctxt.Tlsg = obj.Linklookup(ctxt, "run_time.tlsg", 0)
 		}
 
 		if p.From.Type == obj.TYPE_ADDR && p.From.Name == obj.NAME_EXTERN && p.From.Sym == ctxt.Tlsg {
@@ -183,8 +183,8 @@ func preprocess(ctxt *obj.Link, cursym *obj.LSym) {
 	autosize := int32(0)
 
 	if ctxt.Symmorestack[0] == nil {
-		ctxt.Symmorestack[0] = obj.Linklookup(ctxt, "runtime.morestack", 0)
-		ctxt.Symmorestack[1] = obj.Linklookup(ctxt, "runtime.morestack_noctxt", 0)
+		ctxt.Symmorestack[0] = obj.Linklookup(ctxt, "run_time.morestack", 0)
+		ctxt.Symmorestack[1] = obj.Linklookup(ctxt, "run_time.morestack_noctxt", 0)
 	}
 
 	ctxt.Cursym = cursym
@@ -828,14 +828,14 @@ func stacksplit(ctxt *obj.Link, p *obj.Prog, framesize int32, noctxt bool) *obj.
 	p.To.Type = obj.TYPE_REG
 	p.To.Reg = REG_R3
 
-	// BL.LS		runtime.morestack(SB) // modifies LR, returns with LO still asserted
+	// BL.LS		run_time.morestack(SB) // modifies LR, returns with LO still asserted
 	p = obj.Appendp(ctxt, p)
 
 	p.As = ABL
 	p.Scond = C_SCOND_LS
 	p.To.Type = obj.TYPE_BRANCH
 	if ctxt.Cursym.Cfunc != 0 {
-		p.To.Sym = obj.Linklookup(ctxt, "runtime.morestackc", 0)
+		p.To.Sym = obj.Linklookup(ctxt, "run_time.morestackc", 0)
 	} else {
 		p.To.Sym = ctxt.Symmorestack[bool2int(noctxt)]
 	}

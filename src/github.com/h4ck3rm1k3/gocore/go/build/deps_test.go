@@ -8,7 +8,7 @@
 package build
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"testing"
 )
@@ -29,15 +29,15 @@ var pkgDeps = map[string][]string{
 	// L0 is the lowest level, core, nearly unavoidable packages.
 	"github.com/h4ck3rm1k3/gocore/errors":      {},
 	"github.com/h4ck3rm1k3/gocore/io":          {"github.com/h4ck3rm1k3/gocore/errors", "github.com/h4ck3rm1k3/gocore/sync"},
-	"github.com/h4ck3rm1k3/gocore/runtime":     {"unsafe"},
-	"github.com/h4ck3rm1k3/gocore/sync":        {"github.com/h4ck3rm1k3/gocore/runtime", "github.com/h4ck3rm1k3/gocore/sync/atomic", "unsafe"},
+	"github.com/h4ck3rm1k3/gocore/run_time":     {"unsafe"},
+	"github.com/h4ck3rm1k3/gocore/sync":        {"github.com/h4ck3rm1k3/gocore/run_time", "github.com/h4ck3rm1k3/gocore/sync/atomic", "unsafe"},
 	"github.com/h4ck3rm1k3/gocore/sync/atomic": {"unsafe"},
 	"unsafe":      {},
 
 	"L0": {
 		"github.com/h4ck3rm1k3/gocore/errors",
 		"github.com/h4ck3rm1k3/gocore/io",
-		"github.com/h4ck3rm1k3/gocore/runtime",
+		"github.com/h4ck3rm1k3/gocore/run_time",
 		"github.com/h4ck3rm1k3/gocore/sync",
 		"github.com/h4ck3rm1k3/gocore/sync/atomic",
 		"unsafe",
@@ -146,11 +146,11 @@ var pkgDeps = map[string][]string{
 	// Packages used by testing must be low-level (L2+fmt).
 	"github.com/h4ck3rm1k3/gocore/regexp":         {"L2", "github.com/h4ck3rm1k3/gocore/regexp/syntax"},
 	"github.com/h4ck3rm1k3/gocore/regexp/syntax":  {"L2"},
-	"runtime/debug":  {"L2", "github.com/h4ck3rm1k3/gocore/fmt", "github.com/h4ck3rm1k3/gocore/io/ioutil", "github.com/h4ck3rm1k3/gocore/os", "github.com/h4ck3rm1k3/gocore/time"},
-	"github.com/h4ck3rm1k3/gocore/runtime/pprof":  {"L2", "github.com/h4ck3rm1k3/gocore/fmt", "github.com/h4ck3rm1k3/gocore/text/tabwriter"},
+	"run_time/debug":  {"L2", "github.com/h4ck3rm1k3/gocore/fmt", "github.com/h4ck3rm1k3/gocore/io/ioutil", "github.com/h4ck3rm1k3/gocore/os", "github.com/h4ck3rm1k3/gocore/time"},
+	"github.com/h4ck3rm1k3/gocore/run_time/pprof":  {"L2", "github.com/h4ck3rm1k3/gocore/fmt", "github.com/h4ck3rm1k3/gocore/text/tabwriter"},
 	"github.com/h4ck3rm1k3/gocore/text/tabwriter": {"L2"},
 
-	"testing":        {"L2", "github.com/h4ck3rm1k3/gocore/flag", "github.com/h4ck3rm1k3/gocore/fmt", "github.com/h4ck3rm1k3/gocore/os", "github.com/h4ck3rm1k3/gocore/runtime/pprof", "github.com/h4ck3rm1k3/gocore/time"},
+	"testing":        {"L2", "github.com/h4ck3rm1k3/gocore/flag", "github.com/h4ck3rm1k3/gocore/fmt", "github.com/h4ck3rm1k3/gocore/os", "github.com/h4ck3rm1k3/gocore/run_time/pprof", "github.com/h4ck3rm1k3/gocore/time"},
 	"testing/iotest": {"L2", "github.com/h4ck3rm1k3/gocore/log"},
 	"testing/quick":  {"L2", "github.com/h4ck3rm1k3/gocore/flag", "github.com/h4ck3rm1k3/gocore/fmt", "github.com/h4ck3rm1k3/gocore/reflect"},
 
@@ -227,8 +227,8 @@ var pkgDeps = map[string][]string{
 	},
 
 	// Cgo.
-	"github.com/h4ck3rm1k3/gocore/runtime/cgo": {"L0", "C"},
-	"CGO":         {"C", "github.com/h4ck3rm1k3/gocore/runtime/cgo"},
+	"github.com/h4ck3rm1k3/gocore/run_time/cgo": {"L0", "C"},
+	"CGO":         {"C", "github.com/h4ck3rm1k3/gocore/run_time/cgo"},
 
 	// Fake entry to satisfy the pseudo-import "C"
 	// that shows up in programs that use cgo.
@@ -317,7 +317,7 @@ var pkgDeps = map[string][]string{
 	// HTTP, kingpin of dependencies.
 	"github.com/h4ck3rm1k3/gocore/net/http": {
 		"L4", "NET", "OS",
-		"github.com/h4ck3rm1k3/gocore/compress/gzip", "github.com/h4ck3rm1k3/gocore/crypto/tls", "github.com/h4ck3rm1k3/gocore/mime/multipart", "runtime/debug",
+		"github.com/h4ck3rm1k3/gocore/compress/gzip", "github.com/h4ck3rm1k3/gocore/crypto/tls", "github.com/h4ck3rm1k3/gocore/mime/multipart", "run_time/debug",
 		"github.com/h4ck3rm1k3/gocore/net/http/internal",
 	},
 
@@ -327,7 +327,7 @@ var pkgDeps = map[string][]string{
 	"net/http/fcgi":     {"L4", "NET", "OS", "github.com/h4ck3rm1k3/gocore/net/http", "github.com/h4ck3rm1k3/gocore/net/http/cgi"},
 	"net/http/httptest": {"L4", "NET", "OS", "github.com/h4ck3rm1k3/gocore/crypto/tls", "github.com/h4ck3rm1k3/gocore/flag", "github.com/h4ck3rm1k3/gocore/net/http"},
 	"net/http/httputil": {"L4", "NET", "OS", "github.com/h4ck3rm1k3/gocore/net/http", "github.com/h4ck3rm1k3/gocore/net/http/internal"},
-	"net/http/pprof":    {"L4", "OS", "github.com/h4ck3rm1k3/gocore/html/template", "github.com/h4ck3rm1k3/gocore/net/http", "github.com/h4ck3rm1k3/gocore/runtime/pprof"},
+	"net/http/pprof":    {"L4", "OS", "github.com/h4ck3rm1k3/gocore/html/template", "github.com/h4ck3rm1k3/gocore/net/http", "github.com/h4ck3rm1k3/gocore/run_time/pprof"},
 	"github.com/h4ck3rm1k3/gocore/net/rpc":           {"L4", "NET", "github.com/h4ck3rm1k3/gocore/encoding/gob", "github.com/h4ck3rm1k3/gocore/html/template", "github.com/h4ck3rm1k3/gocore/net/http"},
 	"net/rpc/jsonrpc":   {"L4", "NET", "github.com/h4ck3rm1k3/gocore/encoding/json", "github.com/h4ck3rm1k3/gocore/net/rpc"},
 }
@@ -376,10 +376,10 @@ var allowedErrors = map[osPkg]bool{
 }
 
 func TestDependencies(t *testing.T) {
-	if runtime.GOOS == "nacl" || (runtime.GOOS == "darwin" && runtime.GOARCH == "arm") {
+	if run_time.GOOS == "nacl" || (run_time.GOOS == "darwin" && run_time.GOARCH == "arm") {
 		// Tests run in a limited file system and we do not
 		// provide access to every source file.
-		t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 	var all []string
 
@@ -394,7 +394,7 @@ func TestDependencies(t *testing.T) {
 			if isMacro(pkg) {
 				continue
 			}
-			if pkg == "github.com/h4ck3rm1k3/gocore/runtime/cgo" && !ctxt.CgoEnabled {
+			if pkg == "github.com/h4ck3rm1k3/gocore/run_time/cgo" && !ctxt.CgoEnabled {
 				continue
 			}
 			p, err := ctxt.Import(pkg, "", 0)
@@ -402,7 +402,7 @@ func TestDependencies(t *testing.T) {
 				if allowedErrors[osPkg{ctxt.GOOS, pkg}] {
 					continue
 				}
-				if !ctxt.CgoEnabled && pkg == "github.com/h4ck3rm1k3/gocore/runtime/cgo" {
+				if !ctxt.CgoEnabled && pkg == "github.com/h4ck3rm1k3/gocore/run_time/cgo" {
 					continue
 				}
 				// Some of the combinations we try might not

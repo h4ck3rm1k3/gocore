@@ -14,7 +14,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	pathpkg "github.com/h4ck3rm1k3/gocore/path"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -450,20 +450,20 @@ func expandScanner(err error) error {
 }
 
 var raceExclude = map[string]bool{
-	"runtime/race": true,
-	"github.com/h4ck3rm1k3/gocore/runtime/cgo":  true,
+	"run_time/race": true,
+	"github.com/h4ck3rm1k3/gocore/run_time/cgo":  true,
 	"cmd/cgo":      true,
 	"github.com/h4ck3rm1k3/gocore/syscall":      true,
 	"github.com/h4ck3rm1k3/gocore/errors":       true,
 }
 
 var cgoExclude = map[string]bool{
-	"github.com/h4ck3rm1k3/gocore/runtime/cgo": true,
+	"github.com/h4ck3rm1k3/gocore/run_time/cgo": true,
 }
 
 var cgoSyscallExclude = map[string]bool{
-	"github.com/h4ck3rm1k3/gocore/runtime/cgo":  true,
-	"runtime/race": true,
+	"github.com/h4ck3rm1k3/gocore/run_time/cgo":  true,
+	"run_time/race": true,
 }
 
 // load populates p using information from bp, err, which should
@@ -525,23 +525,23 @@ func (p *Package) load(stk *importStack, bp *build.Package, err error) *Package 
 	}
 
 	importPaths := p.Imports
-	// Packages that use cgo import runtime/cgo implicitly.
+	// Packages that use cgo import run_time/cgo implicitly.
 	// Packages that use cgo also import syscall implicitly,
 	// to wrap errno.
 	// Exclude certain packages to avoid circular dependencies.
 	if len(p.CgoFiles) > 0 && (!p.Standard || !cgoExclude[p.ImportPath]) {
-		importPaths = append(importPaths, "github.com/h4ck3rm1k3/gocore/runtime/cgo")
+		importPaths = append(importPaths, "github.com/h4ck3rm1k3/gocore/run_time/cgo")
 	}
 	if len(p.CgoFiles) > 0 && (!p.Standard || !cgoSyscallExclude[p.ImportPath]) {
 		importPaths = append(importPaths, "github.com/h4ck3rm1k3/gocore/syscall")
 	}
-	// Everything depends on runtime, except runtime and unsafe.
-	if !p.Standard || (p.ImportPath != "github.com/h4ck3rm1k3/gocore/runtime" && p.ImportPath != "unsafe") {
-		importPaths = append(importPaths, "github.com/h4ck3rm1k3/gocore/runtime")
-		// When race detection enabled everything depends on runtime/race.
+	// Everything depends on run_time, except run_time and unsafe.
+	if !p.Standard || (p.ImportPath != "github.com/h4ck3rm1k3/gocore/run_time" && p.ImportPath != "unsafe") {
+		importPaths = append(importPaths, "github.com/h4ck3rm1k3/gocore/run_time")
+		// When race detection enabled everything depends on run_time/race.
 		// Exclude certain packages to avoid circular dependencies.
 		if buildRace && (!p.Standard || !raceExclude[p.ImportPath]) {
-			importPaths = append(importPaths, "runtime/race")
+			importPaths = append(importPaths, "run_time/race")
 		}
 		// On ARM with GOARM=5, everything depends on math for the link.
 		if p.ImportPath == "main" && goarch == "arm" {
@@ -722,11 +722,11 @@ func computeStale(pkgs ...*Package) {
 	}
 }
 
-// The runtime version string takes one of two forms:
+// The run_time version string takes one of two forms:
 // "go1.X[.Y]" for Go releases, and "devel +hash" at tip.
 // Determine whether we are in a released copy by
 // inspecting the version.
-var isGoRelease = strings.HasPrefix(runtime.Version(), "go1")
+var isGoRelease = strings.HasPrefix(run_time.Version(), "go1")
 
 // isStale reports whether package p needs to be rebuilt.
 func isStale(p *Package, topRoot map[string]bool) bool {

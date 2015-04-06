@@ -16,7 +16,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/encoding/base64"
 	"github.com/h4ck3rm1k3/gocore/math"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
@@ -258,7 +258,7 @@ func newEncodeState() *encodeState {
 func (e *encodeState) marshal(v interface{}) (err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			if _, ok := r.(runtime.Error); ok {
+			if _, ok := r.(run_time.Error); ok {
 				panic(r)
 			}
 			if s, ok := r.(string); ok {

@@ -7,7 +7,7 @@ package net
 import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -24,9 +24,9 @@ var ipv4MulticastListenerTests = []struct {
 // test listener with same address family, same group address and same
 // port.
 func TestIPv4MulticastListener(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl", "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	case "solaris":
 		t.Skipf("skipping test on solaris, see issue 7399")
 	}
@@ -94,9 +94,9 @@ var ipv6MulticastListenerTests = []struct {
 // test listener with same address family, same group address and same
 // port.
 func TestIPv6MulticastListener(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	case "solaris":
 		t.Skipf("skipping test on solaris, see issue 7399")
 	}
@@ -161,11 +161,11 @@ func checkMulticastListener(c *UDPConn, ip IP) error {
 }
 
 func multicastRIBContains(ip IP) (bool, error) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "dragonfly", "netbsd", "openbsd", "plan9", "solaris", "windows":
 		return true, nil // not implemented yet
 	case "linux":
-		if runtime.GOARCH == "arm" || runtime.GOARCH == "alpha" {
+		if run_time.GOARCH == "arm" || run_time.GOARCH == "alpha" {
 			return true, nil // not implemented yet
 		}
 	}

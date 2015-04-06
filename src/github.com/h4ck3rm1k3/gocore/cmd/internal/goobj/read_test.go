@@ -10,7 +10,7 @@ var importPathToPrefixTests = []struct {
 	in  string
 	out string
 }{
-	{"github.com/h4ck3rm1k3/gocore/runtime", "runtime"},
+	{"github.com/h4ck3rm1k3/gocore/run_time", "run_time"},
 	{"github.com/h4ck3rm1k3/gocore/sync/atomic", "sync/atomic"},
 	{"golang.org/x/tools/godoc", "golang.org/x/tools/godoc"},
 	{"foo.bar/baz.quux", "foo.bar/baz%2equux"},

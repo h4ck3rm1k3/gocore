@@ -9,7 +9,7 @@ package net
 import (
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -54,7 +54,7 @@ func (fd *netFD) init() error {
 func (fd *netFD) setAddr(laddr, raddr Addr) {
 	fd.laddr = laddr
 	fd.raddr = raddr
-	runtime.SetFinalizer(fd, (*netFD).Close)
+	run_time.SetFinalizer(fd, (*netFD).Close)
 }
 
 func (fd *netFD) name() string {
@@ -88,7 +88,7 @@ func (fd *netFD) connect(la, ra syscall.Sockaddr, deadline time.Time) error {
 		// Treat this as a successful connection--writes to
 		// the socket will see EOF.  For details and a test
 		// case in C see http://golang.org/issue/6828.
-		if runtime.GOOS == "solaris" {
+		if run_time.GOOS == "solaris" {
 			return nil
 		}
 		fallthrough
@@ -106,7 +106,7 @@ func (fd *netFD) connect(la, ra syscall.Sockaddr, deadline time.Time) error {
 		// Performing multiple connect system calls on a
 		// non-blocking socket under Unix variants does not
 		// necessarily result in earlier errors being
-		// returned. Instead, once runtime-integrated network
+		// returned. Instead, once run_time-integrated network
 		// poller tells us that the socket is ready, get the
 		// SO_ERROR socket option to see if the connection
 		// succeeded or failed. See issue 7474 for further
@@ -134,7 +134,7 @@ func (fd *netFD) destroy() {
 	fd.pd.Close()
 	closesocket(fd.sysfd)
 	fd.sysfd = -1
-	runtime.SetFinalizer(fd, nil)
+	run_time.SetFinalizer(fd, nil)
 }
 
 // Add a reference to this fd.
@@ -436,7 +436,7 @@ var tryDupCloexec = int32(1)
 func dupCloseOnExec(fd int) (newfd int, err error) {
 	if atomic.LoadInt32(&tryDupCloexec) == 1 {
 		r0, _, e1 := syscall.Syscall(syscall.SYS_FCNTL, uintptr(fd), syscall.F_DUPFD_CLOEXEC, 0)
-		if runtime.GOOS == "darwin" && e1 == syscall.EBADF {
+		if run_time.GOOS == "darwin" && e1 == syscall.EBADF {
 			// On OS X 10.6 and below (but we only support
 			// >= 10.6), F_DUPFD_CLOEXEC is unsupported
 			// and fcntl there falls back (undocumented)

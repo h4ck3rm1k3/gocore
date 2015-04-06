@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/flag"
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -22,7 +22,7 @@ var benchmarkMemory = flag.Bool("test.benchmem", false, "print memory allocation
 var benchmarkLock sync.Mutex
 
 // Used for every benchmark for measuring memory.
-var memStats runtime.MemStats
+var memStats run_time.MemStats
 
 // An internal type but exported because it is cross-package; part of the implementation
 // of the "go test" command.
@@ -57,7 +57,7 @@ type B struct {
 // a call to StopTimer.
 func (b *B) StartTimer() {
 	if !b.timerOn {
-		runtime.ReadMemStats(&memStats)
+		run_time.ReadMemStats(&memStats)
 		b.startAllocs = memStats.Mallocs
 		b.startBytes = memStats.TotalAlloc
 		b.start = time.Now()
@@ -71,7 +71,7 @@ func (b *B) StartTimer() {
 func (b *B) StopTimer() {
 	if b.timerOn {
 		b.duration += time.Now().Sub(b.start)
-		runtime.ReadMemStats(&memStats)
+		run_time.ReadMemStats(&memStats)
 		b.netAllocs += memStats.Mallocs - b.startAllocs
 		b.netBytes += memStats.TotalAlloc - b.startBytes
 		b.timerOn = false
@@ -82,7 +82,7 @@ func (b *B) StopTimer() {
 // It does not affect whether the timer is running.
 func (b *B) ResetTimer() {
 	if b.timerOn {
-		runtime.ReadMemStats(&memStats)
+		run_time.ReadMemStats(&memStats)
 		b.startAllocs = memStats.Mallocs
 		b.startBytes = memStats.TotalAlloc
 		b.start = time.Now()
@@ -116,7 +116,7 @@ func (b *B) runN(n int) {
 	defer benchmarkLock.Unlock()
 	// Try to get a comparable environment for each run
 	// by clearing garbage from previous runs.
-	runtime.GC()
+	run_time.GC()
 	b.N = n
 	b.parallelism = 1
 	b.ResetTimer()
@@ -191,7 +191,7 @@ func (b *B) launch() {
 	n := 1
 
 	// Signal that we're done whether we return normally
-	// or by FailNow's runtime.Goexit.
+	// or by FailNow's run_time.Goexit.
 	defer func() {
 		b.signal <- b
 	}()
@@ -320,7 +320,7 @@ func RunBenchmarks(matchString func(pat, str string) (bool, error), benchmarks [
 	}
 	for _, Benchmark := range bs {
 		for _, procs := range cpuList {
-			runtime.GOMAXPROCS(procs)
+			run_time.GOMAXPROCS(procs)
 			b := &B{
 				common: common{
 					signal: make(chan interface{}),
@@ -348,7 +348,7 @@ func RunBenchmarks(matchString func(pat, str string) (bool, error), benchmarks [
 				b.trimOutput()
 				fmt.Printf("--- BENCH: %s\n%s", benchName, b.output)
 			}
-			if p := runtime.GOMAXPROCS(-1); p != procs {
+			if p := run_time.GOMAXPROCS(-1); p != procs {
 				fmt.Fprintf(os.Stderr, "testing: %s left GOMAXPROCS set to %d\n", benchName, p)
 			}
 		}
@@ -424,7 +424,7 @@ func (b *B) RunParallel(body func(*PB)) {
 	}
 
 	n := uint64(0)
-	numProcs := b.parallelism * runtime.GOMAXPROCS(0)
+	numProcs := b.parallelism * run_time.GOMAXPROCS(0)
 	var wg sync.WaitGroup
 	wg.Add(numProcs)
 	for p := 0; p < numProcs; p++ {

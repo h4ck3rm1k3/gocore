@@ -325,17 +325,17 @@ func loadinternal(name string) {
 
 func loadlib() {
 	if Flag_shared != 0 {
-		s := Linklookup(Ctxt, "runtime.islibrary", 0)
+		s := Linklookup(Ctxt, "run_time.islibrary", 0)
 		s.Dupok = 1
 		Adduint8(Ctxt, s, 1)
 	}
 
-	loadinternal("github.com/h4ck3rm1k3/gocore/runtime")
+	loadinternal("github.com/h4ck3rm1k3/gocore/run_time")
 	if Thearch.Thechar == '5' {
 		loadinternal("github.com/h4ck3rm1k3/gocore/math")
 	}
 	if flag_race != 0 {
-		loadinternal("runtime/race")
+		loadinternal("run_time/race")
 	}
 
 	var i int
@@ -343,7 +343,7 @@ func loadlib() {
 		if Debug['v'] > 1 {
 			fmt.Fprintf(&Bso, "%5.2f autolib: %s (from %s)\n", obj.Cputime(), Ctxt.Library[i].File, Ctxt.Library[i].Objref)
 		}
-		iscgo = iscgo || Ctxt.Library[i].Pkg == "github.com/h4ck3rm1k3/gocore/runtime/cgo"
+		iscgo = iscgo || Ctxt.Library[i].Pkg == "github.com/h4ck3rm1k3/gocore/run_time/cgo"
 		objfile(Ctxt.Library[i].File, Ctxt.Library[i].Pkg)
 	}
 
@@ -362,7 +362,7 @@ func loadlib() {
 		// cgo on Darwin must use external linking
 		// we can always use external linking, but then there will be circular
 		// dependency problems when compiling natively (external linking requires
-		// runtime/cgo, runtime/cgo requires cmd/cgo, but cmd/cgo needs to be
+		// run_time/cgo, run_time/cgo requires cmd/cgo, but cmd/cgo needs to be
 		// compiled using external linking.)
 		if Thearch.Thechar == '5' && HEADTYPE == Hdarwin && iscgo {
 			Linkmode = LinkExternal
@@ -371,17 +371,17 @@ func loadlib() {
 
 	if Linkmode == LinkExternal && !iscgo {
 		// This indicates a user requested -linkmode=external.
-		// The startup code uses an import of runtime/cgo to decide
+		// The startup code uses an import of run_time/cgo to decide
 		// whether to initialize the TLS.  So give it one.  This could
 		// be handled differently but it's an unusual case.
-		loadinternal("github.com/h4ck3rm1k3/gocore/runtime/cgo")
+		loadinternal("github.com/h4ck3rm1k3/gocore/run_time/cgo")
 
 		if i < len(Ctxt.Library) {
 			objfile(Ctxt.Library[i].File, Ctxt.Library[i].Pkg)
 		}
 
 		// Pretend that we really imported the package.
-		s := Linklookup(Ctxt, "go.importpath.runtime/cgo.", 0)
+		s := Linklookup(Ctxt, "go.importpath.run_time/cgo.", 0)
 
 		s.Type = SDATA
 		s.Dupok = 1
@@ -389,13 +389,13 @@ func loadlib() {
 
 		// Provided by the code that imports the package.
 		// Since we are simulating the import, we have to provide this string.
-		cgostrsym := "go.string.\"runtime/cgo\""
+		cgostrsym := "go.string.\"run_time/cgo\""
 
 		if Linkrlookup(Ctxt, cgostrsym, 0) == nil {
 			s := Linklookup(Ctxt, cgostrsym, 0)
 			s.Type = SRODATA
 			s.Reachable = true
-			addstrdata(cgostrsym, "github.com/h4ck3rm1k3/gocore/runtime/cgo")
+			addstrdata(cgostrsym, "github.com/h4ck3rm1k3/gocore/run_time/cgo")
 		}
 	}
 
@@ -417,14 +417,14 @@ func loadlib() {
 		}
 	}
 
-	tlsg := Linklookup(Ctxt, "runtime.tlsg", 0)
+	tlsg := Linklookup(Ctxt, "run_time.tlsg", 0)
 
-	// For most ports, runtime.tlsg is a placeholder symbol for TLS
+	// For most ports, run_time.tlsg is a placeholder symbol for TLS
 	// relocation. However, the Android and Darwin arm ports need it
 	// to be a real variable.
 	//
 	// TODO(crawshaw): android should require leaving the tlsg->type
-	// alone (as the runtime-provided SNOPTRBSS) just like darwin/arm.
+	// alone (as the run_time-provided SNOPTRBSS) just like darwin/arm.
 	// But some other part of the linker is expecting STLSBSS.
 	if goos != "darwin" || Thearch.Thechar != '5' {
 		tlsg.Type = STLSBSS
@@ -615,8 +615,8 @@ var internalpkg = []string{
 	"github.com/h4ck3rm1k3/gocore/crypto/x509",
 	"github.com/h4ck3rm1k3/gocore/net",
 	"os/user",
-	"github.com/h4ck3rm1k3/gocore/runtime/cgo",
-	"runtime/race",
+	"github.com/h4ck3rm1k3/gocore/run_time/cgo",
+	"run_time/race",
 }
 
 func ldhostobj(ld func(*Biobuf, string, int64, string), f *Biobuf, pkg string, length int64, pn string, file string) {
@@ -1088,8 +1088,8 @@ func callsize() int {
 func dostkcheck() {
 	var ch Chain
 
-	morestack = Linklookup(Ctxt, "runtime.morestack", 0)
-	newstack = Linklookup(Ctxt, "runtime.newstack", 0)
+	morestack = Linklookup(Ctxt, "run_time.morestack", 0)
+	newstack = Linklookup(Ctxt, "run_time.newstack", 0)
 
 	// Every splitting function ensures that there are at least StackLimit
 	// bytes available below SP when the splitting prologue finishes.
@@ -1105,10 +1105,10 @@ func dostkcheck() {
 	// Check every function, but do the nosplit functions in a first pass,
 	// to make the printed failure chains as short as possible.
 	for s := Ctxt.Textp; s != nil; s = s.Next {
-		// runtime.racesymbolizethunk is called from gcc-compiled C
+		// run_time.racesymbolizethunk is called from gcc-compiled C
 		// code running on the operating system thread stack.
 		// It uses more than the usual amount of stack but that's okay.
-		if s.Name == "runtime.racesymbolizethunk" {
+		if s.Name == "run_time.racesymbolizethunk" {
 			continue
 		}
 
@@ -1205,7 +1205,7 @@ func stkcheck(up *Chain, depth int) int {
 
 				// If this is a call to morestack, we've just raised our limit back
 				// to StackLimit beyond the frame size.
-				if strings.HasPrefix(r.Sym.Name, "runtime.morestack") {
+				if strings.HasPrefix(r.Sym.Name, "run_time.morestack") {
 					limit = int(obj.StackLimit + s.Locals)
 					if haslinkregister() {
 						limit += Thearch.Regsize
@@ -1343,12 +1343,12 @@ func doversion() {
 func genasmsym(put func(*LSym, string, int, int64, int64, int, *LSym)) {
 	// These symbols won't show up in the first loop below because we
 	// skip STEXT symbols. Normal STEXT symbols are emitted by walking textp.
-	s := Linklookup(Ctxt, "runtime.text", 0)
+	s := Linklookup(Ctxt, "run_time.text", 0)
 
 	if s.Type == STEXT {
 		put(s, s.Name, 'T', s.Value, s.Size, int(s.Version), nil)
 	}
-	s = Linklookup(Ctxt, "runtime.etext", 0)
+	s = Linklookup(Ctxt, "run_time.etext", 0)
 	if s.Type == STEXT {
 		put(s, s.Name, 'T', s.Value, s.Size, int(s.Version), nil)
 	}

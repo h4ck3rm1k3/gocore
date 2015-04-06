@@ -45,7 +45,7 @@ type Import struct {
 }
 
 // importmap records type information about imported symbols to detect inconsistencies.
-// Entries are keyed by qualified symbol name (e.g., "runtime.Callers" or "net/url.Error").
+// Entries are keyed by qualified symbol name (e.g., "run_time.Callers" or "net/url.Error").
 var importmap = map[string]*Import{}
 
 func lookupImport(name string) *Import {
@@ -595,18 +595,18 @@ func markflood() {
 }
 
 var markextra = []string{
-	"runtime.morestack",
-	"runtime.morestackx",
-	"runtime.morestack00",
-	"runtime.morestack10",
-	"runtime.morestack01",
-	"runtime.morestack11",
-	"runtime.morestack8",
-	"runtime.morestack16",
-	"runtime.morestack24",
-	"runtime.morestack32",
-	"runtime.morestack40",
-	"runtime.morestack48",
+	"run_time.morestack",
+	"run_time.morestackx",
+	"run_time.morestack00",
+	"run_time.morestack10",
+	"run_time.morestack01",
+	"run_time.morestack11",
+	"run_time.morestack8",
+	"run_time.morestack16",
+	"run_time.morestack24",
+	"run_time.morestack32",
+	"run_time.morestack40",
+	"run_time.morestack48",
 	// on arm, lock in the div/mod helpers too
 	"_div",
 	"_divu",
@@ -740,7 +740,7 @@ type Pkg struct {
 
 var (
 	// pkgmap records the imported-by relationship between packages.
-	// Entries are keyed by package path (e.g., "github.com/h4ck3rm1k3/gocore/runtime" or "github.com/h4ck3rm1k3/gocore/net/url").
+	// Entries are keyed by package path (e.g., "github.com/h4ck3rm1k3/gocore/run_time" or "github.com/h4ck3rm1k3/gocore/net/url").
 	pkgmap = map[string]*Pkg{}
 
 	pkgall []*Pkg
@@ -758,8 +758,8 @@ func lookupPkg(path string) *Pkg {
 
 // imported records that package pkg imports package imp.
 func imported(pkg, imp string) {
-	// everyone imports runtime, even runtime.
-	if imp == "github.com/h4ck3rm1k3/gocore/runtime" {
+	// everyone imports run_time, even run_time.
+	if imp == "github.com/h4ck3rm1k3/gocore/run_time" {
 		return
 	}
 

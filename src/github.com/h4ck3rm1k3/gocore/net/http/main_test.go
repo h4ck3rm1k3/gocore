@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/net/http"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
@@ -25,7 +25,7 @@ func TestMain(m *testing.M) {
 
 func interestingGoroutines() (gs []string) {
 	buf := make([]byte, 2<<20)
-	buf = buf[:runtime.Stack(buf, true)]
+	buf = buf[:run_time.Stack(buf, true)]
 	for _, g := range strings.Split(string(buf), "\n\n") {
 		sl := strings.SplitN(g, "\n", 2)
 		if len(sl) != 2 {
@@ -38,10 +38,10 @@ func interestingGoroutines() (gs []string) {
 			strings.Contains(stack, "closeWriteAndWait") ||
 			strings.Contains(stack, "testing.Main(") ||
 			// These only show up with GOTRACEBACK=2; Issue 5005 (comment 28)
-			strings.Contains(stack, "runtime.goexit") ||
-			strings.Contains(stack, "created by runtime.gc") ||
+			strings.Contains(stack, "run_time.goexit") ||
+			strings.Contains(stack, "created by run_time.gc") ||
 			strings.Contains(stack, "net/http_test.interestingGoroutines") ||
-			strings.Contains(stack, "runtime.MHeap_Scavenger") {
+			strings.Contains(stack, "run_time.MHeap_Scavenger") {
 			continue
 		}
 		gs = append(gs, stack)

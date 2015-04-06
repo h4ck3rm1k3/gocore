@@ -5,7 +5,7 @@
 package sort_test
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	. "github.com/h4ck3rm1k3/gocore/sort"
 	"testing"
 )
@@ -131,7 +131,7 @@ func TestSearchWrappersDontAlloc(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping malloc count in short mode")
 	}
-	if runtime.GOMAXPROCS(0) > 1 {
+	if run_time.GOMAXPROCS(0) > 1 {
 		t.Skip("skipping; GOMAXPROCS>1")
 	}
 	allocs := testing.AllocsPerRun(100, runSearchWrappers)

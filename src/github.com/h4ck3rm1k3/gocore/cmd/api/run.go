@@ -21,7 +21,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"os/user"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
 
@@ -97,7 +97,7 @@ func prepGoPath() string {
 	// We don't use io.TempDir or a PID or timestamp here because we do
 	// want this to be stable between runs, to minimize "git clone" calls
 	// in the common case.
-	var tempBase = fmt.Sprintf("go.tools.TMP.%s.%s", runtime.GOOS, runtime.GOARCH)
+	var tempBase = fmt.Sprintf("go.tools.TMP.%s.%s", run_time.GOOS, run_time.GOARCH)
 
 	username := ""
 	u, err := user.Current()
@@ -111,7 +111,7 @@ func prepGoPath() string {
 	}
 
 	// The GOPATH we'll return
-	gopath := filepath.Join(os.TempDir(), "gopath-api-"+cleanUsername(username)+"-"+cleanUsername(strings.Fields(runtime.Version())[0]), goToolsVersion)
+	gopath := filepath.Join(os.TempDir(), "gopath-api-"+cleanUsername(username)+"-"+cleanUsername(strings.Fields(run_time.Version())[0]), goToolsVersion)
 
 	// cloneDir is where we run "git clone".
 	cloneDir := filepath.Join(gopath, "src", "code.google.com", "p")

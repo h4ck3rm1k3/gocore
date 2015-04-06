@@ -6,7 +6,7 @@ package net
 
 import (
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -461,7 +461,7 @@ var ipAddrScopeTests = []struct {
 }
 
 func name(f interface{}) string {
-	return runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
+	return run_time.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
 }
 
 func TestIPAddrScope(t *testing.T) {

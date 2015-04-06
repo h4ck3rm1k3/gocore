@@ -6,7 +6,7 @@ package atomic_test
 
 import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	. "github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"testing"
@@ -881,7 +881,7 @@ func TestHammer32(t *testing.T) {
 	if testing.Short() {
 		n = 1000
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(p))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(p))
 
 	for name, testf := range hammer32 {
 		c := make(chan int)
@@ -1035,7 +1035,7 @@ func TestHammer64(t *testing.T) {
 	if testing.Short() {
 		n = 1000
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(p))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(p))
 
 	for name, testf := range hammer64 {
 		c := make(chan int)
@@ -1182,7 +1182,7 @@ func TestHammerStoreLoad(t *testing.T) {
 		n = int(1e4)
 	}
 	const procs = 8
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(procs))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(procs))
 	for _, tt := range tests {
 		c := make(chan int)
 		var val uint64
@@ -1201,10 +1201,10 @@ func TestHammerStoreLoad(t *testing.T) {
 }
 
 func TestStoreLoadSeqCst32(t *testing.T) {
-	if runtime.NumCPU() == 1 {
-		t.Skipf("Skipping test on %v processor machine", runtime.NumCPU())
+	if run_time.NumCPU() == 1 {
+		t.Skipf("Skipping test on %v processor machine", run_time.NumCPU())
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	N := int32(1e3)
 	if testing.Short() {
 		N = int32(1e2)
@@ -1221,7 +1221,7 @@ func TestStoreLoadSeqCst32(t *testing.T) {
 				StoreInt32(&ack[me][i%3], my)
 				for w := 1; LoadInt32(&ack[he][i%3]) == -1; w++ {
 					if w%1000 == 0 {
-						runtime.Gosched()
+						run_time.Gosched()
 					}
 				}
 				his := LoadInt32(&ack[he][i%3])
@@ -1241,13 +1241,13 @@ func TestStoreLoadSeqCst32(t *testing.T) {
 }
 
 func TestStoreLoadSeqCst64(t *testing.T) {
-	if runtime.NumCPU() == 1 {
-		t.Skipf("Skipping test on %v processor machine", runtime.NumCPU())
+	if run_time.NumCPU() == 1 {
+		t.Skipf("Skipping test on %v processor machine", run_time.NumCPU())
 	}
 	if test64err != nil {
 		t.Skipf("Skipping 64-bit tests: %v", test64err)
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	N := int64(1e3)
 	if testing.Short() {
 		N = int64(1e2)
@@ -1264,7 +1264,7 @@ func TestStoreLoadSeqCst64(t *testing.T) {
 				StoreInt64(&ack[me][i%3], my)
 				for w := 1; LoadInt64(&ack[he][i%3]) == -1; w++ {
 					if w%1000 == 0 {
-						runtime.Gosched()
+						run_time.Gosched()
 					}
 				}
 				his := LoadInt64(&ack[he][i%3])
@@ -1284,10 +1284,10 @@ func TestStoreLoadSeqCst64(t *testing.T) {
 }
 
 func TestStoreLoadRelAcq32(t *testing.T) {
-	if runtime.NumCPU() == 1 {
-		t.Skipf("Skipping test on %v processor machine", runtime.NumCPU())
+	if run_time.NumCPU() == 1 {
+		t.Skipf("Skipping test on %v processor machine", run_time.NumCPU())
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	N := int32(1e3)
 	if testing.Short() {
 		N = int32(1e2)
@@ -1311,7 +1311,7 @@ func TestStoreLoadRelAcq32(t *testing.T) {
 				} else {
 					for w := 1; LoadInt32(&X.signal) != i; w++ {
 						if w%1000 == 0 {
-							runtime.Gosched()
+							run_time.Gosched()
 						}
 					}
 					d1 := X.data1
@@ -1329,13 +1329,13 @@ func TestStoreLoadRelAcq32(t *testing.T) {
 }
 
 func TestStoreLoadRelAcq64(t *testing.T) {
-	if runtime.NumCPU() == 1 {
-		t.Skipf("Skipping test on %v processor machine", runtime.NumCPU())
+	if run_time.NumCPU() == 1 {
+		t.Skipf("Skipping test on %v processor machine", run_time.NumCPU())
 	}
 	if test64err != nil {
 		t.Skipf("Skipping 64-bit tests: %v", test64err)
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	N := int64(1e3)
 	if testing.Short() {
 		N = int64(1e2)
@@ -1359,7 +1359,7 @@ func TestStoreLoadRelAcq64(t *testing.T) {
 				} else {
 					for w := 1; LoadInt64(&X.signal) != i; w++ {
 						if w%1000 == 0 {
-							runtime.Gosched()
+							run_time.Gosched()
 						}
 					}
 					d1 := X.data1
@@ -1403,10 +1403,10 @@ func TestUnaligned64(t *testing.T) {
 }
 
 func TestNilDeref(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin", "freebsd", "netbsd":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("issue 7338: skipping test on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("issue 7338: skipping test on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 	funcs := [...]func(){
@@ -1443,7 +1443,7 @@ func TestNilDeref(t *testing.T) {
 	for _, f := range funcs {
 		func() {
 			defer func() {
-				runtime.GC()
+				run_time.GC()
 				recover()
 			}()
 			f()

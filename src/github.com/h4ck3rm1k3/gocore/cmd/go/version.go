@@ -6,14 +6,14 @@ package main
 
 import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 )
 
 var cmdVersion = &Command{
 	Run:       runVersion,
 	UsageLine: "version",
 	Short:     "print Go version",
-	Long:      `Version prints the Go version, as reported by runtime.Version.`,
+	Long:      `Version prints the Go version, as reported by run_time.Version.`,
 }
 
 func runVersion(cmd *Command, args []string) {
@@ -21,5 +21,5 @@ func runVersion(cmd *Command, args []string) {
 		cmd.Usage()
 	}
 
-	fmt.Printf("go version %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("go version %s %s/%s\n", run_time.Version(), run_time.GOOS, run_time.GOARCH)
 }

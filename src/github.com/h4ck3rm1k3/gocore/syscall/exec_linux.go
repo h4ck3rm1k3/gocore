@@ -35,9 +35,9 @@ type SysProcAttr struct {
 	GidMappings []SysProcIDMap // Group ID mappings for user namespaces.
 }
 
-// Implemented in runtime package.
-func runtime_BeforeFork()
-func runtime_AfterFork()
+// Implemented in run_time package.
+func run_time_BeforeFork()
+func run_time_AfterFork()
 
 // Fork, dup fd onto 0..len(fd), and exec(argv0, argvv, envv) in child.
 // If a dup or exec fails, write the errno error to pipe.
@@ -86,16 +86,16 @@ func forkAndExecInChild(argv0 *byte, argv, envv []*byte, chroot, dir *byte, attr
 
 	// About to call fork.
 	// No more allocation or calls of non-assembly functions.
-	runtime_BeforeFork()
+	run_time_BeforeFork()
 	r1, _, err1 = RawSyscall6(SYS_CLONE, uintptr(SIGCHLD)|sys.Cloneflags, 0, 0, 0, 0, 0)
 	if err1 != 0 {
-		runtime_AfterFork()
+		run_time_AfterFork()
 		return 0, err1
 	}
 
 	if r1 != 0 {
 		// parent; return PID
-		runtime_AfterFork()
+		run_time_AfterFork()
 		pid = int(r1)
 
 		if sys.UidMappings != nil || sys.GidMappings != nil {

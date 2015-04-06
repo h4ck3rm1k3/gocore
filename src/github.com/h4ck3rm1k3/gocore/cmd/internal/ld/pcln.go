@@ -198,13 +198,13 @@ func container(s *LSym) int {
 }
 
 // pclntab initializes the pclntab symbol with
-// runtime function and file name information.
+// run_time function and file name information.
 
 var pclntab_zpcln Pcln
 
 func pclntab() {
 	funcdata_bytes := int64(0)
-	ftab := Linklookup(Ctxt, "runtime.pclntab", 0)
+	ftab := Linklookup(Ctxt, "run_time.pclntab", 0)
 	ftab.Type = SPCLNTAB
 	ftab.Reachable = true
 
@@ -360,9 +360,9 @@ const (
 )
 
 // findfunctab generates a lookup table to quickly find the containing
-// function for a pc.  See src/runtime/symtab.go:findfunc for details.
+// function for a pc.  See src/run_time/symtab.go:findfunc for details.
 func findfunctab() {
-	t := Linklookup(Ctxt, "runtime.findfunctab", 0)
+	t := Linklookup(Ctxt, "run_time.findfunctab", 0)
 	t.Type = SRODATA
 	t.Reachable = true
 

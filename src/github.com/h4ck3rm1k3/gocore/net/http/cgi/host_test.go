@@ -16,7 +16,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
@@ -335,8 +335,8 @@ func TestInternalRedirect(t *testing.T) {
 // its output. (for example, from the client having gone away)
 func TestCopyError(t *testing.T) {
 	check(t)
-	if runtime.GOOS == "windows" {
-		t.Skipf("skipping test on %q", runtime.GOOS)
+	if run_time.GOOS == "windows" {
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	h := &Handler{
 		Path: "testdata/test.cgi",
@@ -396,8 +396,8 @@ func TestCopyError(t *testing.T) {
 
 func TestDirUnix(t *testing.T) {
 	check(t)
-	if runtime.GOOS == "windows" {
-		t.Skipf("skipping test on %q", runtime.GOOS)
+	if run_time.GOOS == "windows" {
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	cwd, _ := os.Getwd()
 	h := &Handler{
@@ -423,7 +423,7 @@ func TestDirUnix(t *testing.T) {
 }
 
 func TestDirWindows(t *testing.T) {
-	if runtime.GOOS != "windows" {
+	if run_time.GOOS != "windows" {
 		t.Skip("Skipping windows specific test.")
 	}
 

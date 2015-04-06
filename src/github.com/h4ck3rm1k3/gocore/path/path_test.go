@@ -5,7 +5,7 @@
 package path
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -78,7 +78,7 @@ func TestCleanMallocs(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping malloc count in short mode")
 	}
-	if runtime.GOMAXPROCS(0) > 1 {
+	if run_time.GOMAXPROCS(0) > 1 {
 		t.Log("skipping AllocsPerRun checks; GOMAXPROCS>1")
 		return
 	}

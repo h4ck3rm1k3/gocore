@@ -6,14 +6,19 @@ package time
 
 // Sleep pauses the current goroutine for at least the duration d.
 // A negative or zero duration causes Sleep to return immediately.
-func Sleep(d Duration)
+func Sleep(d Duration) {
+	panic("not implmented")
+}
 
-// runtimeNano returns the current value of the runtime clock in nanoseconds.
-func runtimeNano() int64
+// run_timeNano returns the current value of the run_time clock in nanoseconds.
+func run_timeNano() int64 {
+	panic("not implmented")
+	return 0
+}
 
-// Interface to timers implemented in package runtime.
-// Must be in sync with ../runtime/runtime.h:/^struct.Timer$
-type runtimeTimer struct {
+// Interface to timers implemented in package run_time.
+// Must be in sync with ../run_time/run_time.h:/^struct.Timer$
+type run_timeTimer struct {
 	i      int
 	when   int64
 	period int64
@@ -22,23 +27,23 @@ type runtimeTimer struct {
 	seq    uintptr
 }
 
-// when is a helper function for setting the 'when' field of a runtimeTimer.
+// when is a helper function for setting the 'when' field of a run_timeTimer.
 // It returns what the time will be, in nanoseconds, Duration d in the future.
 // If d is negative, it is ignored.  If the returned value would be less than
 // zero because of an overflow, MaxInt64 is returned.
 func when(d Duration) int64 {
 	if d <= 0 {
-		return runtimeNano()
+		return run_timeNano()
 	}
-	t := runtimeNano() + int64(d)
+	t := run_timeNano() + int64(d)
 	if t < 0 {
 		t = 1<<63 - 1 // math.MaxInt64
 	}
 	return t
 }
 
-func startTimer(*runtimeTimer)
-func stopTimer(*runtimeTimer) bool
+func startTimer(*run_timeTimer)
+func stopTimer(*run_timeTimer) bool
 
 // The Timer type represents a single event.
 // When the Timer expires, the current time will be sent on C,
@@ -46,7 +51,7 @@ func stopTimer(*runtimeTimer) bool
 // A Timer must be created with NewTimer or AfterFunc.
 type Timer struct {
 	C <-chan Time
-	r runtimeTimer
+	r run_timeTimer
 }
 
 // Stop prevents the Timer from firing.
@@ -67,7 +72,7 @@ func NewTimer(d Duration) *Timer {
 	c := make(chan Time, 1)
 	t := &Timer{
 		C: c,
-		r: runtimeTimer{
+		r: run_timeTimer{
 			when: when(d),
 			f:    sendTime,
 			arg:  c,
@@ -115,7 +120,7 @@ func After(d Duration) <-chan Time {
 // be used to cancel the call using its Stop method.
 func AfterFunc(d Duration, f func()) *Timer {
 	t := &Timer{
-		r: runtimeTimer{
+		r: run_timeTimer{
 			when: when(d),
 			f:    goFunc,
 			arg:  f,

@@ -2,13 +2,13 @@
 
 package obj
 
-import "github.com/h4ck3rm1k3/gocore/runtime"
+import "github.com/h4ck3rm1k3/gocore/run_time"
 
 const defaultGOROOT = `/home/h4ck3rm1k3/go`
 const defaultGO386 = `387`
 const defaultGOARM = `5`
-const defaultGOOS = runtime.GOOS
-const defaultGOARCH = runtime.GOARCH
+const defaultGOOS = run_time.GOOS
+const defaultGOARCH = run_time.GOARCH
 const defaultGO_EXTLINK_ENABLED = ``
 const version = `devel +04bab37 Fri Mar 20 12:12:53 2015 +0000`
 const goexperiment = ``

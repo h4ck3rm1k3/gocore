@@ -5,7 +5,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync/atomic"
 	stdsyscall "github.com/h4ck3rm1k3/gocore/syscall"
 	"unsafe"
@@ -17,7 +17,7 @@ var randomTrap = map[string]uintptr{
 	"arm":     384,
 	"ppc64":   359,
 	"ppc64le": 359,
-}[runtime.GOARCH]
+}[run_time.GOARCH]
 
 var randomUnsupported int32 // atomic
 

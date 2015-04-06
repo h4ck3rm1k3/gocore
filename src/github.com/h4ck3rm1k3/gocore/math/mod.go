@@ -18,7 +18,9 @@ package math
 //	Mod(x, 0) = NaN
 //	Mod(x, ±Inf) = x
 //	Mod(x, NaN) = NaN
-func Mod(x, y float64) float64
+func Mod(x, y float64) float64 {
+	return mod(x,y)
+}
 
 func mod(x, y float64) float64 {
 	if y == 0 || IsInf(x, 0) || IsNaN(x) || IsNaN(y) {

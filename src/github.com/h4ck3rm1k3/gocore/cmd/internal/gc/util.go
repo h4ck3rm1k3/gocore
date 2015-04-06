@@ -3,7 +3,7 @@ package gc
 import (
 	"github.com/h4ck3rm1k3/gocore/cmd/internal/obj"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime/pprof"
+	"github.com/h4ck3rm1k3/gocore/run_time/pprof"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )

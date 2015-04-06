@@ -7,7 +7,7 @@
 package net
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
 )
@@ -44,9 +44,9 @@ var listenerTests = []struct {
 // listener with same address family, same listening address and
 // same port.
 func TestTCPListener(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	for _, tt := range listenerTests {
@@ -68,9 +68,9 @@ func TestTCPListener(t *testing.T) {
 // listener with same address family, same listening address and
 // same port.
 func TestUDPListener(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	toudpnet := func(net string) string {
@@ -172,9 +172,9 @@ func TestDualStackTCPListener(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping in -short mode, see issue 5001")
 	}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	if !supportsIPv6 {
 		t.Skip("ipv6 is not supported")
@@ -184,7 +184,7 @@ func TestDualStackTCPListener(t *testing.T) {
 		if tt.wildcard && !*testExternal {
 			continue
 		}
-		switch runtime.GOOS {
+		switch run_time.GOOS {
 		case "openbsd":
 			if tt.wildcard && differentWildcardAddr(tt.laddr1, tt.laddr2) {
 				tt.xerr = nil
@@ -207,9 +207,9 @@ func TestDualStackUDPListener(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping in -short mode, see issue 5001")
 	}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	if !supportsIPv6 {
 		t.Skip("ipv6 is not supported")
@@ -233,7 +233,7 @@ func TestDualStackUDPListener(t *testing.T) {
 		}
 		tt.net1 = toudpnet(tt.net1)
 		tt.net2 = toudpnet(tt.net2)
-		switch runtime.GOOS {
+		switch run_time.GOOS {
 		case "openbsd":
 			if tt.wildcard && differentWildcardAddr(tt.laddr1, tt.laddr2) {
 				tt.xerr = nil
@@ -414,9 +414,9 @@ var prohibitionaryDialArgTests = []struct {
 }
 
 func TestProhibitionaryDialArgs(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	// This test requires both IPv6 and IPv6 IPv4-mapping functionality.
 	if !supportsIPv4map || testing.Short() || !*testExternal {
@@ -436,9 +436,9 @@ func TestProhibitionaryDialArgs(t *testing.T) {
 }
 
 func TestWildWildcardListener(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 
 	if testing.Short() || !*testExternal {

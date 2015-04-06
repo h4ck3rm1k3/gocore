@@ -5,7 +5,7 @@
 package os
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -41,7 +41,7 @@ func NewFile(fd uintptr, name string) *File {
 		return nil
 	}
 	f := &File{&file{fd: fdi, name: name}}
-	runtime.SetFinalizer(f.file, (*file).close)
+	run_time.SetFinalizer(f.file, (*file).close)
 	return f
 }
 
@@ -153,7 +153,7 @@ func (file *file) close() error {
 	file.fd = -1 // so it can't be closed again
 
 	// no need for a finalizer anymore
-	runtime.SetFinalizer(file, nil)
+	run_time.SetFinalizer(file, nil)
 	return err
 }
 

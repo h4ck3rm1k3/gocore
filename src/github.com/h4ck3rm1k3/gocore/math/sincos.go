@@ -12,7 +12,9 @@ package math
 //	Sincos(±0) = ±0, 1
 //	Sincos(±Inf) = NaN, NaN
 //	Sincos(NaN) = NaN, NaN
-func Sincos(x float64) (sin, cos float64)
+func Sincos(x float64) (sin, cos float64) {
+	return sincos(x)
+}
 
 func sincos(x float64) (sin, cos float64) {
 	const (

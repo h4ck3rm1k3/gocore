@@ -9,7 +9,7 @@ package net
 
 import (
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -26,10 +26,10 @@ func packetConnTestData(t *testing.T, net string, i int) ([]byte, func()) {
 	case "udp":
 		return []byte("UDP PACKETCONN TEST"), nil
 	case "unixgram":
-		switch runtime.GOOS {
+		switch run_time.GOOS {
 		case "nacl", "plan9", "windows":
 			return nil, func() {
-				t.Logf("skipping %q test on %q", net, runtime.GOOS)
+				t.Logf("skipping %q test on %q", net, run_time.GOOS)
 			}
 		default:
 			return []byte("UNIXGRAM PACKETCONN TEST"), nil
@@ -51,7 +51,7 @@ var packetConnTests = []struct {
 }
 
 func TestPacketConn(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		t.Skip("skipping test on darwin/arm")
 	}
 	closer := func(c PacketConn, net, addr1, addr2 string) {
@@ -109,7 +109,7 @@ func TestPacketConn(t *testing.T) {
 }
 
 func TestConnAndPacketConn(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		t.Skip("skipping test on darwin/arm")
 	}
 	closer := func(c PacketConn, net, addr1, addr2 string) {

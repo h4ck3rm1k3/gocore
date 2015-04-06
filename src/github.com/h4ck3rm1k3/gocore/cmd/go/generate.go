@@ -13,7 +13,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/unicode"
@@ -343,9 +343,9 @@ func (g *Generator) expandEnv(word string) string {
 		var sub string
 		switch envVar {
 		case "GOARCH":
-			sub = runtime.GOARCH
+			sub = run_time.GOARCH
 		case "GOOS":
-			sub = runtime.GOOS
+			sub = run_time.GOOS
 		case "GOFILE":
 			sub = g.file
 		case "GOPACKAGE":
@@ -394,8 +394,8 @@ func (g *Generator) exec(words []string) {
 	// Run the command in the package directory.
 	cmd.Dir = g.dir
 	env := []string{
-		"GOARCH=" + runtime.GOARCH,
-		"GOOS=" + runtime.GOOS,
+		"GOARCH=" + run_time.GOARCH,
+		"GOOS=" + run_time.GOOS,
 		"GOFILE=" + g.file,
 		"GOPACKAGE=" + g.pkg,
 	}

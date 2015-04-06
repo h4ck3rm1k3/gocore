@@ -115,7 +115,7 @@ func (f *peFile) pcln() (textStart uint64, symtab, pclntab []byte, err error) {
 	if sect := f.pe.Section(".text"); sect != nil {
 		textStart = imageBase + uint64(sect.VirtualAddress)
 	}
-	if pclntab, err = loadPETable(f.pe, "runtime.pclntab", "runtime.epclntab"); err != nil {
+	if pclntab, err = loadPETable(f.pe, "run_time.pclntab", "run_time.epclntab"); err != nil {
 		// We didn't find the symbols, so look for the names used in 1.3 and earlier.
 		// TODO: Remove code looking for the old symbols when we no longer care about 1.3.
 		var err2 error
@@ -123,7 +123,7 @@ func (f *peFile) pcln() (textStart uint64, symtab, pclntab []byte, err error) {
 			return 0, nil, nil, err
 		}
 	}
-	if symtab, err = loadPETable(f.pe, "runtime.symtab", "runtime.esymtab"); err != nil {
+	if symtab, err = loadPETable(f.pe, "run_time.symtab", "run_time.esymtab"); err != nil {
 		// Same as above.
 		var err2 error
 		if symtab, err2 = loadPETable(f.pe, "symtab", "esymtab"); err2 != nil {

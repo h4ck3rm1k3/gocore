@@ -5,7 +5,7 @@
 package big
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
@@ -167,11 +167,11 @@ func TestMulRangeN(t *testing.T) {
 
 // allocBytes returns the number of bytes allocated by invoking f.
 func allocBytes(f func()) uint64 {
-	var stats runtime.MemStats
-	runtime.ReadMemStats(&stats)
+	var stats run_time.MemStats
+	run_time.ReadMemStats(&stats)
 	t := stats.TotalAlloc
 	f()
-	runtime.ReadMemStats(&stats)
+	run_time.ReadMemStats(&stats)
 	return stats.TotalAlloc - t
 }
 
@@ -179,7 +179,7 @@ func allocBytes(f func()) uint64 {
 // does not cause deep recursion and in turn allocate too much memory.
 // Test case for issue 3807.
 func TestMulUnbalanced(t *testing.T) {
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(1))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(1))
 	x := rndNat(50000)
 	y := rndNat(40)
 	allocSize := allocBytes(func() {

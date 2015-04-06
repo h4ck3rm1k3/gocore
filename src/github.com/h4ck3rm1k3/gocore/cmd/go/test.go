@@ -19,7 +19,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/path"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/text/template"
@@ -134,8 +134,8 @@ control the execution of any test:
 
 	-blockprofilerate n
 	    Control the detail provided in goroutine blocking profiles by
-	    calling runtime.SetBlockProfileRate with n.
-	    See 'godoc runtime SetBlockProfileRate'.
+	    calling run_time.SetBlockProfileRate with n.
+	    See 'godoc run_time SetBlockProfileRate'.
 	    The profiler aims to sample, on average, one blocking event every
 	    n nanoseconds the program spends blocked.  By default,
 	    if -test.blockprofile is set without this flag, all blocking events
@@ -180,7 +180,7 @@ control the execution of any test:
 
 	-memprofilerate n
 	    Enable more precise (and expensive) memory profiles by setting
-	    runtime.MemProfileRate.  See 'godoc runtime MemProfileRate'.
+	    run_time.MemProfileRate.  See 'godoc run_time MemProfileRate'.
 	    To profile all memory allocations, use -test.memprofilerate=1
 	    and pass --alloc_space flag to the pprof tool.
 
@@ -376,11 +376,11 @@ func runTest(cmd *Command, args []string) {
 			}
 		}
 
-		// translate C to runtime/cgo
+		// translate C to run_time/cgo
 		if deps["C"] {
 			delete(deps, "C")
-			deps["github.com/h4ck3rm1k3/gocore/runtime/cgo"] = true
-			if buildContext.GOOS == runtime.GOOS && buildContext.GOARCH == runtime.GOARCH {
+			deps["github.com/h4ck3rm1k3/gocore/run_time/cgo"] = true
+			if buildContext.GOOS == run_time.GOOS && buildContext.GOARCH == run_time.GOARCH {
 				deps["cmd/cgo"] = true
 			}
 		}
@@ -1317,7 +1317,7 @@ import (
 {{end}}
 
 {{if .NeedCgo}}
-	_ "github.com/h4ck3rm1k3/gocore/runtime/cgo"
+	_ "github.com/h4ck3rm1k3/gocore/run_time/cgo"
 {{end}}
 )
 

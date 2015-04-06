@@ -14,7 +14,7 @@
 //      1: 40-nodes leaf functions, oneliners, lazy typechecking (default)
 //      2: early typechecking of all imported bodies
 //      3: allow variadic functions
-//      4: allow non-leaf functions , (breaks runtime.Caller)
+//      4: allow non-leaf functions , (breaks run_time.Caller)
 //
 //  At some point this may get another default and become switch-offable with -N.
 //

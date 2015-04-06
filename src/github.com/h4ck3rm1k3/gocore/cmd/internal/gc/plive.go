@@ -297,7 +297,7 @@ func iscall(prog *obj.Prog, name *obj.LSym) bool {
 	return name == prog.To.Sym
 }
 
-// Returns true for instructions that call a runtime function implementing a
+// Returns true for instructions that call a run_time function implementing a
 // select communication clause.
 
 var selectNames [4]*obj.LSym
@@ -318,7 +318,7 @@ func isselectcommcasecall(prog *obj.Prog) bool {
 	return false
 }
 
-// Returns true for call instructions that target runtime·newselect.
+// Returns true for call instructions that target run_time·newselect.
 
 var isnewselect_sym *obj.LSym
 
@@ -329,7 +329,7 @@ func isnewselect(prog *obj.Prog) bool {
 	return iscall(prog, isnewselect_sym)
 }
 
-// Returns true for call instructions that target runtime·selectgo.
+// Returns true for call instructions that target run_time·selectgo.
 
 var isselectgocall_sym *obj.LSym
 
@@ -349,9 +349,9 @@ func isdeferreturn(prog *obj.Prog) bool {
 	return iscall(prog, isdeferreturn_sym)
 }
 
-// Walk backwards from a runtime·selectgo call up to its immediately dominating
-// runtime·newselect call.  Any successor nodes of communication clause nodes
-// are implicit successors of the runtime·selectgo call node.  The goal of this
+// Walk backwards from a run_time·selectgo call up to its immediately dominating
+// run_time·newselect call.  Any successor nodes of communication clause nodes
+// are implicit successors of the run_time·selectgo call node.  The goal of this
 // analysis is to add these missing edges to complete the control flow graph.
 func addselectgosucc(selectgo *BasicBlock) {
 	var succ *BasicBlock
@@ -1441,7 +1441,7 @@ func livenessepilogue(lv *Liveness) {
 				// The TEXT instruction annotation is implicit.
 				if p.As == obj.ACALL {
 					if isdeferreturn(p) {
-						// runtime.deferreturn modifies its return address to return
+						// run_time.deferreturn modifies its return address to return
 						// back to the CALL, not to the subsequent instruction.
 						// Because the return comes back one instruction early,
 						// the PCDATA must begin one instruction early too.
@@ -1770,7 +1770,7 @@ func printprog(p *obj.Prog) {
 }
 
 // Entry pointer for liveness analysis.  Constructs a complete CFG, solves for
-// the liveness of pointer variables in the function, and emits a runtime data
+// the liveness of pointer variables in the function, and emits a run_time data
 // structure read by the garbage collector.
 func liveness(fn *Node, firstp *obj.Prog, argssym *Sym, livesym *Sym) {
 	// Change name to dump debugging information only for a specific function.

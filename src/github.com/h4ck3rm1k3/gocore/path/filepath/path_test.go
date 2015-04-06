@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
@@ -95,7 +95,7 @@ var wincleantests = []PathTest{
 
 func TestClean(t *testing.T) {
 	tests := cleantests
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		for i := range tests {
 			tests[i].result = filepath.FromSlash(tests[i].result)
 		}
@@ -113,7 +113,7 @@ func TestClean(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping malloc count in short mode")
 	}
-	if runtime.GOMAXPROCS(0) > 1 {
+	if run_time.GOMAXPROCS(0) > 1 {
 		t.Log("skipping AllocsPerRun checks; GOMAXPROCS>1")
 		return
 	}
@@ -183,7 +183,7 @@ var winsplitlisttests = []SplitListTest{
 
 func TestSplitList(t *testing.T) {
 	tests := splitlisttests
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		tests = append(tests, winsplitlisttests...)
 	}
 	for _, test := range tests {
@@ -221,7 +221,7 @@ var winsplittests = []SplitTest{
 func TestSplit(t *testing.T) {
 	var splittests []SplitTest
 	splittests = unixsplittests
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		splittests = append(splittests, winsplittests...)
 	}
 	for _, test := range splittests {
@@ -283,7 +283,7 @@ var winjointests = []JoinTest{
 }
 
 func TestJoin(t *testing.T) {
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		jointests = append(jointests, winjointests...)
 	}
 	for _, test := range jointests {
@@ -420,7 +420,7 @@ func chtmpdir(t *testing.T) (restore func()) {
 }
 
 func TestWalk(t *testing.T) {
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
 		restore := chtmpdir(t)
 		defer restore()
 	}
@@ -581,7 +581,7 @@ var winbasetests = []PathTest{
 
 func TestBase(t *testing.T) {
 	tests := basetests
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		// make unix tests work on windows
 		for i := range tests {
 			tests[i].result = filepath.Clean(tests[i].result)
@@ -624,7 +624,7 @@ var windirtests = []PathTest{
 
 func TestDir(t *testing.T) {
 	tests := dirtests
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		// make unix tests work on windows
 		for i := range tests {
 			tests[i].result = filepath.Clean(tests[i].result)
@@ -672,7 +672,7 @@ var winisabstests = []IsAbsTest{
 
 func TestIsAbs(t *testing.T) {
 	var tests []IsAbsTest
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		tests = append(tests, winisabstests...)
 		// All non-windows tests should fail, because they have no volume letter.
 		for _, test := range isabstests {
@@ -731,9 +731,9 @@ func simpleJoin(dir, path string) string {
 }
 
 func TestEvalSymlinks(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	}
 
 	tmpDir, err := ioutil.TempDir("", "evalsymlink")
@@ -845,7 +845,7 @@ func TestAbs(t *testing.T) {
 		}
 	}
 
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		vol := filepath.VolumeName(root)
 		var extra []string
 		for _, path := range absTests {
@@ -945,7 +945,7 @@ var winreltests = []RelTests{
 
 func TestRel(t *testing.T) {
 	tests := append([]RelTests{}, reltests...)
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		for i := range tests {
 			tests[i].want = filepath.FromSlash(tests[i].want)
 		}
@@ -999,7 +999,7 @@ var volumenametests = []VolumeNameTest{
 }
 
 func TestVolumeName(t *testing.T) {
-	if runtime.GOOS != "windows" {
+	if run_time.GOOS != "windows" {
 		return
 	}
 	for _, v := range volumenametests {
@@ -1010,7 +1010,7 @@ func TestVolumeName(t *testing.T) {
 }
 
 func TestDriveLetterInEvalSymlinks(t *testing.T) {
-	if runtime.GOOS != "windows" {
+	if run_time.GOOS != "windows" {
 		return
 	}
 	wd, _ := os.Getwd()
@@ -1033,10 +1033,10 @@ func TestDriveLetterInEvalSymlinks(t *testing.T) {
 }
 
 func TestBug3486(t *testing.T) { // http://golang.org/issue/3486
-	if runtime.GOOS == "darwin" && runtime.GOARCH == "arm" {
-		t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && run_time.GOARCH == "arm" {
+		t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
-	root, err := filepath.EvalSymlinks(runtime.GOROOT() + "/test")
+	root, err := filepath.EvalSymlinks(run_time.GOROOT() + "/test")
 	if err != nil {
 		t.Fatal(err)
 	}

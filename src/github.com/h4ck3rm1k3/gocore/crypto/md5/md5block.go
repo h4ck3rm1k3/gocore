@@ -8,11 +8,11 @@
 package md5
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"unsafe"
 )
 
-const x86 = runtime.GOARCH == "amd64" || runtime.GOARCH == "386"
+const x86 = run_time.GOARCH == "amd64" || run_time.GOARCH == "386"
 
 var littleEndian bool
 

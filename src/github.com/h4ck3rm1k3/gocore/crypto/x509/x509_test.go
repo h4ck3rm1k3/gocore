@@ -22,7 +22,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/net"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -826,12 +826,12 @@ func TestParsePEMCRL(t *testing.T) {
 }
 
 func TestImports(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 

@@ -6,7 +6,7 @@ package os
 
 import (
 	"github.com/h4ck3rm1k3/gocore/errors"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/time"
 	"unsafe"
@@ -76,7 +76,7 @@ func (p *Process) release() error {
 	}
 	p.handle = uintptr(syscall.InvalidHandle)
 	// no need for a finalizer anymore
-	runtime.SetFinalizer(p, nil)
+	run_time.SetFinalizer(p, nil)
 	return nil
 }
 

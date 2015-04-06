@@ -18,7 +18,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime/pprof"
+	"github.com/h4ck3rm1k3/gocore/run_time/pprof"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
 

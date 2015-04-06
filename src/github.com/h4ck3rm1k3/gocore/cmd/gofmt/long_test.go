@@ -18,15 +18,15 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
 
 var (
-	root    = flag.String("root", runtime.GOROOT(), "test root directory")
+	root    = flag.String("root", run_time.GOROOT(), "test root directory")
 	files   = flag.String("files", "", "comma-separated list of files to test")
-	ngo     = flag.Int("n", runtime.NumCPU(), "number of goroutines used")
+	ngo     = flag.Int("n", run_time.NumCPU(), "number of goroutines used")
 	verbose = flag.Bool("verbose", false, "verbose mode")
 	nfiles  int // number of files processed
 )

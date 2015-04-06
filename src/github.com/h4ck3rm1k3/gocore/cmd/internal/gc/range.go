@@ -166,7 +166,7 @@ func walkrange(n *Node) {
 	default:
 		Fatal("walkrange")
 
-		// Lower n into runtime·memclr if possible, for
+		// Lower n into run_time·memclr if possible, for
 	// fast zeroing of slices and arrays (issue 5373).
 	// Look for instances of
 	//

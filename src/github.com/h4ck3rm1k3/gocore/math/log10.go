@@ -6,7 +6,9 @@ package math
 
 // Log10 returns the decimal logarithm of x.
 // The special cases are the same as for Log.
-func Log10(x float64) float64
+func Log10(x float64) float64 {
+	return log10(x)
+}
 
 func log10(x float64) float64 {
 	return Log(x) * (1 / Ln10)
@@ -14,7 +16,9 @@ func log10(x float64) float64 {
 
 // Log2 returns the binary logarithm of x.
 // The special cases are the same as for Log.
-func Log2(x float64) float64
+func Log2(x float64) float64 {
+	return log2(2)
+}
 
 func log2(x float64) float64 {
 	frac, exp := Frexp(x)

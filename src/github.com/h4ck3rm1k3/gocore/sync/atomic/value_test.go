@@ -6,7 +6,7 @@ package atomic_test
 
 import (
 	"github.com/h4ck3rm1k3/gocore/math/rand"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	. "github.com/h4ck3rm1k3/gocore/sync/atomic"
 	"testing"
@@ -85,7 +85,7 @@ func TestValueConcurrent(t *testing.T) {
 		{uint64(0), ^uint64(0), uint64(1 + 2<<32), uint64(3 + 4<<32)},
 		{complex(0, 0), complex(1, 2), complex(3, 4), complex(5, 6)},
 	}
-	p := 4 * runtime.GOMAXPROCS(0)
+	p := 4 * run_time.GOMAXPROCS(0)
 	for _, test := range tests {
 		var v Value
 		done := make(chan bool)

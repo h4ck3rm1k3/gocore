@@ -9,7 +9,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"unsafe"
 )
@@ -158,7 +158,7 @@ func forkExec(argv0 string, argv []string, attr *ProcAttr) (pid int, err error) 
 		return 0, err
 	}
 
-	if (runtime.GOOS == "freebsd" || runtime.GOOS == "dragonfly") && len(argv[0]) > len(argv0) {
+	if (run_time.GOOS == "freebsd" || run_time.GOOS == "dragonfly") && len(argv[0]) > len(argv0) {
 		argvp[0] = argv0p
 	}
 

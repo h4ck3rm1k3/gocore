@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // This program generates a .s file using a pseudorandom
-// value stream for the runtime function data.
+// value stream for the run_time function data.
 // The pclntab test checks that the linked copy
 // still has the same pseudorandom value stream.
 
@@ -107,6 +107,6 @@ func main() {
 	for f := 0; f < 3; f++ {
 		fmt.Printf("\tCALL func%d(SB)\n", f)
 	}
-	fmt.Printf("\tMOVQ $runtime·pclntab(SB), AX\n")
+	fmt.Printf("\tMOVQ $run_time·pclntab(SB), AX\n")
 	fmt.Printf("\n\tRET\n")
 }

@@ -45,7 +45,7 @@ package obj
 // Pseudo-assembly statements.
 
 // GO_ARGS, GO_RESULTS_INITIALIZED, and NO_LOCAL_POINTERS are macros
-// that communicate to the runtime information about the location and liveness
+// that communicate to the run_time information about the location and liveness
 // of pointers in an assembly function's arguments, results, and stack frame.
 // This communication is only required in assembly functions that make calls
 // to other functions that might be preempted or grow the stack.

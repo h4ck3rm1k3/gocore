@@ -506,7 +506,7 @@ func initdynimport() *Dll {
 		}
 
 		// Because external link requires properly stdcall decorated name,
-		// all external symbols in runtime use %n to denote that the number
+		// all external symbols in run_time use %n to denote that the number
 		// of uinptrs this function consumes. Store the argsize and discard
 		// the %n suffix if any.
 		m.argsize = -1
@@ -965,7 +965,7 @@ func addpesym(s *LSym, name string, type_ int, addr int64, size int64, ver int, 
 		if len(s.Name) > 8 {
 			cs.strtbloff = strtbladd(s.Name)
 		}
-		// Note: although address of runtime.edata (type SDATA) is at the start of .bss section
+		// Note: although address of run_time.edata (type SDATA) is at the start of .bss section
 		// it still belongs to the .data section, not the .bss section.
 		if uint64(s.Value) >= Segdata.Vaddr+Segdata.Filelen && s.Type != SDATA && Linkmode == LinkExternal {
 			cs.value = int64(uint64(s.Value) - Segdata.Vaddr - Segdata.Filelen)
@@ -1228,10 +1228,10 @@ func Asmbpe() {
 
 	// Go code would be OK with 64k stacks, but we need larger stacks for cgo.
 	// That default stack reserve size affects only the main thread,
-	// for other threads we specify stack size in runtime explicitly
-	// (runtime knows whether cgo is enabled or not).
+	// for other threads we specify stack size in run_time explicitly
+	// (run_time knows whether cgo is enabled or not).
 	// If you change stack reserve sizes here,
-	// change STACKSIZE in runtime/cgo/gcc_windows_{386,amd64}.c as well.
+	// change STACKSIZE in run_time/cgo/gcc_windows_{386,amd64}.c as well.
 	if !iscgo {
 		oh64.SizeOfStackReserve = 0x00010000
 		oh.SizeOfStackReserve = 0x00010000

@@ -14,7 +14,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 	"github.com/h4ck3rm1k3/gocore/unicode/utf8"
@@ -199,12 +199,12 @@ func TestExtract(t *testing.T) {
 
 // Test that pack-created archives can be understood by the tools.
 func TestHello(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 
@@ -240,12 +240,12 @@ func TestHello(t *testing.T) {
 
 // Test that pack works with very long lines in PKGDEF.
 func TestLargeDefs(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 

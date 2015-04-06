@@ -19,7 +19,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -601,8 +601,8 @@ func testdataCases(t *testing.T) func(func([]byte)) {
 }
 
 func caller(skip int) string {
-	pc, _, _, _ := runtime.Caller(skip)
-	f := runtime.FuncForPC(pc)
+	pc, _, _, _ := run_time.Caller(skip)
+	f := run_time.FuncForPC(pc)
 	name := "?"
 	if f != nil {
 		name = f.Name()

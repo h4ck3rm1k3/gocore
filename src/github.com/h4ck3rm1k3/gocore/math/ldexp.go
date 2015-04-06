@@ -11,7 +11,10 @@ package math
 //	Ldexp(±0, exp) = ±0
 //	Ldexp(±Inf, exp) = ±Inf
 //	Ldexp(NaN, exp) = NaN
-func Ldexp(frac float64, exp int) float64
+func Ldexp(frac float64, exp int) float64 {
+	panic("not implmented")
+	return 0.0
+}
 
 func ldexp(frac float64, exp int) float64 {
 	// special cases

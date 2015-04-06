@@ -1640,7 +1640,7 @@ func span6(ctxt *obj.Link, s *obj.LSym) {
 				var deferreturn *obj.LSym
 
 				if deferreturn == nil {
-					deferreturn = obj.Linklookup(ctxt, "runtime.deferreturn", 0)
+					deferreturn = obj.Linklookup(ctxt, "run_time.deferreturn", 0)
 				}
 
 				// pad everything to avoid crossing 32-byte boundary
@@ -2042,7 +2042,7 @@ func oclass(ctxt *obj.Link, p *obj.Prog, a *obj.Addr) int {
 		// TODO(rsc): DUFFZERO/DUFFCOPY encoding forgot to set a->index
 		// and got Yi32 in an earlier version of this code.
 		// Keep doing that until we fix yduff etc.
-		if a.Sym != nil && strings.HasPrefix(a.Sym.Name, "runtime.duff") {
+		if a.Sym != nil && strings.HasPrefix(a.Sym.Name, "run_time.duff") {
 			return Yi32
 		}
 

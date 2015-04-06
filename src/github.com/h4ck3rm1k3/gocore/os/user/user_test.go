@@ -5,7 +5,7 @@
 package user
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -41,7 +41,7 @@ func compare(t *testing.T, want, got *User) {
 		t.Errorf("got Name=%q; want %q", got.Name, want.Name)
 	}
 	// TODO(brainman): fix it once we know how.
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		t.Skip("skipping Gid and HomeDir comparisons")
 	}
 	if want.Gid != got.Gid {
@@ -55,8 +55,8 @@ func compare(t *testing.T, want, got *User) {
 func TestLookup(t *testing.T) {
 	check(t)
 
-	if runtime.GOOS == "plan9" {
-		t.Skipf("Lookup not implemented on %q", runtime.GOOS)
+	if run_time.GOOS == "plan9" {
+		t.Skipf("Lookup not implemented on %q", run_time.GOOS)
 	}
 
 	want, err := Current()
@@ -73,8 +73,8 @@ func TestLookup(t *testing.T) {
 func TestLookupId(t *testing.T) {
 	check(t)
 
-	if runtime.GOOS == "plan9" {
-		t.Skipf("LookupId not implemented on %q", runtime.GOOS)
+	if run_time.GOOS == "plan9" {
+		t.Skipf("LookupId not implemented on %q", run_time.GOOS)
 	}
 
 	want, err := Current()

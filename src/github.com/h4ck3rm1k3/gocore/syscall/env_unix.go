@@ -20,15 +20,15 @@ var (
 	// env maps from an environment variable to its first occurrence in envs.
 	env map[string]int
 
-	// envs is provided by the runtime. elements are expected to
+	// envs is provided by the run_time. elements are expected to
 	// be of the form "key=value". An empty string means deleted
 	// (or a duplicate to be ignored).
-	envs []string = runtime_envs()
+	envs []string = run_time_envs()
 )
 
-func runtime_envs() []string // in package runtime
+func run_time_envs() []string // in package run_time
 
-// setenv_c and unsetenv_c are provided by the runtime but are no-ops
+// setenv_c and unsetenv_c are provided by the run_time but are no-ops
 // if cgo isn't loaded.
 func setenv_c(k, v string)
 func unsetenv_c(k string)

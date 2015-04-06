@@ -148,8 +148,8 @@ import (
 	"github.com/h4ck3rm1k3/gocore/flag"
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
-	"github.com/h4ck3rm1k3/gocore/runtime/pprof"
+	"github.com/h4ck3rm1k3/gocore/run_time"
+	"github.com/h4ck3rm1k3/gocore/run_time/pprof"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -175,14 +175,14 @@ var (
 	coverProfile     = flag.String("test.coverprofile", "", "write a coverage profile to the named file after execution")
 	match            = flag.String("test.run", "", "regular expression to select tests and examples to run")
 	memProfile       = flag.String("test.memprofile", "", "write a memory profile to the named file after execution")
-	memProfileRate   = flag.Int("test.memprofilerate", 0, "if >=0, sets runtime.MemProfileRate")
+	memProfileRate   = flag.Int("test.memprofilerate", 0, "if >=0, sets run_time.MemProfileRate")
 	cpuProfile       = flag.String("test.cpuprofile", "", "write a cpu profile to the named file during execution")
 	blockProfile     = flag.String("test.blockprofile", "", "write a goroutine blocking profile to the named file after execution")
-	blockProfileRate = flag.Int("test.blockprofilerate", 1, "if >= 0, calls runtime.SetBlockProfileRate()")
+	blockProfileRate = flag.Int("test.blockprofilerate", 1, "if >= 0, calls run_time.SetBlockProfileRate()")
 	trace            = flag.String("test.trace", "", "write an execution trace to the named file after execution")
 	timeout          = flag.Duration("test.timeout", 0, "if positive, sets an aggregate time limit for all tests")
 	cpuListStr       = flag.String("test.cpu", "", "comma-separated list of number of CPUs to use for each test")
-	parallel         = flag.Int("test.parallel", runtime.GOMAXPROCS(0), "maximum test parallelism")
+	parallel         = flag.Int("test.parallel", run_time.GOMAXPROCS(0), "maximum test parallelism")
 
 	haveExamples bool // are there examples?
 
@@ -217,7 +217,7 @@ func Verbose() bool {
 // decorate prefixes the string with the file and line of the call site
 // and inserts the final newline if needed and indentation tabs for formatting.
 func decorate(s string) string {
-	_, file, line, ok := runtime.Caller(3) // decorate + log + public function.
+	_, file, line, ok := run_time.Caller(3) // decorate + log + public function.
 	if ok {
 		// Truncate file name at last file name separator.
 		if index := strings.LastIndex(file, "/"); index >= 0 {
@@ -311,7 +311,7 @@ func (c *common) Failed() bool {
 func (c *common) FailNow() {
 	c.Fail()
 
-	// Calling runtime.Goexit will exit the goroutine, which
+	// Calling run_time.Goexit will exit the goroutine, which
 	// will run the deferred functions in this goroutine,
 	// which will eventually run the deferred lines in tRunner,
 	// which will signal to the test loop that this test is done.
@@ -320,18 +320,18 @@ func (c *common) FailNow() {
 	//
 	//	c.duration = ...
 	//	c.signal <- c.self
-	//	runtime.Goexit()
+	//	run_time.Goexit()
 	//
 	// This previous version duplicated code (those lines are in
 	// tRunner no matter what), but worse the goroutine teardown
-	// implicit in runtime.Goexit was not guaranteed to complete
+	// implicit in run_time.Goexit was not guaranteed to complete
 	// before the test exited.  If a test deferred an important cleanup
 	// function (like removing temporary files), there was no guarantee
 	// it would run on a test failure.  Because we send on c.signal during
 	// a top-of-stack deferred function now, we know that the send
 	// only happens after any other stacked defers have completed.
 	c.finished = true
-	runtime.Goexit()
+	run_time.Goexit()
 }
 
 // log generates the output. It's always at the same stack depth.
@@ -395,7 +395,7 @@ func (c *common) Skipf(format string, args ...interface{}) {
 func (c *common) SkipNow() {
 	c.skip()
 	c.finished = true
-	runtime.Goexit()
+	run_time.Goexit()
 }
 
 func (c *common) skip() {
@@ -431,14 +431,14 @@ type InternalTest struct {
 func tRunner(t *T, test *InternalTest) {
 	// When this goroutine is done, either because test.F(t)
 	// returned normally or because a test failure triggered
-	// a call to runtime.Goexit, record the duration and send
+	// a call to run_time.Goexit, record the duration and send
 	// a signal saying that the test is done.
 	defer func() {
 		t.duration = time.Now().Sub(t.start)
 		// If the test panicked, print any test output before dying.
 		err := recover()
 		if !t.finished && err == nil {
-			err = fmt.Errorf("test executed panic(nil) or runtime.Goexit")
+			err = fmt.Errorf("test executed panic(nil) or run_time.Goexit")
 		}
 		if err != nil {
 			t.Fail()
@@ -522,7 +522,7 @@ func RunTests(matchString func(pat, str string) (bool, error), tests []InternalT
 		return
 	}
 	for _, procs := range cpuList {
-		runtime.GOMAXPROCS(procs)
+		run_time.GOMAXPROCS(procs)
 		// We build a new channel tree for each run of the loop.
 		// collector merges in one channel all the upstream signals from parallel tests.
 		// If all tests pump to the same channel, a bug can occur where a test
@@ -590,7 +590,7 @@ func RunTests(matchString func(pat, str string) (bool, error), tests []InternalT
 // before runs before all testing.
 func before() {
 	if *memProfileRate > 0 {
-		runtime.MemProfileRate = *memProfileRate
+		run_time.MemProfileRate = *memProfileRate
 	}
 	if *cpuProfile != "" {
 		f, err := os.Create(toOutputDir(*cpuProfile))
@@ -619,7 +619,7 @@ func before() {
 		// Could save f so after can call f.Close; not worth the effort.
 	}
 	if *blockProfile != "" && *blockProfileRate >= 0 {
-		runtime.SetBlockProfileRate(*blockProfileRate)
+		run_time.SetBlockProfileRate(*blockProfileRate)
 	}
 	if *coverProfile != "" && cover.Mode == "" {
 		fmt.Fprintf(os.Stderr, "testing: cannot use -test.coverprofile because test binary was not built with coverage enabled\n")
@@ -641,7 +641,7 @@ func after() {
 			fmt.Fprintf(os.Stderr, "testing: %s\n", err)
 			os.Exit(2)
 		}
-		runtime.GC() // materialize all statistics
+		run_time.GC() // materialize all statistics
 		if err = pprof.WriteHeapProfile(f); err != nil {
 			fmt.Fprintf(os.Stderr, "testing: can't write %s: %s\n", *memProfile, err)
 			os.Exit(2)
@@ -671,7 +671,7 @@ func toOutputDir(path string) string {
 	if *outputDir == "" || path == "" {
 		return path
 	}
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		// On Windows, it's clumsy, but we can be almost always correct
 		// by just looking for a drive letter and a colon.
 		// Absolute paths always have a drive letter (ignoring UNC).
@@ -725,6 +725,6 @@ func parseCpuList() {
 		cpuList = append(cpuList, cpu)
 	}
 	if cpuList == nil {
-		cpuList = append(cpuList, runtime.GOMAXPROCS(-1))
+		cpuList = append(cpuList, run_time.GOMAXPROCS(-1))
 	}
 }

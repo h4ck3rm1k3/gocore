@@ -24,7 +24,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -442,7 +442,7 @@ func TestMuxRedirectLeadingSlashes(t *testing.T) {
 }
 
 func TestServerTimeouts(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7237")
 	}
 	defer afterTest(t)
@@ -521,7 +521,7 @@ func TestServerTimeouts(t *testing.T) {
 // shouldn't cause a handler to block forever on reads (next HTTP
 // request) that will never happen.
 func TestOnlyWriteTimeout(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7237")
 	}
 	defer afterTest(t)
@@ -876,7 +876,7 @@ func TestHeadResponses(t *testing.T) {
 }
 
 func TestTLSHandshakeTimeout(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7237")
 	}
 	defer afterTest(t)
@@ -1576,7 +1576,7 @@ func TestRequestBodyLimit(t *testing.T) {
 // TestClientWriteShutdown tests that if the client shuts down the write
 // side of their TCP connection, the server doesn't send a 400 Bad Request.
 func TestClientWriteShutdown(t *testing.T) {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		t.Skip("skipping test; see http://golang.org/issue/7237")
 	}
 	defer afterTest(t)

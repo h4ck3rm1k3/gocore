@@ -6,7 +6,7 @@ package time
 
 import (
 	"github.com/h4ck3rm1k3/gocore/errors"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"unsafe"
 )
@@ -260,7 +260,7 @@ func initLocal() {
 }
 
 func loadLocation(name string) (*Location, error) {
-	z, err := loadZoneFile(runtime.GOROOT()+`\lib\time\zoneinfo.zip`, name)
+	z, err := loadZoneFile(run_time.GOROOT()+`\lib\time\zoneinfo.zip`, name)
 	if err != nil {
 		return nil, err
 	}

@@ -151,7 +151,7 @@ func stackcopy(n, res *gc.Node, osrc, odst, w int64) {
 		p := gins(obj.ADUFFCOPY, nil, f)
 		gc.Afunclit(&p.To, f)
 
-		// 8 and 128 = magic constants: see ../../runtime/asm_arm.s
+		// 8 and 128 = magic constants: see ../../run_time/asm_arm.s
 		p.To.Offset = 8 * (128 - int64(c))
 
 		gc.Regfree(&tmp)

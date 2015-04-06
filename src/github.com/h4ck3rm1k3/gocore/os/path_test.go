@@ -8,7 +8,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
 	. "github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
 )
@@ -65,7 +65,7 @@ func TestMkdirAll(t *testing.T) {
 		t.Fatalf("MkdirAll %q returned wrong error path: %q not %q", ffpath, filepath.Clean(perr.Path), filepath.Clean(fpath))
 	}
 
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		path := tmpDir + `\_TestMkdirAll_\dir\.\dir2\`
 		err := MkdirAll(path, 0777)
 		if err != nil {
@@ -120,7 +120,7 @@ func TestRemoveAll(t *testing.T) {
 
 	// Determine if we should run the following test.
 	testit := true
-	if runtime.GOOS == "windows" {
+	if run_time.GOOS == "windows" {
 		// Chmod is not supported under windows.
 		testit = false
 	} else {
@@ -169,12 +169,12 @@ func TestRemoveAll(t *testing.T) {
 }
 
 func TestMkdirAllWithSymlink(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "nacl", "plan9":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "windows":
 		if !supportsSymlinks {
-			t.Skipf("skipping on %s", runtime.GOOS)
+			t.Skipf("skipping on %s", run_time.GOOS)
 		}
 	}
 
@@ -204,12 +204,12 @@ func TestMkdirAllWithSymlink(t *testing.T) {
 }
 
 func TestMkdirAllAtSlash(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "plan9", "windows":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on darwin/%s, mkdir returns EPERM", runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on darwin/%s, mkdir returns EPERM", run_time.GOARCH)
 		}
 	}
 	RemoveAll("/_go_os_test")

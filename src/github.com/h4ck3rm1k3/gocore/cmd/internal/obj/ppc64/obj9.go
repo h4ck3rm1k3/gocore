@@ -116,8 +116,8 @@ func progedit(ctxt *obj.Link, p *obj.Prog) {
 
 func preprocess(ctxt *obj.Link, cursym *obj.LSym) {
 	if ctxt.Symmorestack[0] == nil {
-		ctxt.Symmorestack[0] = obj.Linklookup(ctxt, "runtime.morestack", 0)
-		ctxt.Symmorestack[1] = obj.Linklookup(ctxt, "runtime.morestack_noctxt", 0)
+		ctxt.Symmorestack[0] = obj.Linklookup(ctxt, "run_time.morestack", 0)
+		ctxt.Symmorestack[1] = obj.Linklookup(ctxt, "run_time.morestack_noctxt", 0)
 	}
 
 	// TODO(minux): add morestack short-cuts with small fixed frame-size.
@@ -753,13 +753,13 @@ func stacksplit(ctxt *obj.Link, p *obj.Prog, framesize int32, noctxt bool) *obj.
 		q.Pcond = p
 	}
 
-	// BL	runtime.morestack(SB)
+	// BL	run_time.morestack(SB)
 	p = obj.Appendp(ctxt, p)
 
 	p.As = ABL
 	p.To.Type = obj.TYPE_BRANCH
 	if ctxt.Cursym.Cfunc != 0 {
-		p.To.Sym = obj.Linklookup(ctxt, "runtime.morestackc", 0)
+		p.To.Sym = obj.Linklookup(ctxt, "run_time.morestackc", 0)
 	} else {
 		p.To.Sym = ctxt.Symmorestack[bool2int(noctxt)]
 	}

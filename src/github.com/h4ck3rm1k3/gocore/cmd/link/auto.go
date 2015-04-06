@@ -16,28 +16,28 @@ import (
 )
 
 // linkerDefined lists the symbols supplied by other parts of the linker
-// (runtime.go and layout.go).
+// (run_time.go and layout.go).
 var linkerDefined = map[string]bool{
-	"runtime.bss":        true,
-	"runtime.data":       true,
-	"runtime.ebss":       true,
-	"runtime.edata":      true,
-	"runtime.efunctab":   true,
-	"runtime.end":        true,
-	"runtime.enoptrbss":  true,
-	"runtime.enoptrdata": true,
-	"runtime.erodata":    true,
-	"runtime.etext":      true,
-	"runtime.etypelink":  true,
-	"runtime.functab":    true,
-	"runtime.gcbss":      true,
-	"runtime.gcdata":     true,
-	"runtime.noptrbss":   true,
-	"runtime.noptrdata":  true,
-	"runtime.pclntab":    true,
-	"runtime.rodata":     true,
-	"runtime.text":       true,
-	"runtime.typelink":   true,
+	"run_time.bss":        true,
+	"run_time.data":       true,
+	"run_time.ebss":       true,
+	"run_time.edata":      true,
+	"run_time.efunctab":   true,
+	"run_time.end":        true,
+	"run_time.enoptrbss":  true,
+	"run_time.enoptrdata": true,
+	"run_time.erodata":    true,
+	"run_time.etext":      true,
+	"run_time.etypelink":  true,
+	"run_time.functab":    true,
+	"run_time.gcbss":      true,
+	"run_time.gcdata":     true,
+	"run_time.noptrbss":   true,
+	"run_time.noptrdata":  true,
+	"run_time.pclntab":    true,
+	"run_time.rodata":     true,
+	"run_time.text":       true,
+	"run_time.typelink":   true,
 }
 
 // isAuto reports whether sym is an automatically-generated data or constant symbol.

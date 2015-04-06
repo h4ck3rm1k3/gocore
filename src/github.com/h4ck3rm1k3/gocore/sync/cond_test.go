@@ -6,7 +6,7 @@ package sync_test
 import (
 	. "github.com/h4ck3rm1k3/gocore/sync"
 
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -152,7 +152,7 @@ func TestRace(t *testing.T) {
 				break
 			}
 			c.L.Unlock()
-			runtime.Gosched()
+			run_time.Gosched()
 			c.L.Lock()
 		}
 		c.L.Unlock()
@@ -172,7 +172,7 @@ func TestRace(t *testing.T) {
 				break
 			}
 			c.L.Unlock()
-			runtime.Gosched()
+			run_time.Gosched()
 			c.L.Lock()
 		}
 		c.L.Unlock()

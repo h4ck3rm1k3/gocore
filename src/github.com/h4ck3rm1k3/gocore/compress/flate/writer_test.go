@@ -6,7 +6,7 @@ package flate
 
 import (
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -28,7 +28,7 @@ func benchmarkEncoder(b *testing.B, testfile, level, n int) {
 		copy(buf1[i:], buf0)
 	}
 	buf0 = nil
-	runtime.GC()
+	run_time.GC()
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
 		w, err := NewWriter(ioutil.Discard, level)

@@ -8,7 +8,7 @@ package user
 
 import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 )
 
 func init() {
@@ -16,13 +16,13 @@ func init() {
 }
 
 func current() (*User, error) {
-	return nil, fmt.Errorf("user: Current not implemented on %s/%s", runtime.GOOS, runtime.GOARCH)
+	return nil, fmt.Errorf("user: Current not implemented on %s/%s", run_time.GOOS, run_time.GOARCH)
 }
 
 func lookup(username string) (*User, error) {
-	return nil, fmt.Errorf("user: Lookup not implemented on %s/%s", runtime.GOOS, runtime.GOARCH)
+	return nil, fmt.Errorf("user: Lookup not implemented on %s/%s", run_time.GOOS, run_time.GOARCH)
 }
 
 func lookupId(uid string) (*User, error) {
-	return nil, fmt.Errorf("user: LookupId not implemented on %s/%s", runtime.GOOS, runtime.GOARCH)
+	return nil, fmt.Errorf("user: LookupId not implemented on %s/%s", run_time.GOOS, run_time.GOARCH)
 }

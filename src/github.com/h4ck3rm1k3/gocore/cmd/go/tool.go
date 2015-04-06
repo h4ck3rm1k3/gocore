@@ -10,7 +10,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
@@ -31,10 +31,10 @@ For more about each tool command, see 'go tool command -h'.
 }
 
 var (
-	toolGOOS      = runtime.GOOS
-	toolGOARCH    = runtime.GOARCH
+	toolGOOS      = run_time.GOOS
+	toolGOARCH    = run_time.GOARCH
 	toolIsWindows = toolGOOS == "windows"
-	toolDir       = filepath.Join(runtime.GOROOT(), "pkg/tool/"+runtime.GOOS+"_"+runtime.GOARCH)
+	toolDir       = filepath.Join(run_time.GOROOT(), "pkg/tool/"+run_time.GOOS+"_"+run_time.GOARCH)
 
 	toolN bool
 )

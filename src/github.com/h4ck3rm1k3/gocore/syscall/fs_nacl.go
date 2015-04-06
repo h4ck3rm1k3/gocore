@@ -19,7 +19,7 @@ import (
 	"unsafe"
 )
 
-// Provided by package runtime.
+// Provided by package run_time.
 func now() (sec int64, nsec int32)
 
 // An fsys is a file system.

@@ -10,15 +10,15 @@ import (
 	"github.com/h4ck3rm1k3/gocore/bytes"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
 
 func TestReadUnixgramWithUnnamedSocket(t *testing.T) {
-	if runtime.GOOS == "darwin" && (runtime.GOARCH == "arm" || runtime.GOARCH == "arm64") {
-		t.Skipf("skipping unixgram test on %s/%s", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && (run_time.GOARCH == "arm" || run_time.GOARCH == "arm64") {
+		t.Skipf("skipping unixgram test on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 	addr := testUnixAddr()
 	la, err := ResolveUnixAddr("unixgram", addr)
@@ -67,8 +67,8 @@ func TestReadUnixgramWithUnnamedSocket(t *testing.T) {
 }
 
 func TestReadUnixgramWithZeroBytesBuffer(t *testing.T) {
-	if runtime.GOOS == "darwin" && (runtime.GOARCH == "arm" || runtime.GOARCH == "arm64") {
-		t.Skipf("skipping unixgram test on %s/%s", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && (run_time.GOARCH == "arm" || run_time.GOARCH == "arm64") {
+		t.Skipf("skipping unixgram test on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 	// issue 4352: Recvfrom failed with "address family not
 	// supported by protocol family" if zero-length buffer provided
@@ -114,7 +114,7 @@ func TestReadUnixgramWithZeroBytesBuffer(t *testing.T) {
 }
 
 func TestUnixgramAutobind(t *testing.T) {
-	if runtime.GOOS != "linux" {
+	if run_time.GOOS != "linux" {
 		t.Skip("skipping: autobind is linux only")
 	}
 
@@ -146,7 +146,7 @@ func TestUnixgramAutobind(t *testing.T) {
 }
 
 func TestUnixAutobindClose(t *testing.T) {
-	if runtime.GOOS != "linux" {
+	if run_time.GOOS != "linux" {
 		t.Skip("skipping: autobind is linux only")
 	}
 	laddr := &UnixAddr{Name: "", Net: "unix"}
@@ -158,8 +158,8 @@ func TestUnixAutobindClose(t *testing.T) {
 }
 
 func TestUnixgramWrite(t *testing.T) {
-	if runtime.GOOS == "darwin" && (runtime.GOARCH == "arm" || runtime.GOARCH == "arm64") {
-		t.Skipf("skipping unixgram test on %s/%s", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && (run_time.GOARCH == "arm" || run_time.GOARCH == "arm64") {
+		t.Skipf("skipping unixgram test on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 	addr := testUnixAddr()
 	laddr, err := ResolveUnixAddr("unixgram", addr)
@@ -228,8 +228,8 @@ func testUnixgramWritePacketConn(t *testing.T, raddr *UnixAddr) {
 }
 
 func TestUnixConnLocalAndRemoteNames(t *testing.T) {
-	if runtime.GOOS == "darwin" && (runtime.GOARCH == "arm" || runtime.GOARCH == "arm64") {
-		t.Skipf("skipping unixgram test on %s/%s", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && (run_time.GOARCH == "arm" || run_time.GOARCH == "arm64") {
+		t.Skipf("skipping unixgram test on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 	for _, laddr := range []string{"", testUnixAddr()} {
 		laddr := laddr
@@ -268,7 +268,7 @@ func TestUnixConnLocalAndRemoteNames(t *testing.T) {
 			t.Fatalf("UnixConn.Write failed: %v", err)
 		}
 
-		switch runtime.GOOS {
+		switch run_time.GOOS {
 		case "android", "linux":
 			if laddr == "" {
 				laddr = "@" // autobind feature
@@ -290,8 +290,8 @@ func TestUnixConnLocalAndRemoteNames(t *testing.T) {
 }
 
 func TestUnixgramConnLocalAndRemoteNames(t *testing.T) {
-	if runtime.GOOS == "darwin" && (runtime.GOARCH == "arm" || runtime.GOARCH == "arm64") {
-		t.Skipf("skipping unixgram test on %s/%s", runtime.GOOS, runtime.GOARCH)
+	if run_time.GOOS == "darwin" && (run_time.GOARCH == "arm" || run_time.GOARCH == "arm64") {
+		t.Skipf("skipping unixgram test on %s/%s", run_time.GOOS, run_time.GOARCH)
 	}
 	for _, laddr := range []string{"", testUnixAddr()} {
 		laddr := laddr
@@ -326,7 +326,7 @@ func TestUnixgramConnLocalAndRemoteNames(t *testing.T) {
 			}
 		}()
 
-		switch runtime.GOOS {
+		switch run_time.GOOS {
 		case "android", "linux":
 			if laddr == "" {
 				laddr = "@" // autobind feature

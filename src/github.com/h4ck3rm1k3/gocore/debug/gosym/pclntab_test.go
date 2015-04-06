@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
@@ -23,15 +23,15 @@ var (
 
 func dotest(self bool) bool {
 	// For now, only works on amd64 platforms.
-	if runtime.GOARCH != "amd64" {
+	if run_time.GOARCH != "amd64" {
 		return false
 	}
 	// Self test reads test binary; only works on Linux.
-	if self && runtime.GOOS != "linux" {
+	if self && run_time.GOOS != "linux" {
 		return false
 	}
 	// Command below expects "sh", so Unix.
-	if runtime.GOOS == "windows" || runtime.GOOS == "plan9" {
+	if run_time.GOOS == "windows" || run_time.GOOS == "plan9" {
 		return false
 	}
 	if pclinetestBinary != "" {

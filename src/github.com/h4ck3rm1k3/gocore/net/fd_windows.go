@@ -7,7 +7,7 @@ package net
 import (
 	"github.com/h4ck3rm1k3/gocore/errors"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"github.com/h4ck3rm1k3/gocore/time"
@@ -97,8 +97,8 @@ type operation struct {
 	// of the struct, as our code rely on it.
 	o syscall.Overlapped
 
-	// fields used by runtime.netpoll
-	runtimeCtx uintptr
+	// fields used by run_time.netpoll
+	run_timeCtx uintptr
 	mode       int32
 	errno      int32
 	qty        uint32
@@ -138,8 +138,8 @@ type ioSrvReq struct {
 // back to their requesters via channel supplied in request.
 // It is used only when the CancelIoEx API is unavailable.
 func (s *ioSrv) ProcessRemoteIO() {
-	runtime.LockOSThread()
-	defer runtime.UnlockOSThread()
+	run_time.LockOSThread()
+	defer run_time.UnlockOSThread()
 	for r := range s.req {
 		if r.submit != nil {
 			r.o.errc <- r.submit(r.o)
@@ -152,10 +152,10 @@ func (s *ioSrv) ProcessRemoteIO() {
 // ExecIO executes a single IO operation o. It submits and cancels
 // IO in the current thread for systems where Windows CancelIoEx API
 // is available. Alternatively, it passes the request onto
-// runtime netpoll and waits for completion or cancels request.
+// run_time netpoll and waits for completion or cancels request.
 func (s *ioSrv) ExecIO(o *operation, name string, submit func(o *operation) error) (int, error) {
 	fd := o.fd
-	// Notify runtime netpoll about starting IO.
+	// Notify run_time netpoll about starting IO.
 	err := fd.pd.Prepare(int(o.mode))
 	if err != nil {
 		return 0, &OpError{name, fd.net, fd.laddr, err}
@@ -199,7 +199,7 @@ func (s *ioSrv) ExecIO(o *operation, name string, submit func(o *operation) erro
 	case errClosing, errTimeout:
 		// will deal with those.
 	default:
-		panic("net: unexpected runtime.netpoll error: " + netpollErr.Error())
+		panic("net: unexpected run_time.netpoll error: " + netpollErr.Error())
 	}
 	// Cancel our request.
 	if canCancelIO {
@@ -309,8 +309,8 @@ func (fd *netFD) init() error {
 	fd.wop.mode = 'w'
 	fd.rop.fd = fd
 	fd.wop.fd = fd
-	fd.rop.runtimeCtx = fd.pd.runtimeCtx
-	fd.wop.runtimeCtx = fd.pd.runtimeCtx
+	fd.rop.run_timeCtx = fd.pd.run_timeCtx
+	fd.wop.run_timeCtx = fd.pd.run_timeCtx
 	if !canCancelIO {
 		fd.rop.errc = make(chan error)
 		fd.wop.errc = make(chan error)
@@ -321,7 +321,7 @@ func (fd *netFD) init() error {
 func (fd *netFD) setAddr(laddr, raddr Addr) {
 	fd.laddr = laddr
 	fd.raddr = raddr
-	runtime.SetFinalizer(fd, (*netFD).Close)
+	run_time.SetFinalizer(fd, (*netFD).Close)
 }
 
 func (fd *netFD) connect(la, ra syscall.Sockaddr, deadline time.Time) error {
@@ -375,7 +375,7 @@ func (fd *netFD) destroy() {
 	closesocket(fd.sysfd)
 	fd.sysfd = syscall.InvalidHandle
 	// no need for a finalizer anymore
-	runtime.SetFinalizer(fd, nil)
+	run_time.SetFinalizer(fd, nil)
 }
 
 // Add a reference to this fd.

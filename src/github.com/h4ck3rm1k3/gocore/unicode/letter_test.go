@@ -7,7 +7,7 @@ package unicode_test
 import (
 	"github.com/h4ck3rm1k3/gocore/flag"
 	"github.com/h4ck3rm1k3/gocore/fmt"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"testing"
 	. "github.com/h4ck3rm1k3/gocore/unicode"
@@ -437,8 +437,8 @@ func TestCalibrate(t *testing.T) {
 		return
 	}
 
-	if runtime.GOARCH == "amd64" {
-		fmt.Printf("warning: running calibration on %s\n", runtime.GOARCH)
+	if run_time.GOARCH == "amd64" {
+		fmt.Printf("warning: running calibration on %s\n", run_time.GOARCH)
 	}
 
 	// Find the point where binary search wins by more than 10%.

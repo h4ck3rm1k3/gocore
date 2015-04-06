@@ -12,52 +12,52 @@ import (
 	"github.com/h4ck3rm1k3/gocore/time"
 )
 
-// runtimeNano returns the current value of the runtime clock in nanoseconds.
-func runtimeNano() int64
+// run_timeNano returns the current value of the run_time clock in nanoseconds.
+func run_timeNano() int64
 
-func runtime_pollServerInit()
-func runtime_pollOpen(fd uintptr) (uintptr, int)
-func runtime_pollClose(ctx uintptr)
-func runtime_pollWait(ctx uintptr, mode int) int
-func runtime_pollWaitCanceled(ctx uintptr, mode int) int
-func runtime_pollReset(ctx uintptr, mode int) int
-func runtime_pollSetDeadline(ctx uintptr, d int64, mode int)
-func runtime_pollUnblock(ctx uintptr)
+func run_time_pollServerInit()
+func run_time_pollOpen(fd uintptr) (uintptr, int)
+func run_time_pollClose(ctx uintptr)
+func run_time_pollWait(ctx uintptr, mode int) int
+func run_time_pollWaitCanceled(ctx uintptr, mode int) int
+func run_time_pollReset(ctx uintptr, mode int) int
+func run_time_pollSetDeadline(ctx uintptr, d int64, mode int)
+func run_time_pollUnblock(ctx uintptr)
 
 type pollDesc struct {
-	runtimeCtx uintptr
+	run_timeCtx uintptr
 }
 
 var serverInit sync.Once
 
 func (pd *pollDesc) Init(fd *netFD) error {
-	serverInit.Do(runtime_pollServerInit)
-	ctx, errno := runtime_pollOpen(uintptr(fd.sysfd))
+	serverInit.Do(run_time_pollServerInit)
+	ctx, errno := run_time_pollOpen(uintptr(fd.sysfd))
 	if errno != 0 {
 		return syscall.Errno(errno)
 	}
-	pd.runtimeCtx = ctx
+	pd.run_timeCtx = ctx
 	return nil
 }
 
 func (pd *pollDesc) Close() {
-	if pd.runtimeCtx == 0 {
+	if pd.run_timeCtx == 0 {
 		return
 	}
-	runtime_pollClose(pd.runtimeCtx)
-	pd.runtimeCtx = 0
+	run_time_pollClose(pd.run_timeCtx)
+	pd.run_timeCtx = 0
 }
 
 // Evict evicts fd from the pending list, unblocking any I/O running on fd.
 func (pd *pollDesc) Evict() {
-	if pd.runtimeCtx == 0 {
+	if pd.run_timeCtx == 0 {
 		return
 	}
-	runtime_pollUnblock(pd.runtimeCtx)
+	run_time_pollUnblock(pd.run_timeCtx)
 }
 
 func (pd *pollDesc) Prepare(mode int) error {
-	res := runtime_pollReset(pd.runtimeCtx, mode)
+	res := run_time_pollReset(pd.run_timeCtx, mode)
 	return convertErr(res)
 }
 
@@ -70,7 +70,7 @@ func (pd *pollDesc) PrepareWrite() error {
 }
 
 func (pd *pollDesc) Wait(mode int) error {
-	res := runtime_pollWait(pd.runtimeCtx, mode)
+	res := run_time_pollWait(pd.run_timeCtx, mode)
 	return convertErr(res)
 }
 
@@ -83,7 +83,7 @@ func (pd *pollDesc) WaitWrite() error {
 }
 
 func (pd *pollDesc) WaitCanceled(mode int) {
-	runtime_pollWaitCanceled(pd.runtimeCtx, mode)
+	run_time_pollWaitCanceled(pd.run_timeCtx, mode)
 }
 
 func (pd *pollDesc) WaitCanceledRead() {
@@ -120,14 +120,14 @@ func (fd *netFD) setWriteDeadline(t time.Time) error {
 }
 
 func setDeadlineImpl(fd *netFD, t time.Time, mode int) error {
-	d := runtimeNano() + int64(t.Sub(time.Now()))
+	d := run_timeNano() + int64(t.Sub(time.Now()))
 	if t.IsZero() {
 		d = 0
 	}
 	if err := fd.incref(); err != nil {
 		return err
 	}
-	runtime_pollSetDeadline(fd.pd.runtimeCtx, d, mode)
+	run_time_pollSetDeadline(fd.pd.run_timeCtx, d, mode)
 	fd.decref()
 	return nil
 }

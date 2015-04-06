@@ -1,0 +1,2 @@
+err.txt:Please submit a full bug report,
+err.txt:Please include the complete backtrace with any bug report.

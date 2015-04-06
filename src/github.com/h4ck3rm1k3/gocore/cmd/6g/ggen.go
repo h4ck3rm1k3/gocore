@@ -566,7 +566,7 @@ func clearfat(nl *gc.Node) {
 		p.To.Type = obj.TYPE_ADDR
 		p.To.Sym = gc.Linksym(gc.Pkglookup("duffzero", gc.Runtimepkg))
 
-		// 2 and 128 = magic constants: see ../../runtime/asm_amd64.s
+		// 2 and 128 = magic constants: see ../../run_time/asm_amd64.s
 		p.To.Offset = 2 * (128 - q)
 	}
 

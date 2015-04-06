@@ -9,18 +9,18 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 	"testing"
 )
 
 func buildObjdump(t *testing.T) (tmp, exe string) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "nacl":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	case "darwin":
-		if runtime.GOARCH == "arm" {
-			t.Skipf("skipping on %s/%s", runtime.GOOS, runtime.GOARCH)
+		if run_time.GOARCH == "arm" {
+			t.Skipf("skipping on %s/%s", run_time.GOOS, run_time.GOARCH)
 		}
 	}
 
@@ -79,7 +79,7 @@ func testDisasm(t *testing.T, flags ...string) {
 		"fmthello.go:6",
 		"TEXT main.main(SB)",
 	}
-	switch runtime.GOARCH {
+	switch run_time.GOARCH {
 	case "amd64", "386":
 		need = append(need, x86Need...)
 	case "arm":
@@ -105,25 +105,25 @@ func testDisasm(t *testing.T, flags ...string) {
 }
 
 func TestDisasm(t *testing.T) {
-	switch runtime.GOARCH {
+	switch run_time.GOARCH {
 	case "ppc64", "ppc64le":
-		t.Skipf("skipping on %s, issue 9039", runtime.GOARCH)
+		t.Skipf("skipping on %s, issue 9039", run_time.GOARCH)
 	case "arm64":
-		t.Skipf("skipping on %s, issue 10106", runtime.GOARCH)
+		t.Skipf("skipping on %s, issue 10106", run_time.GOARCH)
 	}
 	testDisasm(t)
 }
 
 func TestDisasmExtld(t *testing.T) {
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "plan9", "windows":
-		t.Skipf("skipping on %s", runtime.GOOS)
+		t.Skipf("skipping on %s", run_time.GOOS)
 	}
-	switch runtime.GOARCH {
+	switch run_time.GOARCH {
 	case "ppc64", "ppc64le":
-		t.Skipf("skipping on %s, no support for external linking, issue 9038", runtime.GOARCH)
+		t.Skipf("skipping on %s, no support for external linking, issue 9038", run_time.GOARCH)
 	case "arm64":
-		t.Skipf("skipping on %s, issue 10106", runtime.GOARCH)
+		t.Skipf("skipping on %s, issue 10106", run_time.GOARCH)
 	}
 	testDisasm(t, "-ldflags=-linkmode=external")
 }

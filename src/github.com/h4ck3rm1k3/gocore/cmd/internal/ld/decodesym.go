@@ -7,7 +7,7 @@ package ld
 import "github.com/h4ck3rm1k3/gocore/cmd/internal/obj"
 
 // Decoding the type.* symbols.	 This has to be in sync with
-// ../../runtime/type.go, or more specifically, with what
+// ../../run_time/type.go, or more specifically, with what
 // ../gc/reflect.c stuffs in these.
 
 func decode_reloc(s *LSym, off int32) *Reloc {

@@ -12,7 +12,7 @@ import (
 
 var mpzero Mpint
 
-// The constant is known to runtime.
+// The constant is known to run_time.
 const (
 	tmpstringbufsize = 32
 )
@@ -782,7 +782,7 @@ func walkexpr(np **Node, init **NodeList) {
 		walkexpr(&r.Right, init)
 		t := r.Left.Type
 		p := ""
-		if t.Type.Width <= 128 { // Check ../../runtime/hashmap.go:maxValueSize before changing.
+		if t.Type.Width <= 128 { // Check ../../run_time/hashmap.go:maxValueSize before changing.
 			switch Simsimtype(t.Down) {
 			case TINT32,
 				TUINT32:
@@ -895,7 +895,7 @@ func walkexpr(np **Node, init **NodeList) {
 		fromKind := type2IET(from.Type)
 		toKind := type2IET(t)
 
-		// Avoid runtime calls in a few cases of the form _, ok := i.(T).
+		// Avoid run_time calls in a few cases of the form _, ok := i.(T).
 		// This is faster and shorter and allows the corresponding assertX2X2
 		// routines to skip nil checks on their last argument.
 		if isblank(n.List.N) {
@@ -1211,7 +1211,7 @@ func walkexpr(np **Node, init **NodeList) {
 
 		t := n.Left.Type
 		p := ""
-		if t.Type.Width <= 128 { // Check ../../runtime/hashmap.go:maxValueSize before changing.
+		if t.Type.Width <= 128 { // Check ../../run_time/hashmap.go:maxValueSize before changing.
 			switch Simsimtype(t.Down) {
 			case TINT32,
 				TUINT32:
@@ -2028,7 +2028,7 @@ func walkprint(nn *Node, init **NodeList) *Node {
 			substArgTypes(on, n.Type) // any-1
 		} else if Isint[et] {
 			if et == TUINT64 {
-				if (t.Sym.Pkg == Runtimepkg || compiling_runtime != 0) && t.Sym.Name == "hex" {
+				if (t.Sym.Pkg == Runtimepkg || compiling_run_time != 0) && t.Sym.Name == "hex" {
 					on = syslook("printhex", 0)
 				} else {
 					on = syslook("printuint", 0)
@@ -2727,8 +2727,8 @@ func paramstoheap(argin **Type, out int) *NodeList {
 		}
 
 		// generate allocation & copying code
-		if compiling_runtime != 0 {
-			Yyerror("%v escapes to heap, not allowed in runtime.", Nconv(v, 0))
+		if compiling_run_time != 0 {
+			Yyerror("%v escapes to heap, not allowed in run_time.", Nconv(v, 0))
 		}
 		if v.Alloc == nil {
 			v.Alloc = callnew(v.Type)
@@ -2898,11 +2898,11 @@ func addstr(n *Node, init **NodeList) *Node {
 
 	var fn string
 	if c <= 5 {
-		// small numbers of strings use direct runtime helpers.
+		// small numbers of strings use direct run_time helpers.
 		// note: orderexpr knows this cutoff too.
 		fn = fmt.Sprintf("concatstring%d", c)
 	} else {
-		// large numbers of strings are passed to the runtime as a slice.
+		// large numbers of strings are passed to the run_time as a slice.
 		fn = "concatstrings"
 
 		t := typ(TARRAY)
@@ -2984,7 +2984,7 @@ func appendslice(n *Node, init **NodeList) *Node {
 		nt := mkcall1(fn, Types[TINT], &l, typename(l1.Type.Type), nptr1, nptr2)
 		l = list(l, nt)
 	} else if flag_race != 0 {
-		// rely on runtime to instrument copy.
+		// rely on run_time to instrument copy.
 		// copy(s[len(l1):len(l1)+len(l2)], l2)
 		nptr1 := Nod(OSLICE, s, Nod(OKEY, Nod(OLEN, l1, nil), Nod(OADD, Nod(OLEN, l1, nil), Nod(OLEN, l2, nil))))
 
@@ -3105,7 +3105,7 @@ func walkappend(n *Node, init **NodeList) *Node {
 	return ns
 }
 
-// Lower copy(a, b) to a memmove call or a runtime call.
+// Lower copy(a, b) to a memmove call or a run_time call.
 //
 // init {
 //   n := len(a)
@@ -3116,13 +3116,13 @@ func walkappend(n *Node, init **NodeList) *Node {
 //
 // Also works if b is a string.
 //
-func copyany(n *Node, init **NodeList, runtimecall int) *Node {
+func copyany(n *Node, init **NodeList, run_timecall int) *Node {
 	if haspointers(n.Left.Type.Type) {
 		fn := writebarrierfn("typedslicecopy", n.Left.Type, n.Right.Type)
 		return mkcall1(fn, n.Type, init, typename(n.Left.Type.Type), n.Left, n.Right)
 	}
 
-	if runtimecall != 0 {
+	if run_timecall != 0 {
 		var fn *Node
 		if n.Right.Type.Etype == TSTRING {
 			fn = syslook("slicestringcopy", 1)

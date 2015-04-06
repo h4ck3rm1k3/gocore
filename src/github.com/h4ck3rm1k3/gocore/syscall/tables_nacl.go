@@ -4,7 +4,7 @@
 
 package syscall
 
-// TODO: generate with runtime/mknacl.sh, allow override with IRT.
+// TODO: generate with run_time/mknacl.sh, allow override with IRT.
 const (
 	sys_null                 = 1
 	sys_nameservice          = 2
@@ -93,7 +93,7 @@ const (
 
 // TODO: Auto-generate some day. (Hard-coded in binaries so not likely to change.)
 const (
-	// native_client/src/trusted/service_runtime/include/sys/errno.h
+	// native_client/src/trusted/service_run_time/include/sys/errno.h
 	// The errors are mainly copied from Linux.
 	EPERM           Errno = 1       /* Operation not permitted */
 	ENOENT          Errno = 2       /* No such file or directory */

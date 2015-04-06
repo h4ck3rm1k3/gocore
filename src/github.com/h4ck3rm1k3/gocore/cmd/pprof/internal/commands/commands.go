@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 
 	"github.com/h4ck3rm1k3/gocore/cmd/pprof/internal/plugin"
@@ -83,7 +83,7 @@ func PProf(c Completer, interactive **bool, svgpan **string) Commands {
 // on the current platform
 func browsers() []string {
 	cmds := []string{"chrome", "google-chrome", "firefox"}
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "darwin":
 		cmds = append(cmds, "/usr/bin/open")
 	case "windows":

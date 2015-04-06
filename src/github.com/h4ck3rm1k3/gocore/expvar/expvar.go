@@ -12,7 +12,7 @@
 // following variables:
 //
 //	cmdline   os.Args
-//	memstats  runtime.Memstats
+//	memstats  run_time.Memstats
 //
 // The package is sometimes only imported for the side effect of
 // registering its HTTP handler and the above variables.  To use it
@@ -28,7 +28,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/log"
 	"github.com/h4ck3rm1k3/gocore/net/http"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sort"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/sync"
@@ -318,8 +318,8 @@ func cmdline() interface{} {
 }
 
 func memstats() interface{} {
-	stats := new(runtime.MemStats)
-	runtime.ReadMemStats(stats)
+	stats := new(run_time.MemStats)
+	run_time.ReadMemStats(stats)
 	return *stats
 }
 

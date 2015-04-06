@@ -10,7 +10,7 @@ import (
 )
 
 /*
- * runtime interface and reflection data structures
+ * run_time interface and reflection data structures
  */
 var signatlist *NodeList
 
@@ -107,7 +107,7 @@ func lsort(l *Sig, f func(*Sig, *Sig) int) *Sig {
 // the given map type.  This type is not visible to users -
 // we include only enough information to generate a correct GC
 // program for it.
-// Make sure this stays in sync with ../../runtime/hashmap.go!
+// Make sure this stays in sync with ../../run_time/hashmap.go!
 const (
 	BUCKETSIZE = 8
 	MAXKEYSIZE = 128
@@ -173,7 +173,7 @@ func mapbucket(t *Type) *Type {
 		bucket.Width += int64(Widthreg) - int64(Widthptr)
 	}
 
-	// See comment on hmap.overflow in ../../runtime/hashmap.go.
+	// See comment on hmap.overflow in ../../run_time/hashmap.go.
 	if !haspointers(t.Type) && !haspointers(t.Down) && t.Type.Width <= MAXKEYSIZE && t.Down.Width <= MAXVALSIZE {
 		bucket.Haspointers = 1 // no pointers
 	}
@@ -185,7 +185,7 @@ func mapbucket(t *Type) *Type {
 }
 
 // Builds a type representing a Hmap structure for the given map type.
-// Make sure this stays in sync with ../../runtime/hashmap.go!
+// Make sure this stays in sync with ../../run_time/hashmap.go!
 func hmap(t *Type) *Type {
 	if t.Hmap != nil {
 		return t.Hmap
@@ -236,7 +236,7 @@ func hiter(t *Type) *Type {
 	//    bucket uintptr
 	//    checkBucket uintptr
 	// }
-	// must match ../../runtime/hashmap.go:hash_iter.
+	// must match ../../run_time/hashmap.go:hash_iter.
 	var field [12]*Type
 	field[0] = makefield("key", Ptrto(t.Down))
 
@@ -513,7 +513,7 @@ func dgopkgpath(s *Sym, ot int, pkg *Pkg) int {
 
 /*
  * uncommonType
- * ../../runtime/type.go:/uncommonType
+ * ../../run_time/type.go:/uncommonType
  */
 func dextratype(sym *Sym, off int, t *Type, ptroff int) int {
 	m := methods(t)
@@ -555,7 +555,7 @@ func dextratype(sym *Sym, off int, t *Type, ptroff int) int {
 	// methods
 	for a := m; a != nil; a = a.link {
 		// method
-		// ../../runtime/type.go:/method
+		// ../../run_time/type.go:/method
 		ot = dgostringptr(s, ot, a.name)
 
 		ot = dgopkgpath(s, ot, a.pkg)
@@ -671,7 +671,7 @@ func haspointers(t *Type) bool {
 
 /*
  * commonType
- * ../../runtime/type.go:/commonType
+ * ../../run_time/type.go:/commonType
  */
 
 var dcommontype_algarray *Sym
@@ -701,7 +701,7 @@ func dcommontype(s *Sym, ot int, t *Type) int {
 
 	// All (non-reflect-allocated) Types share the same zero object.
 	// Each place in the compiler where a pointer to the zero object
-	// might be returned by a runtime call (map access return value,
+	// might be returned by a run_time call (map access return value,
 	// 2-arg type cast) declares the size of the zerovalue it needs.
 	// The linker magically takes the max of all the sizes.
 	zero := Pkglookup("zerovalue", Runtimepkg)
@@ -732,7 +732,7 @@ func dcommontype(s *Sym, ot int, t *Type) int {
 	ot = duint32(s, ot, typehash(t))
 	ot = duint8(s, ot, 0) // unused
 
-	// runtime (and common sense) expects alignment to be a power of two.
+	// run_time (and common sense) expects alignment to be a power of two.
 	i := int(t.Align)
 
 	if i == 0 {
@@ -971,8 +971,8 @@ func dtypesym(t *Type) *Sym {
 	}
 	s.Flags |= SymSiggen
 
-	// special case (look for runtime below):
-	// when compiling package runtime,
+	// special case (look for run_time below):
+	// when compiling package run_time,
 	// emit the type structures for int, float, etc.
 	tbase := t
 
@@ -984,7 +984,7 @@ func dtypesym(t *Type) *Sym {
 		dupok = obj.DUPOK
 	}
 
-	if compiling_runtime != 0 && (tbase == Types[tbase.Etype] || tbase == bytetype || tbase == runetype || tbase == errortype) { // int, float, etc
+	if compiling_run_time != 0 && (tbase == Types[tbase.Etype] || tbase == bytetype || tbase == runetype || tbase == errortype) { // int, float, etc
 		goto ok
 	}
 
@@ -1006,7 +1006,7 @@ ok:
 
 	case TARRAY:
 		if t.Bound >= 0 {
-			// ../../runtime/type.go:/ArrayType
+			// ../../run_time/type.go:/ArrayType
 			s1 := dtypesym(t.Type)
 
 			t2 := typ(TARRAY)
@@ -1019,7 +1019,7 @@ ok:
 			ot = dsymptr(s, ot, s2, 0)
 			ot = duintptr(s, ot, uint64(t.Bound))
 		} else {
-			// ../../runtime/type.go:/SliceType
+			// ../../run_time/type.go:/SliceType
 			s1 := dtypesym(t.Type)
 
 			ot = dcommontype(s, ot, t)
@@ -1027,7 +1027,7 @@ ok:
 			ot = dsymptr(s, ot, s1, 0)
 		}
 
-		// ../../runtime/type.go:/ChanType
+		// ../../run_time/type.go:/ChanType
 	case TCHAN:
 		s1 := dtypesym(t.Type)
 
@@ -1087,7 +1087,7 @@ ok:
 			n++
 		}
 
-		// ../../runtime/type.go:/InterfaceType
+		// ../../run_time/type.go:/InterfaceType
 		ot = dcommontype(s, ot, t)
 
 		xt = ot - 3*Widthptr
@@ -1095,14 +1095,14 @@ ok:
 		ot = duintxx(s, ot, uint64(n), Widthint)
 		ot = duintxx(s, ot, uint64(n), Widthint)
 		for a := m; a != nil; a = a.link {
-			// ../../runtime/type.go:/imethod
+			// ../../run_time/type.go:/imethod
 			ot = dgostringptr(s, ot, a.name)
 
 			ot = dgopkgpath(s, ot, a.pkg)
 			ot = dsymptr(s, ot, dtypesym(a.type_), 0)
 		}
 
-		// ../../runtime/type.go:/MapType
+		// ../../run_time/type.go:/MapType
 	case TMAP:
 		s1 := dtypesym(t.Down)
 
@@ -1137,20 +1137,20 @@ ok:
 	case TPTR32,
 		TPTR64:
 		if t.Type.Etype == TANY {
-			// ../../runtime/type.go:/UnsafePointerType
+			// ../../run_time/type.go:/UnsafePointerType
 			ot = dcommontype(s, ot, t)
 
 			break
 		}
 
-		// ../../runtime/type.go:/PtrType
+		// ../../run_time/type.go:/PtrType
 		s1 := dtypesym(t.Type)
 
 		ot = dcommontype(s, ot, t)
 		xt = ot - 3*Widthptr
 		ot = dsymptr(s, ot, s1, 0)
 
-		// ../../runtime/type.go:/StructType
+		// ../../run_time/type.go:/StructType
 	// for security, only the exported fields.
 	case TSTRUCT:
 		n := 0
@@ -1166,7 +1166,7 @@ ok:
 		ot = duintxx(s, ot, uint64(n), Widthint)
 		ot = duintxx(s, ot, uint64(n), Widthint)
 		for t1 := t.Type; t1 != nil; t1 = t1.Down {
-			// ../../runtime/type.go:/structField
+			// ../../run_time/type.go:/structField
 			if t1.Sym != nil && t1.Embedded == 0 {
 				ot = dgostringptr(s, ot, t1.Sym.Name)
 				if exportname(t1.Sym.Name) {
@@ -1244,13 +1244,13 @@ func dumptypestructs() {
 		}
 	}
 
-	// do basic types if compiling package runtime.
+	// do basic types if compiling package run_time.
 	// they have to be in at least one package,
-	// and runtime is always loaded implicitly,
+	// and run_time is always loaded implicitly,
 	// so this is as good as any.
 	// another possible choice would be package main,
-	// but using runtime means fewer copies in .6 files.
-	if compiling_runtime != 0 {
+	// but using run_time means fewer copies in .6 files.
+	if compiling_run_time != 0 {
 		for i := 1; i <= TBOOL; i++ {
 			dtypesym(Ptrto(Types[i]))
 		}
@@ -1263,7 +1263,7 @@ func dumptypestructs() {
 
 		dtypesym(functype(nil, list1(Nod(ODCLFIELD, nil, typenod(errortype))), list1(Nod(ODCLFIELD, nil, typenod(Types[TSTRING])))))
 
-		// add paths for runtime and main, which 6l imports implicitly.
+		// add paths for run_time and main, which 6l imports implicitly.
 		dimportpath(Runtimepkg)
 
 		if flag_race != 0 {
@@ -1331,7 +1331,7 @@ func dalgsym(t *Type) *Sym {
 		ggloblsym(eqfunc, int32(Widthptr), obj.DUPOK|obj.RODATA)
 	}
 
-	// ../../runtime/alg.go:/typeAlg
+	// ../../run_time/alg.go:/typeAlg
 	ot := 0
 
 	ot = dsymptr(s, ot, hashfunc, 0)
@@ -1389,7 +1389,7 @@ func gengcmask(t *Type, gcmask []byte) {
 	half := false
 
 	// If number of words is odd, repeat the mask.
-	// This makes simpler handling of arrays in runtime.
+	// This makes simpler handling of arrays in run_time.
 	var i int64
 	var bits uint8
 	for j := int64(0); j <= (nptr % 2); j++ {
@@ -1494,12 +1494,12 @@ func gengcprog(t *Type, pgc0 **Sym, pgc1 **Sym) {
 		size *= 2 // repeated twice
 	}
 	size = size * obj.PointersPerByte / 8 // 4 bits per word
-	size++                                // unroll flag in the beginning, used by runtime (see runtime.markallocated)
+	size++                                // unroll flag in the beginning, used by run_time (see run_time.markallocated)
 
 	// emity space in BSS for unrolled program
 	*pgc0 = nil
 
-	// Don't generate it if it's too large, runtime will unroll directly into GC bitmap.
+	// Don't generate it if it's too large, run_time will unroll directly into GC bitmap.
 	if size <= obj.MaxGCMask {
 		gc0 := typesymprefix(".gc", t)
 		ggloblsym(gc0, int32(size), obj.DUPOK|obj.NOPTR)

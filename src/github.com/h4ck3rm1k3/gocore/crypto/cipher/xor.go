@@ -5,12 +5,12 @@
 package cipher
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"unsafe"
 )
 
 const wordSize = int(unsafe.Sizeof(uintptr(0)))
-const supportsUnaligned = runtime.GOARCH == "386" || runtime.GOARCH == "amd64"
+const supportsUnaligned = run_time.GOARCH == "386" || run_time.GOARCH == "amd64"
 
 // fastXORBytes xors in bulk. It only works on architectures that
 // support unaligned read/writes.

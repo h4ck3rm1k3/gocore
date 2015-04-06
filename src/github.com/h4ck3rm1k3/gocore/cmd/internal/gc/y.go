@@ -1132,9 +1132,9 @@ yydefault:
 			importpkg = Runtimepkg
 
 			if Debug['A'] != 0 {
-				cannedimports("runtime.Builtin", "package runtime\n\n$$\n\n")
+				cannedimports("run_time.Builtin", "package run_time\n\n$$\n\n")
 			} else {
-				cannedimports("runtime.Builtin", runtimeimport)
+				cannedimports("run_time.Builtin", run_timeimport)
 			}
 			curio.importsafe = true
 		}

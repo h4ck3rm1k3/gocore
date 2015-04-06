@@ -7,7 +7,7 @@ package main
 import (
 	"github.com/h4ck3rm1k3/gocore/fmt"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
 
@@ -37,8 +37,8 @@ func mkEnv() []envVar {
 		{"GOARCH", goarch},
 		{"GOBIN", gobin},
 		{"GOEXE", exeSuffix},
-		{"GOHOSTARCH", runtime.GOARCH},
-		{"GOHOSTOS", runtime.GOOS},
+		{"GOHOSTARCH", run_time.GOARCH},
+		{"GOHOSTOS", run_time.GOOS},
 		{"GOOS", goos},
 		{"GOPATH", os.Getenv("GOPATH")},
 		{"GORACE", os.Getenv("GORACE")},
@@ -90,7 +90,7 @@ func runEnv(cmd *Command, args []string) {
 
 	for _, e := range env {
 		if e.name != "TERM" {
-			switch runtime.GOOS {
+			switch run_time.GOOS {
 			default:
 				fmt.Printf("%s=\"%s\"\n", e.name, e.value)
 			case "plan9":

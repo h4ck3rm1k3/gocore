@@ -82,7 +82,7 @@ func errstr() string {
 	return cstring(buf[:])
 }
 
-// Implemented in assembly to import from runtime.
+// Implemented in assembly to import from run_time.
 func exit(code int)
 
 func Exit(code int) { exit(code) }

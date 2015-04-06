@@ -1,4 +1,8 @@
 
+clean :
+	find -name \*.o -exec rm {} \;
+	find -name \*.a -exec rm {} \;
+
 test123:
 	gccgo test123.go
 
@@ -59,3 +63,6 @@ src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.o:
 	/home/h4ck3rm1k3/install/bin/gccgo -I $(WORK) -c -g -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/unsafe -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe -o $(WORK)/github.com/h4ck3rm1k3/gocore/unsafe/_go_.o -c  -O0 /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.go
 	/home/h4ck3rm1k3/install/bin/gccgo -c -I $(WORK)/github.com/h4ck3rm1k3/gocore/unsafe/ -o $(WORK)/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.o -D GOOS_linux -D OARCH_ppc64le -D "GOPKGPATH=\"github_com_h4ck3rm1k3_gocore_unsafe\"" /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.s
 	ar cru $(WORK)/github.com/h4ck3rm1k3/gocore/libunsafe.a $(WORK)/github.com/h4ck3rm1k3/gocore/unsafe/_go_.o $(WORK)/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.o
+
+symbols:
+	find -name \*.o -print -exec nm  {} \; > symbols.txt

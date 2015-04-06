@@ -15,7 +15,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/crypto/cipher"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"github.com/h4ck3rm1k3/gocore/time"
 )
@@ -26,7 +26,7 @@ const urandomDevice = "/dev/urandom"
 // This is sufficient on Linux, OS X, and FreeBSD.
 
 func init() {
-	if runtime.GOOS == "plan9" {
+	if run_time.GOOS == "plan9" {
 		Reader = newReader(nil)
 	} else {
 		Reader = &devReader{name: urandomDevice}
@@ -55,7 +55,7 @@ func (r *devReader) Read(b []byte) (n int, err error) {
 		if f == nil {
 			return 0, err
 		}
-		if runtime.GOOS == "plan9" {
+		if run_time.GOOS == "plan9" {
 			r.f = f
 		} else {
 			r.f = bufio.NewReader(hideAgainReader{f})

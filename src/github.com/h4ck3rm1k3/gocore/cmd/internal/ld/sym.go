@@ -99,7 +99,7 @@ func linknew(arch *LinkArch) *Link {
 		/*
 		 * ELF uses TLS offset negative from FS.
 		 * Translate 0(FS) and 8(FS) into -16(FS) and -8(FS).
-		 * Known to low-level assembly in package runtime and runtime/cgo.
+		 * Known to low-level assembly in package run_time and run_time/cgo.
 		 */
 	case Hlinux,
 		Hfreebsd,
@@ -126,7 +126,7 @@ func linknew(arch *LinkArch) *Link {
 
 		/*
 		 * OS X system constants - offset from 0(GS) to our TLS.
-		 * Explained in ../../runtime/cgo/gcc_darwin_*.c.
+		 * Explained in ../../run_time/cgo/gcc_darwin_*.c.
 		 */
 	case Hdarwin:
 		switch ctxt.Arch.Thechar {

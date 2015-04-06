@@ -7,7 +7,7 @@
 package sync_test
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	. "github.com/h4ck3rm1k3/gocore/sync"
 	"testing"
 )
@@ -43,7 +43,7 @@ func BenchmarkContendedSemaphore(b *testing.B) {
 	s := new(uint32)
 	*s = 1
 	c := make(chan bool)
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(2))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(2))
 	b.StartTimer()
 
 	go HammerSemaphore(s, b.N/2, c)
@@ -158,7 +158,7 @@ func BenchmarkMutexNoSpin(b *testing.B) {
 				for i := 0; i < len(data); i += 4 {
 					data[i]++
 				}
-				// Elaborate way to say runtime.Gosched
+				// Elaborate way to say run_time.Gosched
 				// that does not put the goroutine onto global runq.
 				go func() {
 					c <- true

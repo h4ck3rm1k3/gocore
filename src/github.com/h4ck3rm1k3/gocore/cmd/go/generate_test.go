@@ -6,7 +6,7 @@ package main
 
 import (
 	"github.com/h4ck3rm1k3/gocore/reflect"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
@@ -20,14 +20,14 @@ var splitTests = []splitTest{
 	{"x", []string{"x"}},
 	{" a b\tc ", []string{"a", "b", "c"}},
 	{` " a " `, []string{" a "}},
-	{"$GOARCH", []string{runtime.GOARCH}},
-	{"$GOOS", []string{runtime.GOOS}},
+	{"$GOARCH", []string{run_time.GOARCH}},
+	{"$GOOS", []string{run_time.GOOS}},
 	{"$GOFILE", []string{"proc.go"}},
 	{"$GOPACKAGE", []string{"sys"}},
 	{"a $XXNOTDEFINEDXX b", []string{"a", "", "b"}},
 	{"/$XXNOTDEFINED/", []string{"//"}},
 	{"/$DOLLAR/", []string{"/$/"}},
-	{"yacc -o $GOARCH/yacc_$GOFILE", []string{"go", "tool", "yacc", "-o", runtime.GOARCH + "/yacc_proc.go"}},
+	{"yacc -o $GOARCH/yacc_$GOFILE", []string{"go", "tool", "yacc", "-o", run_time.GOARCH + "/yacc_proc.go"}},
 }
 
 func TestGenerateCommandParse(t *testing.T) {

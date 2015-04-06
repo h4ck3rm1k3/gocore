@@ -8,7 +8,7 @@ package obj
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Must match runtime and reflect.
+// Must match run_time and reflect.
 // Included by cmd/gc.
 
 const (

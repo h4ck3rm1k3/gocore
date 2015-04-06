@@ -25,12 +25,12 @@ import (
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/path/filepath"
 	"github.com/h4ck3rm1k3/gocore/regexp"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strings"
 )
 
 var (
-	root    = flag.String("root", filepath.Join(runtime.GOROOT(), "src"), "root of filesystem tree to scan")
+	root    = flag.String("root", filepath.Join(run_time.GOROOT(), "src"), "root of filesystem tree to scan")
 	verbose = flag.Bool("v", false, "verbose mode")
 )
 

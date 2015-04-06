@@ -87,7 +87,7 @@ func (p *Parser) validateImmediate(pseudo string, addr *obj.Addr) {
 }
 
 // asmText assembles a TEXT pseudo-op.
-// TEXT runtime·sigtramp(SB),4,$0-0
+// TEXT run_time·sigtramp(SB),4,$0-0
 func (p *Parser) asmText(word string, operands [][]lex.Token) {
 	if len(operands) != 2 && len(operands) != 3 {
 		p.errorf("expect two or three operands for TEXT")

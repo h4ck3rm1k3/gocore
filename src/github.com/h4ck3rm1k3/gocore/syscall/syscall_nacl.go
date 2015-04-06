@@ -18,7 +18,7 @@ import (
 
 const direntSize = 8 + 8 + 2 + 256
 
-// native_client/src/trusted/service_runtime/include/sys/dirent.h
+// native_client/src/trusted/service_run_time/include/sys/dirent.h
 type Dirent struct {
 	Ino    int64
 	Off    int64
@@ -120,7 +120,7 @@ const (
 	Stderr = 2
 )
 
-// native_client/src/trusted/service_runtime/include/sys/fcntl.h
+// native_client/src/trusted/service_run_time/include/sys/fcntl.h
 const (
 	O_RDONLY  = 0
 	O_WRONLY  = 1
@@ -143,7 +143,7 @@ const (
 	FD_CLOEXEC = 1
 )
 
-// native_client/src/trusted/service_runtime/include/sys/fcntl.h
+// native_client/src/trusted/service_run_time/include/sys/fcntl.h
 const (
 	F_DUPFD   = 0
 	F_GETFD   = 1
@@ -166,7 +166,7 @@ const (
 	F_UNLKSYS = 4
 )
 
-// native_client/src/trusted/service_runtime/include/bits/stat.h
+// native_client/src/trusted/service_run_time/include/bits/stat.h
 const (
 	S_IFMT        = 0000370000
 	S_IFSHM_SYSV  = 0000300000
@@ -212,8 +212,8 @@ const (
 	S_IXOTH = 01
 )
 
-// native_client/src/trusted/service_runtime/include/sys/stat.h
-// native_client/src/trusted/service_runtime/include/machine/_types.h
+// native_client/src/trusted/service_run_time/include/sys/stat.h
+// native_client/src/trusted/service_run_time/include/machine/_types.h
 type Stat_t struct {
 	Dev       int64
 	Ino       uint64

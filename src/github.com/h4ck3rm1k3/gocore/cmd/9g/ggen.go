@@ -450,7 +450,7 @@ func clearfat(nl *gc.Node) {
 		p = gins(obj.ADUFFZERO, nil, f)
 		gc.Afunclit(&p.To, f)
 
-		// 4 and 128 = magic constants: see ../../runtime/asm_ppc64x.s
+		// 4 and 128 = magic constants: see ../../run_time/asm_ppc64x.s
 		p.To.Offset = int64(4 * (128 - q))
 
 		// duffzero leaves R3 on the last zeroed dword
@@ -501,7 +501,7 @@ func expandchecks(firstp *obj.Prog) {
 			//	TD $4, R0, arg (R0 is always zero)
 			// eqv. to:
 			// 	tdeq r0, arg
-			// NOTE: this needs special runtime support to make SIGTRAP recoverable.
+			// NOTE: this needs special run_time support to make SIGTRAP recoverable.
 			reg = p->from.reg;
 			p->as = ATD;
 			p->from = p->to = p->from3 = zprog.from;

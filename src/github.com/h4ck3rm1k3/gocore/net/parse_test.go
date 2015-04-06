@@ -7,15 +7,15 @@ package net
 import (
 	"github.com/h4ck3rm1k3/gocore/bufio"
 	"github.com/h4ck3rm1k3/gocore/os"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"testing"
 )
 
 func TestReadLine(t *testing.T) {
 	// /etc/services file does not exist on android, plan9, windows.
-	switch runtime.GOOS {
+	switch run_time.GOOS {
 	case "android", "plan9", "windows":
-		t.Skipf("skipping test on %q", runtime.GOOS)
+		t.Skipf("skipping test on %q", run_time.GOOS)
 	}
 	filename := "/etc/services" // a nice big file
 

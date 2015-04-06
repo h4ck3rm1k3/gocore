@@ -11,7 +11,7 @@ import (
 	"github.com/h4ck3rm1k3/gocore/io/ioutil"
 	"github.com/h4ck3rm1k3/gocore/os"
 	"github.com/h4ck3rm1k3/gocore/os/exec"
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/strconv"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 	"testing"
@@ -69,7 +69,7 @@ func TestStress(t *testing.T) {
 	if testing.Short() {
 		dur = 100 * time.Millisecond
 	}
-	defer runtime.GOMAXPROCS(runtime.GOMAXPROCS(4))
+	defer run_time.GOMAXPROCS(run_time.GOMAXPROCS(4))
 	done := make(chan bool)
 	finished := make(chan bool)
 	go func() {
@@ -94,7 +94,7 @@ func TestStress(t *testing.T) {
 				break Loop
 			default:
 				syscall.Kill(syscall.Getpid(), syscall.SIGUSR1)
-				runtime.Gosched()
+				run_time.Gosched()
 			}
 		}
 		finished <- true
@@ -237,7 +237,7 @@ func TestNohup(t *testing.T) {
 
 	// When run without nohup, the test should crash on an uncaught SIGHUP.
 	// When run under nohup, the test should ignore uncaught SIGHUPs,
-	// because the runtime is not supposed to be listening for them.
+	// because the run_time is not supposed to be listening for them.
 	// Either way, TestStop should still be able to catch them when it wants them
 	// and then when it stops wanting them, the original behavior should resume.
 	//

@@ -11,7 +11,7 @@ package strings
 // It is usually clearer and always faster to use the built-in
 // string comparison operators ==, <, >, and so on.
 func Compare(a, b string) int {
-	// NOTE(rsc): This function does NOT call the runtime cmpstring function,
+	// NOTE(rsc): This function does NOT call the run_time cmpstring function,
 	// because we do not want to provide any performance justification for
 	// using strings.Compare. Basically no one should use strings.Compare.
 	// As the comment above says, it is here only for symmetry with package bytes.

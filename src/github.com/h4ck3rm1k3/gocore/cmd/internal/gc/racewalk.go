@@ -24,7 +24,7 @@ import (
 
 // Do not instrument the following packages at all,
 // at best instrumentation would cause infinite recursion.
-var omit_pkgs = []string{"github.com/h4ck3rm1k3/gocore/runtime", "runtime/race"}
+var omit_pkgs = []string{"github.com/h4ck3rm1k3/gocore/run_time", "run_time/race"}
 
 // Only insert racefuncenter/racefuncexit into the following packages.
 // Memory accesses in the packages are either uninteresting or will cause false positives.
@@ -186,9 +186,9 @@ func racewalknode(np **Node, init **NodeList, wr int, skip int) {
 		racewalknode(&n.Left, init, 0, 0)
 		goto ret
 
-		// Instrument dst argument of runtime.writebarrier* calls
-	// as we do not instrument runtime code.
-	// typedslicecopy is instrumented in runtime.
+		// Instrument dst argument of run_time.writebarrier* calls
+	// as we do not instrument run_time code.
+	// typedslicecopy is instrumented in run_time.
 	case OCALLFUNC:
 		if n.Left.Sym != nil && n.Left.Sym.Pkg == Runtimepkg && (strings.HasPrefix(n.Left.Sym.Name, "writebarrier") || n.Left.Sym.Name == "typedmemmove") {
 			// Find the dst argument.
@@ -475,7 +475,7 @@ func isartificial(n *Node) bool {
 			return true
 		}
 
-		// go.itab is accessed only by the compiler and runtime (assume safe)
+		// go.itab is accessed only by the compiler and run_time (assume safe)
 		if n.Sym.Pkg != nil && n.Sym.Pkg.Name != "" && n.Sym.Pkg.Name == "go.itab" {
 			return true
 		}

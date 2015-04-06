@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 //go:generate go tool yacc go.y
-//go:generate go run mkbuiltin.go runtime unsafe
+//go:generate go run mkbuiltin.go run_time unsafe
 
 package gc
 
@@ -135,10 +135,10 @@ func Main() {
 
 	unsafepkg.Name = "unsafe"
 
-	// real package, referred to by generated runtime calls
-	Runtimepkg = mkpkg("github.com/h4ck3rm1k3/gocore/runtime")
+	// real package, referred to by generated run_time calls
+	Runtimepkg = mkpkg("github.com/h4ck3rm1k3/gocore/run_time")
 
-	Runtimepkg.Name = "github.com/h4ck3rm1k3/gocore/runtime"
+	Runtimepkg.Name = "github.com/h4ck3rm1k3/gocore/run_time"
 
 	// pseudo-packages used in symbol tables
 	gostringpkg = mkpkg("go.string")
@@ -178,7 +178,7 @@ func Main() {
 	}
 
 	outfile = ""
-	obj.Flagcount("+", "compiling runtime", &compiling_runtime)
+	obj.Flagcount("+", "compiling run_time", &compiling_run_time)
 	obj.Flagcount("%", "debug non-static initializers", &Debug['%'])
 	obj.Flagcount("A", "for bootstrapping, allow 'any' type", &Debug['A'])
 	obj.Flagcount("B", "disable bounds checking", &Debug['B'])
@@ -203,7 +203,7 @@ func Main() {
 	obj.Flagcount("h", "halt on error", &Debug['h'])
 	obj.Flagcount("i", "debug line number stack", &Debug['i'])
 	obj.Flagstr("installsuffix", "pkg directory suffix", &flag_installsuffix)
-	obj.Flagcount("j", "debug runtime-initialized variables", &Debug['j'])
+	obj.Flagcount("j", "debug run_time-initialized variables", &Debug['j'])
 	obj.Flagcount("l", "disable inlining", &Debug['l'])
 	obj.Flagcount("live", "debug liveness analysis", &debuglive)
 	obj.Flagcount("m", "print optimization decisions", &Debug['m'])
@@ -242,7 +242,7 @@ func Main() {
 	startProfile()
 
 	if flag_race != 0 {
-		racepkg = mkpkg("runtime/race")
+		racepkg = mkpkg("run_time/race")
 		racepkg.Name = "race"
 	}
 
@@ -1589,8 +1589,8 @@ func getlinepragma() int {
 		}
 
 		if verb == "go:nowritebarrier" {
-			if compiling_runtime == 0 {
-				Yyerror("//go:nowritebarrier only allowed in runtime")
+			if compiling_run_time == 0 {
+				Yyerror("//go:nowritebarrier only allowed in run_time")
 			}
 			nowritebarrier = true
 			return c

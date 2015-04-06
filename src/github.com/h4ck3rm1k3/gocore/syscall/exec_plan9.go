@@ -7,7 +7,7 @@
 package syscall
 
 import (
-	"github.com/h4ck3rm1k3/gocore/runtime"
+	"github.com/h4ck3rm1k3/gocore/run_time"
 	"github.com/h4ck3rm1k3/gocore/sync"
 	"unsafe"
 )
@@ -535,7 +535,7 @@ func startProcess(argv0 string, argv []string, attr *ProcAttr) (pid int, err err
 
 	forkc := make(chan forkRet, 1)
 	go func() {
-		runtime.LockOSThread()
+		run_time.LockOSThread()
 		var ret forkRet
 
 		ret.pid, ret.err = forkExec(argv0, argv, attr)
