@@ -222,8 +222,12 @@ func memlimit() uintptr {
 //#define sa_handler k_sa_handler
 //#endif
 
-func sigreturn()
-func sigtramp()
+func sigreturn(){
+	panic("not implemented")
+}
+func sigtramp(){
+	panic("not implemented")
+}
 
 func setsig(i int32, fn uintptr, restart bool) {
 	var sa sigactiont

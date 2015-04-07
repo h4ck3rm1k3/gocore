@@ -129,8 +129,9 @@ func osinit() {
 	ncpu = getncpu()
 }
 
-func tstart_sysvicall()
-
+func tstart_sysvicall(){
+	panic("not implemented")
+}
 // May run without a P, so write barriers are not allowed.
 //go:nowritebarrier
 func newosproc(mp *m, _ unsafe.Pointer) {
@@ -188,7 +189,9 @@ func mpreinit(mp *m) {
 	mp.gsignal.m = mp
 }
 
-func miniterrno()
+func miniterrno(){
+	panic("not implemented")
+}
 
 // Called to initialize a new m (including the bootstrap m).
 // Called on the new thread, can not allocate memory.
@@ -236,7 +239,9 @@ func memlimit() uintptr {
 	return 0
 }
 
-func sigtramp()
+func sigtramp(){
+	panic("not implemented")
+}
 
 func setsig(i int32, fn uintptr, restart bool) {
 	var sa sigactiont
@@ -380,7 +385,9 @@ func munmap(addr unsafe.Pointer, n uintptr) {
 	sysvicall2(libc_munmap, uintptr(addr), uintptr(n))
 }
 
-func nanotime1()
+func nanotime1(){
+	panic("not implemented")
+}
 
 //go:nosplit
 func nanotime() int64 {
@@ -469,7 +476,9 @@ func sysconf(name int32) int64 {
 	return int64(sysvicall1(libc_sysconf, uintptr(name)))
 }
 
-func usleep1(uint32)
+func usleep1(uint32){
+	panic("not implemented")
+}
 
 //go:nosplit
 func usleep(µs uint32) {
@@ -481,7 +490,9 @@ func write(fd uintptr, buf unsafe.Pointer, nbyte int32) int32 {
 	return int32(sysvicall3(libc_write, uintptr(fd), uintptr(buf), uintptr(nbyte)))
 }
 
-func osyield1()
+func osyield1(){
+	panic("not implemented")
+}
 
 //go:nosplit
 func osyield() {

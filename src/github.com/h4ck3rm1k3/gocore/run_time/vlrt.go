@@ -186,10 +186,14 @@ func int64mod(n, d int64) int64 {
 }
 
 //go:noescape
-func _mul64by32(lo64 *uint64, a uint64, b uint32) (hi32 uint32)
+func _mul64by32(lo64 *uint64, a uint64, b uint32) (hi32 uint32){
+	panic("not implemented")
+}
 
 //go:noescape
-func _div64by32(a uint64, b uint32, r *uint32) (q uint32)
+func _div64by32(a uint64, b uint32, r *uint32) (q uint32){
+	panic("not implemented")
+}
 
 func dodiv(n, d uint64) (q, r uint64) {
 	if GOARCH == "arm" {

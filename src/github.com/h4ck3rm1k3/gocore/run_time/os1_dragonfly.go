@@ -69,7 +69,9 @@ func futexwakeup(addr *uint32, cnt uint32) {
 	})
 }
 
-func lwp_start(uintptr)
+func lwp_start(uintptr){
+	panic("not implemented")
+}
 
 // May run without a P, so write barriers are not allowed.
 //go:nowritebarrier
@@ -169,7 +171,9 @@ func memlimit() uintptr {
 	return 0
 }
 
-func sigtramp()
+func sigtramp(){
+	panic("not implemented")
+}
 
 type sigactiont struct {
 	sa_sigaction uintptr

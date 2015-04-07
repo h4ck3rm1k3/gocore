@@ -12,13 +12,25 @@ import (
 	"unsafe"
 )
 
-func RaceRead(addr unsafe.Pointer)
-func RaceWrite(addr unsafe.Pointer)
-func RaceReadRange(addr unsafe.Pointer, len int)
-func RaceWriteRange(addr unsafe.Pointer, len int)
+func RaceRead(addr unsafe.Pointer){
+	panic("not implemented")
+}
+func RaceWrite(addr unsafe.Pointer){
+	panic("not implemented")
+}
+func RaceReadRange(addr unsafe.Pointer, len int){
+	panic("not implemented")
+}
+func RaceWriteRange(addr unsafe.Pointer, len int){
+	panic("not implemented")
+}
 
-func RaceSemacquire(s *uint32)
-func RaceSemrelease(s *uint32)
+func RaceSemacquire(s *uint32){
+	panic("not implemented")
+}
+func RaceSemrelease(s *uint32){
+	panic("not implemented")
+}
 
 // private interface for the run_time
 const raceenabled = true
@@ -53,10 +65,14 @@ func raceWriteObjectPC(t *_type, addr unsafe.Pointer, callerpc, pc uintptr) {
 }
 
 //go:noescape
-func racereadpc(addr unsafe.Pointer, callpc, pc uintptr)
+func racereadpc(addr unsafe.Pointer, callpc, pc uintptr){
+	panic("not implemented")
+}
 
 //go:noescape
-func racewritepc(addr unsafe.Pointer, callpc, pc uintptr)
+func racewritepc(addr unsafe.Pointer, callpc, pc uintptr){
+	panic("not implemented")
+}
 
 type symbolizeContext struct {
 	pc   uintptr

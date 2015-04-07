@@ -42,8 +42,12 @@ func when(d Duration) int64 {
 	return t
 }
 
-func startTimer(*run_timeTimer)
-func stopTimer(*run_timeTimer) bool
+func startTimer(*run_timeTimer){
+	panic("not implemented")
+}
+func stopTimer(*run_timeTimer) bool{
+	panic("not implemented")
+}
 
 // The Timer type represents a single event.
 // When the Timer expires, the current time will be sent on C,

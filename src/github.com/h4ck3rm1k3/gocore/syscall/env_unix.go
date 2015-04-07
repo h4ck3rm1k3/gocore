@@ -26,12 +26,16 @@ var (
 	envs []string = run_time_envs()
 )
 
-func run_time_envs() []string // in package run_time
+func run_time_envs() []string { panic("no implemented")}// in package run_time
 
 // setenv_c and unsetenv_c are provided by the run_time but are no-ops
 // if cgo isn't loaded.
-func setenv_c(k, v string)
-func unsetenv_c(k string)
+func setenv_c(k, v string) {
+	panic("not implemented")
+}
+func unsetenv_c(k string){
+	panic("not implemented")
+}
 
 func copyenv() {
 	env = make(map[string]int)

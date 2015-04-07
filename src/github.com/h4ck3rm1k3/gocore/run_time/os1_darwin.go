@@ -308,10 +308,18 @@ func mach_semdestroy(sem uint32) {
 
 // The other calls have simple system call traps in sys_darwin_{amd64,386}.s
 
-func mach_semaphore_wait(sema uint32) int32
-func mach_semaphore_timedwait(sema, sec, nsec uint32) int32
-func mach_semaphore_signal(sema uint32) int32
-func mach_semaphore_signal_all(sema uint32) int32
+func mach_semaphore_wait(sema uint32) int32{
+	panic("not implemented")
+}
+func mach_semaphore_timedwait(sema, sec, nsec uint32) int32{
+	panic("not implemented")
+}
+func mach_semaphore_signal(sema uint32) int32{
+	panic("not implemented")
+}
+func mach_semaphore_signal_all(sema uint32) int32{
+	panic("not implemented")
+}
 
 func semasleep1(ns int64) int32 {
 	_g_ := getg()

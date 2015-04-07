@@ -66,3 +66,6 @@ src/github.com/h4ck3rm1k3/gocore/unsafe/unsafe.o:
 
 symbols:
 	find -name \*.o -print -exec nm  {} \; > symbols.txt
+
+funct.txt: todo.txt
+	grep undef todo.txt | cut "-d\`" -f2 | sort -u > funct.txt

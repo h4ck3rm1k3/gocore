@@ -612,7 +612,9 @@ func _sfloat2(pc uint32, regs [15]uint32) (newpc uint32) {
 	return
 }
 
-func _sfloatpanic()
+func _sfloatpanic(){
+	panic("not implemented")
+}
 
 func sfloat2(pc uint32, regs *[15]uint32) uint32 {
 	first := true

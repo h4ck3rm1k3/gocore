@@ -4937,17 +4937,4 @@ $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/zlib.o:$(GOPATH)/src/github.com/h4ck3
 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/zlib.o:$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode.o
 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/zlib.o:$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unicode/utf8.o
 $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/zlib.o:$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/unsafe.o""".split("\n"):
-    #print x
-    (a,b) = x.split(":")
-    if a in s:
-        if b not in s[a]:
-            s[a].append(b)
-    else:
-        s[a] = [b]
-
-for x in s:
-    print x,":"," ".join(s[x]),"\n"
-
-
-print "total :" + " ".join(s.keys())
     

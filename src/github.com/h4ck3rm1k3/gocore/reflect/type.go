@@ -1447,7 +1447,10 @@ func ChanOf(dir ChanDir, t Type) Type {
 	return cachePut(ckey, &ch.rtype)
 }
 
-func ismapkey(*rtype) bool // implemented in run_time
+func ismapkey(*rtype) bool {
+	// implemented in run_time
+	panic("not implmented")
+}
 
 // MapOf returns the map type with the given key and element types.
 // For example, if k represents int and e represents string,

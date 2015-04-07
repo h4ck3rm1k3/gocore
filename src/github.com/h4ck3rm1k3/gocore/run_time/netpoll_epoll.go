@@ -8,15 +8,25 @@ package run_time
 
 import "unsafe"
 
-func epollcreate(size int32) int32
-func epollcreate1(flags int32) int32
+func epollcreate(size int32) int32{
+	panic("not implemented")
+}
+func epollcreate1(flags int32) int32{
+	panic("not implemented")
+}
 
 //go:noescape
-func epollctl(epfd, op, fd int32, ev *epollevent) int32
+func epollctl(epfd, op, fd int32, ev *epollevent) int32{
+	panic("not implemented")
+}
 
 //go:noescape
-func epollwait(epfd int32, ev *epollevent, nev, timeout int32) int32
-func closeonexec(fd int32)
+func epollwait(epfd int32, ev *epollevent, nev, timeout int32) int32{
+	panic("not implemented")
+}
+func closeonexec(fd int32){
+	panic("not implemented")
+}
 
 var (
 	epfd           int32 = -1 // epoll descriptor

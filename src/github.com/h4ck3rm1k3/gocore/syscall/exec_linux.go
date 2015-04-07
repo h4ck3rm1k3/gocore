@@ -36,8 +36,12 @@ type SysProcAttr struct {
 }
 
 // Implemented in run_time package.
-func run_time_BeforeFork()
-func run_time_AfterFork()
+func run_time_BeforeFork(){
+	panic("not implemented")
+}
+func run_time_AfterFork(){
+	panic("not implemented")
+}
 
 // Fork, dup fd onto 0..len(fd), and exec(argv0, argvv, envv) in child.
 // If a dup or exec fails, write the errno error to pipe.

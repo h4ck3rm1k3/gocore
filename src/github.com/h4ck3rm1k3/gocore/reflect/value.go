@@ -1873,7 +1873,9 @@ type run_timeSelect struct {
 // The conventional OK bool indicates whether the receive corresponds
 // to a sent value.
 //go:noescape
-func rselect([]run_timeSelect) (chosen int, recvOK bool)
+func rselect([]run_timeSelect) (chosen int, recvOK bool){
+	panic("undef")
+}
 
 // A SelectDir describes the communication direction of a select case.
 type SelectDir int
@@ -2432,66 +2434,106 @@ func cvtI2I(v Value, typ Type) Value {
 }
 
 // implemented in ../run_time
-func chancap(ch unsafe.Pointer) int
-func chanclose(ch unsafe.Pointer)
-func chanlen(ch unsafe.Pointer) int
+func chancap(ch unsafe.Pointer) int{
+	panic("undefined")
+}
+func chanclose(ch unsafe.Pointer){
+	panic("undefined")
+}
+func chanlen(ch unsafe.Pointer) int{
+	panic("undefined")
+}
 
 //go:noescape
-func chanrecv(t *rtype, ch unsafe.Pointer, nb bool, val unsafe.Pointer) (selected, received bool)
+func chanrecv(t *rtype, ch unsafe.Pointer, nb bool, val unsafe.Pointer) (selected, received bool){
+	panic("undefined")
+}
 
 //go:noescape
-func chansend(t *rtype, ch unsafe.Pointer, val unsafe.Pointer, nb bool) bool
+func chansend(t *rtype, ch unsafe.Pointer, val unsafe.Pointer, nb bool) bool{
+	panic("undefined")
+}
 
-func makechan(typ *rtype, size uint64) (ch unsafe.Pointer)
-func makemap(t *rtype) (m unsafe.Pointer)
+func makechan(typ *rtype, size uint64) (ch unsafe.Pointer){
+	panic("undefined")
+}
+func makemap(t *rtype) (m unsafe.Pointer){
+	panic("undefined")
+}
 
 //go:noescape
-func mapaccess(t *rtype, m unsafe.Pointer, key unsafe.Pointer) (val unsafe.Pointer)
+func mapaccess(t *rtype, m unsafe.Pointer, key unsafe.Pointer) (val unsafe.Pointer){
+	panic("undefined")
+}
 
-func mapassign(t *rtype, m unsafe.Pointer, key, val unsafe.Pointer)
+func mapassign(t *rtype, m unsafe.Pointer, key, val unsafe.Pointer){
+	panic("undefined")
+}
 
 //go:noescape
-func mapdelete(t *rtype, m unsafe.Pointer, key unsafe.Pointer)
+func mapdelete(t *rtype, m unsafe.Pointer, key unsafe.Pointer){
+	panic("undefined")
+}
 
 // m escapes into the return value, but the caller of mapiterinit
 // doesn't let the return value escape.
 //go:noescape
-func mapiterinit(t *rtype, m unsafe.Pointer) unsafe.Pointer
+func mapiterinit(t *rtype, m unsafe.Pointer) unsafe.Pointer{
+	panic("undefined")
+}
 
 //go:noescape
-func mapiterkey(it unsafe.Pointer) (key unsafe.Pointer)
+func mapiterkey(it unsafe.Pointer) (key unsafe.Pointer){
+	panic("undefined")
+}
 
 //go:noescape
-func mapiternext(it unsafe.Pointer)
+func mapiternext(it unsafe.Pointer){
+	panic("undefined")
+}
 
 //go:noescape
-func maplen(m unsafe.Pointer) int
+func maplen(m unsafe.Pointer) int{
+	panic("undefined")
+}
 
 // call calls fn with a copy of the n argument bytes pointed at by arg.
 // After fn returns, reflectcall copies n-retoffset result bytes
 // back into arg+retoffset before returning. If copying result bytes back,
 // the caller must pass the argument frame type as argtype, so that
 // call can execute appropriate write barriers during the copy.
-func call(argtype *rtype, fn, arg unsafe.Pointer, n uint32, retoffset uint32)
+func call(argtype *rtype, fn, arg unsafe.Pointer, n uint32, retoffset uint32){
+	panic("undefined")
+}
 
-func ifaceE2I(t *rtype, src interface{}, dst unsafe.Pointer)
+func ifaceE2I(t *rtype, src interface{}, dst unsafe.Pointer){
+	panic("undefined")
+}
 
 // typedmemmove copies a value of type t to dst from src.
 //go:noescape
-func typedmemmove(t *rtype, dst, src unsafe.Pointer)
+func typedmemmove(t *rtype, dst, src unsafe.Pointer){
+	panic("undefined")
+}
 
 // typedmemmovepartial is like typedmemmove but assumes that
 // dst and src point off bytes into the value and only copies size bytes.
 //go:noescape
-func typedmemmovepartial(t *rtype, dst, src unsafe.Pointer, off, size uintptr)
+func typedmemmovepartial(t *rtype, dst, src unsafe.Pointer, off, size uintptr){
+	panic("undefined")
+}
 
 // typedslicecopy copies a slice of elemType values from src to dst,
 // returning the number of elements copied.
 //go:noescape
-func typedslicecopy(elemType *rtype, dst, src sliceHeader) int
+func typedslicecopy(elemType *rtype, dst, src sliceHeader) int{
+	panic("undefined")
+}
 
 //go:noescape
-func memclr(ptr unsafe.Pointer, n uintptr)
+func memclr(ptr unsafe.Pointer, n uintptr){
+	panic("undefined")
+}
 
 // Dummy annotation marking that the value x escapes,
 // for use in cases where the reflect code is so clever that

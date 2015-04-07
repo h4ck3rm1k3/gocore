@@ -70,7 +70,9 @@ func memhash128(p unsafe.Pointer, h uintptr) uintptr {
 // memhash_varlen is defined in assembly because it needs access
 // to the closure.  It appears here to provide an argument
 // signature for the assembly routine.
-func memhash_varlen(p unsafe.Pointer, h uintptr) uintptr
+func memhash_varlen(p unsafe.Pointer, h uintptr) uintptr {
+	panic("not implemented")
+}
 
 var algarray = [alg_max]typeAlg{
 	alg_MEM:      {nil, nil}, // not used
@@ -100,10 +102,18 @@ var algarray = [alg_max]typeAlg{
 var useAeshash bool
 
 // in asm_*.s
-func aeshash(p unsafe.Pointer, h, s uintptr) uintptr
-func aeshash32(p unsafe.Pointer, h uintptr) uintptr
-func aeshash64(p unsafe.Pointer, h uintptr) uintptr
-func aeshashstr(p unsafe.Pointer, h uintptr) uintptr
+func aeshash(p unsafe.Pointer, h, s uintptr) uintptr {
+	panic("not implemented")
+}
+func aeshash32(p unsafe.Pointer, h uintptr) uintptr{
+	panic("not implemented")
+}
+func aeshash64(p unsafe.Pointer, h uintptr) uintptr{
+	panic("not implemented")
+}
+func aeshashstr(p unsafe.Pointer, h uintptr) uintptr{
+	panic("not implemented")
+}
 
 func strhash(a unsafe.Pointer, h uintptr) uintptr {
 	x := (*stringStruct)(a)

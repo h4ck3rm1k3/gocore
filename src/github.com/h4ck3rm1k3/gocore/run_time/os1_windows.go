@@ -110,10 +110,18 @@ func loadOptionalSyscalls() {
 }
 
 // in sys_windows_386.s and sys_windows_amd64.s
-func externalthreadhandler()
-func exceptiontramp()
-func firstcontinuetramp()
-func lastcontinuetramp()
+func externalthreadhandler(){
+	panic("not implemented")
+}
+func exceptiontramp(){
+	panic("not implemented")
+}
+func firstcontinuetramp(){
+	panic("not implemented")
+}
+func lastcontinuetramp(){
+	panic("not implemented")
+}
 
 //go:nosplit
 func getLoadLibrary() uintptr {
@@ -448,7 +456,9 @@ func stdcall7(fn stdFunction, a0, a1, a2, a3, a4, a5, a6 uintptr) uintptr {
 }
 
 // in sys_windows_386.s and sys_windows_amd64.s
-func usleep1(usec uint32)
+func usleep1(usec uint32){
+	panic("not implemented")
+}
 
 //go:nosplit
 func osyield() {
@@ -510,7 +520,9 @@ func ctrlhandler1(_type uint32) uint32 {
 }
 
 // in sys_windows_386.s and sys_windows_amd64.s
-func profileloop()
+func profileloop(){
+	panic("not implemented")
+}
 
 var profiletimer uintptr
 

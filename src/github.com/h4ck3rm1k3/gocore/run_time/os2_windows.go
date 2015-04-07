@@ -8,16 +8,26 @@ import "unsafe"
 
 // Call a Windows function with stdcall conventions,
 // and switch to os stack during the call.
-func asmstdcall(fn unsafe.Pointer)
+func asmstdcall(fn unsafe.Pointer){
+	panic("not implemented")
+}
 
-func getlasterror() uint32
-func setlasterror(err uint32)
+func getlasterror() uint32{
+	panic("not implemented")
+}
+func setlasterror(err uint32){
+	panic("not implemented")
+}
 
 // Function to be called by windows CreateThread
 // to start new os thread.
-func tstart_stdcall(newm *m) uint32
+func tstart_stdcall(newm *m) uint32{
+	panic("not implemented")
+}
 
-func ctrlhandler(_type uint32) uint32
+func ctrlhandler(_type uint32) uint32{
+	panic("not implemented")
+}
 
 // TODO(brainman): should not need those
 const (

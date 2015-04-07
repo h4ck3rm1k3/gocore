@@ -13,7 +13,9 @@ func mpreinit(mp *m) {
 	mp.gsignal.m = mp
 }
 
-func sigtramp()
+func sigtramp(){
+	panic("not implemented")
+}
 
 // Called to initialize a new m (including the bootstrap m).
 // Called on the new thread, can not allocate memory.
@@ -47,7 +49,9 @@ func crash() {
 }
 
 //go:noescape
-func getRandomData([]byte)
+func getRandomData([]byte){
+	panic("not implemented")
+}
 
 func goenvs() {
 	goenvs_unix()
@@ -65,7 +69,9 @@ func usleep(us uint32) {
 	nacl_nanosleep(&ts, nil)
 }
 
-func mstart_nacl()
+func mstart_nacl(){
+	panic("not implemented")
+}
 
 // May run without a P, so write barriers are not allowed.
 //go:nowritebarrier

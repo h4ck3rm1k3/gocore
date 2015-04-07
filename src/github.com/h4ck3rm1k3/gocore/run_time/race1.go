@@ -89,15 +89,27 @@ var racedataend uintptr
 var racearenastart uintptr
 var racearenaend uintptr
 
-func racefuncenter(uintptr)
-func racefuncexit()
-func racereadrangepc1(uintptr, uintptr, uintptr)
-func racewriterangepc1(uintptr, uintptr, uintptr)
-func racesymbolizethunk(uintptr)
+func racefuncenter(uintptr){
+	panic("not implemented")
+}
+func racefuncexit(){
+	panic("not implemented")
+}
+func racereadrangepc1(uintptr, uintptr, uintptr){
+	panic("not implemented")
+}
+func racewriterangepc1(uintptr, uintptr, uintptr){
+	panic("not implemented")
+}
+func racesymbolizethunk(uintptr){
+	panic("not implemented")
+}
 
 // racecall allows calling an arbitrary function f from C race run_time
 // with up to 4 uintptr arguments.
-func racecall(*byte, uintptr, uintptr, uintptr, uintptr)
+func racecall(*byte, uintptr, uintptr, uintptr, uintptr){
+	panic("not implemented")
+}
 
 // checks if the address has shadow (i.e. heap or data/bss)
 //go:nosplit

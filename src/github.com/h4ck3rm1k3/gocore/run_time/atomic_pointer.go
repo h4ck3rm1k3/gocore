@@ -49,11 +49,13 @@ func casp(ptr *unsafe.Pointer, old, new unsafe.Pointer) bool {
 }
 
 // Like above, but implement in terms of sync/atomic's uintptr operations.
-// We cannot just call the run_time routines, because the race detector expects
-// to be able to intercept the sync/atomic forms but not the run_time forms.
+// We cannot just call the runtime routines, because the race detector expects
+// to be able to intercept the sync/atomic forms but not the runtime forms.
 
 //go:linkname sync_atomic_StoreUintptr sync/atomic.StoreUintptr
-func sync_atomic_StoreUintptr(ptr *uintptr, new uintptr)
+func sync_atomic_StoreUintptr(ptr *uintptr, new uintptr){
+	panic("not implemented")
+}
 
 //go:linkname sync_atomic_StorePointer sync/atomic.StorePointer
 //go:nosplit
@@ -67,7 +69,9 @@ func sync_atomic_StorePointer(ptr *unsafe.Pointer, new unsafe.Pointer) {
 }
 
 //go:linkname sync_atomic_SwapUintptr sync/atomic.SwapUintptr
-func sync_atomic_SwapUintptr(ptr *uintptr, new uintptr) uintptr
+func sync_atomic_SwapUintptr(ptr *uintptr, new uintptr) uintptr{
+	panic("not implemented")
+}
 
 //go:linkname sync_atomic_SwapPointer sync/atomic.SwapPointer
 //go:nosplit
@@ -81,7 +85,9 @@ func sync_atomic_SwapPointer(ptr unsafe.Pointer, new unsafe.Pointer) unsafe.Poin
 }
 
 //go:linkname sync_atomic_CompareAndSwapUintptr sync/atomic.CompareAndSwapUintptr
-func sync_atomic_CompareAndSwapUintptr(ptr *uintptr, old, new uintptr) bool
+func sync_atomic_CompareAndSwapUintptr(ptr *uintptr, old, new uintptr) bool{
+	panic("not implemented")
+}
 
 //go:linkname sync_atomic_CompareAndSwapPointer sync/atomic.CompareAndSwapPointer
 //go:nosplit

@@ -775,7 +775,9 @@ func daysIn(m Month, year int) int {
 }
 
 // Provided by package run_time.
-func now() (sec int64, nsec int32)
+func now() (sec int64, nsec int32){
+	panic("not implemented")
+}
 
 // Now returns the current local time.
 func Now() Time {

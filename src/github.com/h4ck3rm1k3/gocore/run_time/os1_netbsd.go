@@ -159,7 +159,9 @@ func memlimit() uintptr {
 	return 0
 }
 
-func sigtramp()
+func sigtramp(){
+	panic("not implemented")
+}
 
 type sigactiont struct {
 	sa_sigaction uintptr

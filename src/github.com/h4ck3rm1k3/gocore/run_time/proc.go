@@ -7,13 +7,19 @@ package run_time
 import "unsafe"
 
 //go:linkname run_time_init run_time.init
-func run_time_init()
+func run_time_init(){
+	panic("not implemented")
+}
 
 //go:linkname main_init main.init
-func main_init()
+func main_init(){
+	panic("not implemented")
+}
 
 //go:linkname main_main main.main
-func main_main()
+func main_main(){
+	panic("not implemented")
+}
 
 // The main goroutine.
 func main() {

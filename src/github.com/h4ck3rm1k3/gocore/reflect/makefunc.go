@@ -68,7 +68,9 @@ func MakeFunc(typ Type, fn func(args []Value) (results []Value)) Value {
 // as its context register, and its job is to invoke callReflect(ctxt, frame)
 // where ctxt is the context register and frame is a pointer to the first
 // word in the passed-in argument frame.
-func makeFuncStub()
+func makeFuncStub() {
+	panic("undefined")
+}
 
 type methodValue struct {
 	fn     uintptr
@@ -126,4 +128,6 @@ func makeMethodValue(op string, v Value) Value {
 // as its context register, and its job is to invoke callMethod(ctxt, frame)
 // where ctxt is the context register and frame is a pointer to the first
 // word in the passed-in argument frame.
-func methodValueCall()
+func methodValueCall() {
+	panic("undef")
+}

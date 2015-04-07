@@ -24,10 +24,18 @@ const (
 	netbsd32Bit    = run_time.GOOS == "netbsd" && sizeofPtr == 4
 )
 
-func Syscall(trap, a1, a2, a3 uintptr) (r1, r2 uintptr, err Errno)
-func Syscall6(trap, a1, a2, a3, a4, a5, a6 uintptr) (r1, r2 uintptr, err Errno)
-func RawSyscall(trap, a1, a2, a3 uintptr) (r1, r2 uintptr, err Errno)
-func RawSyscall6(trap, a1, a2, a3, a4, a5, a6 uintptr) (r1, r2 uintptr, err Errno)
+func Syscall(trap, a1, a2, a3 uintptr) (r1, r2 uintptr, err Errno){
+	panic("not implemented")
+}
+func Syscall6(trap, a1, a2, a3, a4, a5, a6 uintptr) (r1, r2 uintptr, err Errno){
+	panic("not implemented")
+}
+func RawSyscall(trap, a1, a2, a3 uintptr) (r1, r2 uintptr, err Errno){
+	panic("not implemented")
+}
+func RawSyscall6(trap, a1, a2, a3, a4, a5, a6 uintptr) (r1, r2 uintptr, err Errno){
+	panic("not implemented")
+}
 
 // Mmap manager, for use by operating system-specific implementations.
 

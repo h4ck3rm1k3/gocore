@@ -3659,47 +3659,48 @@ cgox : math/rand  missing  total $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/cmd/
 	/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/cmd/cgo/main.go \
 	/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/cmd/cgo/out.go \
 	/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/cmd/cgo/util.go \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/os.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/os/exec.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/go/printer.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/text/tabwriter.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/go/parser.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/io/ioutil.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/go/ast.o \
 	$(WORK)/github.com/h4ck3rm1k3/gocore/bufio.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/go/scanner.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/path/filepath.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/go/token.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/flag.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/debug/pe.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/debug/macho.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/debug/elf.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/debug/dwarf.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/sort.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/path.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/strings.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/fmt.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/time.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/syscall.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/encoding/binary.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/reflect.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/crypto/md5.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/bytes.o \
 	$(WORK)/github.com/h4ck3rm1k3/gocore/crypto.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/strconv.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/crypto/md5.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/debug/dwarf.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/debug/elf.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/debug/macho.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/debug/pe.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/encoding/binary.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/encoding/gob.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/encoding.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/errors.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/flag.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/fmt.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/go/ast.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/go/parser.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/go/printer.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/go/scanner.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/go/token.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/hash.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/io.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/io/ioutil.o \
 	$(WORK)/github.com/h4ck3rm1k3/gocore/math.o \
 	$(WORK)/github.com/h4ck3rm1k3/gocore/math/rand.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/hash.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/bytes.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/unicode/utf8.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/unicode.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/io.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/os.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/os/exec.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/path.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/path/filepath.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/reflect.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/run_time.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/sort.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/strconv.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/strings.o \
 	$(WORK)/github.com/h4ck3rm1k3/gocore/sync.o \
 	$(WORK)/github.com/h4ck3rm1k3/gocore/sync/atomic.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/run_time.o \
-	$(WORK)/github.com/h4ck3rm1k3/gocore/errors.o \
-	$(GOPATH)/src/github.com/h4ck3rm1k3/gocore/encoding/gob.o 
+	$(WORK)/github.com/h4ck3rm1k3/gocore/syscall.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/text/tabwriter.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/time.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/unicode.o \
+	$(WORK)/github.com/h4ck3rm1k3/gocore/unicode/utf8.o
 
-	mv github.com/h4ck3rm1k3/gocore/cmd/cgo/exe/a.out cgo
+
 
 sync/atomic : $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/sync/atomic.o
 go/ast : $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/go/ast.o

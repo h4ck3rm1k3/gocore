@@ -10,11 +10,17 @@ package run_time
 
 import "unsafe"
 
-func kqueue() int32
+func kqueue() int32{
+	panic("not implemented")
+}
 
 //go:noescape
-func kevent(kq int32, ch *keventt, nch int32, ev *keventt, nev int32, ts *timespec) int32
-func closeonexec(fd int32)
+func kevent(kq int32, ch *keventt, nch int32, ev *keventt, nev int32, ts *timespec) int32{
+	panic("not implemented")
+}
+func closeonexec(fd int32){
+	panic("not implemented")
+}
 
 var (
 	kq             int32 = -1
