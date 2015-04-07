@@ -641,7 +641,7 @@ func gcResetGState() (numgs int) {
 var poolcleanup func()
 
 //go:linkname sync_run_time_registerPoolCleanup sync.run_time_registerPoolCleanup
-func sync_run_time_registerPoolCleanup(f func()) {
+func Sync_run_time_registerPoolCleanup(f func()) {
 	poolcleanup = f
 }
 

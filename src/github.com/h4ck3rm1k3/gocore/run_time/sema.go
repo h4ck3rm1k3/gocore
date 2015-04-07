@@ -39,22 +39,22 @@ var semtable [semTabSize]struct {
 }
 
 //go:linkname sync_run_time_Semacquire sync.run_time_Semacquire
-func sync_run_time_Semacquire(addr *uint32) {
+func Sync_run_time_Semacquire(addr *uint32) {
 	semacquire(addr, true)
 }
 
 //go:linkname net_run_time_Semacquire net.run_time_Semacquire
-func net_run_time_Semacquire(addr *uint32) {
+func Net_run_time_Semacquire(addr *uint32) {
 	semacquire(addr, true)
 }
 
 //go:linkname sync_run_time_Semrelease sync.run_time_Semrelease
-func sync_run_time_Semrelease(addr *uint32) {
+func Sync_run_time_Semrelease(addr *uint32) {
 	semrelease(addr)
 }
 
 //go:linkname net_run_time_Semrelease net.run_time_Semrelease
-func net_run_time_Semrelease(addr *uint32) {
+func Net_run_time_Semrelease(addr *uint32) {
 	semrelease(addr)
 }
 
@@ -281,7 +281,7 @@ func syncsemrelease(s *syncSema, n uint32) {
 }
 
 //go:linkname syncsemcheck sync.run_time_Syncsemcheck
-func syncsemcheck(sz uintptr) {
+func Syncsemcheck(sz uintptr) {
 	if sz != unsafe.Sizeof(syncSema{}) {
 		print("run_time: bad syncSema size - sync=", sz, " run_time=", unsafe.Sizeof(syncSema{}), "\n")
 		throw("bad syncSema size")

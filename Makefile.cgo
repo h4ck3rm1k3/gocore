@@ -3735,3 +3735,7 @@ math/rand $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/rand.o : math $(GOPATH
 
 	/home/h4ck3rm1k3/install/bin/gccgo $(GOFLAGS) -fgo-pkgpath=github.com/h4ck3rm1k3/gocore/math/rand -fgo-relative-import-path=_/home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/rand -o $(GOPATH)/src/github.com/h4ck3rm1k3/gocore/math/rand.o /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/rand/exp.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/rand/normal.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/rand/rand.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/rand/rng.go /home/h4ck3rm1k3/testgo2/src/github.com/h4ck3rm1k3/gocore/math/rand/zipf.go
 #BUILD [accuracy_string.go arith.go arith_decl.go decimal.go float.go floatconv.go ftoa.go int.go intconv.go nat.go natconv.go rat.go ratconv.go roundingmode_string.go]
+
+test : cgox
+	LD_LIBRARY_PATH=/home/h4ck3rm1k3/install/lib64/ ./cgox
+

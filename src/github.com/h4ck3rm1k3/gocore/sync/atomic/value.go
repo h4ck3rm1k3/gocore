@@ -7,6 +7,7 @@ package atomic
 import (
 	//"unsafe"
 	"unsafe"
+	rtatom "sync/atomic"
 )
 
 // A Value provides an atomic load and store of a consistently typed value.
@@ -96,7 +97,7 @@ func LoadPointer(addr *unsafe.Pointer) (val unsafe.Pointer) {
 
 }
 
-//func run_time_procUnpin() { panic("todo") }
+//OAfunc run_time_procUnpin() { panic("todo") }
 func StorePointer(addr *unsafe.Pointer, val unsafe.Pointer) {
 panic("todo") 
 }
@@ -123,8 +124,8 @@ panic("todo")
 	return new}
 
 func LoadInt32(addr *int32) (val int32) {
-panic("todo") 
-	return *addr}
+	return rtatom.LoadInt32(addr)
+}
 
 // LoadInt64 atomically loads *addr.
 func LoadInt64(addr *int64) (val int64) {
@@ -133,12 +134,12 @@ panic("todo")
 
 // LoadUint32 atomically loads *addr.
 func LoadUint32(addr *uint32) (val uint32) {
-panic("todo") 
-	return *addr}
+	return rtatom.LoadUint32(addr)
+	}
 
 // LoadUint64 atomically loads *addr.
 func LoadUint64(addr *uint64) (val uint64) {
-panic("todo") 
+	panic("todo") 
 	return *addr}
 
 func AddInt32(addr *int32, delta int32) (new int32) {

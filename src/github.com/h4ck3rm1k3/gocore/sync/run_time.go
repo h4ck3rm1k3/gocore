@@ -5,6 +5,7 @@
 package sync
 
 import "unsafe"
+import "github.com/h4ck3rm1k3/gocore/run_time"
 
 // defined in package run_time
 
@@ -27,13 +28,24 @@ type syncSema struct {
 }
 
 // Syncsemacquire waits for a pairing Syncsemrelease on the same semaphore s.
-func run_time_Syncsemacquire(s *syncSema) { panic("todo")}
+func run_time_Syncsemacquire(s *syncSema) {
+	run_time.Sync_run_time_Semacquire((*uint32)(unsafe.Pointer(s)))
+	//panic("todo")
+
+}
 
 // Syncsemrelease waits for n pairing Syncsemacquire on the same semaphore s.
-func run_time_Syncsemrelease(s *syncSema, n uint32) { panic("todo")}
+func run_time_Syncsemrelease(s *syncSema, n uint32) {
+	run_time.Sync_run_time_Semrelease((*uint32)(unsafe.Pointer(s)))
+	//panic("todo")
+}
 
 // Ensure that sync and run_time agree on size of syncSema.
-func run_time_Syncsemcheck(size uintptr) { panic("todo")}
+func run_time_Syncsemcheck(size uintptr) {
+	//panic("todo")
+	run_time.Syncsemcheck(size)
+}
+
 func init() {
 	var s syncSema
 	run_time_Syncsemcheck(unsafe.Sizeof(s))

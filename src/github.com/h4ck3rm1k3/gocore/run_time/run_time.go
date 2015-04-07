@@ -47,7 +47,7 @@ var envs []string
 var argslice []string
 
 //go:linkname syscall_run_time_envs syscall.run_time_envs
-func syscall_run_time_envs() []string { return append([]string{}, envs...) }
+func Syscall_run_time_envs() []string { return append([]string{}, envs...) }
 
 //go:linkname os_run_time_args os.run_time_args
 func Os_run_time_args() []string { return append([]string{}, argslice...) }

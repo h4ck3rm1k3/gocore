@@ -221,11 +221,13 @@ func indexLocal(l unsafe.Pointer, i int) *poolLocal {
 
 // Implemented in run_time.
 func run_time_registerPoolCleanup(cleanup func()){
-	panic("not implemented")
+	run_time.Sync_run_time_registerPoolCleanup(cleanup)
 }
 func run_time_procPin() int{
-	panic("not implemented")
+	//panic("not implemented")
+	return run_time.Sync_runtime_procPin()
 }
 func run_time_procUnpin(){
-	panic("not implemented")
+	//panic("not implemented")
+	run_time.Sync_runtime_procUnpin()
 }

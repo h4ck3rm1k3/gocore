@@ -34,9 +34,9 @@ const (
 //	call osinit
 //	call schedinit
 //	make & queue new G
-//	call run_time·mstart
+//	call runtime·mstart
 //
-// The new G calls run_time·main.
+// The new G calls runtime·main.
 func schedinit() {
 	// raceinit must be the first call to race detector.
 	// In particular, it must be done before mallocinit below calls racemapshadow.
@@ -76,21 +76,21 @@ func schedinit() {
 
 	if buildVersion == "" {
 		// Condition should never trigger.  This code just serves
-		// to ensure run_time·buildVersion is kept in the resulting binary.
+		// to ensure runtime·buildVersion is kept in the resulting binary.
 		buildVersion = "unknown"
 	}
 }
 
 func dumpgstatus(gp *g) {
 	_g_ := getg()
-	print("run_time: gp: gp=", gp, ", goid=", gp.goid, ", gp->atomicstatus=", readgstatus(gp), "\n")
-	print("run_time:  g:  g=", _g_, ", goid=", _g_.goid, ",  g->atomicstatus=", readgstatus(_g_), "\n")
+	print("runtime: gp: gp=", gp, ", goid=", gp.goid, ", gp->atomicstatus=", readgstatus(gp), "\n")
+	print("runtime:  g:  g=", _g_, ", goid=", _g_.goid, ",  g->atomicstatus=", readgstatus(_g_), "\n")
 }
 
 func checkmcount() {
 	// sched lock is held
 	if sched.mcount > sched.maxmcount {
-		print("run_time: program exceeds ", sched.maxmcount, "-thread limit\n")
+		print("runtime: program exceeds ", sched.maxmcount, "-thread limit\n")
 		throw("thread exhaustion")
 	}
 }
@@ -258,7 +258,7 @@ func casfrom_Gscanstatus(gp *g, oldval, newval uint32) {
 	// Check that transition is valid.
 	switch oldval {
 	default:
-		print("run_time: casfrom_Gscanstatus bad oldval gp=", gp, ", oldval=", hex(oldval), ", newval=", hex(newval), "\n")
+		print("runtime: casfrom_Gscanstatus bad oldval gp=", gp, ", oldval=", hex(oldval), ", newval=", hex(newval), "\n")
 		dumpgstatus(gp)
 		throw("casfrom_Gscanstatus:top gp->status is not in scan state")
 	case _Gscanrunnable,
@@ -274,7 +274,7 @@ func casfrom_Gscanstatus(gp *g, oldval, newval uint32) {
 		}
 	}
 	if !success {
-		print("run_time: casfrom_Gscanstatus failed gp=", gp, ", oldval=", hex(oldval), ", newval=", hex(newval), "\n")
+		print("runtime: casfrom_Gscanstatus failed gp=", gp, ", oldval=", hex(oldval), ", newval=", hex(newval), "\n")
 		dumpgstatus(gp)
 		throw("casfrom_Gscanstatus: gp->status is not in scan state")
 	}
@@ -295,14 +295,14 @@ func castogscanstatus(gp *g, oldval, newval uint32) bool {
 		}
 	case _Grunning:
 		if gp.gcscanvalid {
-			print("run_time: castogscanstatus _Grunning and gp.gcscanvalid is true, newval=", hex(newval), "\n")
+			print("runtime: castogscanstatus _Grunning and gp.gcscanvalid is true, newval=", hex(newval), "\n")
 			throw("castogscanstatus")
 		}
 		if newval == _Gscanrunning || newval == _Gscanenqueue {
 			return cas(&gp.atomicstatus, oldval, newval)
 		}
 	}
-	print("run_time: castogscanstatus oldval=", hex(oldval), " newval=", hex(newval), "\n")
+	print("runtime: castogscanstatus oldval=", hex(oldval), " newval=", hex(newval), "\n")
 	throw("castogscanstatus")
 	panic("not reached")
 }
@@ -315,7 +315,7 @@ func castogscanstatus(gp *g, oldval, newval uint32) bool {
 func casgstatus(gp *g, oldval, newval uint32) {
 	if (oldval&_Gscan != 0) || (newval&_Gscan != 0) || oldval == newval {
 		systemstack(func() {
-			print("run_time: casgstatus: oldval=", hex(oldval), " newval=", hex(newval), "\n")
+			print("runtime: casgstatus: oldval=", hex(oldval), " newval=", hex(newval), "\n")
 			throw("casgstatus: bad incoming values")
 		})
 	}
@@ -703,7 +703,7 @@ func mstart1() {
 	_g_ := getg()
 
 	if _g_ != _g_.m.g0 {
-		throw("bad run_time·mstart")
+		throw("bad runtime·mstart")
 	}
 
 	// Record top of stack for use by mcall.
@@ -1141,7 +1141,7 @@ func stoplockedm() {
 	noteclear(&_g_.m.park)
 	status := readgstatus(_g_.m.lockedg)
 	if status&^_Gscan != _Grunnable {
-		print("run_time:stoplockedm: g is not Grunnable or Gscanrunnable\n")
+		print("runtime:stoplockedm: g is not Grunnable or Gscanrunnable\n")
 		dumpgstatus(_g_)
 		throw("stoplockedm: not runnable")
 	}
@@ -1962,14 +1962,14 @@ func beforefork() {
 	// This function is called before fork in syscall package.
 	// Code between fork and exec must not allocate memory nor even try to grow stack.
 	// Here we spoil g->_StackGuard to reliably detect any attempts to grow stack.
-	// run_time_AfterFork will undo this in parent process, but not in child.
+	// runtime_AfterFork will undo this in parent process, but not in child.
 	gp.stackguard0 = stackFork
 }
 
 // Called from syscall package before fork.
-//go:linkname syscall_run_time_BeforeFork syscall.run_time_BeforeFork
+//go:linkname syscall_runtime_BeforeFork syscall.runtime_BeforeFork
 //go:nosplit
-func syscall_run_time_BeforeFork() {
+func syscall_runtime_BeforeFork() {
 	systemstack(beforefork)
 }
 
@@ -1987,9 +1987,9 @@ func afterfork() {
 }
 
 // Called from syscall package after fork in parent.
-//go:linkname syscall_run_time_AfterFork syscall.run_time_AfterFork
+//go:linkname syscall_runtime_AfterFork syscall.runtime_AfterFork
 //go:nosplit
-func syscall_run_time_AfterFork() {
+func syscall_runtime_AfterFork() {
 	systemstack(afterfork)
 }
 
@@ -2259,7 +2259,7 @@ func unlockOSThread() {
 }
 
 func badunlockosthread() {
-	throw("run_time: internal error: misuse of lockOSThread/unlockOSThread")
+	throw("runtime: internal error: misuse of lockOSThread/unlockOSThread")
 }
 
 func gcount() int32 {
@@ -2353,7 +2353,7 @@ func sigprof(pc, sp, lr uintptr, gp *g, mp *m) {
 	// Because gogo is the only instance, we check whether the PC lies
 	// within that function, and if so, not ask for a traceback. This approach
 	// requires knowing the size of the gogo function, which we
-	// record in arch_*.h and check in run_time_test.go.
+	// record in arch_*.h and check in runtime_test.go.
 	//
 	// There is another apparently viable approach, recorded here in case
 	// the "PC within gogo" check turns out not to be usable.
@@ -2400,7 +2400,7 @@ func sigprof(pc, sp, lr uintptr, gp *g, mp *m) {
 			n = gentraceback(mp.curg.syscallpc, mp.curg.syscallsp, 0, mp.curg, 0, &stk[0], len(stk), nil, nil, 0)
 		}
 		if GOOS == "windows" && n == 0 && mp.libcallg != nil && mp.libcallpc != 0 && mp.libcallsp != 0 {
-			// Libcall, i.e. run_time syscall on windows.
+			// Libcall, i.e. runtime syscall on windows.
 			// Collect Go stack that leads to the call.
 			n = gentraceback(mp.libcallpc, mp.libcallsp, 0, mp.libcallg, 0, &stk[0], len(stk), nil, nil, 0)
 		}
@@ -2652,7 +2652,7 @@ func incidlelocked(v int32) {
 func checkdead() {
 	// If we are dying because of a signal caught on an already idle thread,
 	// freezetheworld will cause all running threads to block.
-	// And run_time will essentially enter into deadlock state,
+	// And runtime will essentially enter into deadlock state,
 	// except that there is a thread that will call exit soon.
 	if panicking > 0 {
 		return
@@ -2664,7 +2664,7 @@ func checkdead() {
 		return
 	}
 	if run < 0 {
-		print("run_time: checkdead: nmidle=", sched.nmidle, " nmidlelocked=", sched.nmidlelocked, " mcount=", sched.mcount, "\n")
+		print("runtime: checkdead: nmidle=", sched.nmidle, " nmidlelocked=", sched.nmidlelocked, " mcount=", sched.mcount, "\n")
 		throw("checkdead: inconsistent counts")
 	}
 
@@ -2683,13 +2683,13 @@ func checkdead() {
 			_Grunning,
 			_Gsyscall:
 			unlock(&allglock)
-			print("run_time: checkdead: find g ", gp.goid, " in status ", s, "\n")
+			print("runtime: checkdead: find g ", gp.goid, " in status ", s, "\n")
 			throw("checkdead: runnable g")
 		}
 	}
 	unlock(&allglock)
-	if grunning == 0 { // possible if main goroutine calls run_time·Goexit()
-		throw("no goroutines (main called run_time.Goexit) - deadlock!")
+	if grunning == 0 { // possible if main goroutine calls runtime·Goexit()
+		throw("no goroutines (main called runtime.Goexit) - deadlock!")
 	}
 
 	// Maybe jump time forward for playground.
@@ -3350,38 +3350,38 @@ func procUnpin() {
 	_g_.m.locks--
 }
 
-//go:linkname sync_run_time_procPin sync.run_time_procPin
+//go:linkname sync_runtime_procPin sync.runtime_procPin
 //go:nosplit
-func sync_run_time_procPin() int {
+func Sync_runtime_procPin() int {
 	return procPin()
 }
 
-//go:linkname sync_run_time_procUnpin sync.run_time_procUnpin
+//go:linkname sync_runtime_procUnpin sync.runtime_procUnpin
 //go:nosplit
-func sync_run_time_procUnpin() {
+func Sync_runtime_procUnpin() {
 	procUnpin()
 }
 
-//go:linkname sync_atomic_run_time_procPin sync/atomic.run_time_procPin
+//go:linkname sync_atomic_runtime_procPin sync/atomic.runtime_procPin
 //go:nosplit
-func sync_atomic_run_time_procPin() int {
+func sync_atomic_runtime_procPin() int {
 	return procPin()
 }
 
-//go:linkname sync_atomic_run_time_procUnpin sync/atomic.run_time_procUnpin
+//go:linkname sync_atomic_runtime_procUnpin sync/atomic.runtime_procUnpin
 //go:nosplit
-func sync_atomic_run_time_procUnpin() {
+func sync_atomic_runtime_procUnpin() {
 	procUnpin()
 }
 
 // Active spinning for sync.Mutex.
-//go:linkname sync_run_time_canSpin sync.run_time_canSpin
+//go:linkname sync_runtime_canSpin sync.runtime_canSpin
 //go:nosplit
-func sync_run_time_canSpin(i int) bool {
+func sync_runtime_canSpin(i int) bool {
 	// sync.Mutex is cooperative, so we are conservative with spinning.
 	// Spin only few times and only if running on a multicore machine and
 	// GOMAXPROCS>1 and there is at least one other running P and local runq is empty.
-	// As opposed to run_time mutex we don't do passive spinning here,
+	// As opposed to runtime mutex we don't do passive spinning here,
 	// because there can be work on global runq on on other Ps.
 	if i >= active_spin || ncpu <= 1 || gomaxprocs <= int32(sched.npidle+sched.nmspinning)+1 {
 		return false
@@ -3392,8 +3392,8 @@ func sync_run_time_canSpin(i int) bool {
 	return true
 }
 
-//go:linkname sync_run_time_doSpin sync.run_time_doSpin
+//go:linkname sync_runtime_doSpin sync.runtime_doSpin
 //go:nosplit
-func sync_run_time_doSpin() {
+func sync_runtime_doSpin() {
 	procyield(active_spin_cnt)
 }
