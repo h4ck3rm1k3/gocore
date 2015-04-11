@@ -37,6 +37,7 @@
 package os
 
 import (
+	old "os"
 	"github.com/h4ck3rm1k3/gocore/io"
 	"github.com/h4ck3rm1k3/gocore/syscall"
 )
@@ -47,9 +48,9 @@ func (f *File) Name() string { return f.name }
 // Stdin, Stdout, and Stderr are open Files pointing to the standard input,
 // standard output, and standard error file descriptors.
 var (
-	Stdin  = NewFile(uintptr(syscall.Stdin), "/dev/stdin")
-	Stdout = NewFile(uintptr(syscall.Stdout), "/dev/stdout")
-	Stderr = NewFile(uintptr(syscall.Stderr), "/dev/stderr")
+	Stdin  = old.NewFile(uintptr(syscall.Stdin), "/dev/stdin")
+	Stdout = old.NewFile(uintptr(syscall.Stdout), "/dev/stdout")
+	Stderr = old.NewFile(uintptr(syscall.Stderr), "/dev/stderr")
 )
 
 // Flags to Open wrapping those of the underlying system. Not all flags

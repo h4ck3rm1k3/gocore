@@ -5,6 +5,7 @@
 package run_time
 
 import "unsafe"
+import "fmt"
 
 // Declarations for run_time services implemented in C or assembly.
 
@@ -18,8 +19,16 @@ func add(p unsafe.Pointer, x uintptr) unsafe.Pointer {
 	return unsafe.Pointer(uintptr(p) + x)
 }
 
+var global * g=nil;
+
 func getg() *g{
-	panic("not implemented")
+	//panic("not implemented")
+	if (global == nil) {
+		global = new(g)
+		global.m = new(m)
+		fmt.Printf("created new %v", global)
+	}
+	return global
 }
 
 // mcall switches from the g to the g0 stack and invokes fn(g),
@@ -56,7 +65,8 @@ func mcall(fn func(*g)){
 //
 //go:noescape
 func systemstack(fn func()){
-	panic("not implemented")
+	fmt.Printf("systemstack TODO")
+	//panic("not implemented")
 }
 
 func badsystemstack() {

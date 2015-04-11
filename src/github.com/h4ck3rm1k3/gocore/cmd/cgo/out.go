@@ -186,6 +186,8 @@ func dynimport(obj string) {
 		if err != nil {
 			fatalf("%s", err)
 		}
+		var foo *  File  = f
+		var foo2 * File  = stdout
 		stdout = f
 	}
 

@@ -5,6 +5,7 @@
 package run_time
 
 import "unsafe"
+import "fmt"
 
 // Keep a cached value to make gotraceback fast,
 // since we call it on every call to gentraceback.
@@ -81,10 +82,13 @@ func goenvs_unix() {
 	envs = make([]string, n)
 	for i := int32(0); i < n; i++ {
 		envs[i] = gostring(argv_index(argv, argc+1+i))
+		fmt.Printf("INIT ENV %v",envs[i])
 	}
+	fmt.Printf("INIT ENV %v",envs)
 }
 
 func environ() []string {
+	fmt.Printf("ENV %v",envs)
 	return envs
 }
 

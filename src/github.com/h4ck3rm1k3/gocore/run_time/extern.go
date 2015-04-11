@@ -102,7 +102,7 @@ constants or functions in this package, but they do not influence the execution
 of the run-time system.
 */
 package run_time
-
+import "runtime"
 // Caller reports file and line number information about function invocations on
 // the calling goroutine's stack.  The argument skip is the number of stack frames
 // to ascend, with 0 identifying the caller of Caller.  (For historical reasons the
@@ -168,11 +168,12 @@ func Callers(skip int, pc []uintptr) int {
 // It uses the GOROOT environment variable, if set,
 // or else the root used during the Go build.
 func GOROOT() string {
-	s := gogetenv("GOROOT")
-	if s != "" {
-		return s
-	}
-	return defaultGoroot
+	return runtime.GOROOT()
+	// s := gogetenv("GOROOT")
+	// if s != "" {
+	// 	return s
+	// }
+	// return defaultGoroot
 }
 
 // Version returns the Go tree's version string.

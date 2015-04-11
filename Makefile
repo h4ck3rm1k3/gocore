@@ -69,3 +69,12 @@ symbols:
 
 funct.txt: todo.txt
 	grep undef todo.txt | cut "-d\`" -f2 | sort -u > funct.txt
+
+
+testenv:
+	~/install/bin/gccgo testenv.go ./src/github.com/h4ck3rm1k3/gocore/run_time.o -I src/ -o testenv
+	./testenv
+
+testflags:
+	~/install/bin/gccgo ~/testgo2/src/github.com/h4ck3rm1k3/gocore/os/os_args_test.go ./src/github.com/h4ck3rm1k3/gocore/os.o ./src/github.com/h4ck3rm1k3/gocore/runtime.o -I src/ -o testflags
+	./testflags
